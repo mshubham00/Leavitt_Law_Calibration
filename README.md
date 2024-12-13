@@ -24,7 +24,6 @@ Current sampled dataset contains 95 Galactic Cepheids:
 4) distance modulus, mu 	  1	Gaia 2023, IRSB 2011
 5) Photometry	BVIJHK		  6	Jesper 2011
 
-
 # Method
 Intially, color excess (interstellar reddening) will be converted to extinction in each band using Table 4 of Fouque (2007) which fundametally derived from extinction law (Cardelli, 1989) and R(V) = 3.23 (Sandage 2004). Also, reddening free magnitudes are calculated using Wesenhiet function (Madore, 1982) which fudamentally derived from reddening ratio, R. 
 -- Read the extinction law and reddening ratio formulation in './lvtlaw/utils.py'.
@@ -37,8 +36,15 @@ Fundamental idea is, in the absence of distance error, residual slope approaches
 
 Adjusting raw data with the estimated distance-reddening error pair for each Cepheid, then the calibrated PL relation is determined. 
 
+# Documentation
+Read the 'Physics_Modelling_and_Results.pdf' to learn about the physics behind the topic.
+
 # Credits
 The Raw Dataset of 150 Cepheid stars is provided by my supervisor: Dr Jesper Storm (AIP Potsdam) 
-The algorithm developed by Dr. Barry Madore (https://iopscience.iop.org/article/10.3847/1538-4357/aa6e4d/pdf). 
-The python code is developed by me.  
+
+The calibration method developed by Dr. Barry Madore (https://iopscience.iop.org/article/10.3847/1538-4357/aa6e4d/pdf). 
+
+Mathematical model of the algorithm developed by me. By correlating model with physics, I developed more generalized algorithm which yields better results than the previous method. 
+
+The complete python code is developed by me and can be used by anyone without asking for any permission from me.
 
