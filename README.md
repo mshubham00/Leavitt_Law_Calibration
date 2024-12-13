@@ -1,8 +1,12 @@
-'''
 # File: ./README.md
-'''
+
 # Purpose
 This python package can refine Period-Luminosity relation of Cepheid variable stars.
+
+# Execution
+Clone the repo and simply run the main.py file. 
+
+	python3 main.py
 
 # Background
 This linear correlation between period and luminiosity was discovered by Mrs. Henry Leavitt in 1908, that's why it is also called as Leavitt Law. In astronomy, this relation is very important as it serves as a tool for measuring distances to distant galaxies. The realization of Milky Way as an isolated galaxy (1918), the expansion of the Universe (1924), rotation of Milky Way (1934), estimation of age of universe (1958), standardization of cosmic distance ladder (1995), and so on are derived results from the Leavitt Law.   
