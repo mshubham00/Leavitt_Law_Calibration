@@ -4,6 +4,9 @@ data_dir = './data/input/'
 data_file = 'cleaned_data.csv'
 data_out='./data/output/'
 
+disg = '_g'
+disi = '_i'
+
 """
 Extinction Law from Fouque 2007 &
 
@@ -46,8 +49,10 @@ def color_index(mag = mag):
     for i in range(0,len(mag)):
         for j in range(i+1,len(mag)):
             color_index.append(mag[i]+mag[j])
-    print('Possible %i combinations of color indexes (str): \n'%(len(color_index)), color_index)
+    #print('Possible %i combinations of color indexes (str): \n'%(len(color_index)), color_index)
     return color_index
+
+colors = color_index()
 
 from scipy import stats
 def regression(x: list, y: list, x_str: str, y_str: str, p = 0):
