@@ -5,7 +5,7 @@ import pandas as pd
 from lvtlaw.pl_pw import pl_reg     #pl_reg(data,'_g','_i') -> PLW, residue, prediction
 from lvtlaw.data_transform import transformation, extinction_law
 from lvtlaw.residue import residue_analysis
-#from lvtlaw.error_estimation import decouple_error
+from lvtlaw.error_estimation import all_bands_reddening, error_correction
 
 import os
 clear_screen= lambda: os.system('clear')
@@ -88,5 +88,5 @@ input(' \n \n Press Enter to decouple distance reddening error')
 print('###'*30)
 
 ####################################################################################################
-
+error_correction
 input('Enter to exit!!')
