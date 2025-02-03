@@ -3,6 +3,7 @@
 data_dir = './data/input/'
 data_file = 'cleaned_data.csv'
 data_out='./data/output/'
+img_out_path = './data/output/plots/'
 
 disg = '_g'
 disi = '_i'
@@ -34,10 +35,10 @@ R = [R_b, R_v, R_i, R_j, R_h, R_k]
 def band_tick_genrate(data):
     pass
 
+bands_label = ['B_mag', 'V_mag' ,'I_mag', 'J_mag', 'H_mag', 'K_mag']
 mag = ['B', 'V', 'I','J','H','K'];
-bands = ['M_B', 'M_V', 'M_I', 'M_J', 'M_H', 'M_K']; 
-band = len(bands);
-ap_bands = ['B_mag', 'V_mag' ,'I_mag', 'J_mag', 'H_mag', 'K_mag']
+abs_bands = ['M_B', 'M_V', 'M_I', 'M_J', 'M_H', 'M_K']; 
+band = len(mag);
 col_dot = ['b.', 'g*', 'y+', 'r*', 'c+', 'g.', 'y+', 'b+'] ;
 col_lin = ['b-', 'g-', 'y-', 'r-', 'c-', 'g-', 'y-', 'b-'] ;
 col_das = ['b--', 'g--', 'y--', 'r--', 'c--', 'g--', 'y--', 'b--']

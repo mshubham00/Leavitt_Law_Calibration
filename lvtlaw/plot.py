@@ -5,9 +5,7 @@ import matplotlib
 import seaborn as sns
 matplotlib.rcParams['savefig.dpi'] = 300
 matplotlib.rcParams["figure.dpi"] = 100
-from lvtlaw.utils import mag, bands, ap_bands, col_, color_index
-
-output_path = './data/output/plots'
+from lvtlaw.utils import mag, bands, ap_bands, col_, color_index, img_out_path
 
 def save(title, img_path = output_path):
     plt.savefig('%s2%s.pdf'%(img_path,title))

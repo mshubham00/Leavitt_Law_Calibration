@@ -5,11 +5,6 @@ import pandas as pd
 from lvtlaw.pl_pw import pl_reg     #pl_reg(data,'_g','_i') -> PLW, residue, prediction
 from lvtlaw.data_transform import transformation, extinction_law
 
-res = pd.read_csv(data_out+'95_residue.csv')
-raw = pd.read_csv(data_out+'95abs_data.csv')
-del_slope = pd.read_csv(data_out+'95_del_slope_intercept.csv')
-del_slope_M = pd.read_csv(data_out+'95_del_slope_intercept_M.csv')
-
 def calculate_extinction_reddening(name, del_W, del_M, slope, wm_str, R):
     del_mu = [i*0.01 for i in range(-100,100,2)]
     extinction = pd.DataFrame()
@@ -22,7 +17,7 @@ def calculate_extinction_reddening(name, del_W, del_M, slope, wm_str, R):
     #print(reddening.head())
     return del_mu, extinction, reddening
 
-def all_bands_reddening(data = res, slope_data = del_slope, col = 'VI', mag = mag):
+def all_bands_reddening(data, slope_data, col = 'VI', mag = mag):
     reddening_bands_g = []
     reddening_bands_i = []
     for i in range(0,6):
@@ -46,7 +41,6 @@ def all_bands_reddening(data = res, slope_data = del_slope, col = 'VI', mag = ma
     return del_mu, reddening_bands_g, reddening_bands_i
 
 
-mu,red_g,red_i = all_bands_reddening()
 #input('#########################################################')
 def find_rms(name, reddening, del_mu):
     rms_df = pd.DataFrame()
@@ -73,13 +67,10 @@ def find_rms(name, reddening, del_mu):
         rms_df['%f'%(k)] = rms
     return rms_df, EBV_df
 
-rms_df_g, avg_EBV_g = find_rms(res.name, red_g, mu)
-rms_df_i, avg_EBV_i = find_rms(res.name, red_i, mu)
-input('#########################################################')
 
-def find_error_pair(rms_df = rms_df_g, avg_EBV = avg_EBV_g):
+def find_error_pair(rms_df, avg_EBV):
     error_result = pd.DataFrame()
-    error_result['error'] = rms_df.rms
+    error_result['error_pair'] = rms_df.rms
     rms = []
     EBV = []
     mu = []
@@ -97,19 +88,14 @@ def find_error_pair(rms_df = rms_df_g, avg_EBV = avg_EBV_g):
     for i in range(0,6):
         error_result['A_'+mag[i]] = error_result['EBV']*R[i]
     return error_result
-result_g = find_error_pair(rms_df_g, avg_EBV_g)
-result_i = find_error_pair(rms_df_i, avg_EBV_i)
-print('\n',result_g)
-print('\n',result_i)
-input('#########################################################')
 
-def error_correction(error_pair = result_g, raw = raw, dis=disg):
+def error_correction(error_pair, raw, dis):
     correction=pd.DataFrame()
     if dis == disi:
         rdis = 'IRSB'
     else:
         rdis = 'plx'
-    correction['name']=error_pair.error
+    correction['name']=error_pair.error_pair
     correction['new_mod'] = raw[rdis] + error_pair['mu']
     correction['new_EBV'] = raw['EBV'] + error_pair['EBV']
     for i in range(0,6):
@@ -117,7 +103,5 @@ def error_correction(error_pair = result_g, raw = raw, dis=disg):
     print(correction)
     return correction
 
-result_g = error_correction(result_g, raw, disg)
-result_i = error_correction(result_i, raw, disi)
 
 

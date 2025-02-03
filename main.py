@@ -1,11 +1,11 @@
 ### File: ./main.py
 
-from lvtlaw.utils import colors,data_dir, data_file, data_out
+from lvtlaw.utils import colors,data_dir, data_file, data_out, disg, disi
 import pandas as pd
 from lvtlaw.pl_pw import pl_reg     #pl_reg(data,'_g','_i') -> PLW, residue, prediction
 from lvtlaw.data_transform import transformation, extinction_law
 from lvtlaw.residue import residue_analysis
-from lvtlaw.error_estimation import all_bands_reddening, error_correction
+from lvtlaw.error_estimation import all_bands_reddening, find_rms, error_correction, find_error_pair
 
 import os
 clear_screen= lambda: os.system('clear')
@@ -16,6 +16,11 @@ input(' To start the analysis, store the cleaned_data.csv file in ./data/input/ 
 print('###'*30)
 #####################################################################################################
 cleaned_data = pd.read_csv(data_dir+data_file)
+
+x = cleaned_data[['plx','RA_ICRS', 'DE_ICRS']]
+
+print(x.head())
+input('sdf')
 print(' \n Data Loaded from: \t', data_dir+data_file)
 print( cleaned_data.info())
 input('\n \n Raw data will be transformed into absolute magnitude and weseheit magnitude using the extinction law.')
@@ -29,10 +34,10 @@ print('###'*30)
 
 name=cleaned_data['ID']
 absolute, extinction, true_absolute, wesenheit = transformation(cleaned_data)
-absolute.to_csv(data_out+str(len(absolute))+ 'abs_data'+'.csv')
-extinction.to_csv(data_out+ str(len(extinction))+ 'ext_data'+'.csv')
-true_absolute.to_csv(data_out+str(len(true_absolute))+ 'true_abs_data'+'.csv')
-wesenheit.to_csv(data_out+str(len(wesenheit))+ 'wes_data'+'.csv')
+absolute.to_csv(data_out+str(len(absolute))+ '_abs_data'+'.csv')
+extinction.to_csv(data_out+ str(len(extinction))+ '_ext_data'+'.csv')
+true_absolute.to_csv(data_out+str(len(true_absolute))+ '_true_abs_data'+'.csv')
+wesenheit.to_csv(data_out+str(len(wesenheit))+ '_wes_data'+'.csv')
 print('Calculated absolute magnitude: \n', absolute.head())
 print('Calculated true-Absolute magnitude: \n', true_absolute.head())
 print('Calculated Wesenheit magnitude: \n', wesenheit.head())
@@ -47,7 +52,7 @@ print('###'*30)
 merg1= pd.merge(absolute, true_absolute, on="logP")
 prepared_regression_data = pd.merge(merg1, wesenheit, on = 'logP')
 prepared_regression_data['name'] = name 
-prepared_regression_data.to_csv(data_out+str(len(prepared_regression_data))+ 'prepared_PLdata'+'.csv')
+prepared_regression_data.to_csv(data_out+str(len(prepared_regression_data))+ '_prepared_PLdata'+'.csv')
 print(prepared_regression_data.head())
 input('\n This prepared dataset will be used for deriving PL and PW relations with their respective residues \n')
 print('###'*30)
@@ -72,7 +77,7 @@ print(residue.head())
 input('\n'*3 + 'Following begins the residual analysis'+ '\n')
 print('###'*30)
 
-dres , dpre, del_mc, dres_M, dpre_M, del_mc_M = residue_analysis(colors,s=1)
+dres , dpre, del_mc, dres_M, dpre_M, del_mc_M = residue_analysis(residue,colors,s=1)
 input('See residue')
 print('###'*30)
 print('My approach \n', dres.head())
@@ -88,5 +93,32 @@ input(' \n \n Press Enter to decouple distance reddening error')
 print('###'*30)
 
 ####################################################################################################
-error_correction
+del_mu, red_g, red_i = all_bands_reddening(data = residue ,slope_data=del_mc)
+
+
+
+rms_df_g, avg_EBV_g = find_rms(residue.name, red_g, del_mu)
+rms_df_i, avg_EBV_i = find_rms(residue.name, red_i, del_mu)
+rms_df_g.to_csv('%s%i_rms_g.csv'%(data_out,len(rms_df_g)))
+rms_df_i.to_csv('%s%i_rms_i.csv'%(data_out,len(rms_df_i)))
+print('\n',rms_df_g)
+print('\n',rms_df_i)
+
+errorpair_g = find_error_pair(rms_df_g, avg_EBV_g)
+errorpair_i = find_error_pair(rms_df_i, avg_EBV_i)
+print('\n',errorpair_g)
+print('\n',errorpair_i)
+errorpair_g.to_csv('%s%i_errorpair_g.csv'%(data_out,len(errorpair_g)))
+errorpair_i.to_csv('%s%i_errorpair_i.csv'%(data_out,len(errorpair_i)))
+
+result_g = error_correction(errorpair_g, absolute, disg)
+result_i = error_correction(errorpair_i, absolute, disi)
+result_g.to_csv('%s%i_result_g.csv'%(data_out,len(result_g)))
+result_i.to_csv('%s%i_result_i.csv'%(data_out,len(result_i)))
+
+print('\n',result_g)
+print('\n',result_i)
+
+
+
 input('Enter to exit!!')

@@ -10,16 +10,7 @@ simplefilter(action="ignore", category=pd.errors.PerformanceWarning)
 
 
 out_dir = './data/output/'
-regression_file = '102_regression.csv'       # 102 = absolute (1x6), true_absolute (1x6), wesenheint (15x6) 
-residue_file = '95_residue.csv'
-#print(data_dir)
-
-regression_file = pd.read_csv(out_dir+regression_file)
-residue_file = pd.read_csv(out_dir+residue_file)
-#residue_file.info()
-#print(residue_file.head(7).T)
-#print(len(regression_file))
-def filter_PLW_slope_intercept_data(data = regression_file):
+def filter_PLW_slope_intercept_data(data):
     relations = []
     for i in range(0,17):
         regress_data = data[i*6:6*i+6]
@@ -27,9 +18,8 @@ def filter_PLW_slope_intercept_data(data = regression_file):
         relations.append(regress_data)
     return relations
 
-PLW = filter_PLW_slope_intercept_data()
 
-def filter_residue(data=residue_file):
+def filter_residue(data):
     relations = []
     for i in range(0,17):
         residue_data = data.T[i*12+3:12*i+15]
@@ -37,15 +27,13 @@ def filter_residue(data=residue_file):
         relations.append(residue_data)
     return relations
 
-residue = filter_residue()
-
 
 
 
 disg = '_g'
 disi = '_i'
 
-def del_del(col): 
+def del_del(residue_file, col): 
     #input a reference wesenheit color and this function result the delta delta correlation. 
     del_res_WM = pd.DataFrame()
     del_res_WM_M = pd.DataFrame()
@@ -123,7 +111,7 @@ def del_del(col):
                                          'err_mi': del_mei,'err_ci': del_cei})
     return  del_res_WM, del_pre_WM, del_slope_interecept,  del_res_WM_M, del_pre_WM_M, del_slope_interecept_M
 
-def del_col(ls=['BV', 'VI','JK'], s=0):
+def del_col(residue_file,ls=['BV', 'VI','JK'], s=0):
     dres = pd.DataFrame()
     dpre = pd.DataFrame()
     dres['name'] = dpre['name'] = residue_file['name']
@@ -135,7 +123,7 @@ def del_col(ls=['BV', 'VI','JK'], s=0):
     dmc_M = []
     for k in ls:
         print(k)
-        a,b,c,d,e,f = del_del(k)
+        a,b,c,d,e,f = del_del(residue_file,k)
         dres = pd.merge(dres,a, on='name')
         dpre= pd.merge(dpre,b, on='name')
         dmc.append(c)
@@ -160,10 +148,10 @@ def del_col(ls=['BV', 'VI','JK'], s=0):
         dpre_M.to_csv('%s%i_del_pre_M.csv'%(out_dir,cepheid))
     return dres, dpre, del_mc, dres_M, dpre_M, del_mc_M
 
-def residue_analysis(colors= colors, s=0):
-    for i in range(0,len(residue)):
-        print(residue[i])
+def residue_analysis(residue, colors= colors, s=0):
+    #for i in range(0,len(residue)):
+    #    print(residue[i])
     input('Show the residual correlation data:')
-    dres,dpre,del_mc, dres_M, dpre_M, del_mc_M = del_col(colors,s)
+    dres,dpre,del_mc, dres_M, dpre_M, del_mc_M = del_col(residue, colors,s)
     return dres,dpre,del_mc, dres_M, dpre_M, del_mc_M
 

@@ -9,7 +9,7 @@ from lvtlaw.plot import vertical_7_colomn_plot as v_plt
 from warnings import simplefilter
 simplefilter(action="ignore", category=pd.errors.PerformanceWarning)
 
-clean_data = pd.read_csv(data_dir+data_file)
+#clean_data = pd.read_csv(data_dir+data_file)
     
 def extinction_law(mag = mag, A = A, R = R):
     print('Adopting BVIJHK Extinction law and reddening ratio from Fouque (2007): \n')
@@ -18,7 +18,7 @@ def extinction_law(mag = mag, A = A, R = R):
         print(mag[i],'\t', A[i], '\t \t', R[i], '\n')
     return A, R 
 
-def absolute_magnitude(data = clean_data, ap_bands=ap_bands, bands = bands, disg = '_g', disi = '_i'):
+def absolute_magnitude(data, ap_bands=ap_bands, bands = bands, disg = '_g', disi = '_i'):
     absolute = pd.DataFrame()
     absolute['logP'] = data['logP'] 
     absolute['IRSB'] = data['IRSB']
@@ -31,7 +31,7 @@ def absolute_magnitude(data = clean_data, ap_bands=ap_bands, bands = bands, disg
 
 
 
-def extinction(data = clean_data, R=R, bands = bands):
+def extinction(data, R=R, bands = bands):
     extinction = pd.DataFrame()
     extinction['logP'] = data['logP'] 
     extinction['IRSB'] = data['IRSB']
@@ -42,7 +42,7 @@ def extinction(data = clean_data, R=R, bands = bands):
     return extinction
 
 
-def true_absolute_magnitude(data = clean_data, R=R, mag=mag, bands=bands, disg = '_g', disi = '_i'):
+def true_absolute_magnitude(data, R=R, mag=mag, bands=bands, disg = '_g', disi = '_i'):
     tabsolute = pd.DataFrame()
     tabsolute['logP'] = data['logP']
     tabsolute['IRSB'] = data['IRSB']
@@ -55,7 +55,7 @@ def true_absolute_magnitude(data = clean_data, R=R, mag=mag, bands=bands, disg =
 
 
 
-def reddening_free(data = clean_data, R=R, mag=mag, ap_bands=ap_bands, disg = '_g', disi = '_i'):
+def reddening_free(data, R=R, mag=mag, ap_bands=ap_bands, disg = '_g', disi = '_i'):
     wesen = pd.DataFrame()
     wesen['logP'] = data['logP']
     wesen['IRSB'] = data['IRSB']
