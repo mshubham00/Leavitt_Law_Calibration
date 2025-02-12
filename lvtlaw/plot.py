@@ -5,9 +5,9 @@ import matplotlib
 import seaborn as sns
 matplotlib.rcParams['savefig.dpi'] = 300
 matplotlib.rcParams["figure.dpi"] = 100
-from lvtlaw.utils import mag, bands, ap_bands, col_, color_index, img_out_path
-
-def save(title, img_path = output_path):
+from lvtlaw.utils import mag, abs_bands, ap_bands, col_, color_index, img_out_path
+bands = abs_bands
+def save(title, img_path = img_out_path):
     plt.savefig('%s2%s.pdf'%(img_path,title))
 
 def vertical_7_colomn_plot(title: str, data, mag_name: list, sav: int, disg = '_g', disi = '_i'):

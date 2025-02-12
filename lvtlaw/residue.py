@@ -4,9 +4,10 @@ import pandas as pd
 import numpy as np
 from scipy import stats
 from functools import reduce
-from lvtlaw.utils import A, R, mag, bands, ap_bands, colors, data_dir, data_file, data_out, regression
+from lvtlaw.utils import A, R, mag, abs_bands, ap_bands, colors, data_dir, data_file, data_out, regression, dis, process_step
 from warnings import simplefilter
 simplefilter(action="ignore", category=pd.errors.PerformanceWarning)
+bands = abs_bands
 
 
 out_dir = './data/output/'
@@ -27,131 +28,79 @@ def filter_residue(data):
         relations.append(residue_data)
     return relations
 
-
-
-
-disg = '_g'
-disi = '_i'
-
-def del_del(residue_file, col): 
-    #input a reference wesenheit color and this function result the delta delta correlation. 
-    del_res_WM = pd.DataFrame()
-    del_res_WM_M = pd.DataFrame()
+def correlation_extraction(residue_file, dis, col, flag ):
+    # input the PL and PW residues for different distance methods. Flag represents Shubham or Madore approach.  
+    del_mc = pd.DataFrame()
     del_pre_WM = pd.DataFrame()
-    del_pre_WM_M = pd.DataFrame()
-    del_pre_WM['name'] = del_res_WM['name'] = residue_file['name']
-    del_pre_WM_M['name'] = del_res_WM_M['name'] = residue_file['name']
-  
-    del_mg = []
-    del_cg = [] 
-    del_meg = []
-    del_ceg = []
-    del_name = [] 
-    del_mi = []
-    del_ci = [] 
-    del_mei = []
-    del_cei = []
-
-    del_mg_M = []
-    del_cg_M = [] 
-    del_meg_M = []
-    del_ceg_M = []
-    del_name_M = [] 
-    del_mi_M = []
-    del_ci_M = [] 
-    del_mei_M = []
-    del_cei_M = []
-
-    for i in range(0,6):
-        wesen = mag[i]+col # My approach
-        mg, cg, prg, reg , mrg, crg = regression(residue_file['r_'+wesen+disg], residue_file['r_'+mag[i]+disg], wesen, mag[i]+disg,1) 
-        mi, ci, pri, rei , mri, cri = regression(residue_file['r_'+wesen+disi], residue_file['r_'+mag[i]+disi], wesen, mag[i]+disi,1) 
-        del_name.append(mag[i]+wesen)
-        del_mg.append(mg)
-        del_cg.append(cg)
-        del_meg.append(mrg)
-        del_ceg.append(crg)
-        del_res_WM['r_'+mag[i]+wesen+disg] = reg
-        del_pre_WM['p_'+mag[i]+wesen+disg] = prg
-
-        del_mi.append(mi)
-        del_ci.append(ci)
-        del_mei.append(mri)
-        del_cei.append(cri)
-        del_res_WM['r_'+mag[i]+wesen+disi] = rei
-        del_pre_WM['p_'+mag[i]+wesen+disi] = pri
-
-        wesen = col[0]+col # Madore approach
-        mg, cg, prg, reg , mrg, crg = regression(residue_file['r_'+wesen+disg], residue_file['r_'+mag[i]+disg], wesen, mag[i]+disg,1) 
-        mi, ci, pri, rei , mri, cri = regression(residue_file['r_'+wesen+disi], residue_file['r_'+mag[i]+disi], wesen, mag[i]+disi,1) 
-        del_name_M.append(mag[i]+wesen)
-        del_mg_M.append(mg)
-        del_cg_M.append(cg)
-        del_meg_M.append(mrg)
-        del_ceg_M.append(crg)
-        del_res_WM_M['r_'+mag[i]+wesen+disg] = reg
-        del_pre_WM_M['p_'+mag[i]+wesen+disg] = prg
-        del_mi_M.append(mi)
-        del_ci_M.append(ci)
-        del_mei_M.append(mri)
-        del_cei_M.append(cri)
-        del_res_WM_M['r_'+mag[i]+wesen+disi] = rei
-        del_pre_WM_M['p_'+mag[i]+wesen+disi] = pri
-
-    del_slope_interecept_M = pd.DataFrame({'name': del_name_M, 
-                                         'mg': del_mg_M, 'cg': del_cg_M, 
-                                         'err_mg': del_meg_M,'err_cg': del_ceg_M, 
-                                         'mi': del_mi_M, 'ci': del_ci_M, 
-                                         'err_mi': del_mei_M,'err_ci': del_cei_M})
-
-    del_slope_interecept = pd.DataFrame({'name': del_name, 
-                                         'mg': del_mg, 'cg': del_cg, 
-                                         'err_mg': del_meg,'err_cg': del_ceg, 
-                                         'mi': del_mi, 'ci': del_ci, 
-                                         'err_mi': del_mei,'err_ci': del_cei})
-    return  del_res_WM, del_pre_WM, del_slope_interecept,  del_res_WM_M, del_pre_WM_M, del_slope_interecept_M
-
-def del_col(residue_file,ls=['BV', 'VI','JK'], s=0):
-    dres = pd.DataFrame()
-    dpre = pd.DataFrame()
-    dres['name'] = dpre['name'] = residue_file['name']
-    dmc = []
-
+    del_res_WM = pd.DataFrame()
+    del_pre_WM['name'] = del_res_WM['name'] = residue_file['name'] # star-by-star
+    for diss in dis:
+        del_m = []
+        del_c = [] 
+        del_me = []
+        del_ce = []
+        del_name = [] 
+        for i in range(0,6):
+            if flag == 'S':
+                wesen = mag[i]+col # My approach - PW changes with bands, correlation between PW residue vs PL residue for gaia and irsb distances
+            else:
+                wesen = col[0]+col # Madore approach - PW is fixed.
+# Ensure wesen, mag[i], and diss are strings before concatenation
+            print('r_'+wesen)
+            m, c, pr, re, mr, cr = regression(residue_file['r_'+wesen+diss], residue_file['r_'+mag[i]+diss], wesen, mag[i]+diss, 1)
+            del_name.append(mag[i]+wesen)
+            del_m.append(m)
+            del_c.append(c)
+            del_me.append(mr)
+            del_ce.append(cr)
+            del_res_WM['r_'+mag[i]+wesen+diss] = re
+            del_pre_WM['p_'+mag[i]+wesen+diss] = pr
+        del_mc['name'] = del_name
+        del_mc['m'+diss] = del_m
+        del_mc['c'+diss] = del_c
+        del_mc['me'+diss] = del_me
+        del_mc['ce'+diss] = del_ce 
+    # Function return regression data for each combination (del_mc) and residue of individual stars.
+    return del_res_WM, del_pre_WM, del_mc
+    
+def residue_analysis(residue_file, dis = dis, cols=['VI'], s=1):
+    dres_S = pd.DataFrame()
+    dpre_S = pd.DataFrame()
+    dres_S['name'] = dpre_S['name'] = residue_file['name']
+    dmc_S = []
     dres_M = pd.DataFrame()
     dpre_M = pd.DataFrame()
     dres_M['name'] = dpre_M['name'] = residue_file['name']
-    dmc_M = []
-    for k in ls:
-        print(k)
-        a,b,c,d,e,f = del_del(residue_file,k)
-        dres = pd.merge(dres,a, on='name')
-        dpre= pd.merge(dpre,b, on='name')
-        dmc.append(c)
-        dres_M = pd.merge(dres_M,d, on='name')
-        dpre_M= pd.merge(dpre_M,e, on='name')
-        dmc_M.append(f)
+    dmc_M = []                       
+    # Ensure the result of correlation_extraction is properly handled
+    for col in cols:
+        Sa, Sb, Sc = correlation_extraction(residue_file, dis, col, 'S')
+        Ma, Mb, Mc = correlation_extraction(residue_file, dis, col, 'M')
     
-    del_mc = pd.concat(dmc, axis = 0, join = 'inner', ignore_index=True)
-    del_mc = del_mc.drop_duplicates().set_index('name').T
+        dres_S = pd.merge(dres_S, Sa, on='name')
+        dpre_S = pd.merge(dpre_S, Sb, on='name')
+        dmc_S.append(Sc)  # Convert to string explicitly
+        dres_M = pd.merge(dres_M, Ma, on='name')
+        dpre_M = pd.merge(dpre_M, Mb, on='name')
+        dmc_M.append(Mc)  # Convert to string explicitly
 
-    del_mc_M = pd.concat(dmc_M, axis = 0, join = 'inner', ignore_index=True)
+# Concatenate and clean up the dmc_S and dmc_M lists
+    del_mc_S = pd.concat(dmc_S, axis=0, join='inner', ignore_index=True)
+    del_mc_S = del_mc_S.drop_duplicates().set_index('name').T
+
+    del_mc_M = pd.concat(dmc_M, axis=0, join='inner', ignore_index=True)
     del_mc_M = del_mc_M.drop_duplicates().set_index('name').T
+                                         
     #del_mc =del_mc.T
-    print('There will be %i relations, 12 for %i color minus duplicates.'%((6)*len(dmc), len(ls)))
+    print('There will be %i relation s, 12 for %i color minus duplicates.'%((6)*len(dmc_S), len(cols)))
     if s==1:
         cepheid = len(residue_file)
-        del_mc.to_csv('%s%i_del_slope_intercept.csv'%(out_dir,cepheid))
-        dres.to_csv('%s%i_del_res.csv'%(out_dir,cepheid))
-        dpre.to_csv('%s%i_del_pre.csv'%(out_dir,cepheid))
-        del_mc_M.to_csv('%s%i_del_slope_intercept_M.csv'%(out_dir,cepheid))
-        dres_M.to_csv('%s%i_del_res_M.csv'%(out_dir,cepheid))
-        dpre_M.to_csv('%s%i_del_pre_M.csv'%(out_dir,cepheid))
-    return dres, dpre, del_mc, dres_M, dpre_M, del_mc_M
+        del_mc_S.to_csv('%s%i_del_slope_intercept_S.csv'%(out_dir+process_step[2],cepheid))
+        dres_S.to_csv('%s%i_del_res_S.csv'%(out_dir+process_step[2],cepheid))
+        dpre_S.to_csv('%s%i_del_pre_S.csv'%(out_dir+process_step[2],cepheid))
+        del_mc_M.to_csv('%s%i_del_slope_intercept_M.csv'%(out_dir+process_step[2],cepheid))
+        dres_M.to_csv('%s%i_del_res_M.csv'%(out_dir+process_step[2],cepheid))
+        dpre_M.to_csv('%s%i_del_pre_M.csv'%(out_dir+process_step[2],cepheid))
+    return dres_S, dpre_S, del_mc_S, dres_M, dpre_M, del_mc_M
 
-def residue_analysis(residue, colors= colors, s=0):
-    #for i in range(0,len(residue)):
-    #    print(residue[i])
-    input('Show the residual correlation data:')
-    dres,dpre,del_mc, dres_M, dpre_M, del_mc_M = del_col(residue, colors,s)
-    return dres,dpre,del_mc, dres_M, dpre_M, del_mc_M
-
+ 
