@@ -1,42 +1,48 @@
 ### File: ./lvtlaw/utils.py
 import os
+import subprocess
+import matplotlib.pyplot as plt
+import sys
 from scipy import stats
 import pandas as pd
-data_file = 'cleaned_data.csv'
+input_data_file = 'cleaned_data.csv'
 #data_file = '18_gaia_irsb_cluster.csv'
 
 data_dir = './data/input/'
 data_out='./data/output/'
-img_out_path = './data/output/plots/'
+img_out_path = './data/output/9_plots/'
 dis_list = ['plx', 'IRSB']
-dis = ['_g','_i']
+dis_flag = ['_g','_i']
+wes_cols = ['BV', 'VI','VK','JK']
 
 process_step = ['1_prepared/','2_PLPW/','3_deldel/', '4_reddening/', '5_dispersion/','6_rms/','7_errorpair/', '8_result/', '9_plots/']
 
-def output_directories(parent_folder = data_out, subdirectories = process_step):
-    for subdirectory in subdirectories:
-        path = os.path.join(parent_folder, subdirectory)
-        if not os.path.exists(path):
-            os.makedirs(path)
+def output_directories(parent_folder = data_out, s=1,subdirectories = process_step):
+    if s==1:
+        for subdirectory in subdirectories:
+            path = os.path.join(parent_folder, subdirectory)
+            if not os.path.exists(path):
+                os.makedirs(path)
        
-def load_data(data_file = data_file, data_dir = data_dir):
+def load_data(data_file = input_data_file, data_dir = data_dir, p=0):
     cleaned_data = pd.read_csv(data_dir+data_file)
-    print(' \n Data Loaded from: \t', data_dir+data_file)
-    print( cleaned_data.info())
-    name = cleaned_data.ID
-    ra = cleaned_data.RA_ICRS
-    dec = cleaned_data.DE_ICRS
-    EBV = cleaned_data.EBV
-    dis = cleaned_data.IRSB
-    return cleaned_data#, name, ra, dec, EBV, dis
+    if p==1:
+        print(' \n Data Loaded from: \t', data_dir+data_file)
+        print( cleaned_data.info())
+#    name = cleaned_data.ID
+#    ra = cleaned_data.RA_ICRS
+#    dec = cleaned_data.DE_ICRS
+#    EBV = cleaned_data.EBV
+#    dis = cleaned_data.IRSB
+    return cleaned_data #, name, ra, dec, EBV, dis
 
-def open_folder(path):
-    if platform.system() == 'Darwin':  # macOS
-        subprocess.run(['open', path])
-    elif platform.system() == 'Windows':  # Windows
-        subprocess.run(['explorer', path])
-    elif platform.system() == 'Linux':  # Linux
-        subprocess.run(['xdg-open', path])
+def save(title, img_path=img_out_path, step=0):                                      #   2
+    plt.savefig('%s%s.pdf'%(img_path+process_step[step],title))
+
+
+
+def open_output_dir(path):
+    subprocess.run(['xdg-open', path])
 
 # Open the output folder after process completion
 
@@ -98,4 +104,18 @@ def regression(x: list, y: list, x_str: str, y_str: str, p = 0):
     if p == 1:
         print('%s = %f %s ( %f) + %f ( %f)'%(y_str, m, x_str, m_error, c, c_error))
     return m, c, prediction, residue, m_error, c_error
+
+
+
+#####################################################################
+def RA_DEC_DIS_to_Galactocentric(ra, dec, dis):
+    ra = Longitude(ra, unit=u.degree)
+    dec = Latitude(dec, unit = u.degree)                        #   1
+    dis = 10**(1 + dis/5)/1000          # modulus to kpc
+    dis = Distance(dis, unit = u.kpc)
+    coordinate = SkyCoord(ra=ra, dec=dec, distance=dis, frame='icrs')
+    coordinate = coordinate.transform_to(Galactocentric(galcen_distance=8.1*u.kpc))
+    return coordinate
+#####################################################################
+
 

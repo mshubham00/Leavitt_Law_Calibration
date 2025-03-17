@@ -2,7 +2,8 @@
 ####################################################################
 import numpy as np
 import matplotlib.pyplot as plt
-from mw_plot import MWFaceOn
+#from mw_plot import MWFaceOn
+from lvtlaw.utils import RA_DEC_DIS_to_Galactocentric, save
 import pandas as pd                                             #   0
 from astropy import units as u
 from astropy.coordinates import SkyCoord, ICRS, Galactocentric 
@@ -12,29 +13,19 @@ import seaborn as sns
 sns.set()
 bands_label = ap_bands
 #####################################################################
-def RA_DEC_DIS_to_Galactocentric(ra, dec, dis):
-    ra = Longitude(ra, unit=u.degree)
-    dec = Latitude(dec, unit = u.degree)                        #   1
-    dis = 10**(1 + dis/5)/1000          # modulus to kpc
-    dis = Distance(dis, unit = u.kpc)
-    coordinate = SkyCoord(ra=ra, dec=dec, distance=dis, frame='icrs')
-    coordinate = coordinate.transform_to(Galactocentric(galcen_distance=8.1*u.kpc))
-    return coordinate
-#####################################################################
-def save(title, img_path):                                      #   2
-    plt.savefig('%s2%s.pdf'%(img_path,title))
-#####################################################################
-def milky_way(ra,dec, dis, figsize = (8,8), title = 'plot_mw', img_path = './'):
-    coordinate = RA_DEC_DIS_to_Galactocentric(ra, dec, dis)
-    mw1 = MWFaceOn(figsize=figsize,radius=15 * u.kpc, unit=u.kpc, 
-        coord="galactocentric", annotation=True,)
-    mw1.scatter(-coordinate.x, -coordinate.y, c = 'k', s = 6)
-    if title == 'plot_mw':
+def plot_scatter_with_colorbar(x, y, size, color_values, title = ' ', img_path = img_out_path):
+    scatter = plt.scatter(x, y, s=size, c=color_values, cmap='viridis', alpha=0.7)
+    plt.colorbar(scatter, label='Color Value')
+    plt.xlabel('X Axis')
+    plt.ylabel('Y Axis')
+    #plt.xticks(ticks=[])
+    plt.title('Scatter Plot with Size and Colorbar')
+    if title == ' ':
         pass
     else:
-        save(title,img_path)
-    plt.axis('off')
+        save(title)
     plt.show()
+
 #####################################################################
 def histogram_plot(kind, data, bins=10, title="Histogram", xlabel="Values", ylabel="Frequency", img_path = img_out_path):
     if kind == 1:
@@ -84,4 +75,3 @@ def sea_sub(df):
     sns.scatterplot(data=df, x='B', y='I', ax=axes[1,1])
     plt.show()
 #####################################################################
-

@@ -4,43 +4,26 @@ import pandas as pd
 import numpy as np
 from scipy import stats
 from functools import reduce
-from lvtlaw.utils import A, R, mag, abs_bands, ap_bands, colors, data_dir, data_file, data_out, regression, dis, process_step
+from lvtlaw.utils import A, R, mag, abs_bands, ap_bands, colors, data_dir, input_data_file, data_out, regression, dis_flag, process_step
 from warnings import simplefilter
 simplefilter(action="ignore", category=pd.errors.PerformanceWarning)
 bands = abs_bands
 
-
 out_dir = './data/output/'
-def filter_PLW_slope_intercept_data(data):
-    relations = []
-    for i in range(0,17):
-        regress_data = data[i*6:6*i+6]
-        #print('\n \t %i \t Relation  Slope, intercept, respective error in Gaia (g) and IRSB (i) cases \n '%(i), data[i*6:6*i+6])
-        relations.append(regress_data)
-    return relations
 
-
-def filter_residue(data):
-    relations = []
-    for i in range(0,17):
-        residue_data = data.T[i*12+3:12*i+15]
-        #print('\n %i BVIJHK band Residue with Gaia (g) and IRSB (i) cases \n '%(i), residue_data)
-        relations.append(residue_data)
-    return relations
-
-def correlation_extraction(residue_file, dis, col, flag ):
+def correlation_extraction(residue_file, dis_flag, col, flag):
     # input the PL and PW residues for different distance methods. Flag represents Shubham or Madore approach.  
     del_mc = pd.DataFrame()
     del_pre_WM = pd.DataFrame()
     del_res_WM = pd.DataFrame()
     del_pre_WM['name'] = del_res_WM['name'] = residue_file['name'] # star-by-star
-    for diss in dis:
+    for diss in dis_flag:
         del_m = []
         del_c = [] 
         del_me = []
         del_ce = []
         del_name = [] 
-        for i in range(0,6):
+        for i in range(0,len(mag)):
             if flag == 'S':
                 wesen = mag[i]+col # My approach - PW changes with bands, correlation between PW residue vs PL residue for gaia and irsb distances
             else:
@@ -63,14 +46,16 @@ def correlation_extraction(residue_file, dis, col, flag ):
     # Function return regression data for each combination (del_mc) and residue of individual stars.
     return del_res_WM, del_pre_WM, del_mc
     
-def residue_analysis(residue_file, dis = dis, cols=['VI'], s=1):
+def residue_analysis(residue_file, dis = dis_flag, cols=['VI'], s=1):
     dres_S = pd.DataFrame()
     dpre_S = pd.DataFrame()
     dres_S['name'] = dpre_S['name'] = residue_file['name']
+    dres_S['logP'] = dpre_S['logP'] = residue_file['logP']
     dmc_S = []
     dres_M = pd.DataFrame()
     dpre_M = pd.DataFrame()
     dres_M['name'] = dpre_M['name'] = residue_file['name']
+    dres_M['logP'] = dpre_M['logP'] = residue_file['logP']
     dmc_M = []                       
     # Ensure the result of correlation_extraction is properly handled
     for col in cols:
