@@ -100,6 +100,8 @@ def residue(dres_M, dres_S, col='VK'):
         ax.set_ylabel('Y axis')
     ax.set_xlabel('X axis')
     plt.tight_layout(rect=[0, 0, 1, 0.96])  # Adjust for suptitle space
+    title = f'residue_{col}'
+    save(title,img_out_path, 2)    
     plt.show()
 
 
@@ -119,5 +121,7 @@ def PLPWres(dres_M, dres_S, col='VK'):
         ax.set_ylabel('Y axis')
     ax.set_xlabel('X axis')
     plt.tight_layout(rect=[0, 0, 1, 0.96])  # Adjust for suptitle space
+    title = f'PLPWres_{col}'
+    save(title,img_out_path, 2)    
     plt.show()
 

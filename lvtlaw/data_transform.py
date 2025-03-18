@@ -28,6 +28,7 @@ def distance(data, dis_list):
 
 def extinction(data, R=R, bands = abs_bands):
     extinction = pd.DataFrame()
+    extinction['name'] = data['ID'] 
     extinction['logP'] = data['logP'] 
     extinction['IRSB'] = data['IRSB']
     extinction['plx'] = data['plx']
@@ -41,6 +42,7 @@ def extinction(data, R=R, bands = abs_bands):
 
 def absolute_magnitude(data, ap_bands=ap_bands, bands = abs_bands, disg = '_g', disi = '_i'):
     absolute = pd.DataFrame()
+    absolute['name'] = data['ID'] 
     absolute['logP'] = data['logP'] 
     absolute['IRSB'] = data['IRSB']
     absolute['plx'] = data['plx']

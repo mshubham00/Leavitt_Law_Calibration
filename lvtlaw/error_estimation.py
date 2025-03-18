@@ -5,8 +5,63 @@ import pandas as pd
 from lvtlaw.pl_pw import pl_reg     #pl_reg(data,'_g','_i') -> PLW, residue, prediction
 from lvtlaw.data_transform import transformation, extinction_law
 
+
+def all_star(residue, slope_data, dis_flag, cols, flags, s=1):
+    ex_ = pd.DataFrame()
+    rd_ = pd.DataFrame()
+    for flag in flags:
+        for dis in dis_flag:
+            for col in cols:
+                for i in range(0, len(mag)):
+                    r = R[i] / (R[mag.index(col[0])] - R[mag.index(col[1])])                
+                    if flag == '_S':
+                        wes = mag[i] + col
+                        slope = slope_data[0]
+                    else:
+                        wes = col[0] + col
+                        slope = slope_data[1]
+                    wm_str = mag[i] + wes
+                    del_M = residue['r0_' + mag[i] + dis]
+                    del_W = residue['r_' + wes + dis]
+                    if dis == dis_flag[0]:
+                        m = slope[wm_str].iloc[0]
+                        c = slope[wm_str].iloc[2]
+                    elif dis == dis_flag[1]:
+                        m = slope[wm_str].iloc[4]            
+                        c = slope[wm_str].iloc[6]
+                    ex_[wm_str + dis+flag] = del_M - m * del_W - c
+                    rd_[wm_str + dis+flag] = ex_[wm_str + dis+flag] / r
+    if s == 1:
+        ex_.to_csv('%s%i_ex.csv' % (data_out + process_step[2], len(ex_)))
+        rd_.to_csv('%s%i_rd.csv' % (data_out + process_step[2], len(rd_)))    
+    return ex_, rd_
+
+def star_by_star(residue, slope_data, dis_flag , cols, flags, s=1):
+    e,r = all_star(residue, slope_data, dis_flag , cols, flags, s=1)
+    star_list =[]
+    for index in range(len(residue)):
+        star_data = pd.DataFrame()
+        for flag in flags:
+            for dis in range(len(dis_flag)):
+                for col in cols:
+                    ex=[]
+                    rd=[]
+                    for i in range(6):
+                        if flag == '_S':
+                            wes = mag[i]+col
+                        elif flag == '_M':
+                            wes = col[0]+col
+                        wm_str = mag[i]+wes
+                        ex.append(e[wm_str+dis_flag[dis]+flag].iloc[index])
+                        rd.append(r[wm_str+dis_flag[dis]+flag].iloc[index])
+                    star_data['A0'+col+dis_flag[dis]+flag] = ex
+                    star_data['E0'+col+dis_flag[dis]+flag] = rd
+        star_data.to_csv('%s%i_%i_star.csv'%(data_out+process_step[2],len(star_data),index))
+        star_list.append(star_data)
+    return star_list
+     
 #for a star, del-del slope required which varies for different bands. Also residue of PL, PW required. 
-def calculate_extinction_reddening(star_name, period, del_W, del_M, slope, intrc, wm_str, R):
+def calculate_extinction_reddening(star_names, period, del_W, del_M, slope, intrc, wm_str, R, dis, s =1):
     # del_W : list containing residue of specific PW relation
     # del_M : list containing resdiue of specific PL relation
     # slope, intrc : m and c of linear fit between del_W and del_M
@@ -15,12 +70,18 @@ def calculate_extinction_reddening(star_name, period, del_W, del_M, slope, intrc
     extinction = pd.DataFrame()
     reddening = pd.DataFrame()
     extinction['logP'] = reddening['logP'] = period
-    extinction['%s'%(wm_str)]=star_name
-    reddening['%s'%(wm_str)]=star_name
+    extinction['%s'%(wm_str)]=star_names
+    reddening['%s'%(wm_str)]=star_names
+#    ex_ = del_M - slope*del_W - intrc
+#    rd_ = ex_/R
     for mu in del_mu:
         extinction['%f'%(mu)] = (del_M - mu) - slope*(del_W - mu) - intrc
+             #                  = (del_M - slope*del_W - intrc) + mu (slope - 1)
         reddening['%f'%(mu)] = extinction['%f'%(mu)]/R  
-    return del_mu, extinction, reddening
+    if s==1:
+        reddening.to_csv('%s%i_red_%s%s.csv'%(data_out+process_step[3],len(reddening),wm_str,dis))
+        extinction.to_csv('%s%i_ext_%s%s.csv'%(data_out+process_step[3],len(extinction),wm_str,dis))
+    return del_mu, extinction, reddening#, ex_, rd_
 
 def all_dis_reddening(residue, slope_data, dis_flag , col, flag, s=1):
     # residue : dataframe containing PL and PW residues
@@ -44,16 +105,12 @@ def all_dis_reddening(residue, slope_data, dis_flag , col, flag, s=1):
             if dis == '_g':
                 slope = slope_data[wm_str].iloc[0]
                 intrc = slope_data[wm_str].iloc[2]
-
             else:
                 slope = slope_data[wm_str].iloc[4]            
                 intrc = slope_data[wm_str].iloc[6]
-            del_mu, extinction, reddening = calculate_extinction_reddening(star_names, period, del_W, del_M, slope, intrc, wm_str+dis, r)
+            del_mu, extinction, reddening = calculate_extinction_reddening(star_names, period, del_W, del_M, slope, intrc, wm_str, r, dis)
             reddening_bands.append(reddening)
             extinction_bands.append(extinction)
-            if s==1:
-                reddening.to_csv('%s%i_red_%s%s.csv'%(data_out+process_step[3],len(reddening),wm_str,dis))
-                extinction.to_csv('%s%i_ext_%s%s.csv'%(data_out+process_step[3],len(extinction),wm_str,dis))
         reddening_dis_list_df.append(reddening_bands)
         extinction_dis_list_df.append(extinction_bands)
     # returns list of mu, 2 distance-dependent lists of dfs
@@ -61,16 +118,16 @@ def all_dis_reddening(residue, slope_data, dis_flag , col, flag, s=1):
 
 #input('#########################################################')
 
-def find_rms(star_name, reddening, extinction, del_mu, col, d, flag, s=1, number_of_bands = 4):
+def find_rms(star_names, reddening, extinction, del_mu, col, d, flag, s=1, number_of_bands = 4):
     # input 
     rms_df = pd.DataFrame()
-    rms_df['rms'] = star_name
+    rms_df['rms'] = star_names
     EBV_df = pd.DataFrame()
-    EBV_df['EBV'] = star_name
+    EBV_df['EBV'] = star_names
     dispersion_list = []
     for mu in del_mu:
         dispersion = pd.DataFrame()
-        dispersion[str(mu)] = star_name
+        dispersion[str(mu)] = star_names
         summ = 0
         for i in range(0,len(mag)):
             dispersion['E0'+mag[i]] = reddening[i]['%f'%(mu)]
@@ -85,13 +142,14 @@ def find_rms(star_name, reddening, extinction, del_mu, col, d, flag, s=1, number
         rms_df['%f'%(mu)] = rms
         dispersion['%f'%(mu)] = rms
         if s==1:
-            dispersion.to_csv('%s%i_dispersion_%s_%s_%s_%f.csv'%(data_out+process_step[4],len(rms_df), d, col, flag,mu))
+            dispersion.to_csv('%s%i_dispersion%s_%s%s_%f.csv'%(data_out+process_step[4],len(rms_df), d, col, flag,mu))
         dispersion_list.append(dispersion) # list of dataframes for every mu step
     print(EBV_df)
     if s==1:
         rms_df.to_csv('%s%i_rms_%s_%s_%s.csv'%(data_out+process_step[5],len(rms_df),d, col, flag))
         EBV_df.to_csv('%s%i_EBV_%s_%s_%s.csv'%(data_out+process_step[5],len(EBV_df), d, col,flag))
     return rms_df, EBV_df, dispersion_list
+
 
 
 def find_error_pair(rms_df, EBV_df, del_mu, dispersion_list, col,d,flag, s=1):
@@ -139,15 +197,22 @@ def error_correction(error_result, raw, col, dis, flag, s=1):
     return correction
 
 
-def result(raw_data, dresidue, dslope, dis_flag, col, flag, s=1):
+def star_dispersion(index, dis_list, red, ext, col):
+    star = pd.DataFrame()
+#    star['ex_g'] = red[].iloc[index]
+#    star['ex_i'] = 
+
+
+
+def result(raw_data, residue, dslope, dis_flag, col, flag, s=1):
     col_list=[]
     for c in col: # for four interesting wesenheits BV, VI, VK, JK
-        del_mu, red_dis_list, ex_dis_list= all_dis_reddening(dresidue,dslope, dis_flag, c, flag, s)
+        del_mu, red_dis_list, ex_dis_list= all_dis_reddening(residue,dslope, dis_flag, c, flag, s)
         dis_list = []
         k=0
         for red, ext in red_dis_list, ex_dis_list:
             d = dis_flag[k]
-            rms_df, EBV_df, dispersion_list = find_rms(dresidue.name, red, ext, del_mu, c, d, flag, s)
+            rms_df, EBV_df, dispersion_list = find_rms(residue.name, red, ext, del_mu, c, d, flag, s)
             error_df = find_error_pair(rms_df, EBV_df, del_mu, dispersion_list, c, d, flag, s)
             result_df = error_correction(error_df, raw_data, c, d, flag, s)
             #print(result_df)

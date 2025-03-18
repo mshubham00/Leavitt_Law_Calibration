@@ -1,5 +1,0 @@
-### file: ./show.py
-
-import visuals.dataload raw
-
-print(raw)

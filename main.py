@@ -1,12 +1,12 @@
 ### File: ./main.py
 
 #from lvtlaw.visualization import milky_way, plot_corr
-from lvtlaw.utils import output_directories, load_data, process_step, open_output_dir
+from lvtlaw.utils import output_directories, load_data, process_step, open_output_dir, flags
 from lvtlaw.utils import colors,data_dir, input_data_file, data_out, dis_list, dis_flag, wes_cols
 from lvtlaw.pl_pw import pl_reg                                             #pl_reg(data,'_g','_i') -> PLW, residue, prediction
 from lvtlaw.data_transform import transformation, extinction_law, distance  
 from lvtlaw.residue import residue_analysis
-from lvtlaw.error_estimation import result
+from lvtlaw.error_estimation import star_by_star, star_dispersion, result
 import os
 import pandas as pd
 clear_screen= lambda: os.system('clear')
@@ -87,17 +87,21 @@ print('###'*30)
 
 ####################################################################################################
 
-method = []
 col = ['BV', 'VI', 'VK', 'JK']
 dis = ['_g','_i']
+slope_data=[del_mc_S, del_mc_M]
+
+star_by_star(residue, slope_data, dis_flag , wes_cols, flags, s=1)
+
+method = []
 for flag in ['_S', '_M']:
     if flag == '_S':
         dresidue = dres_S
-        slope = del_mc_S
-    else:
+        dslope = del_mc_S
+    elif flag == '_M':
         dresidue = dres_M
-        slope = del_mc_M
-    lists = result( absolute, residue, slope, dis, col, flag, s)
+        dslope = del_mc_M
+    lists = result(absolute, residue, dslope, dis, col, flag, s)
     method.append(lists)
 
 for meth in range(0,2):

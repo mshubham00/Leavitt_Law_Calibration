@@ -14,7 +14,7 @@ img_out_path = './data/output/9_plots/'
 dis_list = ['plx', 'IRSB']
 dis_flag = ['_g','_i']
 wes_cols = ['BV', 'VI','VK','JK']
-
+flags = ['_S', '_M']
 process_step = ['1_prepared/','2_PLPW/','3_deldel/', '4_reddening/', '5_dispersion/','6_rms/','7_errorpair/', '8_result/', '9_plots/']
 
 def output_directories(parent_folder = data_out, s=1,subdirectories = process_step):
@@ -36,8 +36,8 @@ def load_data(data_file = input_data_file, data_dir = data_dir, p=0):
 #    dis = cleaned_data.IRSB
     return cleaned_data #, name, ra, dec, EBV, dis
 
-def save(title, img_path=img_out_path, step=0):                                      #   2
-    plt.savefig('%s%s.pdf'%(img_path+process_step[step],title))
+def save(title, img_path=img_out_path, step=0, fil = 'pdf'):                                   #   2
+    plt.savefig('%s%s.%s'%(img_path+process_step[step],title, fil))
 
 
 
