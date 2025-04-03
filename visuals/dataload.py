@@ -3,35 +3,41 @@
 import pandas as pd
 import os
 import subprocess
-from lvtlaw.utils import wes_cols, mag, dis_flag
+from lvtlaw.utils import wes_cols, mag, dis_flag, flags, save_pickle
 
 process_step = ['1_prepared/','2_PLPW/','3_deldel/', '4_reddening/', '5_dispersion/','6_rms/','7_errorpair/', '8_result/']
 
 #### 
 raw = pd.read_csv('./data/input/cleaned_data.csv')
 data_path = './data/output/'
+n = len(raw)
+####
+absolute = pd.read_csv('%s%i_abs_data.csv'%(data_path+process_step[0],n))
+extinction = pd.read_csv('%s%i_ext_data.csv'%(data_path+process_step[0],n))
+tabsolute = pd.read_csv('%s%i_true_abs_data.csv'%(data_path+process_step[0],n))
+wesenheit = pd.read_csv('%s%i_wes_data.csv'%(data_path+process_step[0],n))
 
 ####
-absolute = pd.read_csv('%s95_abs_data.csv'%(data_path+process_step[0]))
-extinction = pd.read_csv('%s95_ext_data.csv'%(data_path+process_step[0]))
-tabsolute = pd.read_csv('%s95_true_abs_data.csv'%(data_path+process_step[0]))
-wesenheit = pd.read_csv('%s95_wes_data.csv'%(data_path+process_step[0]))
-
-####
-PLWdata = pd.read_csv('%s95_prepared_PLdata.csv'%(data_path+process_step[1]))
-PLWresidue = pd.read_csv('%s95_residue.csv'%(data_path+process_step[1]))
+PLWdata = pd.read_csv('%s%i_prepared_PLdata.csv'%(data_path+process_step[1],n))
+PLWresidue = pd.read_csv('%s%i_residue.csv'%(data_path+process_step[1],n))
 PLWregression = pd.read_csv('%s102_regression.csv'%(data_path+process_step[1]))
-PLWprediction = pd.read_csv('%s95_prediction.csv'%(data_path+process_step[1]))
+PLWprediction = pd.read_csv('%s%i_prediction.csv'%(data_path+process_step[1],n))
 
 #### 
-dpre_M = pd.read_csv('%s95_del_pre_M.csv'%(data_path+process_step[2]))
-dres_M = pd.read_csv('%s95_del_res_M.csv'%(data_path+process_step[2]))
-dmc_M = pd.read_csv('%s95_del_slope_intercept_M.csv'%(data_path+process_step[2]))
-dpre_S = pd.read_csv('%s95_del_pre_S.csv'%(data_path+process_step[2]))
-dres_S = pd.read_csv('%s95_del_res_S.csv'%(data_path+process_step[2]))
-dmc_S = pd.read_csv('%s95_del_slope_intercept_S.csv'%(data_path+process_step[2]))
+dpre_M = pd.read_csv('%s%i_del_pre_M.csv'%(data_path+process_step[2],n))
+dres_M = pd.read_csv('%s%i_del_res_M.csv'%(data_path+process_step[2],n))
+dmc_M = pd.read_csv('%s%i_del_slope_intercept_M.csv'%(data_path+process_step[2],n))
+dpre_S = pd.read_csv('%s%i_del_pre_S.csv'%(data_path+process_step[2],n))
+dres_S = pd.read_csv('%s%i_del_res_S.csv'%(data_path+process_step[2],n))
+dmc_S = pd.read_csv('%s%i_del_slope_intercept_S.csv'%(data_path+process_step[2],n))
 
 ####
+
+extinction0 = pd.read_csv('%s%i_ex.csv' % (data_out + process_step[3], n))
+reddening0 = pd.read_csv('%s%i_rd.csv' % (data_out + process_step[3], n))
+####
+
+
 #dpre_M = pd.read_csv('%s95_del_pre_M.csv'%(data_path+process_step[3]))
 def load_star(total_stars):
     stars = {}
@@ -39,15 +45,15 @@ def load_star(total_stars):
         stars[t] = pd.read_csv('%s%i_%i_star.csv' % (data_path + process_step[2], len(mag), t) )
     return stars
 
-stars = load_star(len(raw))    
+stars = load_star(n)    
 
 def ext(dis):
     ext_S = {}
     ext_M = {}
     for c in wes_cols:
         for m in mag:
-            ext_S[m+m+c+dis] = pd.read_csv('%s95_ext_%s%s.csv' % (data_path + process_step[3], m + m + c, dis))
-            ext_M[m + c[0] + c+dis] = pd.read_csv('%s95_ext_%s%s.csv' % (data_path + process_step[3], m + c[0] + c, dis))
+            ext_S[m+m+c+dis] = pd.read_csv('%s%i_ext_%s%s.csv' % (data_path + process_step[3],n, m + m + c, dis))
+            ext_M[m + c[0] + c+dis] = pd.read_csv('%s%i_ext_%s%s.csv' % (data_path + process_step[3],n, m + c[0] + c, dis))
     ext_MS_dic_deldel = [ext_M, ext_S]
     return ext_MS_dic_deldel
 
@@ -59,8 +65,8 @@ def red(dis):
     red_M = {}
     for c in wes_cols:
         for m in mag:
-            red_S[m+m+c+dis] = pd.read_csv('%s95_red_%s%s.csv' % (data_path + process_step[3], m + m + c, dis))
-            red_M[m + c[0] + c+dis] = pd.read_csv('%s95_red_%s%s.csv' % (data_path + process_step[3], m + c[0] + c, dis))
+            red_S[m+m+c+dis] = pd.read_csv('%s%i_red_%s%s.csv' % (data_path + process_step[3], n, m + m + c, dis))
+            red_M[m + c[0] + c+dis] = pd.read_csv('%s%i_red_%s%s.csv' % (data_path + process_step[3],n, m + c[0] + c, dis))
     red_MS_dic_deldel = [red_M, red_S]
     return red_MS_dic_deldel
 
@@ -68,9 +74,15 @@ red_g = red('_g')
 red_i = red('_i')
 
 
-def pick_extred(t,wes_str,dis):
-    f = pd.read_csv('%s%i_%s_%s%s.csv'%(data_path + process_step[3],len(raw),t,wes_str,dis))
+def pick_extred(exrd,wes_str,dis):
+    f = pd.read_csv('%s%i_%s_%s%s.csv'%(data_path + process_step[3],n,exrd,wes_str,dis))
     return f
+
+
+def pick_disper(dis,col,flag,mu_str):
+    f = pd.read_csv('%s%i_dispersion%s_%s%s_%s.csv'%(data_path+process_step[4],n,dis,col,flag,mu_str))
+    return f
+
 
 #def red(dis):
  #           red_S[m+m+c+dis] = pd.read_csv('%s95_dispersion_g_BV__M_0.000000.csvred_%s%s.csv' % (data_path + process_step[3], m + m + 
