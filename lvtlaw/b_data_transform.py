@@ -13,7 +13,7 @@ simplefilter(action="ignore", category=pd.errors.PerformanceWarning)
 
 def extinction_law(mag = mag, A = A, R = R):
     print('Adopting BVIJHK Extinction law and reddening ratio from Fouque (2007): \n')
-    print ('Bands \t Extinction \t Reddening')
+    print ('Bands \t Extinction \t Reddening ratio \n \t A(x)/A(v) \t R(x) for E(B-V)')
     for i in range(0,len(mag)):
         print(mag[i],'\t', A[i], '\t \t', R[i], '\n')
     return A, R 
@@ -103,22 +103,6 @@ def reddening_free(data, R=R, mag=mag, ap_bands=ap_bands, disg = '_g', disi = '_
     print('###'*30)
     return wesen
 
-def star_frame(data):
-    stars = []   
-    name = data['name_x'] 
-    for i in range(0,len(data)):
-        star = pd.DataFrame()
-        star['%s'%(name[i])] = mag
-        for dis in dis_flag:
-            star['abs'+dis] = data[['M_%s%s'%(x, dis) for x in mag]].iloc[i].values
-            star['abs0'+dis] = data[['M_%s0%s'%(x, dis) for x in mag]].iloc[i].values
-            for c in colors:
-                star[c+dis] = data[['%s%s%s'%(x, c, dis) for x in mag]].iloc[i].values
-        print(star.head(10))
-        stars.append(star)
-    return stars
-    
-    
 
 def transformation(data,  s = s, R=R, A=A):
     print('Absolute magnitude for each band \n')
@@ -134,8 +118,8 @@ def transformation(data,  s = s, R=R, A=A):
         ext_data.to_csv(data_out+process_step[0]+ str(len(ext_data))+ '_ext_data'+'.csv')
         tabs_data.to_csv(data_out+process_step[0]+str(len(tabs_data))+ '_true_abs_data'+'.csv')
         wes_data.to_csv(data_out+process_step[0]+str(len(wes_data))+ '_wes_data'+'.csv')
-    print('\n Number of wesenheit functions: \n', len(wes_data.columns) - 4)
-    print('###'*30)
+    #print('\n Number of wesenheit functions: \n', len(wes_data.columns) - 4) # why 4?
+    #print('###'*30)
     return  abs_data, ext_data, tabs_data, wes_data
         
 

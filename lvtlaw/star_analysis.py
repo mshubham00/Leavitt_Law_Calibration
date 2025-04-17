@@ -5,6 +5,46 @@ import pandas as pd
 from lvtlaw.pl_pw import pl_reg     #pl_reg(data,'_g','_i') -> PLW, residue, prediction
 from lvtlaw.data_transform import transformation, extinction_law
 
+def ex_rd_error(residue, slope_data, dis_flag = dis_flag, cols = wes_cols, flags=flags, s=1):
+    # Input PLW relations slope, intr, residue for all different distances, 
+    ex_ = pd.DataFrame()
+    rd_ = pd.DataFrame()
+    for flag in flags:
+        for dis in dis_flag:
+            for col in cols:
+                for i in range(0, len(mag)):
+                    if flag == '_S':
+                        wes = mag[i] + col
+                        slope = slope_data[0]
+                    else:
+                        wes = col[0] + col
+                        slope = slope_data[1]
+                    wm_str = mag[i] + wes
+                    if dis == dis_flag[0]:      # gaia
+                        m = slope[wm_str].iloc[0]
+                        c = slope[wm_str].iloc[2]
+                    elif dis == dis_flag[1]:      # i
+                        m = slope[wm_str].iloc[4]            
+                        c = slope[wm_str].iloc[6]
+                        
+                    
+                    extinction, reddening = ex_rd_0(residue,m,c,i,col, wes, dis)
+                    ex_[wm_str + dis+flag] = extinction
+                    rd_[wm_str + dis+flag] = reddening
+    if s == 1:
+        ex_.to_csv('%s%i_ex0.csv' % (data_out + process_step[3], n))
+        rd_.to_csv('%s%i_rd0.csv' % (data_out + process_step[3], n))    
+    return ex_, rd_
+
+
+
+
+
+
+
+
+
+
 def ex_rd_0(residue, m, c, i, col, wes, dis):
     # calculates extinction and reddening error for fixed distance error.
     del_M = residue['r0_' + mag[i] + dis]
