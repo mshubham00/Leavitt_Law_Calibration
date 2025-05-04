@@ -57,21 +57,16 @@ def star_ex_red_mu(n, ex_rd_mu, raw):
                 df = pd.concat([df, rdM], axis=1)                         
                 df = pd.concat([df, rdS], axis=1)   
                 df.loc['mean'] = df.mean()
-                df.loc['var'] = df.var()                       
+                x=0
+                for m in range(len(mag)):
+                    x += (df.iloc[m] - df.loc['mean'])**2 
+                df.loc['var'] = x**0.5/len(mag)                       
             print('#'*30)
         #print(df)
         stars.append(df)
-        print('Star Name: ', raw.name.iloc[i])
+        print('Star: %i | Name: '%(i), raw.name.iloc[i])
         print(i, stars[i])                         
         df.to_csv('%s%i_%istars_ex_red_mu.csv'%(data_out+process_step[5],i, n))
     return stars
             
-            
-            
-            
-            
-            
-            
-            
-            
-            
+

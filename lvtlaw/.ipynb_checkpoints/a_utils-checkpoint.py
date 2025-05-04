@@ -1,6 +1,9 @@
 ### File: ./lvtlaw/a_utils.py
+'''
+a_utils.py tells to main.py which dataset should be used through parameter k = [0 ,1, 2] = [Madore, Jesper, Reiss]. A function select_data_file maps the metadata of input with defined variables. Another function provides Fouque extinction law. File also contains more generic function like regression, save_data, etc. and input/output variables.
+'''
 #####################################################################
-k = 1; s=1; R_v = 3.23              
+k = 1; s=1; R_v = 3.23    # k changes dataset, see select_data_file()  
 #####################################################################
 import os, subprocess, sys
 import matplotlib.pyplot as plt
@@ -21,7 +24,7 @@ Ak_v = 0.119                                            #          = A_k / A_v
 '''
 Ratio of total to selective absorption (Sandage 2004)- driving wavelength dependent value of R
 '''
-#R_v = 3.23                                              #      R_V = A_v / E(B-V)
+#R_v = 3.23                                             #      R_V = A_v / E(B-V)
 R_b = Ab_v*R_v                                          #      R_B = (A_b / A_v) * (A_v / E(B-V))
 R_r = Ar_v*R_v                                          #      R_B = (A_b / A_v) * (A_v / E(B-V))
 R_i = Ai_v*R_v                                          #          = (A_i / A_v) * (A_v / E(B-V))
@@ -41,8 +44,8 @@ def select_data_file(k):
         mag = ['B', 'V', 'R', 'I','J','H','K'];
         abs_bands = ['M_B', 'M_V', 'M_R', 'M_I', 'M_J', 'M_H', 'M_K']; 
     elif k ==1:
-        file_name = 'cleaned_data.csv'
-        file_cols = ['name',"logP", 'IRSB', 'EBV', "B_mag", 'V_mag', 'I_mag', 'J_mag', 'H_mag', 'K_mag']
+        file_name = '94_jesper.csv'
+        file_cols = ['name',"logP", 'plx','IRSB', 'EBV', "B_mag", 'V_mag', 'I_mag', 'J_mag', 'H_mag', 'K_mag']
         dis_list = ['plx', 'IRSB']
         dis_flag = ['_g','_i']
         A = [Ab_v, Av_v, Ai_v, Aj_v, Ah_v, Ak_v]
@@ -51,7 +54,7 @@ def select_data_file(k):
         abs_bands = ['M_B', 'M_V', 'M_I', 'M_J', 'M_H', 'M_K']; 
     elif k == 2:
         file_name = '18_gaia_irsb_cluster.csv'
-        file_cols = ['name',"logP", 'IRSB', 'EBV', "B_mag", 'V_mag', 'I_mag', 'J_mag', 'H_mag', 'K_mag']
+        file_cols = ['name',"logP", 'cluster', 'EBV', "B_mag", 'V_mag', 'I_mag', 'J_mag', 'H_mag', 'K_mag']
         dis_list = ['cluster']
         dis_flag = ['_c']
         A = [Ab_v, Av_v, Ai_v, Aj_v, Ah_v, Ak_v]
@@ -66,15 +69,17 @@ nreg = 5*len(dis_flag)
 data_dir = './data/input/'
 data_out='./data/output/'
 img_out_path = './data/output/9_plots/'
-flags = ['_S', '_M']
 process_step = ['1_prepared/','2_PLPW/','3_deldel/', '4_reddening/', '5_dispersion/','6_rms/','7_errorpair/', '8_result/', '9_plots/', '0_stars/']
 #####################################################################
+flags = ['_M', '_S']
+del_mu = [round(i*0.01,2) for i in range(-100,100,2)]
+wes_show = ['VI'] #['BV', 'VI', 'VK','JK']
 ap_bands = ['B_mag', 'V_mag' ,'I_mag', 'J_mag', 'H_mag', 'K_mag']
 band = len(mag);
-col_dot = ['b.', 'g*', 'y+', 'r*', 'c+', 'g.', 'y+', 'b+'] ;
-col_lin = ['b-', 'g-', 'y-', 'r-', 'c-', 'g-', 'y-', 'b-'] ;
-col_das = ['b--', 'g--', 'y--', 'r--', 'c--', 'g--', 'y--', 'b--']
-col_ = ['b', 'g', 'y', 'r', 'c', 'g', 'y', 'b'] ;
+col_dot = ['b.', 'g*', 'y+', 'r*', 'g+', 'k.', 'c+', 'b+'] ;
+col_lin = ['b-', 'g-', 'y-', 'r-', 'g-', 'k-', 'c-', 'b-'] ;
+col_das = ['b--', 'g--', 'y--', 'r--', 'g--', 'k--', 'c--', 'b--']
+col_ = ['b', 'g', 'y', 'r', 'g', 'k', 'c', 'b'] ;
 #####################################################################
 def output_directories(parent_folder = data_out, s=1,subdirectories = process_step):
     if s==1:
@@ -88,17 +93,14 @@ def load_data(data_file = input_data_file, data_dir = data_dir, p=0):
     if p==1:
         print(' \n Data Loaded from: \t', data_dir+data_file)
         print( cleaned_data.info())
-#    name = cleaned_data.ID
-#    ra = cleaned_data.RA_ICRS
-#    dec = cleaned_data.DE_ICRS
-#    EBV = cleaned_data.EBV
-#    dis = cleaned_data.IRSB
     return cleaned_data #, name, ra, dec, EBV, dis
 #####################################################################
-def save(title, img_path=img_out_path, step=0, fil = 'pdf'):                                   #   2
+def save(title, step=0, img_path=img_out_path, fil = 'pdf', p=0):                                   #   2
+    if p == 1:
+        print(img_path+process_step[step]+title+'.'+fil)
     plt.savefig('%s%s.%s'%(img_path+process_step[step],title, fil))
 #####################################################################
-def open_output_dir(path):
+def open_output_dir(path):  
     # Open the output folder after process completion
     subprocess.run(['xdg-open', path])
 #####################################################################
@@ -124,6 +126,13 @@ def regression(x: list, y: list, x_str: str, y_str: str, p = 0):
         print('%s = %f %s ( %f) + %f ( %f)'%(y_str, m, x_str, m_error, c, c_error))
     return m, c, prediction, residue, m_error, c_error
 #####################################################################
+def pr_value(x,y,p=0):
+    p,r = stats.pearsonr(x,y)
+    if p==1:
+        print('Pearson R:', r)
+        print('P-value:', p)
+    return p,r
+#####################################################################
 def RA_DEC_DIS_to_Galactocentric(ra, dec, dis):
     ra = Longitude(ra, unit=u.degree)
     dec = Latitude(dec, unit = u.degree)                        #   1
@@ -133,4 +142,3 @@ def RA_DEC_DIS_to_Galactocentric(ra, dec, dis):
     coordinate = coordinate.transform_to(Galactocentric(galcen_distance=8.1*u.kpc))
     return coordinate
 #####################################################################
-

@@ -31,6 +31,3 @@ def starbystar(star,t):
     title = f'star_{t}'
     save(title,img_out_path, 3, 'pdf')    
     #plt.show()
-    
-    
-

@@ -5,13 +5,17 @@ import pandas as pd
 import os
 import subprocess
 import seaborn as sns
-from lvtlaw.utils import save, mag, img_out_path, process_step
-from visuals.dataload import raw, absolute, PLWregression
+from lvtlaw.a_utils import save, mag, img_out_path, process_step
+from visuals.dataload import raw, transformation, PLWcorrection
 
 ########
 df = raw[["logP", 'IRSB', 'EBV', "B_mag", 'V_mag', 'I_mag', 'J_mag', 'H_mag', 'K_mag']]
 
+absolute, extinction, tabsolute, wesenheit = transformation()
+
 data = absolute[["logP", 'plx', 'EBV', "M_B_g", 'M_V_g', 'M_I_g', 'M_J_g', 'M_H_g', 'M_K_g']]
+
+
 
 def get_apparent(df, extinction):
     p= df['logP']
