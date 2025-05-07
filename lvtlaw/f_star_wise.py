@@ -39,8 +39,10 @@ def add_dres(stars, dresS, dresM):
 
 #                     dis[].cols_SM{}.mag[].[mu_e_r.star] 
 def star_ex_red_mu(n, ex_rd_mu, raw):
+    # ex_rd_mu: list (stars) of dictionary (Madore/Shubham) of list (bands) of dataframes (EBV over mu)
     stars = []
-    print('Reddenings over mu for each star, each color and respective distance')
+    print('Reddenings over mu for each star, each color and respective distance \n')
+    print(f'Data saved at {data_out}{process_step[5]}{n}_i_stars_ex_red_mu.csv')
     for i in range(0, n):
         df = pd.DataFrame()
         for d in range(len(dis_flag)):
@@ -48,25 +50,19 @@ def star_ex_red_mu(n, ex_rd_mu, raw):
                 rdS = pd.DataFrame()
                 rdM = pd.DataFrame()
                 for m in range(len(mag)):
-                    rdS[mag[m]] = ex_rd_mu[d][c+'_S'][m][['rd_'+str(mu) for mu in del_mu]].iloc[i].values
-                    rdM[mag[m]] = ex_rd_mu[d][c+'_M'][m][['rd_'+str(mu) for mu in del_mu]].iloc[i].values
+                    cols = [f'rd_{mu}' for mu in del_mu]
+                    rdS[mag[m]] = ex_rd_mu[d][c+'_S'][m][cols].iloc[i].values
+                    rdM[mag[m]] = ex_rd_mu[d][c+'_M'][m][cols].iloc[i].values
                 rdS = rdS.T
-                rdS.columns = [[c+dis_flag[d]+'rd_S'+str(mu) for mu in del_mu]]  # Make sure number matches df.shape[1]
+                rdS.columns = [f'{c}{dis_flag[d]}rd_S{mu}' for mu in del_mu]  
                 rdM = rdM.T
-                rdM.columns = [[c+dis_flag[d]+'rd_M'+str(mu) for mu in del_mu]]  # Make sure number matches df.shape[1]
-                df = pd.concat([df, rdM], axis=1)                         
-                df = pd.concat([df, rdS], axis=1)   
-                df.loc['mean'] = df.mean()
-                x=0
-                for m in range(len(mag)):
-                    x += (df.iloc[m] - df.loc['mean'])**2 
-                df.loc['var'] = x**0.5/len(mag)                       
-            print('#'*30)
-        #print(df)
+                rdM.columns = [f'{c}{dis_flag[d]}rd_M{mu}' for mu in del_mu] 
+                df = pd.concat([df, rdM, rdS], axis=1)                         
+        df = df.astype('float64')
+        df.loc['mean'] = df.mean()
+        df.loc['var'] = df.drop(index='mean').var(ddof=0)
+        print('###' * 30)
+        print(f'Star: {i} | Name: {raw.name.iloc[i]} \n', i, df)
+        df.to_csv(f'{data_out}{process_step[5]}{n}_{i}stars_ex_red_mu.csv')
         stars.append(df)
-        print('Star: %i | Name: '%(i), raw.name.iloc[i])
-        print(i, stars[i])                         
-        df.to_csv('%s%i_%istars_ex_red_mu.csv'%(data_out+process_step[5],i, n))
     return stars
-            
-

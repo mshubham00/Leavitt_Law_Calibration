@@ -2,28 +2,27 @@ from lvtlaw.a_utils import process_step, colors, mag, ap_bands, abs_bands, data_
 import pandas as pd
 
 def get_error_pair(star):
-    ls = {}    # 
-    for d in dis_flag:
+    # star: dataframe containing star                 
+    mu_rd_var = {}    # 
+    for d in dis_flag: 
         for col in wes_show: 
             for f in flags:
-                x = star[[col+d+'rd'+f+str(mu) for mu in del_mu]].iloc[-1]# # variance list
-                x_min = pd.to_numeric(x, errors='coerce').min()   # minimum variance
-                mu_name = star[[col+d+'rd'+f+str(mu) for mu in del_mu]].iloc[-1].idxmin()  # collect mu index
-                mu = float(mu_name[0][8:])  # collect mu
-                rd = star[mu_name[0]].iloc[-2].values  # collect mean reddening 
-                print('\n redd:', rd[0], x_min)
-                print('mu:', mu_name[0][8:]) 
-                #print(star)
-                ls['rms'+d+col+f] = x_min 
-                ls['mu'+d+col+f] = mu
-                ls['rd'+d+col+f] = rd[0]#.values 
-    return ls
+                var_cols = [f'{col}{d}rd{f}{mu}' for mu in del_mu]
+                var_vals = pd.to_numeric(star.loc['var', var_cols], errors='coerce')
+                min_var_idx = var_vals.idxmin()
+                min_mu = float(min_var_idx[8:])  # collect mu
+                mean_rd = float(star.loc['mean', min_var_idx])                
+                mu_rd_var[f'var{d}{col}{f}'] = var_vals.min()
+                mu_rd_var[f'mu{d}{col}{f}'] = min_mu
+                mu_rd_var[f'rd{d}{col}{f}'] = mean_rd
+    return mu_rd_var
+
 
 def correction_rd_mu(stars, save=1):
     stars_correction = [] 
     for i in range(len(stars)):
-        mu_rd_pair_list = get_error_pair(stars[i])
-        stars_correction.append(mu_rd_pair_list)
+        mu_rd_var = get_error_pair(stars[i])
+        stars_correction.append(mu_rd_var)
     correction_red_mu_stars = pd.DataFrame(stars_correction)
     if save==1:
         correction_red_mu_stars.to_csv('%s%i_error_rms_mu_rd.csv'%(data_out+process_step[6],len(stars)))

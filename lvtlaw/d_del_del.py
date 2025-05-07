@@ -7,11 +7,10 @@ simplefilter(action="ignore", category=pd.errors.PerformanceWarning)
 bands = abs_bands
 out_dir = data_out
 
-def residue_correlation(residue_file, dis_flag, col, method_flag):
+def residue_correlation(residue_file, dis_flag, col, method_flag): 
     del_mc = pd.DataFrame()         # Stores regression results
     del_predictions = pd.DataFrame({'name': residue_file['name']})  # Star-by-star predictions
     del_residuals = pd.DataFrame({'name': residue_file['name']})    # Star-by-star residuals
-    
     print('\nApproach:', method_flag, '\tColor:', col)
     for diss in dis_flag:
         slopes, intercepts = [], []
@@ -46,21 +45,21 @@ def residue_correlation(residue_file, dis_flag, col, method_flag):
         del_mc[f'ce{diss}'] = intercept_errors
     return del_residuals, del_predictions, del_mc
 
-def residue_analysis(residue_file, dis:list, cols:list , save=1):
+def residue_analysis(residue_file, dis_flag:list, cols:list , save=1):
     # Initialize result containers
     dmc_S, dmc_M = [], []
-    dres_S = pd.DataFrame({'name': residue_file['name'], 'logP': residue_file['logP']})
+    dres_S = pd.DataFrame({'name': residue_file['name'], 'logP': residue_file['logP'], 'EBV': residue_file['logP']})
     dpre_S = dres_S.copy()
     dres_M = dres_S.copy()
     dpre_M = dres_S.copy()
     for col in cols:
         # Madore method
-        res_M, pre_M, mc_M = residue_correlation(residue_file, dis, col, '_M')
+        res_M, pre_M, mc_M = residue_correlation(residue_file, dis_flag, col, '_M')
         dres_M = pd.merge(dres_M, res_M, on='name')
         dpre_M = pd.merge(dpre_M, pre_M, on='name')
         dmc_M.append(mc_M)
         # Shubham method
-        res_S, pre_S, mc_S = residue_correlation(residue_file, dis, col, '_S')
+        res_S, pre_S, mc_S = residue_correlation(residue_file, dis_flag, col, '_S')
         dres_S = pd.merge(dres_S, res_S, on='name')
         dpre_S = pd.merge(dpre_S, pre_S, on='name')
         dmc_S.append(mc_S)

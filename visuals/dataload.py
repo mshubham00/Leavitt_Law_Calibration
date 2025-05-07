@@ -4,6 +4,8 @@ import pandas as pd
 import os
 import subprocess
 from lvtlaw.a_utils import flags, load_data, nreg, process_step, input_data_file, dis_list, dis_flag, A, R, mag, abs_bands, data_out, wes_show
+from decimal import Decimal, getcontext
+getcontext().prec = 10
 
 #### 
 raw = load_data(input_data_file)
@@ -46,7 +48,9 @@ def pick_dispersion(dis, wm_str,flag):
 ####
 def pick_star(i):
     f = pd.read_csv('%s%i_star.csv'%(data_out+process_step[9],i))
-    ex_red_mu = pd.read_csv('%s%i_%istars_ex_red_mu.csv'%(data_out+process_step[5],i,n))
+    ex_red_mu = pd.read_csv('%s%i_%istars_ex_red_mu.csv'%(data_out+process_step[5],n,i))
+    #df = ex_red_mu.drop(ex_red_mu.columns[0], axis=1)
+    #df = df.applymap(lambda x: Decimal(x) if x.replace('.', '', 1).isdigit() else x)
     return f, ex_red_mu
 ####
 def correction_red_mu_stars():

@@ -3,7 +3,7 @@
 a_utils.py tells to main.py which dataset should be used through parameter k = [0 ,1, 2] = [Madore, Jesper, Reiss]. A function select_data_file maps the metadata of input with defined variables. Another function provides Fouque extinction law. File also contains more generic function like regression, save_data, etc. and input/output variables.
 '''
 #####################################################################
-k = 1; s=1; R_v = 3.23    # k changes dataset, see select_data_file()  
+k = 1; s=1; R_v = 3.23; z=0    # k changes dataset, see select_data_file()  
 #####################################################################
 import os, subprocess, sys
 import matplotlib.pyplot as plt

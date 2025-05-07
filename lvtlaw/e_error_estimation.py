@@ -15,35 +15,37 @@ def select_regression_parameters(dSM, dis):
         m_M, c_M = dSM[0][1].iloc[0].T, dSM[0][1].iloc[1].T
     return m_S, c_S, m_M, c_M
 
-def run_mu_for_reddening(ex0, r, slope, intercept):
+def run_mu_for_reddening(ex0, r, slope, intercept):  # later called by error_over_mu()
     # for given star, estimate reddening for different mu
     mu_run = pd.DataFrame() 
-    for mu in del_mu:
+    for mu in del_mu: # 
         mu_run[f'ex_{mu}'] = ex0 + mu * (1 - slope) - intercept
         mu_run[f'rd_{mu}'] = mu_run[f'ex_{mu}'] / r
     return mu_run
 
-def error_over_mu(i, col, dis, flag, wm_str, slope, intercept, dres, s):
-    r = R[i] / (R[0] - R[1])  # reddening ratio B-V
-    slope = slope[wm_str]
-    intercept = intercept[wm_str]
-    ext0 = dres[f'd_{wm_str}{dis}']
+def error_over_mu(i, col, dis, flag, wm_str, slope, intercept, dres, s): # later called by process_reddening()
+    r = R[i] / (R[0] - R[1])  # reddening ratio with respect to B-V
+    ext0 = dres[f'd_{wm_str}{dis}'] # extinction error without changing modulus
     red0 = ext0 / r  # Convert extinction to reddening E(B-V)
-    mu_run_ext_red = run_mu_for_reddening(ext0, r, slope, intercept)
+    mu_run = run_mu_for_reddening(ext0, r, slope, intercept)
     if s == 1:
-        mu_run_ext_red.to_csv(f'{data_out}{process_step[4]}{len(mu_run_ext_red)}{dis}{wm_str}{flag}.csv', index=False)
-    return ext0, red0, mu_run_ext_red
+        mu_run.to_csv(f'{data_out}{process_step[4]}{len(mu_run)}{dis}{wm_str}{flag}.csv', index=False)
+    return ext0, red0, mu_run
 
-def process_reddening_for_method(col, dis, flag, slope, intercept, dres, wes_mu, ext0_df, red0_df, s):
+def process_reddening(col, dis, flag, slope, intercept, dres, s):# later called by reddening_error()
+    wes_mu = []
+    ext0_df, red0_df = pd.DataFrame(), pd.DataFrame()
     for i, band in enumerate(mag):
         if flag == '_M':
             wm_str = f"{band}{col[0]}{col}" 
         else: 
             wm_str = f"{band}{band}{col}"
-        ext0, red0, mu_err = error_over_mu(i, col, dis, flag, wm_str, slope, intercept, dres, s)        
+        slope_ = slope[wm_str]
+        intercept_ = intercept[wm_str]
+        ext0, red0, mu_run = error_over_mu(i, col, dis, flag, wm_str, slope_, intercept_, dres, s)        
         ext0_df[f'{wm_str}{dis}'] = ext0
         red0_df[f'{wm_str}{dis}'] = red0
-        wes_mu.append(mu_err)
+        wes_mu.append(mu_run)
     return wes_mu, ext0_df, red0_df
 
 def save_results(ext0S, ext0M, red0S, red0M):
@@ -54,8 +56,6 @@ def save_results(ext0S, ext0M, red0S, red0M):
 
 def reddening_error(wes_cols, dis_flags, dSM, save=1):
     #Estimate reddening errors (mu_0 uncertainties) for both Shubham and Madore approaches.
-    ext0S, ext0M = pd.DataFrame(), pd.DataFrame()
-    red0S, red0M = pd.DataFrame(), pd.DataFrame()
     ex_rd_mu = []
     for dis in dis_flags:
         # Select regression slopes and intercepts based on distance flag
@@ -64,19 +64,18 @@ def reddening_error(wes_cols, dis_flags, dSM, save=1):
         dis_mu_dict = {}
         for col in wes_cols:
             print(f'  → Processing {col}')
-            wes_mu_S, wes_mu_M = [], []
             # Madore approach
-            wes_mu_M, ext0M, red0M = process_reddening_for_method(col, dis, '_M', m_M, c_M, dSM[1][1], wes_mu_M, ext0M, red0M, save)       
+            wes_mu_M, ext0M_df, red0M_df = process_reddening(col, dis, '_M', m_M, c_M, dSM[1][1], save)       
             # Shubham approach
-            wes_mu_S, ext0S, red0S = process_reddening_for_method(col, dis, '_S', m_S, c_S, dSM[1][0], wes_mu_S, ext0S, red0S, save)
+            wes_mu_S, ext0S_df, red0S_df = process_reddening(col, dis, '_S', m_S, c_S, dSM[1][0], save)
             # Store uncertainty arrays
             dis_mu_dict[f'{col}_M'] = wes_mu_M
             dis_mu_dict[f'{col}_S'] = wes_mu_S
-        ex_rd_mu.append(dis_mu_dict)
+        ex_rd_mu.append(dis_mu_dict)    # []{}[]
     # Output results
-    red_SM = [red0S, red0M]
+    red_SM = [red0S_df, red0M_df]
     if save == 1:
-        save_results(ext0S, ext0M, red0S, red0M)
+        save_results(ext0S_df, ext0M_df, red0S_df, red0M_df)
     return red_SM, ex_rd_mu
 
 
