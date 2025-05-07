@@ -159,6 +159,60 @@ def plotPL(i,a, ta, res, reg, pre, dis, s=0):
         save(title,1, fil = 'png', p=1)
     plt.show()
 
+def plotPL6(ta, res, reg, pre, dis, s=0):
+    fig, axs = plt.subplots(2, 3, figsize=(18, 8), sharex='col')
+    axs = axs.flatten()  # Flatten for easy indexing
+    
+    x = ta['logP'] - 1
+
+    for i, m in enumerate(mag):
+        y = ta['M_' + m + '0' + dis]
+
+        # Get regression coefficients
+        if dis == '_i':
+            alpha = reg[m].iloc[4]
+            gamma = reg[m].iloc[5]
+        else:
+            alpha = reg[:4][m].iloc[0]
+            gamma = reg[:4][m].iloc[1]
+
+        pred = pre['p_' + m + '0' + dis]
+        residuals = res['r_' + m + '0' + dis]
+        corr_coef, _ = pr_value(x, y)
+
+        ax = axs[i]
+        ax.plot(x, y, col_dot[i], label=f'{m} Band | r = {corr_coef:.3f}')
+        ax.plot(x, pred, col_lin[i], label=f'$M_{m}$ = {alpha:.3f}(logP - 1) + {gamma:.3f}')
+
+        # Residual lines
+        for j in range(len(ta)):
+            label = "Distance-Reddening Error" if j == 0 else None
+            ax.plot([x[j], x[j]], [y[j], pred[j]], color='red', linestyle='--', alpha=0.5, label=label)
+
+        ax.invert_yaxis()
+        ax.set_ylabel('True Absolute Magnitude')
+        ax.grid(True)
+        ax.tick_params(direction='in', top=True, right=True)
+        ax.legend()
+
+        # Clean up spines
+        for spine in ax.spines.values():
+            spine.set_visible(False)
+
+    # Set x-axis label only on bottom row
+    for i, ax in enumerate(axs):
+        if i >= 3:  # Bottom row
+            ax.set_xlabel('Period (logP - 1)')
+        else:
+            ax.tick_params(labelbottom=False)
+
+    plt.tight_layout()
+    title = f'{len(x)}_PL_{m}{dis}'
+    if s == 1:
+        save(title, 1, fil='png', p=1)
+    plt.show()
+
+
 def plotPW(i, ta , w, col, res, reg, pre, dis, s=0):
 # 1. Extracting x-y axis
     m = mag[i]

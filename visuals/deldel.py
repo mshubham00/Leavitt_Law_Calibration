@@ -62,10 +62,9 @@ def plotdeldel(i, ta, col, res, dSM, dis, s=0):
         else:
             label = None
         axs[0].plot([x1[i], x1[i]], [y[i], predM[i]], color='red', linestyle='--', alpha=0.5, label=label)
-    axs[0].plot(x1, predM, 'b-', label='$\Delta$%s = %f $\Delta$%s%s + %f'%(m,alphaM,col[0],col,gammaM))
-    axs[0].set_ylabel('PL residue ($\Delta$ %s)'%(m))
-    axs[0].set_xlabel('PW residue ($\Delta$ %s)'%(M[1:]))
-
+    axs[0].plot(x1, predM, 'b-', label=r'$\Delta$%s = %f $\Delta$%s%s + %f' % (m, alphaM, col[0], col, gammaM))
+    axs[0].set_ylabel(r'PL residue ($\Delta$ %s)' % m)
+    axs[0].set_xlabel(r'PW residue ($\Delta$ %s)' % M[1:])
 
 # 2. Statistical model with linear regression fit
     axs[1].scatter(x2, y, color='gray', s=ta['EBV']*40, label='Residue Correlation: %s'%(S))
@@ -75,9 +74,10 @@ def plotdeldel(i, ta, col, res, dSM, dis, s=0):
         else:
             label = None
         axs[1].plot([x2[i], x2[i]], [y[i], predS[i]], color='red', linestyle='--', alpha=0.5, label=label)
-    axs[1].plot(x2, predS, 'g-', label='$\Delta$%s = %f $\Delta$%s%s + %f'%(m,alphaS,m,col,gammaS))
-    axs[1].set_xlabel('PW residue ($\Delta$ %s)'%(S[1:]))
-#axs[1].set_title(' Linear Fit')
+    axs[1].plot(x2, predS, 'g-', label=r'$\Delta$%s = %f $\Delta$%s%s + %f' % (m, alphaS, m, col, gammaS))
+    axs[1].set_xlabel(r'PW residue ($\Delta$ %s)' % S[1:])
+
+    #axs[1].set_title(' Linear Fit')
 
 # 3. Histogram of residuals
     labelM = 'Range: %f'%(max(residualsM)-min(residualsM))
