@@ -227,7 +227,7 @@ def residue_correlation(residue_file, dis_flag, col, method_flag):
     ...
     for diss in dis_flag:
         for band in mag:
-            wesenheit = f"{band}{col}" if flag == '_S' else f"{col[0]}{col}"
+            wesenheit = f"{band}{col}" 
             x_key = 'r_' + wesenheit + diss
             y_key = 'r_' + band + '0' + diss
             # Perform regression
@@ -242,20 +242,13 @@ def residue_correlation(residue_file, dis_flag, col, method_flag):
 def residue_analysis(residue_file, dis:list, cols:list , save=1):
     ...
     for col in cols:
-        # Madore method
-        res_M, pre_M, mc_M = residue_correlation(residue_file, dis, col, 'M')
-        dres_M = pd.merge(dres_M, res_M, on='name')
-        dpre_M = pd.merge(dpre_M, pre_M, on='name')
-        dmc_M.append(mc_M)
-        # Shubham method
-        res_S, pre_S, mc_S = residue_correlation(residue_file, dis, col, 'S')
-        dres_S = pd.merge(dres_S, res_S, on='name')
-        dpre_S = pd.merge(dpre_S, pre_S, on='name')
-        dmc_S.append(mc_S)
+        res, pre, mc = residue_correlation(residue_file, dis, col)
+        dres = pd.merge(dres, res, on='name')
+        dpre = pd.merge(dpre, pre, on='name')
+        dmc.append(mc)
     # Combine regression dataframes
-    dmc_M = pd.concat(dmc_M, ignore_index=True).drop_duplicates().set_index('name').T
-    dmc_S = pd.concat(dmc_S, ignore_index=True).drop_duplicates().set_index('name').T
-    dSM = [[dmc_S,  dmc_M],[dres_S, dres_M]]
+    dmc = pd.concat(dmc, ignore_index=True).drop_duplicates().set_index('name').T
+    dSM = [[dmc_S],[dres_S]]
     return dres_S, dpre_S, dres_M, dpre_M, dSM
 
 \end{lstlisting}

@@ -36,13 +36,13 @@ R_k = Ak_v*R_v                                          #          = (A_k / A_v)
 def select_data_file(k):
     if k==0:
         file_name = '59_madore.csv'
-        file_cols = ['name','logP','HST','EBV','M_B','M_V','M_R','M_I','M_J','M_H','M_K'] 
+        file_cols = ['name','logP','HST','EBV','M_B','M_V','M_I','M_J','M_H','M_K'] 
         dis_list = ['HST']
         dis_flag = ['_h']
-        A = [Ab_v, Av_v, Ar_v, Ai_v, Aj_v, Ah_v, Ak_v]
-        R = [R_b, R_v, R_r, R_i, R_j, R_h, R_k]
-        mag = ['B', 'V', 'R', 'I','J','H','K'];
-        abs_bands = ['M_B', 'M_V', 'M_R', 'M_I', 'M_J', 'M_H', 'M_K']; 
+        A = [Ab_v, Av_v, Ai_v, Aj_v, Ah_v, Ak_v]
+        R = [R_b, R_v, R_i, R_j, R_h, R_k]
+        mag = ['B', 'V', 'I','J','H','K'];
+        abs_bands = ['M_B', 'M_V', 'M_I', 'M_J', 'M_H', 'M_K']; 
     elif k ==1:
         file_name = '94_jesper.csv'
         file_cols = ['name',"logP", 'plx','IRSB', 'EBV', "B_mag", 'V_mag', 'I_mag', 'J_mag', 'H_mag', 'K_mag']
@@ -70,18 +70,26 @@ data_dir = './data/input/'
 data_out='./data/output/'
 img_out_path = './data/output/9_plots/'
 process_step = ['1_prepared/','2_PLPW/','3_deldel/', '4_reddening/', '5_dispersion/','6_rms/','7_errorpair/', '8_result/', '9_plots/', '0_stars/']
+image_step = ['1_datacleaning/','2_PLPW/','3_deldel/', '4_reddening/', '5_dispersion/','6_rms/','7_errorpair/', '8_result/']
 #####################################################################
 flags = ['_M', '_S']
 del_mu = [round(i*0.01,2) for i in range(-100,100,2)]
-wes_show = ['VI'] #['BV', 'VI', 'VK','JK']
+wes_show = ['BV', 'VI', 'VK','JK']
 ap_bands = ['B_mag', 'V_mag' ,'I_mag', 'J_mag', 'H_mag', 'K_mag']
 band = len(mag);
-col_dot = ['b.', 'g*', 'y+', 'r*', 'g+', 'k.', 'c+', 'b+'] ;
-col_lin = ['b-', 'g-', 'y-', 'r-', 'g-', 'k-', 'c-', 'b-'] ;
-col_das = ['b--', 'g--', 'y--', 'r--', 'g--', 'k--', 'c--', 'b--']
-col_ = ['b', 'g', 'y', 'r', 'g', 'k', 'c', 'b'] ;
+col_dot = ['b.', 'g*', 'y+', 'c*', 'g+', 'k.', 'c+', 'r+'] ;
+col_lin = ['b-', 'g-', 'y-', 'c-', 'g-', 'k-', 'c-', 'r-'] ;
+col_das = ['b--', 'g--', 'y--', 'c--', 'g--', 'k--', 'c--', 'r--']
+col_ = ['b', 'g', 'y', 'c', 'g', 'k', 'c', 'r'] ;
 #####################################################################
 def output_directories(parent_folder = data_out, s=1,subdirectories = process_step):
+    if s==1:
+        for subdirectory in subdirectories:
+            path = os.path.join(parent_folder, subdirectory)
+            if not os.path.exists(path):
+                os.makedirs(path)
+#####################################################################       
+def image_directories(parent_folder = img_out_path, s=1,subdirectories = image_step):
     if s==1:
         for subdirectory in subdirectories:
             path = os.path.join(parent_folder, subdirectory)

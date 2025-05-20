@@ -162,12 +162,9 @@ def plotPL(i,a, ta, res, reg, pre, dis, s=0):
 def plotPL6(ta, res, reg, pre, dis, s=0):
     fig, axs = plt.subplots(2, 3, figsize=(18, 8), sharex='col')
     axs = axs.flatten()  # Flatten for easy indexing
-    
     x = ta['logP'] - 1
-
     for i, m in enumerate(mag):
         y = ta['M_' + m + '0' + dis]
-
         # Get regression coefficients
         if dis == '_i':
             alpha = reg[m].iloc[4]
@@ -175,20 +172,16 @@ def plotPL6(ta, res, reg, pre, dis, s=0):
         else:
             alpha = reg[:4][m].iloc[0]
             gamma = reg[:4][m].iloc[1]
-
         pred = pre['p_' + m + '0' + dis]
         residuals = res['r_' + m + '0' + dis]
         corr_coef, _ = pr_value(x, y)
-
         ax = axs[i]
         ax.plot(x, y, col_dot[i], label=f'{m} Band | r = {corr_coef:.3f}')
         ax.plot(x, pred, col_lin[i], label=f'$M_{m}$ = {alpha:.3f}(logP - 1) + {gamma:.3f}')
-
         # Residual lines
         for j in range(len(ta)):
-            label = "Distance-Reddening Error" if j == 0 else None
+            label = r"$Residue = \delta \mu + R_{%s} * E_{{BV}}$"%(m) if j == 0 else None
             ax.plot([x[j], x[j]], [y[j], pred[j]], color='red', linestyle='--', alpha=0.5, label=label)
-
         ax.invert_yaxis()
         ax.set_ylabel('True Absolute Magnitude')
         ax.grid(True)
@@ -207,7 +200,7 @@ def plotPL6(ta, res, reg, pre, dis, s=0):
             ax.tick_params(labelbottom=False)
 
     plt.tight_layout()
-    title = f'{len(x)}_PL_{m}{dis}'
+    title = f"{len(x)}_{''.join(mag)}{dis}"
     if s == 1:
         save(title, 1, fil='png', p=1)
     plt.show()
@@ -274,7 +267,55 @@ def plotPW(i, ta , w, col, res, reg, pre, dis, s=0):
         save(title,1, fil = 'png', p=1)
     plt.show()
 
+def plotPW6(w, col, res, reg, pre, dis, mag=mag, s=0):
+    x = w['logP'] - 1
+    fig, axs = plt.subplots(2, 3, figsize=(18, 8), sharex='col')
+    axs = axs.flatten()
 
+    for i in range(6):
+        w_str = mag[i] + col
+        y = w[w_str + dis]
+        p1, _ = pr_value(x, y)
+
+        # Coefficients from regression
+        if dis == '_i':
+            alpha = reg[w_str].iloc[4]
+            gamma = reg[w_str].iloc[5]
+        else:
+            alpha = reg[:4][w_str].iloc[0]
+            gamma = reg[:4][w_str].iloc[1]
+
+        pred = pre['p_' + w_str + dis]
+        residuals = res['r_' + w_str + dis]
+
+        # Plot
+        ax = axs[i]
+        ax.scatter(x, y, color='gray', s=w['EBV'] * 50, label=f'{w_str} Wesenheit | r = {p1:.2f}')
+        ax.plot(x, pred, 'b-', label=f'{w_str} = {alpha:.2f}(logP - 1) + {gamma:.2f}')
+
+        # Residual lines
+        for j in range(len(w)):
+            label = r"$Residue = \delta \mu$" if j == 0 else None
+            ax.plot([x[j], x[j]], [y[j], pred[j]], color='red', linestyle='--', alpha=0.5, label=label)
+        ax.grid(True)
+        ax.invert_yaxis()
+        ax.set_ylabel('Wesenheit Magnitude')
+        ax.legend()
+
+    # Set x-axis labels only on bottom row
+    for i, ax in enumerate(axs):
+        if i >= 3:
+            ax.set_xlabel('Period (logP - 1)')
+        else:
+            ax.tick_params(labelbottom=False)
+
+    plt.tight_layout()
+
+    # Title
+    title = f"{len(x)}_{col}_{''.join(mag)}{dis}"
+    if s == 1:
+        save(title, 1, fil='png', p=1)
+    plt.show()
 
 
 def pl6(data, PL_m,PL_c, PW_m,PW_c, path = img_out_path):

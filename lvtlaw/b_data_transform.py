@@ -68,6 +68,7 @@ def reddening_free(data, R=R, mag=mag, ap_bands=ap_bands):
     wesen = pd.DataFrame()
     wesen['name'] = data['name']
     wesen['logP'] = data['logP']
+    wesen['EBV'] = data['EBV']
     for a in range(0,len(mag)):
         for b in range(a+1,len(mag)):
             for c in range(0,len(mag)):

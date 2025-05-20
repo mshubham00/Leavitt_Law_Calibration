@@ -26,24 +26,19 @@ def PLWcorrection():
     return PLWdata, PLWresidue, PLWregression, PLWprediction
 #### 
 def del_del():
-    dpre_M = pd.read_csv('%s%i_del_pre_M.csv'%(data_out+process_step[2],n))
-    dres_M = pd.read_csv('%s%i_del_res_M.csv'%(data_out+process_step[2],n))
-    dmc_M = pd.read_csv('%s%i_del_slope_intercept_M.csv'%(data_out+process_step[2],n))
     dpre_S = pd.read_csv('%s%i_del_pre_S.csv'%(data_out+process_step[2],n))
     dres_S = pd.read_csv('%s%i_del_res_S.csv'%(data_out+process_step[2],n))
     dmc_S = pd.read_csv('%s%i_del_slope_intercept_S.csv'%(data_out+process_step[2],n))
-    dSM = [[dmc_S, dmc_M],[dres_S, dres_M], [dpre_S, dpre_M]]
-    return dpre_M, dres_M, dmc_M, dpre_S, dres_S, dmc_S, dSM
+    dSM = [[dmc_S],[dres_S], [dpre_S]]
+    return dpre_S, dres_S, dmc_S, dSM
 ####
 def ext_red():
     ext0S = pd.read_csv('%s%i_ext_err0_S.csv' % (data_out + process_step[3], n))
-    ext0M = pd.read_csv('%s%i_ext_err0_M.csv' % (data_out + process_step[3], n))    
     red0S = pd.read_csv('%s%i_red_err0_S.csv' % (data_out + process_step[3], n))
-    red0M = pd.read_csv('%s%i_red_err0_M.csv' % (data_out + process_step[3], n))    
-    return ext0S, ext0M, red0S, red0M
+    return ext0S, red0S
 ####
 def pick_dispersion(dis, wm_str,flag):
-    f = pd.read_csv('%s%i%s%s%s.csv' % (data_out + process_step[4], n, dis, wm_str, flag))
+    f = pd.read_csv('%s%i%s%s.csv' % (data_out + process_step[4], n, dis, wm_str))
     return f
 ####
 def pick_star(i):
@@ -54,9 +49,15 @@ def pick_star(i):
     return f, ex_red_mu
 ####
 def correction_red_mu_stars():
-    correction = pd.read_csv('%s%i_error_rms_mu_rd.csv'%(data_out+process_step[6],n))    
+    correction = pd.read_csv('%s%i_error_rms_mu_rd.csv'%(data_out+process_step[6],n))  
     return correction
 
+def result():
+    result = pd.read_csv('%s%i_corrected.csv'%(data_out+process_step[7],n))      
+    reg = pd.read_csv('%s%i_%i_result_regression.csv'%(data_out+process_step[7],n, nreg))      
+    res = pd.read_csv('%s%i_result_residue.csv'%(data_out+process_step[7],n))      
+    pre = pd.read_csv('%s%i_result_prediction.csv'%(data_out+process_step[7],n))      
+    return result, reg, res, pre
 
 #dpre_M = pd.read_csv('%s95_del_pre_M.csv'%(data_path+process_step[3]))
 def load_star(total_stars):

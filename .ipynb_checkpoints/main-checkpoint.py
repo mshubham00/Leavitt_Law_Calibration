@@ -68,22 +68,20 @@ if z==1:
 
 
 from lvtlaw.d_del_del import residue_analysis
-dres_S, dpre_S, dmc_S, dres_M, dpre_M, dmc_M = residue_analysis(residue, dis_flag, wes_show, s)
-print(dres_S, dres_M)
-star_frame_list = add_dres(star_frame_list, dres_S, dres_M)
-print('Slope, Intercept and respective errors for Madore and Shubham approach.')
+dres, dpre, dmc = residue_analysis(residue, dis_flag, wes_show, s)
+print(dres)
+star_frame_list = add_dres(star_frame_list, dres)
+print('Slope, Intercept and respective errors.')
 print('###'*30)
-print(dmc_M.head())
-print(dmc_S.head())
+print(dmc.head())
 print('###'*30)
-print('\n Madore dresidue \n', dres_M.head())
-print('\n Shubham dresidue \n', dres_S.head())
-star_frame_list = add_dres(star_frame_list, dres_S, dres_M)
+print('\n Delta residue \n', dres.head())
+star_frame_list = add_dres(star_frame_list, dres)
 print('###'*30)
 print(' \n start decoupling distance-reddening errors.')
 if z==1:
     input('###'*30+'\n')
-dSM = [[dmc_S,  dmc_M],[dres_S, dres_M]]
+dSM = [[dmc],[dres]]
 ####################################################################################################
 
 
@@ -111,13 +109,13 @@ print('loaded')
 ####################################################################################################
 
 
-from lvtlaw.g_result import correction_rd_mu, correction_apply, corrected_PL
+from lvtlaw.g_result import correction_rd_mu, correction_apply, corrected_PL, corrected_reg
 correction_red_mu_stars = correction_rd_mu(stars_ex_red_mu_list, save=1)
 print('\n Modulus-Reddening error pair estimated using different composite wesenheit magnitudes \n' ,correction_red_mu_stars.head())
 if z==1:
     input('###'*30+'\n')
 corrected = correction_apply(tabsolute, correction_red_mu_stars, save=1)
-corrected_PL(tabsolute, corrected, s=1)
+corrected_reg(tabsolute, corrected, dis_flag, s=1)
 '''
 from visuals.dataload import tabsolute, correction, wesenheit
 import matplotlib.pyplot as plt

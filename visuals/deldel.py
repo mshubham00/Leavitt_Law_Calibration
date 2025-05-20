@@ -9,95 +9,48 @@ from lvtlaw.a_utils import save, mag, img_out_path, process_step, col_das, col_l
 #from plotly.subplots import make_subplots
 #import plotly.io as pio  
 
-def plotdeldel_(col,d,res_data):
-    fig, axarr = plt.subplots(6, sharex = True, gridspec_kw={'hspace': 0, 'wspace': 0})
-    fig = plt.gcf()
-    fig.set_size_inches(9, 6)
-    for i,ax in enumerate(axarr):
-        ax.plot(res_data['r_'+mag[i]+col+d],res_data['r0_'+mag[i]+d], col_dot[i], label = mag[i])
-        ax.plot(res_data['r_'+col[0]+col+d],res_data['r0_'+mag[i]+d], 'k.', label = mag[i])
-        ax.text(0.4, -0.5, '%s,%s'%(mag[i],mag[i]+col))
-    plt.legend()
-    plt.xlabel('PW Residue (%s)'%(d))
-    plt.ylabel('PL Residue (%s)'%(d))
-    title = '%s'%(col+d)
-    save(title,2)
-    plt.show()
-
 def plotdeldel(i, ta, col, res, dSM, dis, s=0):
 # 1. Extracting x-y axis
     m = mag[i]
     y = res['r_' + m + '0' + dis]
-    
-    x1 = res['r_' + col[0] + col + dis]
-    M = m + col[0] + col
-    predM = dSM[2][1]['p_' + M + dis]
-    residualsM =  dSM[1][1]['d_' + M + dis] 
-
-    x2 = res['r_' + m + col + dis]
+    x = res['r_' + m + col + dis]
     S = m + m + col
-    predS = dSM[2][0]['p_' + S + dis]
-    residualsS =  dSM[1][0]['d_' + S + dis] 
+    pred = dSM[2][0]['p_' + S + dis]
+    residuals =  dSM[1][0]['d_' + S + dis] 
 
     if dis == '_i':
-        alphaM = dSM[0][1][M].iloc[4]
-        gammaM = dSM[0][1][M].iloc[5]
-        alphaS = dSM[0][0][S].iloc[4]
-        gammaS = dSM[0][0][S].iloc[5]
+        alpha = dSM[0][0][S].iloc[4]
+        gamma = dSM[0][0][S].iloc[5]
     else:
-        alphaM = dSM[0][1][:4][M].iloc[0]
-        gammaM = dSM[0][1][:4][M].iloc[1]
-        alphaS = dSM[0][0][:4][S].iloc[0]
-        gammaS = dSM[0][0][:4][S].iloc[1]
+        alpha = dSM[0][0][:4][S].iloc[0]
+        gamma = dSM[0][0][:4][S].iloc[1]
 # === Plotting ===
-    fig, axs = plt.subplots(1, 3, figsize=(18, 4))
-
-# 1. Deterministic model
-#axs[0].plot(t, x1, 'k-', label='Deterministic: $s = vt$', marker='x')
-    axs[0].scatter(x1, y, color='gray', s=ta['EBV']*40, marker='o', label='Residue Correlation: %s'%(M))
-    #axs[0].set_title('Absolute Mag')
-    for i in range(len(ta)):
-        if i == 0:
-            label = "Madore"
-        else:
-            label = None
-        axs[0].plot([x1[i], x1[i]], [y[i], predM[i]], color='red', linestyle='--', alpha=0.5, label=label)
-    axs[0].plot(x1, predM, 'b-', label=r'$\Delta$%s = %f $\Delta$%s%s + %f' % (m, alphaM, col[0], col, gammaM))
-    axs[0].set_ylabel(r'PL residue ($\Delta$ %s)' % m)
-    axs[0].set_xlabel(r'PW residue ($\Delta$ %s)' % M[1:])
-
+    fig, axs = plt.subplots(1, 2, figsize=(18, 4))
 # 2. Statistical model with linear regression fit
-    axs[1].scatter(x2, y, color='gray', s=ta['EBV']*40, label='Residue Correlation: %s'%(S))
+    axs[0].scatter(x, y, color='gray', s=ta['EBV']*40, label='Residue Correlation: %s'%(S))
     for i in range(len(ta)):
         if i == 0:
-            label = "Shubham"
+            label = "Deviation"
         else:
             label = None
-        axs[1].plot([x2[i], x2[i]], [y[i], predS[i]], color='red', linestyle='--', alpha=0.5, label=label)
-    axs[1].plot(x2, predS, 'g-', label=r'$\Delta$%s = %f $\Delta$%s%s + %f' % (m, alphaS, m, col, gammaS))
-    axs[1].set_xlabel(r'PW residue ($\Delta$ %s)' % S[1:])
-
-    #axs[1].set_title(' Linear Fit')
-
-# 3. Histogram of residuals
-    labelM = 'Range: %f'%(max(residualsM)-min(residualsM))
-    labelS = 'Range: %f'%(max(residualsS)-min(residualsS))
-    axs[2].hist(residualsM, bins=15, edgecolor='black', color='steelblue',label = labelM)
-    axs[2].hist(residualsS, bins=15, edgecolor='black', color='green',label = labelS, alpha = 0.5)
-    #axs[2].set_title('Histogram of Model Residuals')
-    axs[2].set_xlabel('Residual (true - pred)')
-    axs[2].set_ylabel('Count')
-    axs[2].grid(True)
-    axs[2].legend()
-
+        axs[0].plot([x[i], x[i]], [y[i], pred[i]], color='red', linestyle='--', alpha=0.5, label=label)
+    axs[0].plot(x, pred, 'g-', label=r'$\Delta$%s = %f $\Delta$%s%s + %f' % (m, alpha, m, col, gamma))
+    axs[0].set_xlabel(r'PW residue ($\Delta$ %s)' % S[1:])
+    axs[0].set_ylabel(r'PW residue ($\Delta$ %s)' % (m))
+    # 3. Histogram of residuals
+    label = 'Range: %f'%(max(residuals)-min(residuals))
+    axs[1].hist(residuals, bins=15, edgecolor='black', color='green',label = label, alpha = 0.5)
+    axs[1].set_xlabel('Residual (true - pred)')
+    axs[1].set_ylabel('Count')
+    axs[1].grid(True)
+    axs[1].legend()
     for ax in axs[:2]:
         ax.grid(True)
         ax.legend()
         for spine in ax.spines.values():
             spine.set_visible(False)
-
     plt.tight_layout()
-    title = '%i_del_%s_%s%s'%(len(x1), col,m, dis)
+    title = '%i_del_%s_%s%s'%(len(x), col,m, dis)
     print(title)
     if s==1:
         save(title,2)

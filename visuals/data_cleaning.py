@@ -9,22 +9,12 @@ import pandas as pd
 import os
 import subprocess
 import seaborn as sns
+color = ['BV', 'VI']
 
-img_out_path = '../data/output/9_plots/'
-process_step = ['1_datacleaning/','2_PLPW/','3_deldel/', '4_reddening/', '5_dispersion/','6_rms/','7_errorpair/', '8_result/']
 
-def output_directories(parent_folder = img_out_path, s=1,subdirectories = process_step):
-    if s==1:
-        for subdirectory in subdirectories:
-            path = os.path.join(parent_folder, subdirectory)
-            if not os.path.exists(path):
-                os.makedirs(path)
-
-output_directories(s=1)
-
-raw_data = pd.read_csv('../data/input/103_raw_data_IRSB.csv')
-color=pd.read_csv('../data/input/103_color.csv')
-print(raw_data.info(), color.info())
+#raw_data = pd.read_csv('../data/input/103_raw_data_IRSB.csv')
+#color=pd.read_csv('../data/input/103_color.csv')
+#print(raw_data.info(), color.info())
 
 def savefigure(title):
     img_path = '../data/output/9_plots/'
@@ -52,4 +42,4 @@ def plot_outliers(ls = ls, outliers=outliers, s=0, a= 1, color = color):
     #cbar.set_label('Color Excess')
     plt.show()
 
-plot_outliers(s=0)
+#plot_outliers(s=0)
