@@ -37,9 +37,7 @@ def absolute_magnitude(data, ap_bands=ap_bands, bands = abs_bands, disg = '_g', 
         for d in range(0,len(dis_list)):    
             if k == 0:
                 absolute[bands[i]+dis_flag[d]]=data['M_'+mag[i]]+data['EBV']*R[i]
-            elif k==1:
-                absolute[bands[i]+dis_flag[d]]=data[ap_bands[i]] - data[dis_list[d]]
-            elif k==2:
+            elif k in {1, 2, 3}:
                 absolute[bands[i]+dis_flag[d]]=data[ap_bands[i]] - data[dis_list[d]]
     print(absolute.head())
     print('###'*30)
@@ -56,9 +54,7 @@ def true_absolute_magnitude(data, R=R, mag=mag, bands=abs_bands):
         for i in range(0,len(mag)):
             if k == 0:
                 tabsolute[bands[i]+'0'+dis_flag[d]]=data['M_'+mag[i]]    
-            elif k==1:
-                tabsolute[bands[i]+'0'+dis_flag[d]]=data[mag[i]+'_mag'] - data[dis_list[d]] - R[i]*data['EBV']
-            elif k==2:
+            elif k in {1, 2, 3}:
                 tabsolute[bands[i]+'0'+dis_flag[d]]=data[mag[i]+'_mag'] - data[dis_list[d]] - R[i]*data['EBV']
     print(tabsolute.head())
     print('###'*30)
@@ -76,9 +72,7 @@ def reddening_free(data, R=R, mag=mag, ap_bands=ap_bands):
                     wes_str = mag[c]+mag[a]+mag[b]+dis_flag[d]
                     if k == 0:
                         wesen[wes_str] = data[abs_bands[c]] - (R[c]/(R[a]-R[b]))*(data[abs_bands[a]] - data[abs_bands[b]])
-                    elif k==1:
-                        wesen[wes_str] = data[ap_bands[c]] - (R[c]/(R[a]-R[b]))*(data[ap_bands[a]] - data[ap_bands[b]]) - data[dis_list[d]]
-                    elif k==2:
+                    elif k in {1, 2, 3}:
                         wesen[wes_str] = data[ap_bands[c]] - (R[c]/(R[a]-R[b]))*(data[ap_bands[a]] - data[ap_bands[b]]) - data[dis_list[d]]
     print(wesen.head())
     print('###'*30)

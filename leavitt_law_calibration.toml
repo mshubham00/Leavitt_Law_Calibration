@@ -6,7 +6,7 @@ version = "0.0.1"
 authors = [
   { name="Shubham Mamgain", email="mshubham00@gmail.com" },
 ]
-description = "Require dataset of Cepheids distance, reddening and multiband photometry luminosity in BVIJHK"
+description = "Require Cepheid dataset with distance, reddening and multiband photometry."
 readme = "README.md"
 requires-python = ">=3.8"
 classifiers = [

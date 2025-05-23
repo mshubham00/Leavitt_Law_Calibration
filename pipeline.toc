@@ -1,8 +1,0 @@
-\contentsline {section}{\numberline {1}Calibration}{1}{}%
-\contentsline {subsection}{\numberline {1.1}lvtlaw.a\_utils}{3}{}%
-\contentsline {subsection}{\numberline {1.2}lvtlaw.b\_data\_transform}{4}{}%
-\contentsline {subsection}{\numberline {1.3}lvtlaw.c\_pl\_pw}{5}{}%
-\contentsline {subsection}{\numberline {1.4}lvtlaw.d\_del\_del}{6}{}%
-\contentsline {subsection}{\numberline {1.5}lvtlaw.e\_error\_estimation}{7}{}%
-\contentsline {subsection}{\numberline {1.6}lvtlaw.f\_star\_wise}{9}{}%
-\contentsline {subsection}{\numberline {1.7}lvtlaw.g\_result}{10}{}%
