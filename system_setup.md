@@ -13,7 +13,6 @@ This repository guides you through the process of setting up your environment, i
    - [Using `requirements.txt`](#using-requirementstxt)
    - [Using Conda `environment.yml`](#using-conda-environmentyml)
 4. [Running the Code](#4-running-the-code)
-5. [Troubleshooting](#5-troubleshooting)
 
 ---
 
@@ -82,7 +81,7 @@ conda env create -f environment.yml
 conda activate lvtlaw_calibration_env
 ```
 
-## Execute the code
+## 4. Execute the code
 ```
 python main.py
 ```

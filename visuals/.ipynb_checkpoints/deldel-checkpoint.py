@@ -14,7 +14,7 @@ def plotdeldel(i, ta, col, res, dSM, dis, s=0):
     m = mag[i]
     y = res['r_' + m + '0' + dis]
     x = res['r_' + m + col + dis]
-    S = m + m + col
+    S = m + col[0] + col
     pred = dSM[2][0]['p_' + S + dis]
     residuals =  dSM[1][0]['d_' + S + dis] 
 

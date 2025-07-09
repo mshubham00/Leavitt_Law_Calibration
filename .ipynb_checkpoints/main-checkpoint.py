@@ -5,15 +5,17 @@ print('Master Thesis Project: Galactic BVIJHK Leavitt Law Calibration \n     Ref
 #####################################################################################################
 
 
-from lvtlaw.a_utils import output_directories, load_data, process_step, open_output_dir, flags, data_cols, z
-from lvtlaw.a_utils import data_dir, input_data_file, data_out, mag, colors, wes_cols, wes_show, dis_list, dis_flag, del_mu, s, k, flags
+from lvtlaw.a_utils import output_directories, load_data, process_step, open_output_dir, data_cols, z
+from lvtlaw.a_utils import data_dir, input_data_file, data_out, mag, colors, wes_cols, wes_show, dis_list, dis_flag, del_mu, s, k
 output_directories(data_out, s)
 cleaned_data = load_data(input_data_file)
-df = cleaned_data[data_cols]; n = len(df)  # total number of cepheids
+
+df = cleaned_data[data_cols].dropna().reset_index(drop=True)
+n = len(df)  # total number of cepheids
 if z==1:
     input('###'*30+'\n')
 
-print(n,' Galactic Cepheids loaded. (k = %i)\n'%(k), df.head(),'\n')
+print(n,' Galactic Cepheids loaded. (k = %i)\n'%(k), df.head(-1),'\n')
 '''
 from lvtlaw.visualization import milky_way, plot_corr, cordinate
 milky_way(ra,dec, dis_flag[0], '%i_Galactic_Cepheids'%(n))
@@ -32,9 +34,8 @@ A, R = extinction_law() # converts Fouque (2007) extinction law into correspondi
 print(' \n Reddening ratio values will be multiplied with E(B-V) values to calculate extinction in each band for individual Cepheid toward the respective line-of-sight.  \n')
 if z==1:
     input('###'*30+'\n')
-star_names=cleaned_data['name']
-n = len(star_names)
-absolute, extinction, tabsolute, wesenheit = transformation(cleaned_data, s)
+star_names=df['name']
+absolute, extinction, tabsolute, wesenheit = transformation(df, s)
 merg1= pd.merge(absolute, tabsolute, on="logP")
 prepared_regression_data = pd.merge(merg1, wesenheit, on = 'logP')
 #prepared_regression_data['name'] = star_names 
@@ -83,8 +84,7 @@ if z==1:
     input('###'*30+'\n')
 dSM = [[dmc],[dres]]
 ####################################################################################################
-
-
+'''
 from lvtlaw.e_error_estimation import reddening_error#star_by_star, star_dispersion, result
 #from visuals.dataload import dSM#, pick_star
 red0_SM, ex_rd_mu = reddening_error(wes_show, dis_flag, dSM, s)
@@ -97,6 +97,7 @@ if z==1:
 stars_ex_red_mu_list =  star_ex_red_mu(n,ex_rd_mu, df)
 if z==1:
     input('###'*30+'\n')
+'''
 '''
 print('loading stars')
 from visuals.dataload import pick_star
@@ -115,6 +116,7 @@ print('\n Modulus-Reddening error pair estimated using different composite wesen
 if z==1:
     input('###'*30+'\n')
 corrected = correction_apply(tabsolute, correction_red_mu_stars, save=1)
+print(corrected.head(-1))
 corrected_reg(tabsolute, corrected, dis_flag, s=1)
 '''
 from visuals.dataload import tabsolute, correction, wesenheit

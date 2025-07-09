@@ -84,8 +84,7 @@ if z==1:
     input('###'*30+'\n')
 dSM = [[dmc],[dres]]
 ####################################################################################################
-
-
+'''
 from lvtlaw.e_error_estimation import reddening_error#star_by_star, star_dispersion, result
 #from visuals.dataload import dSM#, pick_star
 red0_SM, ex_rd_mu = reddening_error(wes_show, dis_flag, dSM, s)
@@ -98,6 +97,7 @@ if z==1:
 stars_ex_red_mu_list =  star_ex_red_mu(n,ex_rd_mu, df)
 if z==1:
     input('###'*30+'\n')
+'''
 '''
 print('loading stars')
 from visuals.dataload import pick_star

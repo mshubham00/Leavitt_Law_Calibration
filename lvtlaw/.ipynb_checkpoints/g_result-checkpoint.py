@@ -1,4 +1,4 @@
-from lvtlaw.a_utils import process_step, colors, mag, ap_bands, abs_bands, data_dir, input_data_file, data_out, dis_flag, dis_list, s, data_out, wes_show, flags, del_mu, regression, R, nreg
+from lvtlaw.a_utils import process_step, colors, mag, ap_bands, abs_bands, data_dir, input_data_file, data_out, dis_flag, dis_list, s, data_out, wes_show, del_mu, regression, R, nreg
 import pandas as pd
 
 def get_error_pair(star):
@@ -28,15 +28,14 @@ def correction_rd_mu(stars, save=1):
 
 def correction_apply(tabsolute, correction, save=1):
     corrected = pd.DataFrame()
-    correct = pd.DataFrame()
     corrected['logP'] = tabsolute['logP'] 
     for d in dis_flag:
         for col in wes_show:
-            correct['mu'+d+col] = -correction['mu'+d+col]
+            corrected['mu'+d+col] = tabsolute[dis_list[dis_flag.index(d)]]+correction['mu'+d+col]
+            corrected['EBV'+d+col]  = tabsolute['EBV']+correction['rd'+d+col]
             for i in range(len(mag)):
-                correct['ex'+mag[i]+d+col] = -R[i]*correction['rd'+d+col]
-                corrected[mag[i]+d+col]=tabsolute['M_'+mag[i]+'0'+d] + correct['ex'+mag[i]+d+col]+correction['mu'+d+col]
-    print('Correction for each band \n', correct)
+                ex = -R[i]*correction['rd'+d+col]
+                corrected[mag[i]+d+col]=tabsolute['M_'+mag[i]+'0'+d] + ex +correction['mu'+d+col]
     if save==1:
         corrected.to_csv('%s%i_corrected.csv'%(data_out+process_step[7],len(corrected)))
     return corrected

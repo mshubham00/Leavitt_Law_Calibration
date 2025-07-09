@@ -3,12 +3,15 @@
 import pandas as pd
 import os
 import subprocess
-from lvtlaw.a_utils import flags, load_data, nreg, process_step, input_data_file, dis_list, dis_flag, A, R, mag, abs_bands, data_out, wes_show
+from lvtlaw.a_utils import load_data, nreg, process_step, input_data_file, dis_list, dis_flag, A, R, mag, abs_bands, data_out, wes_show, data_cols
 from decimal import Decimal, getcontext
 getcontext().prec = 10
 
 #### 
-raw = load_data(input_data_file)
+cleaned_data = load_data(input_data_file)
+raw = cleaned_data[data_cols].dropna().reset_index(drop=True)
+n = len(raw)  # total number of cepheids
+
 n = len(raw)
 ####
 def transformation():
@@ -26,9 +29,9 @@ def PLWcorrection():
     return PLWdata, PLWresidue, PLWregression, PLWprediction
 #### 
 def del_del():
-    dpre_S = pd.read_csv('%s%i_del_pre_S.csv'%(data_out+process_step[2],n))
-    dres_S = pd.read_csv('%s%i_del_res_S.csv'%(data_out+process_step[2],n))
-    dmc_S = pd.read_csv('%s%i_del_slope_intercept_S.csv'%(data_out+process_step[2],n))
+    dpre_S = pd.read_csv('%s%i_del_pre.csv'%(data_out+process_step[2],n))
+    dres_S = pd.read_csv('%s%i_del_res.csv'%(data_out+process_step[2],n))
+    dmc_S = pd.read_csv('%s%i_del_slope_intercept.csv'%(data_out+process_step[2],n))
     dSM = [[dmc_S],[dres_S], [dpre_S]]
     return dpre_S, dres_S, dmc_S, dSM
 ####

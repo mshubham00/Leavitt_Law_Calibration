@@ -3,7 +3,8 @@
 a_utils.py tells to main.py which dataset should be used through parameter k = [0 ,1, 2] = [Madore, Jesper, Reiss]. A function select_data_file maps the metadata of input with defined variables. Another function provides Fouque extinction law. File also contains more generic function like regression, save_data, etc. and input/output variables.
 '''
 #####################################################################
-k = 3; s=1; R_v = 3.23; z=0    # k changes dataset, see select_data_file()  
+k = 1; s=1; z=0; flag = 'S'    # k changes dataset, s saves the output, z switches intracting output, flag for Madore/Shubham
+wes_show = ['BI','VI', 'VK','JK']; R_v = 3.23; 
 #####################################################################
 import os, subprocess, sys
 import matplotlib.pyplot as plt
@@ -16,7 +17,7 @@ Extinction Law from Fouque 2007
 """ 
 Ab_v = 1.31                                             #          = A_b / A_v
 Av_v = 1                                                #          = A_v / A_v
-Ar_v = 0.845 	                                                #          = A_v / A_v
+Ar_v = 0.845 	                                        #          = A_v / A_v
 Ai_v = 0.608                                            #          = A_i / A_v
 Aj_v = 0.292                                            #          = A_j / A_v
 Ah_v = 0.181                                            #          = A_h / A_v
@@ -24,9 +25,9 @@ Ak_v = 0.119                                            #          = A_k / A_v
 '''
 Ratio of total to selective absorption (Sandage 2004)- driving wavelength dependent value of R
 '''
-#R_v = 3.23                                             #      R_V = A_v / E(B-V)
-R_b = Ab_v*R_v                                          #      R_B = (A_b / A_v) * (A_v / E(B-V))
-R_r = Ar_v*R_v                                          #      R_B = (A_b / A_v) * (A_v / E(B-V))
+#R_v = 3.23                                             #      R_v = A_v / E(B-V)
+R_b = Ab_v*R_v                                          #      R_b = (A_b / A_v) * (A_v / E(B-V))
+R_r = Ar_v*R_v                                          #      R_r = (A_r / A_v) * (A_v / E(B-V))
 R_i = Ai_v*R_v                                          #          = (A_i / A_v) * (A_v / E(B-V))
 R_j = Aj_v*R_v                                          #          = (A_j / A_v) * (A_v / E(B-V))
 R_h = Ah_v*R_v                                          #          = (A_h / A_v) * (A_v / E(B-V))
@@ -43,12 +44,12 @@ def select_data_file(k):
         R = [R_b, R_v, R_i, R_j, R_h, R_k]
         mag = ['B', 'V', 'I','J','H','K'];
         abs_bands = ['M_B', 'M_V', 'M_I', 'M_J', 'M_H', 'M_K']; 
-        ap_bands = ['B_mag', 'V_mag' ,'I_mag', 'J_mag', 'H_mag', 'K_mag']
+        ap_bands = ['B_mag', 'V_mag', 'I_mag', 'J_mag', 'H_mag', 'K_mag']
     elif k ==1:
-        file_name = '94_jesper.csv'
-        file_cols = ['name',"logP", 'plx','IRSB', 'EBV', "B_mag", 'V_mag', 'I_mag', 'J_mag', 'H_mag', 'K_mag']
-        dis_list = ['plx', 'IRSB']
-        dis_flag = ['_g','_i']
+        file_name = '95_apparent_plx.csv'
+        file_cols = ['name',"logP", 'plx', 'EBV', "B_mag", 'V_mag', 'I_mag', 'J_mag', 'H_mag', 'K_mag']
+        dis_list = ['plx']
+        dis_flag = ['_g']
         A = [Ab_v, Av_v, Ai_v, Aj_v, Ah_v, Ak_v]
         R = [R_b, R_v, R_i, R_j, R_h, R_k]
         mag = ['B', 'V', 'I','J','H','K'];
@@ -86,7 +87,6 @@ process_step = ['1_prepared/','2_PLPW/','3_deldel/', '4_reddening/', '5_dispersi
 image_step = ['1_datacleaning/','2_PLPW/','3_deldel/', '4_reddening/', '5_dispersion/','6_rms/','7_errorpair/', '8_result/']
 #####################################################################
 del_mu = [round(i*0.01,2) for i in range(-100,100,2)]
-wes_show = ['VI', 'VK','JK']
 band = len(mag);
 col_dot = ['b.', 'g*', 'y+', 'c*', 'g+', 'k.', 'c+', 'r+'] ;
 col_lin = ['b-', 'g-', 'y-', 'c-', 'g-', 'k-', 'c-', 'r-'] ;

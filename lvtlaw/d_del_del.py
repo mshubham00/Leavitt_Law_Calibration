@@ -4,7 +4,6 @@ import pandas as pd
 from functools import reduce
 from warnings import simplefilter
 simplefilter(action="ignore", category=pd.errors.PerformanceWarning)
-bands = abs_bands
 out_dir = data_out
 
 def residue_correlation(residue_file, dis_flag, col): 
@@ -17,7 +16,7 @@ def residue_correlation(residue_file, dis_flag, col):
         slope_errors, intercept_errors = [], []
         regression_names = []
         for band in mag:
-            wesenheit = f"{band}{col}"
+            wesenheit = f"{band}{col}" if flag == "S" else f"{col[0]}{col}"
             x_key = 'r_' + wesenheit + diss
             y_key = 'r_' + band + '0' + diss
             regression_name = band + wesenheit
@@ -29,11 +28,8 @@ def residue_correlation(residue_file, dis_flag, col):
             intercepts.append(intercept)
             slope_errors.append(slope_err)
             intercept_errors.append(intercept_err)
-
-            # Save predictions and residuals
             del_residuals[f'd_{regression_name}{diss}'] = residual
             del_predictions[f'p_{regression_name}{diss}'] = predicted
-
         # Save regression metadata for this distance flag
         del_mc['name'] = regression_names
         del_mc[f'm{diss}'] = slopes
@@ -42,7 +38,7 @@ def residue_correlation(residue_file, dis_flag, col):
         del_mc[f'ce{diss}'] = intercept_errors
     return del_residuals, del_predictions, del_mc
 
-def residue_analysis(residue_file, dis_flag:list, cols:list , save=1):
+def residue_analysis(residue_file, dis_flag:list, cols:list , s=1):
     # Initialize result containers
     dmc = []
     dres = pd.DataFrame({'name': residue_file['name'], 'logP': residue_file['logP'], 'EBV': residue_file['logP']})
@@ -51,12 +47,11 @@ def residue_analysis(residue_file, dis_flag:list, cols:list , save=1):
         res, pre, mc = residue_correlation(residue_file, dis_flag, col)
         dres = pd.merge(dres, res, on='name')
         dpre = pd.merge(dpre, pre, on='name')
-        dmc.append(mc)
+        dmc.append(mc) 
     # Combine regression dataframes
     del_mc = pd.concat(dmc, ignore_index=True).drop_duplicates().set_index('name').T
-    total_relations = len(mag) * len(dmc)  # 6 distance flags per color
     # Optional: Save to CSV
-    if save == 1:
+    if s == 1:
         cepheid_count = len(residue_file)
         out_base = f"{out_dir}{process_step[2]}{cepheid_count}_"
         del_mc.to_csv(f'{out_base}del_slope_intercept.csv')
