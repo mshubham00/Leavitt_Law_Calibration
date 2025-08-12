@@ -107,8 +107,8 @@ def plotPL(i,a, ta, res, reg, pre, dis, s=0):
         alpha = reg[m].iloc[4]
         gamma= reg[m].iloc[5]
     else:
-        alpha = reg[:4][m].iloc[0]
-        gamma= reg[:4][m].iloc[1]
+        alpha = reg[f'{m}0'].iloc[0]
+        gamma= reg[f'{m}0'].iloc[1]
     pred = pre['p_'+m+'0'+dis]
     residuals =  res['r_'+m+'0'+dis] 
     p1,r1 = pr_value(x,y1)
@@ -167,11 +167,11 @@ def plotPL6(ta, res, reg, pre, dis, s=0):
         y = ta['M_' + m + '0' + dis]
         # Get regression coefficients
         if dis == '_i':
-            alpha = reg[m].iloc[4]
-            gamma = reg[m].iloc[5]
+            alpha = reg[f'{m}0'].iloc[4]
+            gamma = reg[f'{m}0'].iloc[5]
         else:
-            alpha = reg[:4][m].iloc[0]
-            gamma = reg[:4][m].iloc[1]
+            alpha = reg[f'{m}0'].iloc[0]
+            gamma = reg[f'{m}0'].iloc[1]
         pred = pre['p_' + m + '0' + dis]
         residuals = res['r_' + m + '0' + dis]
         corr_coef, _ = pr_value(x, y)
@@ -215,11 +215,11 @@ def plotPW(i, ta , w, col, res, reg, pre, dis, s=0):
     p1,r1 = pr_value(x,y1)
     p2,r2 = pr_value(x,y2)
     if dis == '_i':
-        alpha = reg[m].iloc[4]
-        gamma = reg[m].iloc[5]
+        alpha = reg[f'{m}0'].iloc[4]
+        gamma = reg[f'{m}0'].iloc[5]
     else:
-        alpha = reg[:4][m].iloc[0]
-        gamma = reg[:4][m].iloc[1]
+        alpha = reg[f'{m}0'].iloc[0]
+        gamma = reg[f'{m}0'].iloc[1]
     pred = pre['p_' + m + col + dis]
     residuals =  res['r_' + m + col + dis] 
 # === Plotting ===
@@ -267,13 +267,12 @@ def plotPW(i, ta , w, col, res, reg, pre, dis, s=0):
         save(title,1, fil = 'png', p=1)
     plt.show()
 
-def plotPW6(w, col, res, reg, pre, dis, mag=mag, s=0):
+def plotPW6(w, col, res, reg, pre, dis, s=0):
     x = w['logP'] - 1
     fig, axs = plt.subplots(2, 3, figsize=(18, 8), sharex='col')
     axs = axs.flatten()
-
-    for i in range(6):
-        w_str = mag[i] + col
+    for i, m in enumerate(mag):
+        w_str = m + col
         y = w[w_str + dis]
         p1, _ = pr_value(x, y)
 
@@ -333,7 +332,47 @@ def pl6(data, PL_m,PL_c, PW_m,PW_c, path = img_out_path):
     save(title,path, 1)
     plt.show()
     
-    
+def plotPLWres(res, reg, dis, col='',s=0):
+    fig_res, axs_res = plt.subplots(2, 3, figsize=(18, 6))
+    axs_res = axs_res.flatten()
+    x = res['logP'] - 1
+    for i, m in enumerate(mag):
+        print(m,col)
+        if dis == '_i':
+            alpha_e = round(reg[f'{m}0'].iloc[6], 3)
+            gamma_e = round(reg[f'{m}0'].iloc[7], 3)
+        else:
+            alpha_e = round(reg[f'{m}0'].iloc[2], 3)
+            gamma_e = round(reg[f'{m}0'].iloc[3], 3)
+        if col == '':
+            residuals = res['r_' + m + '0' + dis]
+        else:
+            residuals = res['r_' + m + col+dis]
+        ax_res = axs_res[i]
+        stdd = round(residuals.std(ddof=0), 3)
+        ax_res.plot(x, residuals, col_dot[i], label=f'{m} $\sigma = $ {stdd}')
+        ax_res.axhline(0.5, color='gray', linestyle='--', linewidth=1)
+        ax_res.axhline(0, color='red', linestyle='--', linewidth=1)
+        ax_res.axhline(-0.5, color='gray', linestyle='--', linewidth=1)
+        xlabel = f'Errors: slope {alpha_e} | intercept {gamma_e}'
+        ax_res.set_xlabel(xlabel)
+        ax_res.set_ylabel(f'{m} Band Residuals')
+        #ax_res.grid(True)
+        ax_res.tick_params(direction='in', top=True, right=True)
+        ax_res.legend()
+
+        for spine in ax_res.spines.values():
+            spine.set_visible(False)
+
+    for j in range(len(mag), 6):  # Hide any unused axes
+        axs_res[j].set_visible(False)
+    title = 'residuals'
+    plt.tight_layout()
+    if s == 1:
+        save(title + "_residuals", 1, fil='png', p=1)
+    plt.show()
+
+
 def PLresidue(res_data, path = img_out_path):
     plot = len(dis_flag)
     fig, axarr = plt.subplots(plot, sharex='col',gridspec_kw={'hspace': 0, 'wspace': 0})

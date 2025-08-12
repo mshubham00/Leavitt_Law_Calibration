@@ -3,12 +3,18 @@
 a_utils.py tells to main.py which dataset should be used through parameter k = [0 ,1, 2] = [Madore, Jesper, Reiss]. A function select_data_file maps the metadata of input with defined variables. Another function provides Fouque extinction law. File also contains more generic function like regression, save_data, etc. and input/output variables.
 '''
 #####################################################################
-k = 1; s=1; z=0, flag = 'S'    # k changes dataset, s saves the output, z switches intracting output, flag for Madore/Shubham
-wes_show = ['BI','VI', 'VK','JK']; R_v = 3.23; 
+k = 1; s=1; z=0; 
+# k changes dataset, s saves the output, z switches intracting output, flag for Madore/Shubham
+flags = ['M']
+
+R_v = 3.23; # for milky way Sandage (2004)
+#R_v = 3.41# ± 0.06 in the LMC and 
+#R_v = 2.74 #± 0.13 in the SMC. (2023)
 #####################################################################
 import os, subprocess, sys
 import matplotlib.pyplot as plt
 from scipy import stats
+
 import pandas as pd
 #####################################################################
 """
@@ -36,7 +42,7 @@ R_k = Ak_v*R_v                                          #          = (A_k / A_v)
 ##########################################################
 def select_data_file(k):
     if k==0:
-        file_name = '59_madore.csv'
+        file_name = '59_madore'
         file_cols = ['name','logP','HST','EBV','M_B','M_V','M_I','M_J','M_H','M_K'] 
         dis_list = ['HST']
         dis_flag = ['_h']
@@ -46,17 +52,17 @@ def select_data_file(k):
         abs_bands = ['M_B', 'M_V', 'M_I', 'M_J', 'M_H', 'M_K']; 
         ap_bands = ['B_mag', 'V_mag', 'I_mag', 'J_mag', 'H_mag', 'K_mag']
     elif k ==1:
-        file_name = '94_jesper.csv'
-        file_cols = ['name',"logP", 'plx','IRSB', 'EBV', "B_mag", 'V_mag', 'I_mag', 'J_mag', 'H_mag', 'K_mag']
-        dis_list = ['plx', 'IRSB']
-        dis_flag = ['_g','_i']
+        file_name = '95_jesper'
+        file_cols = ['name',"logP", 'plx', 'EBV', "B_mag", 'V_mag', 'I_mag', 'J_mag', 'H_mag', 'K_mag']
+        dis_list = ['plx']
+        dis_flag = ['_g']
         A = [Ab_v, Av_v, Ai_v, Aj_v, Ah_v, Ak_v]
         R = [R_b, R_v, R_i, R_j, R_h, R_k]
         mag = ['B', 'V', 'I','J','H','K'];
         abs_bands = ['M_B', 'M_V', 'M_I', 'M_J', 'M_H', 'M_K']; 
         ap_bands = ['B_mag', 'V_mag' ,'I_mag', 'J_mag', 'H_mag', 'K_mag']
     elif k == 2:
-        file_name = '18_gaia_irsb_cluster.csv'
+        file_name = '18_cluster'
         file_cols = ['name',"logP", 'cluster', 'EBV', "B_mag", 'V_mag', 'I_mag', 'J_mag', 'H_mag', 'K_mag']
         dis_list = ['cluster']
         dis_flag = ['_c']
@@ -66,7 +72,7 @@ def select_data_file(k):
         abs_bands = ['M_B', 'M_V', 'M_I', 'M_J', 'M_H', 'M_K']; 
         ap_bands = ['B_mag', 'V_mag' ,'I_mag', 'J_mag', 'H_mag', 'K_mag']
     elif k == 3:
-        file_name = '36_LMC_VIJK.csv'
+        file_name = '36_LMC'
         file_cols = ['name',"logP", 'IRSB', 'EBV', 'V_mag', 'I_mag', 'J_mag', 'K_mag']
         dis_list = ['IRSB']
         dis_flag = ['_l']
@@ -75,13 +81,23 @@ def select_data_file(k):
         mag = ['V', 'I','J','K']
         abs_bands = ['M_V', 'M_I', 'M_J', 'M_K']; 
         ap_bands = ['V_mag' ,'I_mag', 'J_mag', 'K_mag']
+    elif k == 4:
+        file_name = '20_cluster_cruz'
+        file_cols = ['name',"logP", 'mplx', 'IRSB', 'EBV','B_mag', 'V_mag', 'I_mag', 'J_mag', 'H_mag','K_mag']
+        dis_list = ['IRSB']
+        dis_flag = ['_c']
+        A = [Ab_v, Av_v, Ai_v, Aj_v, Ah_v, Ak_v]
+        R = [R_b, R_v, R_i, R_j, R_h, R_k]
+        mag = ['B', 'V', 'I','J','H','K'];
+        abs_bands = ['M_B', 'M_V', 'M_I', 'M_J', 'M_H', 'M_K']; 
+        ap_bands = ['B_mag', 'V_mag' ,'I_mag', 'J_mag', 'H_mag', 'K_mag']
     return file_name, file_cols, dis_list, dis_flag, A, R, mag, abs_bands, ap_bands
 #k = input('Dataset \n')
 input_data_file, data_cols, dis_list, dis_flag, A, R, mag, abs_bands, ap_bands = select_data_file(k)
 nreg = 5*len(dis_flag)
 #####################################################################
 data_dir = './data/input/'
-data_out='./data/output/'
+data_out=f'./data/{input_data_file}_{R_v}/'
 img_out_path = './data/output/9_plots/'
 process_step = ['1_prepared/','2_PLPW/','3_deldel/', '4_reddening/', '5_dispersion/','6_rms/','7_errorpair/', '8_result/', '9_plots/', '0_stars/']
 image_step = ['1_datacleaning/','2_PLPW/','3_deldel/', '4_reddening/', '5_dispersion/','6_rms/','7_errorpair/', '8_result/']
@@ -108,7 +124,7 @@ def image_directories(parent_folder = img_out_path, s=1,subdirectories = image_s
                 os.makedirs(path)
 #####################################################################       
 def load_data(data_file = input_data_file, data_dir = data_dir, p=0):
-    cleaned_data = pd.read_csv(data_dir+data_file)
+    cleaned_data = pd.read_csv(data_dir+data_file+'.csv')
     if p==1:
         print(' \n Data Loaded from: \t', data_dir+data_file)
         print( cleaned_data.info())
@@ -131,6 +147,7 @@ def color_index(mag = mag):
     #print('Possible %i combinations of color indexes (str): \n'%(len(color_index)), color_index)
     return color_index
 colors = color_index()
+wes_show = color_index()#['BV','VI','VK','JK']; 
 wes_cols = colors
 #####################################################################
 def regression(x: list, y: list, x_str: str, y_str: str, p = 0):

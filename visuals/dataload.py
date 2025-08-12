@@ -45,8 +45,8 @@ def pick_dispersion(dis, wm_str,flag):
     return f
 ####
 def pick_star(i):
-    f = pd.read_csv('%s%i_star.csv'%(data_out+process_step[9],i))
-    ex_red_mu = pd.read_csv('%s%i_%istars_ex_red_mu.csv'%(data_out+process_step[5],n,i))
+    f = pd.read_csv('%s%i_star.csv'%(data_out+process_step[9],i), index_col=0)
+    ex_red_mu = pd.read_csv('%s%i_%istars_ex_red_mu.csv'%(data_out+process_step[5],n,i), index_col=0) 
     #df = ex_red_mu.drop(ex_red_mu.columns[0], axis=1)
     #df = df.applymap(lambda x: Decimal(x) if x.replace('.', '', 1).isdigit() else x)
     return f, ex_red_mu

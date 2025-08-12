@@ -1,4 +1,15 @@
 ### File: ./lvtlaw/d_del_del.py
+'''
+This file correlates the residues of PL and PW relations.
+
+The output will be saved in 'data/{DatasetName_Rv}/3_deldel/*.csv'
+
+Function contained:
+    residue_correlation(residue): for given color and flag, perform residual correlation for different distance
+        Outout (DataFrame): del_residuals, del_predictions, del_mc
+    residue_analysis(residue): For every color and method, residual correlation implimented for every for PL-PW residuals for two version of methods. 
+        Output (DataFrame): dres, dpre, del_mc
+'''
 from lvtlaw.a_utils import A, R, mag, abs_bands, ap_bands, colors, data_dir, input_data_file, data_out, regression, dis_flag, process_step
 import pandas as pd
 from functools import reduce
@@ -6,7 +17,7 @@ from warnings import simplefilter
 simplefilter(action="ignore", category=pd.errors.PerformanceWarning)
 out_dir = data_out
 
-def residue_correlation(residue_file, dis_flag, col): 
+def residue_correlation(residue_file, dis_flag, col, flag): 
     del_mc = pd.DataFrame()         # Stores regression results
     del_predictions = pd.DataFrame({'name': residue_file['name']})  # Star-by-star predictions
     del_residuals = pd.DataFrame({'name': residue_file['name']})    # Star-by-star residuals
@@ -16,9 +27,9 @@ def residue_correlation(residue_file, dis_flag, col):
         slope_errors, intercept_errors = [], []
         regression_names = []
         for band in mag:
+            y_key = 'r_' + band + '0' + diss
             wesenheit = f"{band}{col}" if flag == "S" else f"{col[0]}{col}"
             x_key = 'r_' + wesenheit + diss
-            y_key = 'r_' + band + '0' + diss
             regression_name = band + wesenheit
             # Perform regression
             slope, intercept, predicted, residual, slope_err, intercept_err = regression(
@@ -36,18 +47,20 @@ def residue_correlation(residue_file, dis_flag, col):
         del_mc[f'c{diss}'] = intercepts
         del_mc[f'me{diss}'] = slope_errors
         del_mc[f'ce{diss}'] = intercept_errors
+    print('Here\n'*2,del_mc)
     return del_residuals, del_predictions, del_mc
 
-def residue_analysis(residue_file, dis_flag:list, cols:list , s=1):
+def residue_analysis(residue_file, dis_flag:list, cols:list , flags:list, s=1):
     # Initialize result containers
     dmc = []
     dres = pd.DataFrame({'name': residue_file['name'], 'logP': residue_file['logP'], 'EBV': residue_file['logP']})
     dpre = dres.copy()
-    for col in cols:
-        res, pre, mc = residue_correlation(residue_file, dis_flag, col)
-        dres = pd.merge(dres, res, on='name')
-        dpre = pd.merge(dpre, pre, on='name')
-        dmc.append(mc) 
+    for flg in flags:
+        for col in cols:
+            res, pre, mc = residue_correlation(residue_file, dis_flag, col, flg)
+            dres = pd.merge(dres, res[[cl for cl in res.columns if cl not in dres.columns or cl == 'name']], on='name')
+            dpre = pd.merge(dpre, pre[[cl for cl in dpre.columns if cl not in dpre.columns or cl == 'name']], on='name')
+            dmc.append(mc) 
     # Combine regression dataframes
     del_mc = pd.concat(dmc, ignore_index=True).drop_duplicates().set_index('name').T
     # Optional: Save to CSV
