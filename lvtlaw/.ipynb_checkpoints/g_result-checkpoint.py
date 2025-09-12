@@ -6,17 +6,16 @@ The output will be saved in 'data/{DatasetName_Rv}/1_prepared/*.csv'
 
 Function contained:
 
-
 '''
 
-from lvtlaw.a_utils import process_step, colors, mag, ap_bands, abs_bands, data_dir, input_data_file, data_out, dis_flag, dis_list, s, data_out, wes_show, del_mu, regression, R, nreg, flags
+from lvtlaw.a_utils import process_step, colors, mag, ap_bands, abs_bands, data_dir, data_out, dis_flag, dis_list, s, data_out, wes_show, del_mu, regression, R, nreg, flags
 import pandas as pd
 
 def get_error_pair(star, flags = flags, wes_show = wes_show, del_mu = del_mu):
     # star: dataframe containing star                 
     mu_rd_var = {}    # 
 #    print(star)
-    for d in dis_flag:
+    for d in dis_flag:   
         for f in flags: 
             for col in wes_show: 
                 var_cols = [f'{f}{col}{d}rd_{mu}' for mu in del_mu] # column names
@@ -29,28 +28,30 @@ def get_error_pair(star, flags = flags, wes_show = wes_show, del_mu = del_mu):
                 mu_rd_var[f'rd{f}{col}{d}'] = mean_rd
     return mu_rd_var
 
-def correction_rd_mu(stars, save=1):   
-    stars_correction = [] 
+def correction_rd_mu(stars, raw, s=1):
+    stars_correction = []
     for i in range(len(stars)):
         mu_rd_var = get_error_pair(stars[i])
         stars_correction.append(mu_rd_var)
     correction_red_mu_stars = pd.DataFrame(stars_correction)
-    if save==1:
+    correction_red_mu_stars['name'] = raw.name
+    
+    if s==1:
         correction_red_mu_stars.to_csv('%s%i_error_rms_mu_rd.csv'%(data_out+process_step[6],len(stars)))
     return correction_red_mu_stars    
 
-def correction_apply(tabsolute, correction, flags, save=1):
+def correction_apply(tabsolute, correction, flags, s=1):
     corrected = pd.DataFrame()
     corrected['logP'] = tabsolute['logP'] 
     for d in dis_flag:
         for f in flags:
             for col in wes_show:
                 corrected['mu'+f+col+d] = tabsolute[dis_list[dis_flag.index(d)]]-correction['mu'+f+col+d]
-                corrected['EBV'+f+col+d]  = tabsolute['EBV']-correction['rd'+f+col+d]
+                corrected['EBV'+f+col+d]  = tabsolute['EBV']- correction['rd'+f+col+d]
                 for i in range(len(mag)):
                     ex = R[i]*correction['rd'+f+col+d]
-                    corrected[mag[i]+f+col+d]=tabsolute['M_'+mag[i]+'0'+d] - ex - correction['mu'+f+col+d]
-    if save==1:
+                    corrected[mag[i]+f+col+d]=tabsolute['M_'+mag[i]+'0'+d] + correction['mu'+f+col+d] -ex
+    if s==1:
         corrected.to_csv('%s%i_corrected.csv'%(data_out+process_step[7],len(corrected)))
     return corrected
 

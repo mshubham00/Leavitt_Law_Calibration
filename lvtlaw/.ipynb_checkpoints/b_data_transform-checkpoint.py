@@ -14,7 +14,7 @@ Function contained:
     transformation(data): calls the above functions and save the results as csv files. 
 '''
 
-from lvtlaw.a_utils import A, R, mag, data_dir, input_data_file, dis_flag, data_out, dis_list, process_step, colors, k, s
+from lvtlaw.a_utils import A, R, mag, data_dir, file_name, dis_flag, data_out, dis_list, process_step, colors, k, s
 
 import pandas as pd
 from warnings import simplefilter
@@ -44,13 +44,13 @@ def absolute_magnitude(data, R=R, mag=mag, dis_flag=dis_flag, dis_list=dis_list,
         'name': data['name'],
         'logP': data['logP'],
         'EBV': data['EBV']})
-    for i, d in enumerate(dis_list):
-        absolute[d] = data[d]
-        for m in mag:
+    for d, dis in enumerate(dis_list):
+        absolute[dis] = data[dis]
+        for i, m in enumerate(mag):
             if k == 0:  # Madore dataset
-                absolute[f'M_{m}{dis_flag[i]}'] = data[f'M_{m}'] + data['EBV'] * R[i]
+                absolute[f'M_{m}{dis_flag[d]}'] = data[f'M_{m}'] + R[i]*data['EBV']
             else:
-                absolute[f'M_{m}{dis_flag[i]}'] = data[f'{m}_mag'] - data[dis_list[i]]
+                absolute[f'M_{m}{dis_flag[d]}'] = data[f'{m}_mag'] - data[dis_list[d]]
     print(absolute.head())
     print('###' * 30)
     return absolute
@@ -60,7 +60,7 @@ def true_absolute_magnitude(absolute, R=R, mag=mag, dis_flag=dis_flag, dis_list=
     for d,dis in enumerate(dis_list):
         tabsolute[dis] = absolute[dis]    
         for i,m in enumerate(mag):
-                tabsolute[f'M_{m}0{dis_flag[d]}']=absolute[f'M_{m}{dis_flag[d]}']  - R[i]*absolute['EBV']    
+                tabsolute[f'M_{m}0{dis_flag[d]}']=absolute[f'M_{m}{dis_flag[d]}'] - R[i]*absolute['EBV']    
     print(tabsolute.head())
     print('###'*30) 
     return tabsolute
@@ -74,12 +74,14 @@ def reddening_free(absolute, R=R, mag=mag, dis_flag=dis_flag, k=k):
                     wes_str = m+c1+c2+dis
                     Rm12 = R123(m,c1,c2)
                     wesen[wes_str] = absolute[f'M_{m}{dis}'] - Rm12*(absolute[f'M_{c1}{dis}'] - absolute[f'M_{c2}{dis}'])
-                    wesen[wes_str+'0'] = (absolute[f'M_{m}{dis}'] - absolute['EBV'] * R[c]) - Rm12*(absolute[f'M_{c1}{dis}'] - absolute['EBV'] * R[a] - absolute[f'M_{c2}{dis}'] - absolute['EBV'] * R[b])
+                    #wesen[wes_str+'0'] = (absolute[f'M_{m}{dis}'] - absolute['EBV'] * R[c]) - Rm12*(absolute[f'M_{c1}{dis}'] - absolute['EBV'] * R[a] - absolute[f'M_{c2}{dis}'] - absolute['EBV'] * R[b])
     print(wesen.head())
     print('###'*30)
     return wesen
 
 def transformation(data, R=R, mag=mag, dis_flag=dis_flag, dis_list=dis_list, k=k, s=s):
+    data = data
+    print(f'Raw Data columns: {data.columns}')
     print('Absolute magnitude for each band \n')
     abs_data = absolute_magnitude(data, R, mag, dis_flag, dis_list, k)    
     print('Calculated extinction for each band \n')
@@ -90,17 +92,13 @@ def transformation(data, R=R, mag=mag, dis_flag=dis_flag, dis_list=dis_list, k=k
     wes_data = reddening_free(abs_data, R, mag, dis_flag, k)
     merg1= pd.merge(abs_data, tabs_data, on="logP")
     prepared_regression_data = pd.merge(merg1, wes_data, on = 'logP')
-
     if s==1:
         abs_data.to_csv(data_out+process_step[0]+str(len(abs_data))+ '_abs_data'+'.csv')
         ext_data.to_csv(data_out+process_step[0]+ str(len(ext_data))+ '_ext_data'+'.csv')
         tabs_data.to_csv(data_out+process_step[0]+str(len(tabs_data))+ '_true_abs_data'+'.csv')
         wes_data.to_csv(data_out+process_step[0]+str(len(wes_data))+ '_wes_data'+'.csv')
-    #print('\n Number of wesenheit functions: \n', len(wes_data.columns) - 4) # why 4?
-    #print('###'*30)
         prepared_regression_data.to_csv(data_out+process_step[0]+str(len(prepared_regression_data))+ '_prepared_PLdata'+'.csv')
-
-    return  abs_data, ext_data, tabs_data, wes_data, prepared_regression_data
+    return data, abs_data, ext_data, tabs_data, wes_data, prepared_regression_data
         
 
     

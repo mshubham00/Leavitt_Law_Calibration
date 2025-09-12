@@ -18,34 +18,33 @@ Function contained:
         Output: red0_df_list, mu_df_list_dict
 '''
 
-from lvtlaw.a_utils import colors,data_dir, input_data_file, data_out, R, mag, dis_flag, dis_list, process_step, del_mu
+from lvtlaw.a_utils import colors,data_dir, data_out, R, mag, dis_flag, dis_list, process_step, del_mu
 import pandas as pd
 from lvtlaw.b_data_transform import transformation, extinction_law
 from lvtlaw.c_pl_pw import pl_reg     
 
-def save_results(ext0, red0, col, flag, dis):
-    ext0.to_csv(f'{data_out}{process_step[3]}{len(ext0)}_ext_err0_{col}_{flag}{dis}.csv', index=False)
-    red0.to_csv(f'{data_out}{process_step[3]}{len(red0)}_red_err0_{col}_{flag}{dis}.csv', index=False)
+def save_results(ext0, red0):
+    ext0.to_csv(f'{data_out}{process_step[3]}{len(ext0)}_ext_err0.csv', index=False)
+    red0.to_csv(f'{data_out}{process_step[3]}{len(red0)}_red_err0.csv', index=False)
 
 def select_regression_parameters(dSM, dis): 
     if dis == '_i':
-        m, c = dSM[0][0].iloc[4].T, dSM[0][0].iloc[5].T
+        m, c = dSM[0].iloc[4].T, dSM[0].iloc[5].T
     else:
-        m, c = dSM[0][0].iloc[0].T, dSM[0][0].iloc[1].T
-    return m, c
+        m, c = dSM[0].iloc[0].T, dSM[0].iloc[1].T
+    return m, c #lists
 
-def run_mu_for_reddening(ex0, r, slope, intercept,dis):  # later called by error_over_mu()
-    # for given star, estimate reddening for different mu
+def run_mu_for_reddening(ex0, r,slope, intercept,dis):  # later called by error_over_mu()
     mu_rd_ex_df = pd.DataFrame() 
     for mu in del_mu: #  
-        mu_rd_ex_df[f'ex_{mu}{dis}'] = ex0 + mu * (1 - slope) - intercept
+        mu_rd_ex_df[f'ex_{mu}{dis}'] = ex0 + mu * (1 - slope) #- intercept
         mu_rd_ex_df[f'rd_{mu}{dis}'] = mu_rd_ex_df[f'ex_{mu}{dis}'] / r
     return mu_rd_ex_df
 
-def error_over_mu(i, dis, wm_str, slope, intercept, dres, s): # later called by process_reddening()
+def error_over_mu(i, dis, col, wm_str, slope, intercept, dres, s): # later called by process_reddening()
 #    r = R[i] / (R[mag.index(col[0])] - R[mag.index(col[1])])  # reddening ratio
     r = R[i] / (R[0] - R[1])  # reddening ratio
-    ext0_list = dres[f'd_{wm_str}{dis}'] # extinction error without changing modulus
+    ext0_list = dres[f'd_{wm_str}{dis}'] # extinction error without changing modulus from d_residue_analysis()
     red0_list = ext0_list / r  # Convert extinction to reddening E(B-V)
     mu_rd_ex_df = run_mu_for_reddening(ext0_list, r, slope, intercept,dis)
     if s == 1:
@@ -53,31 +52,33 @@ def error_over_mu(i, dis, wm_str, slope, intercept, dres, s): # later called by 
     return ext0_list, red0_list, mu_rd_ex_df
 
 def process_reddening(col, dis, slope, intercept, dres, flag, s):# later called by reddening_error()
-    mu_df_list = []
-    ext0_df, red0_df = pd.DataFrame(), pd.DataFrame()
+    mu_df_list, ext0_df, red0_df = [], pd.DataFrame({'name': dres['name']}), pd.DataFrame({'name': dres['name']})
     for i, band in enumerate(mag):
         wm_str = f"{band}{band}{col}" if flag == "S" else f"{band}{col[0]}{col}"
         slope_ = slope[wm_str]
         intercept_ = intercept[wm_str]
-        ext0_list, red0_list, mu_rd_ex_df = error_over_mu(i, dis, wm_str, slope_, intercept_, dres, s)        
+        ext0_list, red0_list, mu_rd_ex_df = error_over_mu(i, dis, col, wm_str, slope_, intercept_, dres, s)        
         ext0_df[f'{wm_str}{dis}'] = ext0_list
         red0_df[f'{wm_str}{dis}'] = red0_list
         mu_df_list.append(mu_rd_ex_df)
-    if s == 1:
-        save_results(ext0_df, red0_df, col, flag, dis)
     return mu_df_list, ext0_df, red0_df
 
 def reddening_error(wes_cols, dis_flag, dSM, flags, s=1):
-    #Estimate reddening errors (mu_0 uncertainties) for both Shubham and Madore approaches.
     red0_df_list = []        # 4 col x 2 flags in list of red0_df
     mu_df_list_dict = {}     # 4 col x 2 flags in dict of list of mu_rd_df
+    ex = pd.DataFrame({'name': dSM[1]['name']})
+    rd = ex.copy()
     for dis in dis_flag: 
         m, c = select_regression_parameters(dSM, dis)
         print(f'\nDistance: {dis}\nWesenheit colors:')
         for flag in flags:
             for col in wes_cols:   
                 print(f'  → Processing {col} for {flag}') #
-                mu_df_list, ext0_df, red0_df = process_reddening(col, dis, m, c, dSM[1][0], flag, s)
+                mu_df_list, ext0_df, red0_df = process_reddening(col, dis, m, c, dSM[1], flag, s)
                 mu_df_list_dict[f'{col}_{flag}{dis}'] = mu_df_list
                 red0_df_list.append(red0_df)    
+                ex = pd.merge(ex, ext0_df[[cl for cl in ext0_df.columns if cl not in ex.columns or cl == 'name']], on='name')
+                rd = pd.merge(rd, red0_df[[cl for cl in red0_df.columns if cl not in rd.columns or cl == 'name']], on='name')
+    if s == 1:
+        save_results(ex, rd)
     return red0_df_list, mu_df_list_dict

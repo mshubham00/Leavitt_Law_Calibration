@@ -1,12 +1,12 @@
 ### File: ./lvtlaw/a_utils.py
 '''
-a_utils.py tells to main.py which dataset should be used through parameter k = [0 ,1, 2] = [Madore, Jesper, Reiss]. A function select_data_file maps the metadata of input with defined variables. Another function provides Fouque extinction law. File also contains more generic function like regression, save_data, etc. and input/output variables.
+a_utils.py tells to main.py which dataset should be used through parameter k = [0 ,1, 2]. A function select_data_file maps the metadata of input with defined variables. Another function provides Fouque extinction law. File also contains more generic function like regression, save_data, etc. and input/output variables.
 '''
 #####################################################################
-k = 1; s=1; z=0; 
+k = 0; s=1; z=0; 
 # k changes dataset, s saves the output, z switches intracting output, flag for Madore/Shubham
 flags = ['M']
-
+wes_show = ['BI', 'VI', 'BV', 'VK']
 R_v = 3.23; # for milky way Sandage (2004)
 #R_v = 3.41# ± 0.06 in the LMC and 
 #R_v = 2.74 #± 0.13 in the SMC. (2023)
@@ -31,7 +31,6 @@ Ak_v = 0.119                                            #          = A_k / A_v
 '''
 Ratio of total to selective absorption (Sandage 2004)- driving wavelength dependent value of R
 '''
-#R_v = 3.23                                             #      R_v = A_v / E(B-V)
 R_b = Ab_v*R_v                                          #      R_b = (A_b / A_v) * (A_v / E(B-V))
 R_r = Ar_v*R_v                                          #      R_r = (A_r / A_v) * (A_v / E(B-V))
 R_i = Ai_v*R_v                                          #          = (A_i / A_v) * (A_v / E(B-V))
@@ -93,16 +92,16 @@ def select_data_file(k):
         ap_bands = ['B_mag', 'V_mag' ,'I_mag', 'J_mag', 'H_mag', 'K_mag']
     return file_name, file_cols, dis_list, dis_flag, A, R, mag, abs_bands, ap_bands
 #k = input('Dataset \n')
-input_data_file, data_cols, dis_list, dis_flag, A, R, mag, abs_bands, ap_bands = select_data_file(k)
+file_name, data_cols, dis_list, dis_flag, A, R, mag, abs_bands, ap_bands = select_data_file(k)
 nreg = 5*len(dis_flag)
 #####################################################################
 data_dir = './data/input/'
-data_out=f'./data/{input_data_file}_{R_v}/'
-img_out_path = './data/output/9_plots/'
+data_out=f'./data/{file_name}_{R_v}/'
+img_out_path = data_out + '9_plots/'
 process_step = ['1_prepared/','2_PLPW/','3_deldel/', '4_reddening/', '5_dispersion/','6_rms/','7_errorpair/', '8_result/', '9_plots/', '0_stars/']
 image_step = ['1_datacleaning/','2_PLPW/','3_deldel/', '4_reddening/', '5_dispersion/','6_rms/','7_errorpair/', '8_result/']
 #####################################################################
-del_mu = [round(i*0.01,2) for i in range(-100,100,2)]
+del_mu = [round(i*0.01,2) for i in range(-150,150,3)]
 band = len(mag);
 col_dot = ['b.', 'g*', 'y+', 'c*', 'g+', 'k.', 'c+', 'r+'] ;
 col_lin = ['b-', 'g-', 'y-', 'c-', 'g-', 'k-', 'c-', 'r-'] ;
@@ -123,7 +122,7 @@ def image_directories(parent_folder = img_out_path, s=1,subdirectories = image_s
             if not os.path.exists(path):
                 os.makedirs(path)
 #####################################################################       
-def load_data(data_file = input_data_file, data_dir = data_dir, p=0):
+def load_data(data_file = file_name, data_dir = data_dir, p=0):
     cleaned_data = pd.read_csv(data_dir+data_file+'.csv')
     if p==1:
         print(' \n Data Loaded from: \t', data_dir+data_file)
@@ -144,18 +143,15 @@ def color_index(mag = mag):
     for i in range(0,len(mag)):
         for j in range(i+1,len(mag)):
             color_index.append(mag[i]+mag[j])
-    #print('Possible %i combinations of color indexes (str): \n'%(len(color_index)), color_index)
     return color_index
 colors = color_index()
-wes_show = color_index()#['BV','VI','VK','JK']; 
-wes_cols = colors
 #####################################################################
 def regression(x: list, y: list, x_str: str, y_str: str, p = 0):
     regression_line = stats.linregress(x, y); 
     m = regression_line.slope; 
     c = regression_line.intercept
     prediction = m * x + c; 
-    residue = y-prediction 
+    residue = y - prediction
     m_error = regression_line.stderr; 
     c_error = regression_line.intercept_stderr
     if p == 1:

@@ -13,14 +13,14 @@ Function contained:
         Output: stars_ex_red_mu (list of DataFrames: star_df)
 '''
 
-from lvtlaw.a_utils import process_step, colors, mag, ap_bands, abs_bands, data_dir, input_data_file, data_out, dis_flag, dis_list, s, data_out, wes_show, del_mu
+from lvtlaw.a_utils import process_step, colors, mag, ap_bands, abs_bands, data_dir, data_out, dis_flag, dis_list, s, data_out, wes_show, del_mu
 
 import pandas as pd
 
 def star_frame(data, dis_flag=dis_flag):
     # input prepared_regression_data
     stars = []   
-    name = data['name_x'] 
+    name = data['name'] 
     for i in range(0,len(data)):
         star = pd.DataFrame()
         star['%s'%(name[i])] = mag
@@ -37,16 +37,16 @@ def add_res(stars, res, dis_flag=dis_flag):
     for i in range(0, len(stars)):
         for d in dis_flag:
 #            stars[i]['r%s'%(d)] =  res[['r_%s%s'%(x,d) for x in mag]].iloc[i].values
-            stars[i]['r0%s'%(d)] = res[['r_%s0%s'%(x,d) for x in mag]].iloc[i].values
+            stars[i]['r_0%s'%(d)] = res[['r_%s0%s'%(x,d) for x in mag]].iloc[i].values
             for c in wes_show:
                 stars[i]['r_%s%s'%(c,d)] = res[['r_%s%s%s'%(x,c,d) for x in mag]].iloc[i].values
     return stars
     
-def add_dres(stars, dres, flags, d):
+def add_dres(stars, dres, flags, dis):
     for i in range(0, len(stars)):
         for c in wes_show:
             for f in flags:
-                stars[i]['%s%s'%(c,d)] = dres[['d_%s%s%s%s'%(x,x if f=='S' else c[0],c,d) for x in mag]].iloc[i].values
+                stars[i]['%s%s'%(c,dis)] = dres[['d_%s%s%s%s'%(x,x if f=='S' else c[0],c,dis) for x in mag]].iloc[i].values
         stars[i].to_csv('%s%i_star.csv'%(data_out+process_step[9],i))
     return stars
 
@@ -57,18 +57,18 @@ def star_ex_red_mu(n, mu_df_list_dict, raw, flags, dis_flag=dis_flag):
     for i in range(0, n):
         star_df = pd.DataFrame()
         for c in wes_show:
-            for f in flags:
-                for dis in dis_flag:
+            for dis in dis_flag:
+                colms = [f'rd_{mu}{dis}' for mu in del_mu]
+                for f in flags:
                     rdMS = pd.DataFrame()
                     for m in range(len(mag)):
-                        colms = [f'rd_{mu}{dis}' for mu in del_mu]
                         rdMS[mag[m]] = mu_df_list_dict[f'{c}_{f}{dis}'][m][colms].iloc[i].values
-                    rdMS = rdMS.T 
-                    rdMS.columns = [f'{f}{c}{dis}rd_{mu}' for mu in del_mu]  
-                    star_df = pd.concat([star_df, rdMS], axis = 1)                         
+                    rdMS = rdMS.T
+                    rdMS.columns = [f'{f}{c}{dis}rd_{mu}' for mu in del_mu]
+                    star_df = pd.concat([star_df, rdMS], axis = 1)
         star_df = star_df.astype('float64')
-        star_df.loc['mean'] = star_df.mean()
-        star_df.loc['var'] = star_df.drop(index='mean').std(ddof=0)
+        star_df.loc['mean'] = star_df.drop(index=['H', 'K']).mean()
+        star_df.loc['var'] = star_df.drop(index=['mean', 'H', 'K']).std(ddof=0)
         print('###' * 30)
         print(f'Star: {i} | Name: {raw.name.iloc[i]} \n', i, star_df)
         star_df.to_csv(f'{data_out}{process_step[5]}{n}_{i}stars_ex_red_mu.csv')

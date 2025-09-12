@@ -5,7 +5,7 @@ import matplotlib
 import seaborn as sns
 matplotlib.rcParams['savefig.dpi'] = 300
 matplotlib.rcParams["figure.dpi"] = 100
-from lvtlaw.utils import mag, abs_bands, ap_bands, col_, color_index, img_out_path
+from lvtlaw.utils import mag, abs_bands, ap_bands, col_, color_index, img_out_path, col_
 bands = abs_bands
 def save(title, img_path = img_out_path):
     plt.savefig('%s2%s.pdf'%(img_path,title))
@@ -64,7 +64,7 @@ def matrix_plot(title: str, data, mag_name: list, sav: int):
         save(title)
     plt.show()
 
-def plot(x,y,col: int, xlable: str, sav=0, ant = []):
+def plot(x,y,col: int = 0, xlable: str = 'xlable', sav=0, ant = []):
     #
     plt.figure(figsize=(5,5))
     plt.scatter(x, y, c= col_)

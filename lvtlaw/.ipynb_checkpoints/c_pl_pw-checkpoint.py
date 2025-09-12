@@ -9,7 +9,7 @@ Function contained:
     pl_dis(data, dis, mag): calculate regression for PL and PW relations and return residue, PLW and prediction 
     pl_reg(data, dis_flag, mag): save the output and returns dataframes
 '''
-from lvtlaw.a_utils import process_step, regression, colors, mag, ap_bands, abs_bands, data_dir, input_data_file, data_out, dis_flag, dis_list, s, wes_show, nreg
+from lvtlaw.a_utils import process_step, regression, colors, mag, ap_bands, abs_bands, data_dir, data_out, dis_flag, dis_list, s, wes_show, nreg
 
 import pandas as pd, numpy as np
 from functools import reduce
@@ -30,12 +30,11 @@ def append_PLW(PLW_struct : list,i : str,a : float,b : float,c : list,d : list,e
 def pl_dis(data, dis: str, mag: list):
     print(data)
     # Initialize the structure for storing results
-    PL_name, PL_slope, PL_intercept = [], [], []
-    err_slope, err_intercept = [], []
+    PL_name, PL_slope, PL_intercept, err_slope, err_intercept  = [], [], [], [], []
     residue = pd.DataFrame({'name': data['name'], 'logP': data['logP'], 'EBV': data['EBV_x']})
     prediction = residue.copy()   
-    # Store regression results
     PLW_struct = [PL_name, PL_slope, PL_intercept, prediction, residue, err_slope, err_intercept]    
+    # Store regression results
 #    print('Absolute Magnitude \n#######  m - mu = alpha (logP - 1) + gamma     #################')
 #    for i in range(len(mag)):  # Iterate over magnitudes
 #        a, b, c, d, e, f = regression(data['logP'] - 1, data['M_'+mag[i] + dis], '(logP - 1)', mag[i] + dis, 1)
@@ -44,7 +43,6 @@ def pl_dis(data, dis: str, mag: list):
     for i in range(len(mag)):  # True absolute magnitudes
         a, b, c, d, e, f = regression(data['logP'] - 1, data['M_'+mag[i] + '0'+dis], '(logP -1)', mag[i] + '0' + dis, 1)
         PLW_struct = append_PLW(PLW_struct, mag[i] + '0', a, b, c, d, e, f, dis)
-
     print('Wesenheit Magnitude \n#######  m - mu - R*(B-V) = alpha (logP - 1) + gamma     #####')
     for color in wes_show:
         print(f'Wesenheit Magnitude for color index: {color} \n#######  m - mu - R*({color}) = alpha (logP - 1) + gamma     #####')
@@ -61,7 +59,6 @@ def pl_dis(data, dis: str, mag: list):
     })
     prediction = PLW_struct[3]
     residue = PLW_struct[4]
-    
     return PLW, residue, prediction
 
 def pl_reg(data, s=1, dis_flag: list = dis_flag, mag = mag):
