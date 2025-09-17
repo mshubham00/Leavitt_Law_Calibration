@@ -23,7 +23,7 @@ simplefilter(action="ignore", category=pd.errors.PerformanceWarning)
 import warnings
 warnings.filterwarnings("ignore", category=UserWarning)
 
-from data.datamapping import R, mag, data_dir, file_name, dis_flag, data_out, dis_list, process_step, colors, k, s, z, extinction_ratios
+from data.datamapping import R, mag, data_dir, file_name, dis_flag, data_out, dis_list, process_step, k, s, z, extinction_ratios
 from lvtlaw.a_utils import merge_12, imgsave
 
 
@@ -92,10 +92,13 @@ def transformation(data, R=R, A=extinction_ratios, mag=mag, dis_flag=dis_flag, d
     A, R = extinction_law(mag = mag, A = extinction_ratios, R = R) # converts Fouque (2007) extinction law into corresponding reddening ration
     print(' \n Reddening ratio values will be multiplied with E(B-V) values to yield extinction in each band for individual Cepheid along the respective line-of-sight.  \n')
     print('###'*30)
-    print('\nRaw data transformed into absolute magnitude and weseheit magnitude using the Galactic extinction law, Reddenings (EBV) and Distance modulus (mu).\n M  = m - mu \n M0 = m - mu - R*EBV \n W  = m - mu - R*(m1-m2) \n')
+    print('\nApparent magnitude transformed into absolute magnitude and weseheit magnitude using the Galactic extinction law, Reddenings (EBV) and Distance modulus (mu).\n M  = m - mu \n M0 = m - mu - R*EBV \n W  = m - mu - R*(m1-m2) \n')
     if z==1:
-        input('###'*30+'\n')
+        input('\n')
     data = data
+    print('###'*30)
+    print('Apparent magnitude')
+    print(data.head())
     print('###'*30)
     print('Absolute magnitude for each band \n')
     abs_data = absolute_magnitude(data)    
@@ -107,14 +110,15 @@ def transformation(data, R=R, A=extinction_ratios, mag=mag, dis_flag=dis_flag, d
     wes_data = reddening_free(abs_data)
     merged_data= pd.merge(abs_data, tabs_data, on=['name','logP', 'EBV', f'{dis_list[0]}'])
     merged_data = merge_12(merged_data, wes_data, on = ['name','logP', 'EBV', f'{dis_list[0]}'])
-    if z==1:
-        input('###'*30+'\n')
     if s==1:
         abs_data.to_csv(data_out+process_step[0]+str(len(abs_data))+ '_abs_data'+'.csv')
         ext_data.to_csv(data_out+process_step[0]+ str(len(ext_data))+ '_ext_data'+'.csv')
         tabs_data.to_csv(data_out+process_step[0]+str(len(tabs_data))+ '_true_abs_data'+'.csv')
         wes_data.to_csv(data_out+process_step[0]+str(len(wes_data))+ '_wes_data'+'.csv')
         merged_data.to_csv(data_out+process_step[0]+str(len(merged_data))+ '_prepared_PLdata'+'.csv')
+        print(f'Above data saved in ./{data_out+process_step[0]}\n')
+    if z==1:
+        input('\n')
     return data, abs_data, ext_data, tabs_data, wes_data, merged_data
         
 def plot_corr(df, Y='logP', title ='', f=12, s=s):

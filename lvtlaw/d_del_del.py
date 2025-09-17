@@ -12,7 +12,7 @@ Function contained:
 '''
 module = 'd_del_del'
 from lvtlaw.a_utils import regression, merge_12, imgsave
-from data.datamapping import file_name, data_cols, dis_list, dis_flag, col_dot, col_lin, mag, flags, data_out, wes_show, colors, process_step,z, s, plots, mode
+from data.datamapping import file_name, data_cols, dis_list, dis_flag, col_dot, col_lin, mag, flags, data_out, wes_show, process_step,z, s, plots, mode
 import pandas as pd
 import numpy as np
 from functools import reduce
@@ -21,9 +21,9 @@ from warnings import simplefilter
 simplefilter(action="ignore", category=pd.errors.PerformanceWarning)
 out_dir = data_out
 
-def residue_correlation(residue_file, col, flag, dis_flag = dis_flag): 
+def residue_correlation(residue, col, flag, dis_flag = dis_flag): 
     del_mc = pd.DataFrame()         # Stores regression results
-    del_predictions = pd.DataFrame({'name': residue_file['name'],'logP': residue_file['logP'],'EBV': residue_file['EBV'] })  # Star-by-star predictions
+    del_predictions = pd.DataFrame({'name': residue['name'],'logP': residue['logP'],'EBV': residue['EBV'] })  # Star-by-star predictions
     del_residuals = del_predictions.copy()   # Star-by-star residuals
     print('\tColor:', col, '\tMethod:', flag)
     for diss in dis_flag:
@@ -38,7 +38,7 @@ def residue_correlation(residue_file, col, flag, dis_flag = dis_flag):
                 regression_name = band + ab + wesenheit
             # Perform regression
                 slope, intercept, predicted, residual, slope_err, intercept_err = regression(
-                    residue_file[x_key], residue_file[y_key], wesenheit, band + ab + diss, 1)
+                    residue[x_key], residue[y_key], wesenheit, band + ab + diss, 1)
                 regression_names.append(regression_name)
                 slopes.append(slope)
                 intercepts.append(intercept)
@@ -47,8 +47,6 @@ def residue_correlation(residue_file, col, flag, dis_flag = dis_flag):
                 del_residuals[f'd_{regression_name}{diss}'] = residual
                 del_predictions[f'p_{regression_name}{diss}'] = predicted
         # Save regression metadata for this distance flag
-        if z==1:
-            input('###'*30+'\n')
         del_mc['name'] = regression_names
         del_mc[f'm{diss}'] = slopes
         del_mc[f'c{diss}'] = intercepts
@@ -56,33 +54,34 @@ def residue_correlation(residue_file, col, flag, dis_flag = dis_flag):
         del_mc[f'ce{diss}'] = intercept_errors
     return del_residuals, del_predictions, del_mc
 
-def residue_analysis(residue_file, s=s, plots=plots, dis_flag = dis_flag, cols = wes_show, flags = flags):
+def residue_analysis(residue, s=s, plots=plots, dis_flag = dis_flag, cols = wes_show, flags = flags):
     # Initialize result containers
     dmc = []
-    dres = pd.DataFrame({'name': residue_file['name'], 'logP': residue_file['logP'], 'EBV': residue_file['EBV']})
+    dres = pd.DataFrame({'name': residue['name'], 'logP': residue['logP'], 'EBV': residue['EBV']})
     dpre = dres.copy()
     for flg in flags:
         for col in cols:
-            res, pre, mc = residue_correlation(residue_file, col, flg)
+            res, pre, mc = residue_correlation(residue, col, flg)
             dres = pd.merge(dres, res[[cl for cl in res.columns if cl not in dres.columns or cl == 'name']], on='name')
             dpre = pd.merge(dpre, pre[[cl for cl in pre.columns if cl not in dpre.columns or cl == 'name']], on='name')
             dmc.append(mc) 
     # Combine regression dataframes
     del_mc = pd.concat(dmc, ignore_index=True).drop_duplicates().set_index('name').T
-    merged_data = merge_12(residue_file, dres, on = ['name', 'EBV', 'logP'])    
+    merged_data = merge_12(residue, dres, on = ['name', 'EBV', 'logP'])    
     merged_data = merge_12(merged_data, dpre, on = ['name', 'EBV', 'logP'])    
    # Optional: Save to CSV
     if s == 1:
-        out_base = f"{out_dir}{process_step[2]}{len(residue_file)}_"
+        out_base = f"{out_dir}{process_step[2]}{len(residue)}_"
         del_mc.to_csv(f'{out_base}del_slope_intercept.csv')
         dres.to_csv(f'{out_base}del_res.csv')
         dpre.to_csv(f'{out_base}del_pre.csv')
         merged_data.to_csv(f'{out_base}merged_data.csv')
+        print(f'Data saved in ./{data_out+process_step[2]}')
     if plots==1:
         for flg in flags:
             for col in cols:
                 for dis in dis_flag:
-                    plotdeldel6(merged_data, del_mc, col, dis, flg, s)
+                    plotdeldel6(merged_data, del_mc, col, dis, flg, '0', s)
     return dres, dpre, del_mc, merged_data
 
 def plotdeldel6(data, dmc, col, dis, flag, ab, s):
@@ -115,7 +114,7 @@ def plotdeldel6(data, dmc, col, dis, flag, ab, s):
             ax.plot([x[j], x[j]], [y[j], pred[j]], color='red', linestyle='--', alpha=0.5, label=label)
         ax.set_ylabel(f'PL Residue: $\\Delta M_{m+ab}$')
         ax.set_xlabel(f'PW Residue: $\\Delta$ {wes_str}')
-        ax.grid(True)
+        #ax.grid(True)
         ax.tick_params(direction='in', top=True, right=True)
         ax.legend()   
         # Clean up spines

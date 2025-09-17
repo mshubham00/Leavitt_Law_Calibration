@@ -13,18 +13,19 @@ from lvtlaw.g_result import correction_apply, corrected_PL, corrected_reg
 def intro(data_out=data_out, k=k, s=s, z=z):
     bar = '_'
     star = '* '
-    print(f'{star*20}\n{star*20}\n\n\nMaster Thesis Project: \tGalactic BVIJHK Leavitt Law Calibration for R_v = {R['V']} \n\n  \t\t\tTo Refine systematic errors in luminosity, distance and reddening of individual Cepheid. \n\t\t\t{bar*54}\n\n     \t\t\tAuthor: Shubham Mamgain (mshubham00@gmail.com) \n     \t\t\tSupervisor I: Dr. Jesper Storm (AIP Potsdam)\n     \t\t\tSupervisor II: Prof. Dr. Maria Rosa Cioni \n\n\n\n\t\tTo begin the calibration process, store cleaned data at ./data/input/<file_name>.csv \n\n\t\tFor datafile selection (k) and columns mapping, edit ./data/datamapping.py file.')
+    print(f'{star*20}\n{star*20}\n\n\nMaster Thesis Project: \tGalactic BVIJHK Leavitt Law Calibration for R_v = {R['V']} \n\n  \t\t\tTo Refine systematic errors in luminosity, distance and reddening of individual Cepheid. \n\t\t\t{bar*54}\n\n     \t\t\tAuthor: Shubham Mamgain (mshubham00@gmail.com) \n     \t\t\tSupervisor I: Dr. Jesper Storm (AIP Potsdam)\n     \t\t\tSupervisor II: Prof. Dr. Maria Rosa Cioni') 
+    print('\n\n\n\n\t\tTo begin the calibration process, store cleaned data at ./data/input/<file_name>.csv \n\n\t\tFor datafile selection (k) and columns mapping, edit ./data/datamapping.py file.')
     print(f'\n\t\tAutosave (s = {s}) | Autoprocess (z = {z}) | Generate Plots (plots = {plots})\n\n\t\t\tk : {k}\n\t\t\tdata : {file_name}\n\t\t\tR_v : {R['V']}\n\n\t\tProcessed data will be saved in {data_out} directory. \n'+'###'*30)
     if z==1:
-        input('\nPress Enter to proceed \n \n')
+        input('\nPress Enter to proceed \n')
 #####################################################################################################
 # b_data_transform -> [0] output folder
 def mag_transformation(cleaned_data,plots=plots,s=s,file_name=file_name):
-    data, abs_data, ext_data, tabs_data, wes_data, merged_data = transformation(cleaned_data)
     if plots == 1:
-        df = data.drop(columns = ['name'])
+        df = cleaned_data.drop(columns = ['name'])
         print(file_name)
         plot_corr(df , Y = 'logP', title = file_name, f=12)
+    data, abs_data, ext_data, tabs_data, wes_data, merged_data = transformation(cleaned_data)
     return data, abs_data, ext_data, tabs_data, wes_data, merged_data
 #####################################################################################################
 # c_pl_pw -> [1]
@@ -38,7 +39,7 @@ def PLWcorrection(merged_data, plots=plots, s=s, z=z):
     print(residue.head())
     print('Raw PL and PW relations derived. \n', len(mag),'Photometry bands: \t \t \t ', mag, '\n %i versions of composite wesenheits: \t '%(len(wes_show)), wes_show,'\n \nTotal: \t \t \t \t \t', len(mag), '(PL relations) +',len(mag),'x' ,len(wes_show),' (PW relations) \n \t \t \t \t \t = ',len(mag) + len(mag)*len(wes_show),' versions of Galactic Leavitt Law.' )
     if plots == 1:
-        plotPL6(merged_data, PLW)
+        plotPL6(merged_data, PLW, '0')
         for col in wes_show:
             plotPW6(merged_data, PLW, col)
     if z==1:

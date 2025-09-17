@@ -1,0 +1,108 @@
+\documentclass{article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Update as per datamapping file
+\newcommand{\Rratio}{3.23}
+\newcommand{\cepheid}{59}
+\newcommand{\dis}{h}
+\newcommand{\filename}{\cepheid_madore}
+\newcommand{\mag}{BVIJHK}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\pathprefix}{data/\filename_\Rratio/9_plots}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage[a4paper, total={7in, 10in}]{geometry}
+
+\begin{document}
+
+\section{Raw Data}
+
+\begin{figure}[htbp]
+  \centering
+  \begin{subfigure}[b]{\textwidth}
+    \includegraphics[width=\textwidth]{{\pathprefix/1_datacleaning/\filename}.png}
+  \end{subfigure}
+  \caption{Period-Luminosity Relation plots.}
+\end{figure}
+
+
+\section{Period Luminosity Relation}
+
+\begin{figure}[htbp]
+  \centering
+  \begin{subfigure}[b]{\textwidth}
+    \includegraphics[width=\textwidth]{{\pathprefix/2_PLPW/\cepheid_\mag_\dis}.png}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{\textwidth}
+    \includegraphics[width=\textwidth]{{\pathprefix/2_PLPW/\cepheid_PL_residuals}.png}
+  \end{subfigure}
+  \caption{Period-Luminosity Relation plots.}
+  \label{solar_system}
+\end{figure}
+
+\section{Period Wesenheit Relation}
+
+\begin{figure}[htbp]
+  \centering
+  \caption{Period-Wesenheit BV Relation plots.}
+  \begin{subfigure}[b]{\textwidth}
+    \includegraphics[width=\textwidth]{{\pathprefix/2_PLPW/\cepheid_BV_\mag_\dis}.png}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{\textwidth}
+    \includegraphics[width=\textwidth]{{\pathprefix/2_PLPW/\cepheid_BI_\mag_\dis}.png}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{\textwidth}
+    \includegraphics[width=\textwidth]{{\pathprefix/2_PLPW/\cepheid_VI_\mag_\dis}.png}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{\textwidth}
+    \includegraphics[width=\textwidth]{{\pathprefix/2_PLPW/\cepheid_VK_\mag_\dis}.png}
+  \end{subfigure}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \caption{Period-Wesenheit Relation plots.}
+  \begin{subfigure}[b]{\textwidth}
+    \includegraphics[width=\textwidth]{{\pathprefix/2_PLPW/\cepheid_PW_BV_residuals}.png}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{\textwidth}
+    \includegraphics[width=\textwidth]{{\pathprefix/2_PLPW/\cepheid_PW_BI_residuals}.png}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{\textwidth}
+    \includegraphics[width=\textwidth]{{\pathprefix/2_PLPW/\cepheid_PW_VI_residuals}.png}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{\textwidth}
+    \includegraphics[width=\textwidth]{{\pathprefix/2_PLPW/\cepheid_PW_VK_residuals}.png}
+  \end{subfigure}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \caption{PL-PW Residuals correlation plots.}
+  \begin{subfigure}[b]{\textwidth}
+    \includegraphics[width=\textwidth]{{\pathprefix/3_deldel/\cepheid_BV_\dis}.png}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{\textwidth}
+    \includegraphics[width=\textwidth]{{\pathprefix/3_deldel/\cepheid_BI_\dis}.png}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{\textwidth}
+    \includegraphics[width=\textwidth]{{\pathprefix/3_deldel/\cepheid_VI_\dis}.png}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{\textwidth}
+    \includegraphics[width=\textwidth]{{\pathprefix/3_deldel/\cepheid_VK_\dis}.png}
+  \end{subfigure}
+\end{figure}
+
+
+\end{document}

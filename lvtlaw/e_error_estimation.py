@@ -17,8 +17,10 @@ Function contained:
 module = 'e_error_estimation'
 #from lvtlaw.a_utils import A, R, mag, abs_bands, ap_bands, colors, data_dir, data_out, regression, dis_flag, process_step, wes_show, merge_12
 from data.datamapping import file_name, data_cols, dis_list, dis_flag, R, mag, wes_show, flags,s, plots,z, mode
-from data.datamapping import colors,data_dir, data_out, process_step, del_mu
+from data.datamapping import data_dir, data_out, process_step, del_mu
 import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
 from lvtlaw.a_utils import merge_12
 from lvtlaw.b_data_transform import transformation, extinction_law
 from lvtlaw.c_pl_pw import pl_reg     
@@ -32,7 +34,7 @@ def select_regression_parameters(dmc, dis):
 
 
 def error_over_mu(dres, m, ab, dis, col, wm_str, slope, intercept, s=s): # called by process_reddening()
-    r = R[mag[m]] / (R[col[0]] - R[col[1]])  # reddening ratio
+    r = R[mag[m]] #/ (R[col[0]] - R[col[1]])  # reddening ratio
     ext0_list = dres[f'd_{wm_str}{dis}'] # extinction error without changing modulus from d_residue_analysis()
     red0_list = ext0_list / r  # Convert extinction to reddening E(B-V)
     mu_rd_ex_df = pd.DataFrame({'name': dres['name'], 'logP': dres['logP']})
@@ -80,4 +82,17 @@ def error_reddening(dres, dmc, del_mu=del_mu,z=z, wes_show=wes_show, dis_flag = 
         rd_df.to_csv(f'{data_out}{process_step[3]}{len(rd_df)}_red_err0.csv', index=False)
     return ex_df,rd_df, mu_df_list_dict
     
+    
+def plot_star_rd0(i, red0, col, flag, ab, dis = dis_flag[0]):
+    rd = [red0[f"rd_{m}{ab}{m if flag == 'S' else col[0]}{col}{dis}"].iloc[i] for m in mag]
+    plt.figure(figsize=(7, 2))  # width=10, height=5 (in inches)
+    plt.plot([x for x in range(len(mag))], rd, '-o')
+    #plt.ylim(-0.2, 0.2)
+    plt.axhline(y=np.mean(rd), color='gray', linestyle='--')
+    plt.annotate(f'avg: {np.mean(rd):.2f}', xy=(len(mag)-1, np.mean(rd)), xytext=(5, 0), textcoords='offset points', va='bottom', ha='right', fontsize=10, color='black')
+    plt.xticks(ticks=range(len(mag)), labels=mag)  # Set x-axis ticks to values in mag
+    plt.suptitle(f'{i} {red0.name.iloc[i]} ({flag}{col})')
+    plt.ylabel('Reddening Error')
+    plt.show()
+
 print(f'* * {module} module loaded!')

@@ -97,7 +97,7 @@ def correction_rd_mu(stars_rd_mu_list, raw, s=s, plots=plots):
     if s==1:
         correction_rd_mu_stars_df.to_csv('%s%i_error_rms_mu_rd.csv'%(data_out+process_step[6],len(raw)))
     if plots == 1:
-        for i in range(0, len(merged_data),30):
+        for i in range(0, len(raw),30):
             for f in flags:
                 for d in dis_flag:
                     for ab in mode:
@@ -114,6 +114,7 @@ def plot_star_rd_mu(i, stars_rd_mu_list, correction, flag, ab, dis, wes_show = w
         EBV_c = correction[f'rd{flag}{ab}{col}{dis}'].iloc[i]
 # === Plotting ===
         ax = axs[k]
+        #ax.invert_yaxis()
         for j in range(len(mag)):
             ax.plot(del_mu, del_E.iloc[j].values, col_lin[j], label='%s'%(mag[j]+ab))
         ax.plot(del_mu, del_E.iloc[7].values, col_das[0], label='rms')

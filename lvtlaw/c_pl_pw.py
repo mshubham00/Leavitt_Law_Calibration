@@ -11,7 +11,7 @@ Function contained:
 '''
 module = 'c_pl_pw'
 
-from data.datamapping import R, mag, data_dir, file_name, dis_flag, data_out, dis_list, process_step, colors, k, s, z, wes_show, nreg, col_dot, col_lin, mode
+from data.datamapping import R, mag, data_dir, file_name, dis_flag, data_out, dis_list, process_step, k, s, z, wes_show, nreg, col_dot, col_lin, mode
 from lvtlaw.a_utils import regression, merge_12, pr_value,imgsave
 import pandas as pd, numpy as np
 from functools import reduce
@@ -39,20 +39,20 @@ def pl_dis(merged_data, dis: str, mag: list, wes_show = wes_show):
 
     print('Leavitt Law : Absolute Magnitude \n#######  m - mu = alpha (logP - 1) + gamma     #################\n')
     for i in range(len(mag)):  # Iterate over magnitudes
-        a, b, c, d, e, f = regression(merged_data['logP'] - 1, merged_data['M_'+mag[i] + dis], '(logP - 1)', mag[i] + dis, 1)
-        PLW_struct = append_PLW(PLW_struct, mag[i], a, b, c, d, e, f, dis)
+        m, c, prediction, residue, m_error, c_error = regression(merged_data['logP'] - 1, merged_data['M_'+mag[i] + dis], '(logP - 1)', mag[i] + dis, 1)
+        PLW_struct = append_PLW(PLW_struct, mag[i], m, c, prediction, residue, m_error, c_error, dis)
 
-    print('Leavitt Law : True Absolute Magnitude \n#######  m - mu - R*E(B-V) = alpha (logP - 1) + gamma     #####\n')
+    print('\nLeavitt Law : True Absolute Magnitude \n#######  m - mu - R*E(B-V) = alpha (logP - 1) + gamma     #####\n')
     for i in range(len(mag)):  # True absolute magnitudes
-        a, b, c, d, e, f = regression(merged_data['logP'] - 1, merged_data['M_'+mag[i] + '0'+dis], '(logP -1)', mag[i] + '0' + dis, 1)
-        PLW_struct = append_PLW(PLW_struct, mag[i] + '0', a, b, c, d, e, f, dis)
+        m, c, prediction, residue, m_error, c_error = regression(merged_data['logP'] - 1, merged_data['M_'+mag[i] + '0'+dis], '(logP -1)', mag[i] + '0' + dis, 1)
+        PLW_struct = append_PLW(PLW_struct, mag[i] + '0', m, c, prediction, residue, m_error, c_error, dis)
 
-    print('Leavitt Law : Wesenheit Magnitude \n#######  m - mu - R*(B-V) = alpha (logP - 1) + gamma     #####\n')
+    print('\nLeavitt Law : Wesenheit Magnitude \n#######  m - mu - R*(B-V) = alpha (logP - 1) + gamma     #####')
     for color in wes_show:
-        print(f'Wesenheit Magnitude for color index: {color} \n#######  m - mu - R*({color}) = alpha (logP - 1) + gamma     #####')
+        print(f'\nWesenheit Magnitude for color index: {color} \n#######  m - mu - R*({color[0]} - {color[1]}) = alpha (logP - 1) + gamma     #####')
         for i in range(len(mag)):
-            a, b, c, d, e, f = regression(merged_data['logP'] - 1, merged_data[mag[i] + color + dis], '(logP - 1)', mag[i] + color + dis, 1)
-            PLW_struct = append_PLW(PLW_struct, mag[i] + color, a, b, c, d, e, f, dis)
+            m, c, prediction, residue, m_error, c_error = regression(merged_data['logP'] - 1, merged_data[mag[i] + color + dis], '(logP - 1)', mag[i] + color + dis, 1)
+            PLW_struct = append_PLW(PLW_struct, mag[i] + color, m, c, prediction, residue, m_error, c_error, dis)
 
     # Convert the results into a DataFrame
     PLW = pd.DataFrame({
@@ -87,6 +87,7 @@ def pl_reg(merged_data, s=s, dis_flag = dis_flag, mag = mag):
         res.to_csv('%s%i_residue.csv'%(data_out+process_step[1],len(res)))
         pre.to_csv('%s%i_prediction.csv'%(data_out+process_step[1],len(pre)))
         reg.to_csv('./%s%i_%i_regression.csv'%(data_out+process_step[1],len(res),nreg))
+        print(f'\nData saved in ./{data_out+process_step[1]}')
     return reg, res, pre, merged_data
 ####################################################################################
 def plotPL6(merged_data, reg, ab, dis=dis_flag[0], s=s):
@@ -118,7 +119,7 @@ def plotPL6(merged_data, reg, ab, dis=dis_flag[0], s=s):
             ax.set_ylabel('True Absolute Magnitude')
         else:
             ax.set_ylabel('Absolute Magnitude')
-        ax.grid(True)
+        #ax.grid(True)
         ax.tick_params(direction='in', top=True, right=True)
         ax.legend()
         # Clean up spines
@@ -163,14 +164,14 @@ def plotPW6(data, reg, col, dis=dis_flag[0], s=s):
 
         # Plot
         ax = axs[i]
-        ax.scatter(x, y, color='gray', s=data['EBV'] * 50, label=f'{w_str} Wesenheit | r = {p1:.2f}')
-        ax.plot(x, pred, 'b-', label=f'{w_str} = {alpha:.2f}(logP - 1) + {gamma:.2f}')
+        ax.plot(x, y, col_dot[i], label=f'{w_str} Wesenheit | r = {p1:.2f}')
+        ax.plot(x, pred, col_lin[i], label=f'{w_str} = {alpha:.2f}(logP - 1) + {gamma:.2f}')
 
         # Residual lines
         for j in range(len(data)):
             label = r"$Residue = \delta \mu$" if j == 0 else None
             ax.plot([x[j], x[j]], [y[j], pred[j]], color='red', linestyle='--', alpha=0.5, label=label)
-        ax.grid(True)
+        #ax.grid(True)
         ax.invert_yaxis()
         ax.set_ylabel('Wesenheit Magnitude')
         ax.legend()

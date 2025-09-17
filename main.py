@@ -7,7 +7,8 @@ from lvtlaw.main_modules import *
 #####################################################################################################
 
 #Generate directories for saving output
-output_directories(); image_directories(); 
+output_directories(); 
+image_directories(); 
 
 # Display project related details
 intro()

@@ -5,16 +5,16 @@
 module = 'datamapping'
 #####################################################################
 # k selects dataset, s saves the output, z switches to intracting output, plots for genrating plots
-k = 0; s=1 ; z=0; plots = 0; 
+k = 2; s=1 ; z=0; plots = 0; 
 
-wes_show = ['VI']
+wes_show=['BI', 'VI', 'IH', 'JK']
 
-rd_avg_drop = ['K']
+rd_avg_drop = ['H','K'] # Dropped while estimating variance
 
 del_mu = [round(i*0.01,2) for i in range(-300,300,2)]
 
-flags = ['S'] # 'M'
-mode = ['', '0'] # '0'
+flags = ['S'] # 'M'    # Madore and Shubham
+mode = ['', '0'] # '0' # Absolute mag and True absolute mag
 #####################################################################
 import os, subprocess, sys
 import pandas as pd
@@ -42,53 +42,54 @@ def R_(R_v, mag, extinction_ratios=extinction_ratios):
 ##########################################################
 def select_data_file(k):
     if k==0:
-        file_name = '59_madore'
+        filename = '59_madore'
         dis_list = ['HST']
         dis_flag = ['_h']
         mag = ['B', 'V', 'I','J','H','K'];
         R, R_v = R_(R_v = 3.23, mag = mag)
         file_cols = ['name','logP','EBV'] + dis_list + [f'M_{m}' for m in mag]
     elif k ==1:
-        file_name = '95_jesper'
+        filename = '95_jesper'
         dis_list = ['plx']
         dis_flag = ['_g']
         mag = ['B', 'V', 'I','J','H','K'];
         R, R_v = R_(R_v = 3.23, mag = mag)
         file_cols = ['name','logP','EBV'] + dis_list + [f'{m}_mag' for m in mag]
     elif k == 2:
-        file_name = '18_cluster'
-        dis_list = ['cluster']
-        dis_flag = ['_c']
-        mag = ['B', 'V', 'I','J','H','K'];
-        R, R_v = R_(R_v = 3.23, mag = mag)
-        file_cols = ['name','logP','EBV'] + dis_list + [f'{m}_mag' for m in mag]
-    elif k == 3:
-        file_name = '20_cluster_cruz'
+        filename = '20_cluster_cruz'
         dis_list = ['mplx']
         dis_flag = ['_p']
         mag = ['B', 'V', 'I','J','H','K'];
         R, R_v = R_(R_v = 3.23, mag = mag)
         file_cols = ['name','logP','EBV'] + dis_list + [f'{m}_mag' for m in mag]
-    elif k == 4:
-        file_name = '30_LMC'
+    elif k == 3:
+        filename = '30_LMC'
         dis_list = ['IRSB']
         dis_flag = ['_l']
-        mag = ['V', 'I','J','H', 'K'] 
+        mag = ['V', 'I','J', 'K'] 
         R, R_v = R_(R_v = 3.41, mag = mag) #± 0.06
         file_cols = ['name','logP','EBV'] + dis_list + [f'{m}_mag' for m in mag]
-    elif k == 5:
-        file_name = '32_SMC_VIJK'
+    elif k == 4:
+        filename = '32_SMC_VIJK'
         dis_list = ['IRSB']
         dis_flag = ['_s']
         mag = ['V', 'I','J', 'K']
         R, R_v = R_(R_v = 2.74, mag = mag) #± 0.13
         file_cols = ['name','logP','EBV'] + dis_list + [f'{m}_mag' for m in mag]
-    return file_name, file_cols, dis_list, dis_flag, R, mag, R_v
+    return filename, file_cols, dis_list, dis_flag, R, mag, R_v
 #k = input('Dataset \n')
 
 file_name, data_cols, dis_list, dis_flag, R, mag, R_v = select_data_file(k)
 
 nreg = 5*len(dis_flag)
+#####################################################################
+def color_index(mag = mag):
+    color_index = []
+    for i in range(0,len(mag)):
+        for j in range(i+1,len(mag)):
+            color_index.append(mag[i]+mag[j])
+    return color_index
+#wes_show = color_index()
 #####################################################################
 data_dir = './data/input/'
 data_out=f'./data/{file_name}_{R_v}/'
@@ -101,13 +102,5 @@ col_dot = ['b.', 'g*', 'y+', 'c*', 'g+', 'k.', 'c+', 'r+'] ;
 col_lin = ['b-', 'g-', 'y-', 'c-', 'g-', 'k-', 'c-', 'r-'] ;
 col_das = ['b--', 'g--', 'y--', 'c--', 'g--', 'k--', 'c--', 'r--']
 col_ = ['b', 'g', 'y', 'c', 'g', 'k', 'c', 'r'] ;
-#####################################################################
-def color_index(mag = mag):
-    color_index = []
-    for i in range(0,len(mag)):
-        for j in range(i+1,len(mag)):
-            color_index.append(mag[i]+mag[j])
-    return color_index
-colors = color_index()
 #####################################################################
 print(f'* * {module} module loaded!')
