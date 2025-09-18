@@ -15,7 +15,6 @@ Function contained:
         Output: red0_df_list, mu_df_list_dict
 '''
 module = 'e_error_estimation'
-#from lvtlaw.a_utils import A, R, mag, abs_bands, ap_bands, colors, data_dir, data_out, regression, dis_flag, process_step, wes_show, merge_12
 from data.datamapping import file_name, data_cols, dis_list, dis_flag, R, mag, wes_show, flags,s, plots,z, mode
 from data.datamapping import data_dir, data_out, process_step, del_mu
 import pandas as pd
@@ -24,15 +23,15 @@ import matplotlib.pyplot as plt
 from lvtlaw.a_utils import merge_12
 from lvtlaw.b_data_transform import transformation, extinction_law
 from lvtlaw.c_pl_pw import pl_reg     
-
+#####################################################################
 def select_regression_parameters(dmc, dis): 
+    # this function selects particular slope and intercept from del-del correlation
     if dis == '_i':
         m, c = dmc.iloc[4].T, dmc.iloc[5].T
     else:
         m, c = dmc.iloc[0].T, dmc.iloc[1].T
     return m, c #lists
-
-
+#####################################################################
 def error_over_mu(dres, m, ab, dis, col, wm_str, slope, intercept, s=s): # called by process_reddening()
     r = R[mag[m]] #/ (R[col[0]] - R[col[1]])  # reddening ratio
     ext0_list = dres[f'd_{wm_str}{dis}'] # extinction error without changing modulus from d_residue_analysis()
@@ -44,7 +43,7 @@ def error_over_mu(dres, m, ab, dis, col, wm_str, slope, intercept, s=s): # calle
     if s == 1:
         mu_rd_ex_df.to_csv(f'{data_out}{process_step[4]}{len(mu_rd_ex_df)}_mu_rd_ex{dis}{wm_str}.csv', index=False)
     return ext0_list, red0_list, mu_rd_ex_df
-
+#####################################################################
 def process_reddening(dres, col, dis, slope, intercept, flag):# later called by reddening_error()
     mu_df_list, ext0_df = [], pd.DataFrame({'name': dres['name']})
     red0_df = ext0_df.copy()
@@ -63,7 +62,7 @@ def process_reddening(dres, col, dis, slope, intercept, flag):# later called by 
                 mu_rd_ex_df = merge_12(df, mu_rd_ex_df, ['name', 'logP'])
                 mu_df_list.append(mu_rd_ex_df)
     return mu_df_list, ext0_df, red0_df                                           
-
+#####################################################################
 def error_reddening(dres, dmc, del_mu=del_mu,z=z, wes_show=wes_show, dis_flag = dis_flag, plots=plots, flags = flags, s=s):
     mu_df_list_dict = {}     # 4 col x 2 flags in dict of list of mu_rd_df
     ex_df = pd.DataFrame({'name': dres['name'], 'logP': dres['logP']})
@@ -81,8 +80,7 @@ def error_reddening(dres, dmc, del_mu=del_mu,z=z, wes_show=wes_show, dis_flag = 
         ex_df.to_csv(f'{data_out}{process_step[3]}{len(ex_df)}_ext_err0.csv', index=False)
         rd_df.to_csv(f'{data_out}{process_step[3]}{len(rd_df)}_red_err0.csv', index=False)
     return ex_df,rd_df, mu_df_list_dict
-    
-    
+#####################################################################    
 def plot_star_rd0(i, red0, col, flag, ab, dis = dis_flag[0]):
     rd = [red0[f"rd_{m}{ab}{m if flag == 'S' else col[0]}{col}{dis}"].iloc[i] for m in mag]
     plt.figure(figsize=(7, 2))  # width=10, height=5 (in inches)
@@ -94,5 +92,5 @@ def plot_star_rd0(i, red0, col, flag, ab, dis = dis_flag[0]):
     plt.suptitle(f'{i} {red0.name.iloc[i]} ({flag}{col})')
     plt.ylabel('Reddening Error')
     plt.show()
-
+#####################################################################
 print(f'* * {module} module loaded!')

@@ -13,13 +13,14 @@ Function contained:
         Output: stars_ex_red_mu (list of DataFrames: star_df)
 '''
 module = 'f_star_wise'
+#####################################################################
 from data.datamapping import dis_flag, flags, wes_show, del_mu, s, plots, mag, data_out, process_step, col_lin, col_dot, col_das, rd_avg_drop, mode
 from lvtlaw.a_utils import imgsave
 import pandas as pd
 import matplotlib.pyplot as plt
-
+#####################################################################
 def star_frame(data, dis_flag=dis_flag, flags=flags, wes_show=wes_show):
-    # input prepared_regression_data
+    #  to extract features of individual Cepheids
     stars_list = []   
     name = data['name'] 
     for i in range(0,len(data)):
@@ -37,7 +38,7 @@ def star_frame(data, dis_flag=dis_flag, flags=flags, wes_show=wes_show):
         star.to_csv('%s%i_star.csv'%(data_out+process_step[9],i))
         stars_list.append(star)
     return stars_list
-    
+#####################################################################
 def star_ex_rd_mu(mu_df_list_dict, data, flags=flags, dis_flag=dis_flag, p=1):
     n = len(data)
     stars_rd_mu_list = []
@@ -65,7 +66,7 @@ def star_ex_rd_mu(mu_df_list_dict, data, flags=flags, dis_flag=dis_flag, p=1):
         star_df.to_csv(f'{data_out}{process_step[5]}{n}_{i}stars_ex_red_mu.csv')
         stars_rd_mu_list.append(star_df)
     return stars_rd_mu_list
-
+#####################################################################
 def get_error_pair(star_rd_mu, flags = flags, wes_show = wes_show, del_mu = del_mu):
     # star: dataframe containing star                 
     mu_rd_dict = {}    # 
@@ -85,7 +86,7 @@ def get_error_pair(star_rd_mu, flags = flags, wes_show = wes_show, del_mu = del_
                     mean_rd = float(star_rd_mu.loc['mean', min_var_indx]) #               
                     mu_rd_dict[f'rd{f}{ab}{col}{d}'] = mean_rd
     return mu_rd_dict
-
+#####################################################################
 def correction_rd_mu(stars_rd_mu_list, raw, s=s, plots=plots):
     stars_correction = []
     for i in range(len(stars_rd_mu_list)):
@@ -104,7 +105,7 @@ def correction_rd_mu(stars_rd_mu_list, raw, s=s, plots=plots):
                         print(i,f,d,ab)
                         plot_star_rd_mu(i, stars_rd_mu_list, correction_rd_mu_stars_df, f, ab, d)
     return correction_rd_mu_stars_df    
-
+#####################################################################
 def plot_star_rd_mu(i, stars_rd_mu_list, correction, flag, ab, dis, wes_show = wes_show, s=s):
     a = stars_rd_mu_list[i]
     fig, axs = plt.subplots(2, 2, figsize=(13, 5), sharex='col')
@@ -139,6 +140,5 @@ def plot_star_rd_mu(i, stars_rd_mu_list, correction, flag, ab, dis, wes_show = w
     if s==1:
         imgsave(title,5,fil='pdf', p=1)
     plt.show()
-
-
+#####################################################################
 print(f'* * {module} module loaded!')

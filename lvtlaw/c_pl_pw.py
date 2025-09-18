@@ -20,7 +20,7 @@ from warnings import simplefilter
 simplefilter(action="ignore", category=pd.errors.PerformanceWarning)
 #####################################################################
 def append_PLW(PLW_struct : list,name : str,m : float,c : float,p : list,r : list,me :float,ce :float,dis :str):
-    # collect different regression output into one structure
+    # framing multiple regression output into one structure
     PLW_struct[0].append(name) 
     PLW_struct[1].append(m)
     PLW_struct[2].append(c)
@@ -41,7 +41,6 @@ def plw_relation(merged_data, dis: str, mag: list, wes_show = wes_show):
     for i in range(len(mag)):  # Iterate over magnitudes
         m, c, prediction, residue, m_error, c_error = regression(merged_data['logP'] - 1, merged_data['M_'+mag[i] + dis], '(logP - 1)', mag[i] + dis, 1)
         PLW_struct = append_PLW(PLW_struct, mag[i], m, c, prediction, residue, m_error, c_error, dis)
-
 
     print('\nLeavitt Law : True Absolute Magnitude \n#######  m - mu - R*E(B-V) = alpha (logP - 1) + gamma     #####\n')
     for i in range(len(mag)):  # True absolute magnitudes
@@ -70,9 +69,9 @@ def plw_relation(merged_data, dis: str, mag: list, wes_show = wes_show):
     return PLW, residue, prediction
 #####################################################################
 def pl_reg(merged_data, s=s, dis_flag = dis_flag, mag = mag):
-    reg = pd.DataFrame()
-    res = pd.DataFrame()
-    pre = pd.DataFrame()
+    reg = pd.DataFrame() # collecting slope and intercept parameter
+    res = pd.DataFrame() # to collect residuals
+    pre = pd.DataFrame() # to collect prediction
     for dis in dis_flag:
         PLW, residue, prediction = plw_relation(merged_data, dis, mag)
         res = pd.concat([res, residue], axis=1)

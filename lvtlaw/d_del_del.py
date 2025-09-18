@@ -20,11 +20,12 @@ import matplotlib.pyplot as plt
 from warnings import simplefilter
 simplefilter(action="ignore", category=pd.errors.PerformanceWarning)
 out_dir = data_out
-
+#####################################################################
 def residue_correlation(residue, col, flag, dis_flag = dis_flag): 
-    del_mc = pd.DataFrame()         # Stores regression results
+    # this function correlates the PL and PW residuals
+    del_mc = pd.DataFrame()         # Stores del-del regression slope and intercept
     del_predictions = pd.DataFrame({'name': residue['name'],'logP': residue['logP'],'EBV': residue['EBV'] })  # Star-by-star predictions
-    del_residuals = del_predictions.copy()   # Star-by-star residuals
+    del_residuals = del_predictions.copy()   # collects deldel residuals
     print('\tColor:', col, '\tMethod:', flag)
     for diss in dis_flag:
         regression_names = []
@@ -53,9 +54,9 @@ def residue_correlation(residue, col, flag, dis_flag = dis_flag):
         del_mc[f'me{diss}'] = slope_errors
         del_mc[f'ce{diss}'] = intercept_errors
     return del_residuals, del_predictions, del_mc
-
+#####################################################################
 def residue_analysis(residue, s=s, plots=plots, dis_flag = dis_flag, cols = wes_show, flags = flags):
-    # Initialize result containers
+    # This function calls residue_correlation() for different different wesenheits
     dmc = []
     dres = pd.DataFrame({'name': residue['name'], 'logP': residue['logP'], 'EBV': residue['EBV']})
     dpre = dres.copy()
@@ -83,7 +84,7 @@ def residue_analysis(residue, s=s, plots=plots, dis_flag = dis_flag, cols = wes_
                 for dis in dis_flag:
                     plotdeldel6(merged_data, del_mc, col, dis, flg, '0', s)
     return dres, dpre, del_mc, merged_data
-
+#####################################################################
 def plotdeldel6(data, dmc, col, dis, flag, ab, s):
 # 1. Extracting x-y axis
     print(col)
@@ -133,7 +134,7 @@ def plotdeldel6(data, dmc, col, dis, flag, ab, s):
         imgsave(title, 2, fil='pdf', p=1)
     plt.show()
     plotdeldelres(data, dmc, col, dis, flag, ab, s)
-
+#####################################################################
 def plotdeldelres(data, dmc, col, dis, flag, ab, s):
     fig_res, axs_res = plt.subplots(2, 3, figsize=(18, 6))
     axs_res = axs_res.flatten()
@@ -172,7 +173,5 @@ def plotdeldelres(data, dmc, col, dis, flag, ab, s):
     if s == 1:
         imgsave(title + "_residuals", 2, fil='png', p=1)
     plt.show()
-
-
-
+#####################################################################
 print(f'* * {module} module loaded!')
