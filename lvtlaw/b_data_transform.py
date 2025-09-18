@@ -22,31 +22,31 @@ from warnings import simplefilter
 simplefilter(action="ignore", category=pd.errors.PerformanceWarning)
 import warnings
 warnings.filterwarnings("ignore", category=UserWarning)
-
+#####################################################################
 from data.datamapping import R, mag, data_dir, file_name, dis_flag, data_out, dis_list, process_step, k, s, z, extinction_ratios
 from lvtlaw.a_utils import merge_12, imgsave
-
-
-
+#####################################################################
 def R123(m:str,c1:str,c2:str,R=R):
+    # calculate composite reddening ratio for wesenheit functions
     R123 = R[m] / (R[c1] - R[c2])
     return R123
-
+#####################################################################
 def extinction_law(mag = mag, A = extinction_ratios, R = R):
     print('Adopting BVIJHK Extinction law and reddening ratio from Fouque (2007): \n')
     print ('Bands \t Extinction \t Reddening ratio \n \t A(x)/A(v) \t R(x) for E(B-V)')
     for i in mag:
         print(i,'\t', extinction_ratios[i], '\t \t', R[i], '\n')
     return A, R 
-
+#####################################################################
 def extinction(data, R=R, mag = mag):
+    #converts reddening into extinction
     extinction = pd.DataFrame({'name': data['name'], 'logP': data['logP'], 'EBV': data['EBV']})
     for i in mag:
         extinction['A_'+i]=data['EBV']*R[i]
     print(extinction.head())
     print('###'*30)
     return extinction
-
+#####################################################################
 def absolute_magnitude(data, R=R, mag=mag, dis_flag=dis_flag, dis_list=dis_list, k=k):
     absolute = pd.DataFrame({
         'name': data['name'],
@@ -62,7 +62,7 @@ def absolute_magnitude(data, R=R, mag=mag, dis_flag=dis_flag, dis_list=dis_list,
     print(absolute.head())
     print('###' * 30)
     return absolute
-
+#####################################################################
 def true_absolute_magnitude(absolute, extinction, mag=mag, dis_flag=dis_flag, dis_list=dis_list):
     tabsolute = pd.DataFrame({'name': absolute['name'], 'logP': absolute['logP'], 'EBV': absolute['EBV']})
     for d,dis in enumerate(dis_list):
@@ -72,7 +72,7 @@ def true_absolute_magnitude(absolute, extinction, mag=mag, dis_flag=dis_flag, di
     print(tabsolute.head())
     print('###'*30) 
     return tabsolute
-
+#####################################################################
 def reddening_free(absolute, R=R, mag=mag, dis_flag=dis_flag):
     wesen = pd.DataFrame({'name': absolute['name'], 'logP': absolute['logP'], 'EBV': absolute['EBV']})
     for d,dis in enumerate(dis_flag):
@@ -83,11 +83,12 @@ def reddening_free(absolute, R=R, mag=mag, dis_flag=dis_flag):
                     wes_str = m+c1+c2+dis
                     Rm12 = R123(m,c1,c2)
                     wesen[wes_str] = absolute[f'M_{m}{dis}'] - Rm12*(absolute[f'M_{c1}{dis}'] - absolute[f'M_{c2}{dis}'])
+                    #print(f'{m+c1+c2}: {Rm12}')
                     #wesen[wes_str] = absolute[f'M_{m}0{dis}']- Rm12*(absolute[f'M_{c1}0{dis}']- absolute[f'M_{c2}0{dis}'])
     print(wesen.head())
     print('###'*30)
     return wesen
-
+#####################################################################
 def transformation(data, R=R, A=extinction_ratios, mag=mag, dis_flag=dis_flag, dis_list=dis_list, s=s, z=z):
     A, R = extinction_law(mag = mag, A = extinction_ratios, R = R) # converts Fouque (2007) extinction law into corresponding reddening ration
     print(' \n Reddening ratio values will be multiplied with E(B-V) values to yield extinction in each band for individual Cepheid along the respective line-of-sight.  \n')
@@ -120,7 +121,7 @@ def transformation(data, R=R, A=extinction_ratios, mag=mag, dis_flag=dis_flag, d
     if z==1:
         input('\n')
     return data, abs_data, ext_data, tabs_data, wes_data, merged_data
-        
+#####################################################################
 def plot_corr(df, Y='logP', title ='', f=12, s=s):
     sns.set_context("paper", rc={"axes.labelsize": f})
     g = sns.pairplot(data=df, x_vars=df.columns[::], y_vars=Y, kind='scatter')
@@ -130,8 +131,7 @@ def plot_corr(df, Y='logP', title ='', f=12, s=s):
     if s == 1:
         imgsave(title,0)    
     plt.show()
-
-
+#####################################################################
 print(f'* * {module} module loaded!')
 
     

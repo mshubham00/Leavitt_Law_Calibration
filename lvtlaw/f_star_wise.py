@@ -101,7 +101,8 @@ def correction_rd_mu(stars_rd_mu_list, raw, s=s, plots=plots):
             for f in flags:
                 for d in dis_flag:
                     for ab in mode:
-                        plot_star_rd_mu(i, stars_rd_mu_list, correction_rd_mu_stars, f, ab, d)
+                        print(i,f,d,ab)
+                        plot_star_rd_mu(i, stars_rd_mu_list, correction_rd_mu_stars_df, f, ab, d)
     return correction_rd_mu_stars_df    
 
 def plot_star_rd_mu(i, stars_rd_mu_list, correction, flag, ab, dis, wes_show = wes_show, s=s):

@@ -4,37 +4,36 @@
 '''
 module = 'datamapping'
 #####################################################################
-# k selects dataset, s saves the output, z switches to intracting output, plots for genrating plots
-k = 2; s=1 ; z=0; plots = 0; 
-
+k=1; 						# k selects dataset [0:Madore, 1:Jesper, 2:Cruz, 3:LMC, 4:SMC]
+s=0 ; 						# saves the output
+z=0; 						# z switches output to paging mode
+plots=0; 					# plots for genrating plots
+#####################################################################
+flags = ['S'] 				# Madore and Shubham
+mode = ['', '0']  			# Absolute mag and True absolute mag for PL and PW
+rd_avg_drop = ['H','K'] 	# Not included in estimating reddening variance (f_star_wise)
+#####################################################################
 wes_show=['BI', 'VI', 'IH', 'JK']
-
-rd_avg_drop = ['H','K'] # Dropped while estimating variance
-
 del_mu = [round(i*0.01,2) for i in range(-300,300,2)]
-
-flags = ['S'] # 'M'    # Madore and Shubham
-mode = ['', '0'] # '0' # Absolute mag and True absolute mag
+extinction_ratios = {   	# Extinction Law from Fouque 2007
+    'B': 1.31,   			# A_b / A_v
+    'V': 1.0,    			# A_v / A_v
+    'R': 0.845,  			# A_r / A_v
+    'I': 0.608,  			# A_i / A_v
+    'J': 0.292,  			# A_j / A_v
+    'H': 0.181,  			# A_h / A_v
+    'K': 0.119 }   			# A_k / A_v 
+#####################################################################
+col_dot = ['b.', 'g*', 'y+', 'c*', 'g+', 'k.', 'c+', 'r+'] ;
+col_lin = ['b-', 'g-', 'y-', 'c-', 'g-', 'k-', 'c-', 'r-'] ;
+col_das = ['b--', 'g--', 'y--', 'c--', 'g--', 'k--', 'c--', 'r--']
+col_ = ['b', 'g', 'y', 'c', 'g', 'k', 'c', 'r'] ;
 #####################################################################
 import os, subprocess, sys
-import pandas as pd
+#import pandas as pd
 #####################################################################
-"""
-Extinction Law from Fouque 2007
-""" 
-extinction_ratios = {
-    'B': 1.31,   # A_b / A_v
-    'V': 1.0,    # A_v / A_v
-    'R': 0.845,  # A_r / A_v
-    'I': 0.608,  # A_i / A_v
-    'J': 0.292,  # A_j / A_v
-    'H': 0.181,  # A_h / A_v
-    'K': 0.119   # A_k / A_v
-}
-'''
-Ratio of total to selective absorption (Sandage 2004)- driving wavelength dependent value of R
-'''
 def R_(R_v, mag, extinction_ratios=extinction_ratios):
+	# Wavelength dependent value of ratio of total to selective absorption
     r = {}
     for m in mag:
         r[m] = extinction_ratios[m]*R_v
@@ -78,10 +77,14 @@ def select_data_file(k):
         file_cols = ['name','logP','EBV'] + dis_list + [f'{m}_mag' for m in mag]
     return filename, file_cols, dis_list, dis_flag, R, mag, R_v
 #k = input('Dataset \n')
-
+#####################################################################
 file_name, data_cols, dis_list, dis_flag, R, mag, R_v = select_data_file(k)
-
 nreg = 5*len(dis_flag)
+data_dir = './data/input/'
+data_out=f'./data/{file_name}_{R_v}/'
+img_out_path = data_out + '9_plots/'
+process_step = ['1_prepared/','2_PLPW/','3_deldel/', '4_reddening/', '5_dispersion/','6_rms/','7_errorpair/', '8_result/', '9_plots/', '0_stars/']
+image_step = ['1_datacleaning/','2_PLPW/','3_deldel/', '4_reddening/', '5_dispersion/','6_rms/','7_errorpair/', '8_result/']
 #####################################################################
 def color_index(mag = mag):
     color_index = []
@@ -91,16 +94,5 @@ def color_index(mag = mag):
     return color_index
 #wes_show = color_index()
 #####################################################################
-data_dir = './data/input/'
-data_out=f'./data/{file_name}_{R_v}/'
-img_out_path = data_out + '9_plots/'
-process_step = ['1_prepared/','2_PLPW/','3_deldel/', '4_reddening/', '5_dispersion/','6_rms/','7_errorpair/', '8_result/', '9_plots/', '0_stars/']
-image_step = ['1_datacleaning/','2_PLPW/','3_deldel/', '4_reddening/', '5_dispersion/','6_rms/','7_errorpair/', '8_result/']
-#####################################################################
-band = len(mag);
-col_dot = ['b.', 'g*', 'y+', 'c*', 'g+', 'k.', 'c+', 'r+'] ;
-col_lin = ['b-', 'g-', 'y-', 'c-', 'g-', 'k-', 'c-', 'r-'] ;
-col_das = ['b--', 'g--', 'y--', 'c--', 'g--', 'k--', 'c--', 'r--']
-col_ = ['b', 'g', 'y', 'c', 'g', 'k', 'c', 'r'] ;
-#####################################################################
+
 print(f'* * {module} module loaded!')

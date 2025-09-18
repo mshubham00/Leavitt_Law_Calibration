@@ -10,7 +10,7 @@ Function contained:
     pl_reg(data, dis_flag, mag): save the output and returns dataframes
 '''
 module = 'c_pl_pw'
-
+#####################################################################
 from data.datamapping import R, mag, data_dir, file_name, dis_flag, data_out, dis_list, process_step, k, s, z, wes_show, nreg, col_dot, col_lin, mode
 from lvtlaw.a_utils import regression, merge_12, pr_value,imgsave
 import pandas as pd, numpy as np
@@ -18,7 +18,7 @@ from functools import reduce
 import matplotlib.pyplot as plt
 from warnings import simplefilter
 simplefilter(action="ignore", category=pd.errors.PerformanceWarning)
-
+#####################################################################
 def append_PLW(PLW_struct : list,name : str,m : float,c : float,p : list,r : list,me :float,ce :float,dis :str):
     # collect different regression output into one structure
     PLW_struct[0].append(name) 
@@ -29,23 +29,25 @@ def append_PLW(PLW_struct : list,name : str,m : float,c : float,p : list,r : lis
     PLW_struct[5].append(me)
     PLW_struct[6].append(ce)
     return PLW_struct
-
-def pl_dis(merged_data, dis: str, mag: list, wes_show = wes_show):
+#####################################################################
+def plw_relation(merged_data, dis: str, mag: list, wes_show = wes_show):
     PL_name, PL_slope, PL_intercept, err_slope, err_intercept  = [], [], [], [], []
     residue = pd.DataFrame({'name': merged_data['name'], 'logP': merged_data['logP'], 'EBV': merged_data['EBV']})
     residue[dis_list[dis_flag.index(dis)]] = merged_data[dis_list[dis_flag.index(dis)]]
     prediction = residue.copy()   
     PLW_struct = [PL_name, PL_slope, PL_intercept, prediction, residue, err_slope, err_intercept]    
 
-    print('Leavitt Law : Absolute Magnitude \n#######  m - mu = alpha (logP - 1) + gamma     #################\n')
+    print('Leavitt Law : Absolute Magnitude \n#######  m - mu = alpha (logP - 1) + gamma  #################\n')
     for i in range(len(mag)):  # Iterate over magnitudes
         m, c, prediction, residue, m_error, c_error = regression(merged_data['logP'] - 1, merged_data['M_'+mag[i] + dis], '(logP - 1)', mag[i] + dis, 1)
         PLW_struct = append_PLW(PLW_struct, mag[i], m, c, prediction, residue, m_error, c_error, dis)
+
 
     print('\nLeavitt Law : True Absolute Magnitude \n#######  m - mu - R*E(B-V) = alpha (logP - 1) + gamma     #####\n')
     for i in range(len(mag)):  # True absolute magnitudes
         m, c, prediction, residue, m_error, c_error = regression(merged_data['logP'] - 1, merged_data['M_'+mag[i] + '0'+dis], '(logP -1)', mag[i] + '0' + dis, 1)
         PLW_struct = append_PLW(PLW_struct, mag[i] + '0', m, c, prediction, residue, m_error, c_error, dis)
+
 
     print('\nLeavitt Law : Wesenheit Magnitude \n#######  m - mu - R*(B-V) = alpha (logP - 1) + gamma     #####')
     for color in wes_show:
@@ -53,6 +55,7 @@ def pl_dis(merged_data, dis: str, mag: list, wes_show = wes_show):
         for i in range(len(mag)):
             m, c, prediction, residue, m_error, c_error = regression(merged_data['logP'] - 1, merged_data[mag[i] + color + dis], '(logP - 1)', mag[i] + color + dis, 1)
             PLW_struct = append_PLW(PLW_struct, mag[i] + color, m, c, prediction, residue, m_error, c_error, dis)
+
 
     # Convert the results into a DataFrame
     PLW = pd.DataFrame({
@@ -65,13 +68,13 @@ def pl_dis(merged_data, dis: str, mag: list, wes_show = wes_show):
     prediction = PLW_struct[3]
     residue = PLW_struct[4]
     return PLW, residue, prediction
-
+#####################################################################
 def pl_reg(merged_data, s=s, dis_flag = dis_flag, mag = mag):
     reg = pd.DataFrame()
     res = pd.DataFrame()
     pre = pd.DataFrame()
     for dis in dis_flag:
-        PLW, residue, prediction = pl_dis(merged_data, dis, mag)
+        PLW, residue, prediction = plw_relation(merged_data, dis, mag)
         res = pd.concat([res, residue], axis=1)
         pre = pd.concat([pre, prediction], axis=1)
         reg = pd.concat([reg, PLW], axis=1)
@@ -138,8 +141,7 @@ def plotPL6(merged_data, reg, ab, dis=dis_flag[0], s=s):
         imgsave(title, step=1)
     plt.show()
     plotPLWres(merged_data, reg, ab, col='')
-
-
+#####################################################################
 def plotPW6(data, reg, col, dis=dis_flag[0], s=s):
     print('Wesenheit ', col)
     x = data['logP'] - 1
@@ -189,7 +191,7 @@ def plotPW6(data, reg, col, dis=dis_flag[0], s=s):
         imgsave(title, 1)
     plt.show()
     plotPLWres(data, reg, ab = '', col = col)
-    
+#####################################################################
 def plotPLWres(res, reg, ab, col='', dis=dis_flag[0],s=0):
     x = res['logP'] - 1
     title = f"{len(x)}_{''.join(mag)}_{ab+col}{dis}"
@@ -228,6 +230,5 @@ def plotPLWres(res, reg, ab, col='', dis=dis_flag[0],s=0):
     if s == 1:
         save(title + "_residuals", 1, fil='png', p=1)
     plt.show()
-
-
+#####################################################################
 print(f'* * {module} module loaded!')
