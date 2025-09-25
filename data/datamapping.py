@@ -5,7 +5,7 @@
 module = 'datamapping'
 #####################################################################
 k=3; 						# k selects dataset [0:Madore, 1:Jesper, 2:Cruz, 3:LMC, 4:SMC]
-skip=1
+skip=0
 s=1 ; 						# saves the output
 z=0; 						# z switches output to paging mode
 plots=0; 					# plots for genrating plots

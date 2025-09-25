@@ -3,9 +3,12 @@ This python package calibrates Period-Luminosity relation of Cepheid variable fo
 
 # Execution
 1. Clone the repository
+
+	git clone <repo_link>
+
 2. install the require packages from requirements.txt
 
-    pip install -r requirements.txt
+	pip install -r requirements.txt
 
 3. Add your dataset in ./data/input/<file_name.csv>
 4. Map your dataset columns in ./data/datamapping.py
@@ -13,6 +16,10 @@ This python package calibrates Period-Luminosity relation of Cepheid variable fo
 6. Run the main.py file. 
 
 	python3 main.py
+
+7. To pull updated repo
+    
+	git pull origin main
 
 # Background of Leavitt Law
 A linear correlation between period and luminiosity was discovered by Mrs. Henry Leavitt in 1908. This relation is very important in astronomy as it serves as a tool for measuring distances to distant galaxies. The realization of Milky Way as an isolated galaxy (1918), the expansion of the Universe (1924), rotation of Milky Way (1934), estimation of age of universe (1958), standardization of cosmic distance ladder (1995), and so on are derived results from the Leavitt Law.   

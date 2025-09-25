@@ -42,7 +42,7 @@ def error_over_mu(dres, m, dis, col, slope, intercept, flag, s=s): # called by p
         ext0_list = dres[f'd_{wm_str}{dis}'] # extinction error  without changing modulus from d_residue_analysis()
         red0_list = ext0_list / r  # Convert extinction to reddening E(B-V)
         for mu in del_mu: # 
-            mu_rd_ex_df[f'ex_{ab}{col}{mu}{dis}'] = ext0_list + mu * (1 - slope_) 
+            mu_rd_ex_df[f'ex_{ab}{col}{mu}{dis}'] =  ext0_list + mu * (1 - slope_) 
             mu_rd_ex_df[f'rd_{ab}{col}{mu}{dis}'] = mu_rd_ex_df[f'ex_{ab}{col}{mu}{dis}'] / r
     if s == 1:
         mu_rd_ex_df.to_csv(f'{data_out}{process_step[4]}{len(mu_rd_ex_df)}_mu_rd_ex{dis}{wm_str}.csv', index=False)
