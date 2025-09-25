@@ -1,112 +1,14 @@
 ### File: ./lvtlaw/a_utils.py
 '''
-a_utils.py tells to main.py which dataset should be used through parameter k = [0 ,1, 2]. A function select_data_file maps the metadata of input with defined variables. Another function provides Fouque extinction law. File also contains more generic function like regression, save_data, etc. and input/output variables.
+a_utils.py contains generic function like regression, save_data, etc. and input/output variables.
 '''
-#####################################################################
-k = 0; s=1; z=0; 
-# k changes dataset, s saves the output, z switches intracting output, flag for Madore/Shubham
-flags = ['M']
-wes_show = ['BI', 'VI', 'BV', 'VK']
-R_v = 3.23; # for milky way Sandage (2004)
-#R_v = 3.41# ± 0.06 in the LMC and 
-#R_v = 2.74 #± 0.13 in the SMC. (2023)
+module = 'a_utils'
 #####################################################################
 import os, subprocess, sys
 import matplotlib.pyplot as plt
 from scipy import stats
-
 import pandas as pd
-#####################################################################
-"""
-Extinction Law from Fouque 2007
-
-""" 
-Ab_v = 1.31                                             #          = A_b / A_v
-Av_v = 1                                                #          = A_v / A_v
-Ar_v = 0.845 	                                        #          = A_v / A_v
-Ai_v = 0.608                                            #          = A_i / A_v
-Aj_v = 0.292                                            #          = A_j / A_v
-Ah_v = 0.181                                            #          = A_h / A_v
-Ak_v = 0.119                                            #          = A_k / A_v
-'''
-Ratio of total to selective absorption (Sandage 2004)- driving wavelength dependent value of R
-'''
-R_b = Ab_v*R_v                                          #      R_b = (A_b / A_v) * (A_v / E(B-V))
-R_r = Ar_v*R_v                                          #      R_r = (A_r / A_v) * (A_v / E(B-V))
-R_i = Ai_v*R_v                                          #          = (A_i / A_v) * (A_v / E(B-V))
-R_j = Aj_v*R_v                                          #          = (A_j / A_v) * (A_v / E(B-V))
-R_h = Ah_v*R_v                                          #          = (A_h / A_v) * (A_v / E(B-V))
-R_k = Ak_v*R_v                                          #          = (A_k / A_v) * (A_v / E(B-V))
-
-##########################################################
-def select_data_file(k):
-    if k==0:
-        file_name = '59_madore'
-        file_cols = ['name','logP','HST','EBV','M_B','M_V','M_I','M_J','M_H','M_K'] 
-        dis_list = ['HST']
-        dis_flag = ['_h']
-        A = [Ab_v, Av_v, Ai_v, Aj_v, Ah_v, Ak_v]
-        R = [R_b, R_v, R_i, R_j, R_h, R_k]
-        mag = ['B', 'V', 'I','J','H','K'];
-        abs_bands = ['M_B', 'M_V', 'M_I', 'M_J', 'M_H', 'M_K']; 
-        ap_bands = ['B_mag', 'V_mag', 'I_mag', 'J_mag', 'H_mag', 'K_mag']
-    elif k ==1:
-        file_name = '95_jesper'
-        file_cols = ['name',"logP", 'plx', 'EBV', "B_mag", 'V_mag', 'I_mag', 'J_mag', 'H_mag', 'K_mag']
-        dis_list = ['plx']
-        dis_flag = ['_g']
-        A = [Ab_v, Av_v, Ai_v, Aj_v, Ah_v, Ak_v]
-        R = [R_b, R_v, R_i, R_j, R_h, R_k]
-        mag = ['B', 'V', 'I','J','H','K'];
-        abs_bands = ['M_B', 'M_V', 'M_I', 'M_J', 'M_H', 'M_K']; 
-        ap_bands = ['B_mag', 'V_mag' ,'I_mag', 'J_mag', 'H_mag', 'K_mag']
-    elif k == 2:
-        file_name = '18_cluster'
-        file_cols = ['name',"logP", 'cluster', 'EBV', "B_mag", 'V_mag', 'I_mag', 'J_mag', 'H_mag', 'K_mag']
-        dis_list = ['cluster']
-        dis_flag = ['_c']
-        A = [Ab_v, Av_v, Ai_v, Aj_v, Ah_v, Ak_v]
-        R = [R_b, R_v, R_i, R_j, R_h, R_k]
-        mag = ['B', 'V', 'I','J','H','K'];
-        abs_bands = ['M_B', 'M_V', 'M_I', 'M_J', 'M_H', 'M_K']; 
-        ap_bands = ['B_mag', 'V_mag' ,'I_mag', 'J_mag', 'H_mag', 'K_mag']
-    elif k == 3:
-        file_name = '36_LMC'
-        file_cols = ['name',"logP", 'IRSB', 'EBV', 'V_mag', 'I_mag', 'J_mag', 'K_mag']
-        dis_list = ['IRSB']
-        dis_flag = ['_l']
-        A = [Av_v, Ai_v, Aj_v,  Ak_v]
-        R = [R_v, R_i, R_j, R_k]
-        mag = ['V', 'I','J','K']
-        abs_bands = ['M_V', 'M_I', 'M_J', 'M_K']; 
-        ap_bands = ['V_mag' ,'I_mag', 'J_mag', 'K_mag']
-    elif k == 4:
-        file_name = '20_cluster_cruz'
-        file_cols = ['name',"logP", 'mplx', 'IRSB', 'EBV','B_mag', 'V_mag', 'I_mag', 'J_mag', 'H_mag','K_mag']
-        dis_list = ['IRSB']
-        dis_flag = ['_c']
-        A = [Ab_v, Av_v, Ai_v, Aj_v, Ah_v, Ak_v]
-        R = [R_b, R_v, R_i, R_j, R_h, R_k]
-        mag = ['B', 'V', 'I','J','H','K'];
-        abs_bands = ['M_B', 'M_V', 'M_I', 'M_J', 'M_H', 'M_K']; 
-        ap_bands = ['B_mag', 'V_mag' ,'I_mag', 'J_mag', 'H_mag', 'K_mag']
-    return file_name, file_cols, dis_list, dis_flag, A, R, mag, abs_bands, ap_bands
-#k = input('Dataset \n')
-file_name, data_cols, dis_list, dis_flag, A, R, mag, abs_bands, ap_bands = select_data_file(k)
-nreg = 5*len(dis_flag)
-#####################################################################
-data_dir = './data/input/'
-data_out=f'./data/{file_name}_{R_v}/'
-img_out_path = data_out + '9_plots/'
-process_step = ['1_prepared/','2_PLPW/','3_deldel/', '4_reddening/', '5_dispersion/','6_rms/','7_errorpair/', '8_result/', '9_plots/', '0_stars/']
-image_step = ['1_datacleaning/','2_PLPW/','3_deldel/', '4_reddening/', '5_dispersion/','6_rms/','7_errorpair/', '8_result/']
-#####################################################################
-del_mu = [round(i*0.01,2) for i in range(-150,150,3)]
-band = len(mag);
-col_dot = ['b.', 'g*', 'y+', 'c*', 'g+', 'k.', 'c+', 'r+'] ;
-col_lin = ['b-', 'g-', 'y-', 'c-', 'g-', 'k-', 'c-', 'r-'] ;
-col_das = ['b--', 'g--', 'y--', 'c--', 'g--', 'k--', 'c--', 'r--']
-col_ = ['b', 'g', 'y', 'c', 'g', 'k', 'c', 'r'] ;
+from data.datamapping import plots,s,file_name,data_dir,z, image_step, data_out, k, process_step, img_out_path, mag, dis_flag, dis_list, data_cols
 #####################################################################
 def output_directories(parent_folder = data_out, s=1,subdirectories = process_step):
     if s==1:
@@ -115,36 +17,28 @@ def output_directories(parent_folder = data_out, s=1,subdirectories = process_st
             if not os.path.exists(path):
                 os.makedirs(path)
 #####################################################################       
-def image_directories(parent_folder = img_out_path, s=1,subdirectories = image_step):
-    if s==1:
+def image_directories(parent_folder = img_out_path, plots=1,subdirectories = image_step):
+    if plots==1:
         for subdirectory in subdirectories:
             path = os.path.join(parent_folder, subdirectory)
             if not os.path.exists(path):
                 os.makedirs(path)
 #####################################################################       
-def load_data(data_file = file_name, data_dir = data_dir, p=0):
-    cleaned_data = pd.read_csv(data_dir+data_file+'.csv')
-    if p==1:
-        print(' \n Data Loaded from: \t', data_dir+data_file)
-        print( cleaned_data.info())
-    return cleaned_data #, name, ra, dec, EBV, dis
-#####################################################################
-def save(title, step=0, img_path=img_out_path, fil = 'pdf', p=0):                                   #   2
+def imgsave(title, step=0, img_path=img_out_path, fil = 'pdf', p=1):                                   #   2
     if p == 1:
-        print(img_path+process_step[step]+title+'.'+fil)
-    plt.savefig('%s%s.%s'%(img_path+process_step[step],title, fil))
+        print(img_path+image_step[step]+title+'.'+fil)
+    plt.savefig('%s%s.%s'%(img_path+image_step[step],title, fil))
 #####################################################################
-def open_output_dir(path):  
-    # Open the output folder after process completion
-    subprocess.run(['xdg-open', path])
-#####################################################################
-def color_index(mag = mag):
-    color_index = []
-    for i in range(0,len(mag)):
-        for j in range(i+1,len(mag)):
-            color_index.append(mag[i]+mag[j])
-    return color_index
-colors = color_index()
+def load_data(data_file = file_name, data_dir = data_dir, mag = mag,  data_cols = data_cols, dis_list = dis_list, p=0):
+    data = pd.read_csv(data_dir+data_file+'.csv')
+    raw = data[data_cols].dropna().reset_index(drop=True);
+    mag = mag
+    dis = dis_flag[0]
+    if p==1:
+        print('\nData Loaded from: \t', data_dir+data_file, '.csv')
+        print(f'Distance: {dis} | Bands: {mag}')
+        print( data.info())
+    return data, raw, mag, dis #, name, ra, dec, EBV, dis
 #####################################################################
 def regression(x: list, y: list, x_str: str, y_str: str, p = 0):
     regression_line = stats.linregress(x, y); 
@@ -158,19 +52,36 @@ def regression(x: list, y: list, x_str: str, y_str: str, p = 0):
         print('%s = %f %s ( %f) + %f ( %f)'%(y_str, m, x_str, m_error, c, c_error))
     return m, c, prediction, residue, m_error, c_error
 #####################################################################
-def pr_value(x,y,p=0):
+def open_output_dir(path):  
+    # Open the output folder after process completion
+    subprocess.run(['xdg-open', path])
+#####################################################################
+def colprint(merged_data):
+    l = merged_data.columns
+    for x in range(0, len(l),40):
+        print(l[x:x+40])
+#####################################################################
+def merge_12(df1, df2, on: list):
+    # Ensure `on` is a list
+    on = [on] if isinstance(on, str) else on
+    overlap = set(df1.columns).intersection(df2.columns) - set(on)
+    df2_clean = df2.drop(columns=overlap)
+    return df1.merge(df2_clean, on=on)
+#####################################################################
+def pr_value(x,y,s=0):
     p,r = stats.pearsonr(x,y)
-    if p==1:
+    if s==1:
         print('Pearson R:', r)
         print('P-value:', p)
     return p,r
 #####################################################################
-def RA_DEC_DIS_to_Galactocentric(ra, dec, dis):
+'''def RA_DEC_DIS_to_Galactocentric(ra, dec, dis):
     ra = Longitude(ra, unit=u.degree)
     dec = Latitude(dec, unit = u.degree)                        #   1
     dis = 10**(1 + dis/5)/1000          # modulus to kpc
     dis = Distance(dis, unit = u.kpc)
     coordinate = SkyCoord(ra=ra, dec=dec, distance=dis, frame='icrs')
     coordinate = coordinate.transform_to(Galactocentric(galcen_distance=8.1*u.kpc))
-    return coordinate
+    return coordinate'''
 #####################################################################
+print(f'* * {module} module loaded!')
