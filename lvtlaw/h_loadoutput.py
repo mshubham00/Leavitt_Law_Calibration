@@ -14,7 +14,7 @@ raw = input_data[data_cols].dropna().reset_index(drop=True);
 n = len(raw)  # total number of cepheids
 ####
 
-def transformation(raw=raw):  # b_data_transform
+def transformation_(raw=raw):  # b_data_transform
     raw = raw
     absolute = pd.read_csv('%s%i_abs_data.csv'%(data_out+process_step[0],n))
     extinction = pd.read_csv('%s%i_ext_data.csv'%(data_out+process_step[0],n))
@@ -23,21 +23,21 @@ def transformation(raw=raw):  # b_data_transform
     merged_data = pd.read_csv('%s%i_prepared_PLdata.csv'%(data_out+process_step[0],n))
     return raw, absolute, extinction, tabsolute, wesenheit, merged_data
 ####
-def PLWcorrection():     # c_pl_pw
+def PLWcorrection_():     # c_pl_pw
     PLWresidue = pd.read_csv('%s%i_residue.csv'%(data_out+process_step[1],n))
     PLWregression = pd.read_csv('%s%i_%i_regression.csv'%(data_out+process_step[1], n, nreg))
     PLWprediction = pd.read_csv('%s%i_prediction.csv'%(data_out+process_step[1],n))
     data = pd.read_csv('%s%i_merged_data.csv'%(data_out+process_step[1],n))        
     return PLWregression, PLWresidue, PLWprediction, data
 #### 
-def residual_correlation():     # d_del_del
+def residual_correlation_():     # d_del_del
     dpre = pd.read_csv('%s%i_del_pre.csv'%(data_out+process_step[2],n))
     dres = pd.read_csv('%s%i_del_res.csv'%(data_out+process_step[2],n))
     dmc = pd.read_csv('%s%i_del_slope_intercept.csv'%(data_out+process_step[2],n))
     data = pd.read_csv('%s%i_merged_data.csv'%(data_out+process_step[2],n))        
     return dmc, dpre, dres, data
 ####
-def rd_mu_error_matrix():    # e_error_estimation
+def rd_mu_error_matrix_():    # e_error_estimation
     data = pd.read_csv('%s%i_merged_data.csv'%(data_out+process_step[2],n))        
     ext0 = pd.read_csv('%s%i_ext_err0.csv' % (data_out + process_step[3], n))
     red0 = pd.read_csv('%s%i_red_err0.csv' % (data_out + process_step[3], n))
@@ -47,13 +47,13 @@ def rd_mu_error_matrix():    # e_error_estimation
             for col in wes_show:   
                 mu_df_list = []
                 for i, band in enumerate(mag):
-                    wm_str = f"{band}{band}{col}" if flag == "S" else f"{band}{col[0]}{col}"
+                    wm_str = f"{band}{mode[-1]}{band}{col}" if flag == "S" else f"{band}{mode[-1]}{col[0]}{col}"
                     mu_rd_ex_df = pd.read_csv('%s%i_mu_rd_ex%s%s.csv' % (data_out + process_step[4], n, dis, wm_str))
                     mu_df_list.append(mu_rd_ex_df)
                 mu_df_list_dict[f'{col}_{flag}{dis}'] = mu_df_list
     return ext0, red0, mu_df_list_dict, data
 ####
-def starwise_analysis(p=0):    # f_star_wise
+def starwise_analysis_(p=0):    # f_star_wise
     data = pd.read_csv('%s%i_merged_data.csv'%(data_out+process_step[2],n))        
     stars_list = []
     stars_ex_red_mu_list = []
@@ -72,7 +72,7 @@ def pick_star(i):
     ex_red_mu = pd.read_csv('%s%i_%istars_ex_red_mu.csv'%(data_out+process_step[5],n,i), index_col=0) 
     return f, ex_red_mu
 
-def calibrated_result():
+def calibrated_result_():
     merged_data = pd.read_csv('%s%i_merged_data.csv'%(data_out+process_step[7],n))      
     reg = pd.read_csv('%s%i_%i_result_regression.csv'%(data_out+process_step[7],n, nreg))      
     res = pd.read_csv('%s%i_result_residue.csv'%(data_out+process_step[7],n))      

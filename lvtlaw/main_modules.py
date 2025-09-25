@@ -26,6 +26,7 @@ def mag_transformation(cleaned_data,plots=plots,s=s,file_name=file_name):
         print(file_name)
         plot_corr(df , Y = 'logP', title = file_name, f=12)
     data, abs_data, ext_data, tabs_data, wes_data, merged_data = transformation(cleaned_data)
+    print('mag_transformation module ended!')
     return data, abs_data, ext_data, tabs_data, wes_data, merged_data
 #####################################################################################################
 # c_pl_pw -> [1]
@@ -44,13 +45,14 @@ def PLWcorrection(merged_data, plots=plots, s=s, z=z):
             plotPW6(merged_data, PLW, col)
     if z==1:
         input('###'*30+'\n')
+    print('PLWcorrection module ended!')
     return PLW, residue, prediction, merged_data
 #####################################################################################################
 # d_del_del  -> [2]
 def residual_correlation(merged_data, plots=plots, s=s, z=z):
     print('Starting residual correlation \n')
     print('PW residuals correlated with PL residuals with two approaches. \n i) Madore : (m vs. VVI) \n ii) Shubham: (m vs mVI) \n') 
-    dres, dpre, dmc, merged_data = residue_analysis(merged_data)
+    dres, dpre, dmc, merged_data = residue_analysis(merged_data, plots)
     print('Slope, Intercept and respective errors.')
     print('###'*30)
     print(dmc.head())
@@ -59,6 +61,7 @@ def residual_correlation(merged_data, plots=plots, s=s, z=z):
     print('###'*30)
     if z==1:
         input('###'*30+'\n')    
+    print('residual_correlation module ended!')
     return dmc, dres, dpre, merged_data
 ####################################################################################################
 # e_error_estimation  -> [3,4]
@@ -72,13 +75,15 @@ def rd_mu_error_matrix(merged_data, dmc, del_mu=del_mu, z=z):
     print('\n Extrapolating modulus error for each Cepheid \n')
     if z==1:
         input('###'*30+'\n')
+    print('rd_mu_error_matrix module ended!')
     return ex0_df, rd0_df, mu_df_list_dict, merged_data
 ####################################################################################################
 # f_star_wise  -> [5, 9]
-def starwise_analysis(merged_data, mu_df_list_dict, s=s, plots=plots, z=z):
+def starwise_analysis(merged_data, mu_df_list_dict, plots=plots, s=s, z=z):
     star_frame_list = star_frame(merged_data)
     stars_rd_mu_list =  star_ex_rd_mu(mu_df_list_dict, merged_data)
-    correction_rd_mu_stars = correction_rd_mu(stars_rd_mu_list, merged_data, s, plots)
+    correction_rd_mu_stars = correction_rd_mu(stars_rd_mu_list, merged_data, plots)
+    print('starwise_analysis module ended!')
     return star_frame_list, stars_rd_mu_list, correction_rd_mu_stars, merged_data
 ####################################################################################################
 #g_result -> [7]
@@ -89,7 +94,7 @@ def calibrated_result(merged_data,correction_rd_mu_stars, plots = plots, flags=f
     corrected = correction_apply(merged_data, correction_rd_mu_stars)
 #    print('Calibrated data: \n', corrected.head(-1))
     reg, res, pre, merged_data = corrected_reg(merged_data, corrected, dis_flag[0], plots)
-    
+    print('calibrated_result module ended!')   
     return corrected, merged_data
 '''
 from lvtlaw.visualization import milky_way, plot_corr, cordinate

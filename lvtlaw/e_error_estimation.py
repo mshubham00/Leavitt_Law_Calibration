@@ -32,35 +32,31 @@ def select_regression_parameters(dmc, dis):
         m, c = dmc.iloc[0].T, dmc.iloc[1].T
     return m, c #lists
 #####################################################################
-def error_over_mu(dres, m, ab, dis, col, wm_str, slope, intercept, s=s): # called by process_reddening()
-    r = R[mag[m]] #/ (R[col[0]] - R[col[1]])  # reddening ratio
-    ext0_list = dres[f'd_{wm_str}{dis}'] # extinction error without changing modulus from d_residue_analysis()
-    red0_list = ext0_list / r  # Convert extinction to reddening E(B-V)
+def error_over_mu(dres, m, dis, col, slope, intercept, flag, s=s): # called by process_reddening()
+    r = R[mag[m]]  # reddening ratio
     mu_rd_ex_df = pd.DataFrame({'name': dres['name'], 'logP': dres['logP']})
-    for mu in del_mu: #  
-        mu_rd_ex_df[f'ex{ab}_{col}{mu}{dis}'] = ext0_list + mu * (1 - slope) - intercept
-        mu_rd_ex_df[f'rd{ab}_{col}{mu}{dis}'] = mu_rd_ex_df[f'ex{ab}_{col}{mu}{dis}'] / r
+    for ab in mode: 
+        wm_str = f"{mag[m]}{ab}{mag[m]}{col}" if flag == "S" else f"{mag[m]}{ab}{col[0]}{col}"
+        slope_ = slope[wm_str]
+        intercept_ = intercept[wm_str]
+        ext0_list = dres[f'd_{wm_str}{dis}'] # extinction error  without changing modulus from d_residue_analysis()
+        red0_list = ext0_list / r  # Convert extinction to reddening E(B-V)
+        for mu in del_mu: # 
+            mu_rd_ex_df[f'ex_{ab}{col}{mu}{dis}'] = ext0_list + mu * (1 - slope_) 
+            mu_rd_ex_df[f'rd_{ab}{col}{mu}{dis}'] = mu_rd_ex_df[f'ex_{ab}{col}{mu}{dis}'] / r
     if s == 1:
         mu_rd_ex_df.to_csv(f'{data_out}{process_step[4]}{len(mu_rd_ex_df)}_mu_rd_ex{dis}{wm_str}.csv', index=False)
-    return ext0_list, red0_list, mu_rd_ex_df
+    return wm_str, ext0_list, red0_list, mu_rd_ex_df
 #####################################################################
 def process_reddening(dres, col, dis, slope, intercept, flag):# later called by reddening_error()
     mu_df_list, ext0_df = [], pd.DataFrame({'name': dres['name']})
     red0_df = ext0_df.copy()
-    for ab in mode:
-        print(f'  → Processing {col} {ab} for {flag}') #
-        for m, band in enumerate(mag):
-            wm_str = f"{band}{ab}{band}{col}" if flag == "S" else f"{band}{ab}{col[0]}{col}"
-            slope_ = slope[wm_str]
-            intercept_ = intercept[wm_str]
-            ext0_list, red0_list, mu_rd_ex_df = error_over_mu(dres, m, ab, dis, col, wm_str, slope_, intercept_)        
-            ext0_df[f'ex_{wm_str}{dis}'] = ext0_list
-            red0_df[f'rd_{wm_str}{dis}'] = red0_list
-            if ab == '' or len(mode)==1:
-                df = mu_rd_ex_df
-            else:
-                mu_rd_ex_df = merge_12(df, mu_rd_ex_df, ['name', 'logP'])
-                mu_df_list.append(mu_rd_ex_df)
+    print(f'  → Processing {col} for {flag}') #
+    for m, band in enumerate(mag):
+        wm_str, ext0_list, red0_list, mu_rd_ex_df = error_over_mu(dres, m, dis, col, slope, intercept, flag)
+        ext0_df[f'ex_{wm_str}{dis}'] = ext0_list
+        red0_df[f'rd_{wm_str}{dis}'] = red0_list
+        mu_df_list.append(mu_rd_ex_df)
     return mu_df_list, ext0_df, red0_df                                           
 #####################################################################
 def error_reddening(dres, dmc, del_mu=del_mu,z=z, wes_show=wes_show, dis_flag = dis_flag, plots=plots, flags = flags, s=s):

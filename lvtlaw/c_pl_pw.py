@@ -31,22 +31,17 @@ def append_PLW(PLW_struct : list,name : str,m : float,c : float,p : list,r : lis
     return PLW_struct
 #####################################################################
 def plw_relation(merged_data, dis: str, mag: list, wes_show = wes_show):
-    PL_name, PL_slope, PL_intercept, err_slope, err_intercept  = [], [], [], [], []
     residue = pd.DataFrame({'name': merged_data['name'], 'logP': merged_data['logP'], 'EBV': merged_data['EBV']})
     residue[dis_list[dis_flag.index(dis)]] = merged_data[dis_list[dis_flag.index(dis)]]
     prediction = residue.copy()   
+    PL_name, PL_slope, PL_intercept, err_slope, err_intercept  = [], [], [], [], []
     PLW_struct = [PL_name, PL_slope, PL_intercept, prediction, residue, err_slope, err_intercept]    
 
-    print('Leavitt Law : Absolute Magnitude \n#######  m - mu = alpha (logP - 1) + gamma  #################\n')
-    for i in range(len(mag)):  # Iterate over magnitudes
-        m, c, prediction, residue, m_error, c_error = regression(merged_data['logP'] - 1, merged_data['M_'+mag[i] + dis], '(logP - 1)', mag[i] + dis, 1)
-        PLW_struct = append_PLW(PLW_struct, mag[i], m, c, prediction, residue, m_error, c_error, dis)
-
-    print('\nLeavitt Law : True Absolute Magnitude \n#######  m - mu - R*E(B-V) = alpha (logP - 1) + gamma     #####\n')
-    for i in range(len(mag)):  # True absolute magnitudes
-        m, c, prediction, residue, m_error, c_error = regression(merged_data['logP'] - 1, merged_data['M_'+mag[i] + '0'+dis], '(logP -1)', mag[i] + '0' + dis, 1)
-        PLW_struct = append_PLW(PLW_struct, mag[i] + '0', m, c, prediction, residue, m_error, c_error, dis)
-
+    print('Leavitt Law : Absolute Magnitude \n#######  m  - mu = alpha (logP - 1) + gamma  #################\n')
+    for ab in mode:
+        for i in range(len(mag)):  # Iterate over magnitudes
+            m, c, prediction, residue, m_error, c_error = regression(merged_data['logP'] - 1, merged_data['M_'+mag[i] + ab+ dis], '(logP - 1)', mag[i] + ab + dis, 1)
+            PLW_struct = append_PLW(PLW_struct, mag[i]+ab, m, c, prediction, residue, m_error, c_error, dis)
 
     print('\nLeavitt Law : Wesenheit Magnitude \n#######  m - mu - R*(B-V) = alpha (logP - 1) + gamma     #####')
     for color in wes_show:
@@ -94,10 +89,10 @@ def pl_reg(merged_data, s=s, dis_flag = dis_flag, mag = mag):
 ####################################################################################
 def plotPL6(merged_data, reg, ab, dis=dis_flag[0], s=s):
     x = merged_data['logP'] - 1
-    title = f"{len(x)}_{''.join(mag)}{ab+dis}"
+    title = f"{len(x)}_{ab}{''.join(mag)}{dis}"
     fig, axs = plt.subplots(2, 3, figsize=(18, 8), sharex='col')
     axs = axs.flatten()  # Flatten for easy indexing
-    for i, m in enumerate(mag):
+    for i, m in enumerate(mag[0:6]):
         y = merged_data['M_' + m + ab + dis]
         # Get regression coefficients
         if dis == '_i':
@@ -108,9 +103,9 @@ def plotPL6(merged_data, reg, ab, dis=dis_flag[0], s=s):
             gamma = reg[m+ab].iloc[1]
         pred = merged_data['p_' + m + ab + dis]
         residuals = merged_data['r_' + m + ab + dis]
-        corr_coef, _ = pr_value(x, y)
+        r_std = round(residuals.std(ddof=0), 3)
         ax = axs[i]
-        ax.plot(x, y, col_dot[i], label=f'{m+ab} Band | r = {corr_coef:.3f}')
+        ax.plot(x, y, col_dot[i], label=f'{m+ab} Band | $\sigma$ = {r_std}')
         ax.plot(x, pred, col_lin[i], label=f'$M_{m+ab}$ = {alpha:.3f}(logP - 1) + {gamma:.3f}')
         # Residual lines
         for j in range(len(merged_data)):
@@ -147,7 +142,7 @@ def plotPW6(data, reg, col, dis=dis_flag[0], s=s):
     title = f"{len(x)}_{col}_{''.join(mag)}{dis}"
     fig, axs = plt.subplots(2, 3, figsize=(18, 8), sharex='col')
     axs = axs.flatten()
-    for i, m in enumerate(mag):
+    for i, m in enumerate(mag[0:6]):
         w_str = m + col
         y = data[w_str + dis]
         p1, _ = pr_value(x, y)
@@ -162,10 +157,10 @@ def plotPW6(data, reg, col, dis=dis_flag[0], s=s):
 
         pred = data['p_' + w_str + dis]
         residuals = data['r_' + w_str + dis]
-
+        r_std = round(residuals.std(ddof=0), 3)
         # Plot
         ax = axs[i]
-        ax.plot(x, y, col_dot[i], label=f'{w_str} Wesenheit | r = {p1:.2f}')
+        ax.plot(x, y, col_dot[i], label=f'{w_str} Wesenheit | $\sigma$ = {r_std}')
         ax.plot(x, pred, col_lin[i], label=f'{w_str} = {alpha:.2f}(logP - 1) + {gamma:.2f}')
 
         # Residual lines
@@ -191,12 +186,12 @@ def plotPW6(data, reg, col, dis=dis_flag[0], s=s):
     plt.show()
     plotPLWres(data, reg, ab = '', col = col)
 #####################################################################
-def plotPLWres(res, reg, ab, col='', dis=dis_flag[0],s=0):
+def plotPLWres(res, reg, ab, col='', dis=dis_flag[0],s=s):
     x = res['logP'] - 1
-    title = f"{len(x)}_{''.join(mag)}_{ab+col}{dis}"
+    title = f"{len(x)}_{ab}{''.join(mag)}_{col}{dis}"
     fig_res, axs_res = plt.subplots(2, 3, figsize=(18, 6))
     axs_res = axs_res.flatten()
-    for i, m in enumerate(mag):
+    for i, m in enumerate(mag[0:6]):
         if dis == '_i':
             alpha_e = round(reg[m+ab].iloc[6], 3)
             gamma_e = round(reg[m+ab].iloc[7], 3)
@@ -222,12 +217,12 @@ def plotPLWres(res, reg, ab, col='', dis=dis_flag[0],s=0):
         for spine in ax_res.spines.values():
             spine.set_visible(False)
 
-    for j in range(len(mag), 6):  # Hide any unused axes
+    for j in range(len(mag[0:6]), 6):  # Hide any unused axes
         axs_res[j].set_visible(False)
     plt.tight_layout()
     plt.suptitle(f'{title[3:-2]} Residuals')
     if s == 1:
-        save(title + "_residuals", 1, fil='png', p=1)
+        imgsave(title + "_residuals", 1)
     plt.show()
 #####################################################################
 print(f'* * {module} module loaded!')

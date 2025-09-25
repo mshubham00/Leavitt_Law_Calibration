@@ -24,9 +24,9 @@ def correction_apply(data, correction, wes_show=wes_show, flags=flags, dis_flag=
             for col in wes_show:
                 for ab in mode:
                     corrected['EBV'+f+ab+col+d]  = data['EBV'] - correction['rd'+f+ab+col+d]
-                    corrected['mu'+f+ab+col+d] = data[dis_list[dis_flag.index(d)]] - correction['mu'+f+ab+col+d]
+                    corrected['mu'+f+ab+col+d] = data[dis_list[dis_flag.index(d)]] + correction['mu'+f+ab+col+d]
                     for m in mag:
-                        corr_ex_mu =  - R[m]*correction['rd'+f+ab+col+d] + correction['mu'+f+ab+col+d] 
+                        corr_ex_mu = - R[m]*correction['rd'+f+ab+col+d] + correction['mu'+f+ab+col+d] # 
                         corrected[m+f+ab+col+d]=data['M_'+m+ab+d] + corr_ex_mu
     if s==1:
         corrected.to_csv('%s%i_corrected.csv'%(data_out+process_step[7],len(corrected)))
@@ -100,7 +100,8 @@ def corrected_reg(data, corrected, dis, plots=plots, wes_show = wes_show, flags=
     if plots == 1:
         for f in flags:
             for col in wes_show:
-                plotresultPL6(merged_data, reg, col, dis, f, '0')
+                for ab in mode:
+                    plotresultPL6(merged_data, reg, col, dis, f, ab)
     return reg, res, pre, merged_data
    
 def plotresultPL6(merged_data, merged_reg, col, dis, f, ab, s=s):
@@ -125,11 +126,11 @@ def plotresultPL6(merged_data, merged_reg, col, dis, f, ab, s=s):
         rres = merged_data['r_' + m + ab + col + f + dis]
         pred = merged_data['p_' + m + ab + dis]
         resd = merged_data['r_' + m + ab + dis]
-        rcorr_coef, _ = pr_value(x, y_cor)
-        corr_coef, _ = pr_value(x, y)
+        r_std = round(rres.std(ddof=0), 3)
+        d_std = round(resd.std(ddof=0), 3)
         ax = axs[i]
-        ax.plot(x, y, col_dot[i], label=f'{m+ab} Band | r = {corr_coef:.3f}')
-        ax.plot(x, y_cor, 'ro', label=f'{m+ab} Band ({f}, {col}) | r = {rcorr_coef:.3f}')
+        ax.plot(x, y, col_dot[i], label=f'{m+ab} Band | $\sigma$ = {d_std}')
+        ax.plot(x, y_cor, 'ro', label=f'{m+ab} Band ({f}, {col}) | $\sigma$ = {r_std}')
         ax.plot(x, rpre, 'r-', label=f'$M_{m}^{f}$ = {ralpha:.3f}(logP - 1) + {rgamma:.3f}')
         ax.plot(x, pred, col_das[i], label=f'$M_{m}$ = {alpha:.3f}(logP - 1) + {gamma:.3f}')
         # Residual lines

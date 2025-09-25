@@ -23,13 +23,9 @@ simplefilter(action="ignore", category=pd.errors.PerformanceWarning)
 import warnings
 warnings.filterwarnings("ignore", category=UserWarning)
 #####################################################################
-from data.datamapping import R, mag, data_dir, file_name, dis_flag, data_out, dis_list, process_step, k, s, z, extinction_ratios
+from data.datamapping import R, mag, data_dir, file_name, dis_flag, data_out, dis_list, process_step, k, s, z, extinction_ratios, R123
 from lvtlaw.a_utils import merge_12, imgsave
-#####################################################################
-def R123(m:str,c1:str,c2:str,R=R):
-    # calculate composite reddening ratio for wesenheit functions
-    R123 = R[m] / (R[c1] - R[c2])
-    return R123
+
 #####################################################################
 def extinction_law(mag = mag, A = extinction_ratios, R = R):
     print('Adopting BVIJHK Extinction law and reddening ratio from Fouque (2007): \n')
@@ -57,8 +53,12 @@ def absolute_magnitude(data, R=R, mag=mag, dis_flag=dis_flag, dis_list=dis_list,
         for i, m in enumerate(mag):
             if k == 0:  # Madore dataset
                 absolute[f'M_{m}{dis_flag[d]}'] = data[f'M_{m}'] + R[m]*data['EBV']
+            elif k ==3 or k == 4:
+                absolute[f'M_{m}{dis_flag[d]}'] = data[f'{m}_mag'] #- data[dis_list[d]]
             else:
                 absolute[f'M_{m}{dis_flag[d]}'] = data[f'{m}_mag'] - data[dis_list[d]]
+                
+                
     print(absolute.head())
     print('###' * 30)
     return absolute
@@ -68,7 +68,7 @@ def true_absolute_magnitude(absolute, extinction, mag=mag, dis_flag=dis_flag, di
     for d,dis in enumerate(dis_list):
         tabsolute[dis] = absolute[dis]    
         for i,m in enumerate(mag):
-                tabsolute[f'M_{m}0{dis_flag[d]}']=absolute[f'M_{m}{dis_flag[d]}'] - extinction['A_'+m]    
+                tabsolute[f'M_{m}0{dis_flag[d]}'] = absolute[f'M_{m}{dis_flag[d]}'] - extinction['A_'+m]    
     print(tabsolute.head())
     print('###'*30) 
     return tabsolute
@@ -83,7 +83,7 @@ def reddening_free(absolute, R=R, mag=mag, dis_flag=dis_flag):
                     wes_str = m+c1+c2+dis
                     Rm12 = R123(m,c1,c2)
                     wesen[wes_str] = absolute[f'M_{m}{dis}'] - Rm12*(absolute[f'M_{c1}{dis}'] - absolute[f'M_{c2}{dis}'])
-                    #print(f'{m+c1+c2}: {Rm12}')
+                    print(f'{m+c1+c2}: {Rm12}')
                     #wesen[wes_str] = absolute[f'M_{m}0{dis}']- Rm12*(absolute[f'M_{c1}0{dis}']- absolute[f'M_{c2}0{dis}'])
     print(wesen.head())
     print('###'*30)
