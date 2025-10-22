@@ -23,24 +23,25 @@ simplefilter(action="ignore", category=pd.errors.PerformanceWarning)
 import warnings
 warnings.filterwarnings("ignore", category=UserWarning)
 #####################################################################
-from data.datamapping import R, mag, data_dir, file_name, dis_flag, data_out, dis_list, process_step, k, s, z, extinction_ratios, R123
+from data.datamapping import R, mag, data_dir, file_name, dis_flag, data_out, dis_list, process_step, k, s, z, fouque_extinction_ratios, R123,p
 from lvtlaw.a_utils import merge_12, imgsave
 
 #####################################################################
-def extinction_law(mag = mag, A = extinction_ratios, R = R):
+def extinction_law(mag = mag, A = fouque_extinction_ratios, R = R):
     print('Adopting BVIJHK Extinction law and reddening ratio from Fouque (2007): \n')
     print ('Bands \t Extinction \t Reddening ratio \n \t A(x)/A(v) \t R(x) for E(B-V)')
     for i in mag:
-        print(i,'\t', extinction_ratios[i], '\t \t', R[i], '\n')
+        print(i,'\t', A[i], '\t \t', R[i], '\n')
     return A, R 
 #####################################################################
-def extinction(data, R=R, mag = mag):
+def bandwise_extinction(data, R=R, mag = mag, p=p):
     #converts reddening into extinction
     extinction = pd.DataFrame({'name': data['name'], 'logP': data['logP'], 'EBV': data['EBV']})
     for i in mag:
         extinction['A_'+i]=data['EBV']*R[i]
-    print(extinction.head())
-    print('###'*30)
+    if p ==1:
+        print(extinction.head())
+        print('###'*30)
     return extinction
 #####################################################################
 def absolute_magnitude(data, R=R, mag=mag, dis_flag=dis_flag, dis_list=dis_list, k=k):
@@ -58,9 +59,9 @@ def absolute_magnitude(data, R=R, mag=mag, dis_flag=dis_flag, dis_list=dis_list,
             else:
                 absolute[f'M_{m}{dis_flag[d]}'] = data[f'{m}_mag'] - data[dis_list[d]]
                 
-                
-    print(absolute.head())
-    print('###' * 30)
+    if p==1:
+        print(absolute.head())
+        print('###' * 30)
     return absolute
 #####################################################################
 def true_absolute_magnitude(absolute, extinction, mag=mag, dis_flag=dis_flag, dis_list=dis_list):
@@ -69,49 +70,60 @@ def true_absolute_magnitude(absolute, extinction, mag=mag, dis_flag=dis_flag, di
         tabsolute[dis] = absolute[dis]    
         for i,m in enumerate(mag):
                 tabsolute[f'M_{m}0{dis_flag[d]}'] = absolute[f'M_{m}{dis_flag[d]}'] - extinction['A_'+m]    
-    print(tabsolute.head())
-    print('###'*30) 
+    if p==1:
+        print(tabsolute.head())
+        print('###'*30) 
     return tabsolute
 #####################################################################
-def reddening_free(absolute, R=R, mag=mag, dis_flag=dis_flag):
+def reddening_free(absolute, tabsolute, R=R, mag=mag, dis_flag=dis_flag):
     wesen = pd.DataFrame({'name': absolute['name'], 'logP': absolute['logP'], 'EBV': absolute['EBV']})
+    #print(R, '\n')
     for d,dis in enumerate(dis_flag):
         wesen[dis_list[d]] = absolute[dis_list[d]]
-        for c,m in enumerate(mag):
-            for a,c1 in enumerate(mag):
-                for b,c2 in enumerate(mag[a+1:]):
+        for a,c1 in enumerate(mag):
+            for b,c2 in enumerate(mag[a+1:]):
+                for c,m in enumerate(mag):
                     wes_str = m+c1+c2+dis
-                    Rm12 = R123(m,c1,c2)
+                    Rm12 = R123(m,c1,c2, R)
+                    #print(f'{wes_str}: {Rm12}', '\n')
                     wesen[wes_str] = absolute[f'M_{m}{dis}'] - Rm12*(absolute[f'M_{c1}{dis}'] - absolute[f'M_{c2}{dis}'])
-                    print(f'{m+c1+c2}: {Rm12}')
-                    #wesen[wes_str] = absolute[f'M_{m}0{dis}']- Rm12*(absolute[f'M_{c1}0{dis}']- absolute[f'M_{c2}0{dis}'])
-    print(wesen.head())
-    print('###'*30)
+                    wesen[wes_str+'0'] = tabsolute[f'M_{m}0{dis}']- Rm12*(tabsolute[f'M_{c1}0{dis}']- tabsolute[f'M_{c2}0{dis}'])
+                if p==1:
+                    print([f'{x+c1+c2}: {R123(x,c1,c2) :.3f}' for x in mag])
+    if p==1:
+        print(wesen.head())
+        print('###'*30)
     return wesen
 #####################################################################
-def transformation(data, R=R, A=extinction_ratios, mag=mag, dis_flag=dis_flag, dis_list=dis_list, s=s, z=z):
-    A, R = extinction_law(mag = mag, A = extinction_ratios, R = R) # converts Fouque (2007) extinction law into corresponding reddening ration
-    print(' \n Reddening ratio values will be multiplied with E(B-V) values to yield extinction in each band for individual Cepheid along the respective line-of-sight.  \n')
-    print('###'*30)
-    print('\nApparent magnitude transformed into absolute magnitude and weseheit magnitude using the Galactic extinction law, Reddenings (EBV) and Distance modulus (mu).\n M  = m - mu \n M0 = m - mu - R*EBV \n W  = m - mu - R*(m1-m2) \n')
+def transformation(data, R=R, A=fouque_extinction_ratios, mag=mag, dis_flag=dis_flag, dis_list=dis_list, s=s, z=z):
+    if p==1:
+        A, R = extinction_law(mag = mag, A = A, R = R) # converts Fouque (2007) extinction law into corresponding reddening ration
+        print(' \n Reddening ratio values will be multiplied with E(B-V) values to yield extinction in each band for individual Cepheid along the respective line-of-sight.  \n')
+        print('###'*30)
+        print('\nApparent magnitude transformed into absolute magnitude and weseheit magnitude using the Galactic extinction law, Reddenings (EBV) and Distance modulus (mu).\n M  = m - mu \n M0 = m - mu - R*EBV \n W  = m - mu - R*(m1-m2) \n')
     if z==1:
         input('\n')
     data = data
-    print('###'*30)
-    print('Apparent magnitude')
-    print(data.head())
-    print('###'*30)
-    print('Absolute magnitude for each band \n')
+    if p==1:
+        print('###'*30)
+        print('Apparent magnitude')
+        print(data.head())
+        print('###'*30)
+        print('Absolute magnitude for each band \n')
     abs_data = absolute_magnitude(data)    
-    print('Calculated extinction for each band \n')
-    ext_data = extinction(data)
-    print('True absolute magnitude for each band \n')
+    if p==1:
+        print('Calculated extinction for each band \n')
+    ext_data = bandwise_extinction(data)
+    if p==1:
+        print('True absolute magnitude for each band \n')
     tabs_data = true_absolute_magnitude(abs_data, ext_data)
-    print('Wesenheit magnitude for each band \n')
-    wes_data = reddening_free(abs_data)
+    if p==1:
+        print('Wesenheit magnitude for each band \n')
+    wes_data = reddening_free(abs_data,tabs_data, R = R)
     merged_data= pd.merge(abs_data, tabs_data, on=['name','logP', 'EBV', f'{dis_list[0]}'])
     merged_data = merge_12(merged_data, wes_data, on = ['name','logP', 'EBV', f'{dis_list[0]}'])
     if s==1:
+        data..to_csv(data_out+process_step[0]+str(len(data))+ file_name +'.csv')
         abs_data.to_csv(data_out+process_step[0]+str(len(abs_data))+ '_abs_data'+'.csv')
         ext_data.to_csv(data_out+process_step[0]+ str(len(ext_data))+ '_ext_data'+'.csv')
         tabs_data.to_csv(data_out+process_step[0]+str(len(tabs_data))+ '_true_abs_data'+'.csv')

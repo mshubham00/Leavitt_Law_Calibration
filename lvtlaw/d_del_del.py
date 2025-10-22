@@ -112,6 +112,8 @@ def plotdeldel6(data, dmc, col, dis, flag, ab, s):
             ax.plot([x[j], x[j]], [y[j], pred[j]], color='red', linestyle='--', alpha=0.5, label=label)
         ax.set_ylabel(f'PL Residue: $\\Delta M_{m+ab}$')
         ax.set_xlabel(f'PW Residue: $\\Delta$ {wes_str}')
+        for k in range(len(data)):
+            ax.annotate('%i'%(k), xy =(x.iloc[k], y.iloc[k]), fontsize = 11) 
         #ax.grid(True)
         ax.tick_params(direction='in', top=True, right=True)
         ax.legend()   

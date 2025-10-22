@@ -122,7 +122,6 @@ def plotPL6(merged_data, reg, ab, dis=dis_flag[0], s=s):
         # Clean up spines
         for spine in ax.spines.values():
             spine.set_visible(False)
-
     # Set x-axis label only on bottom row
     for i, ax in enumerate(axs):
         if i >= 3:  # Bottom row
@@ -146,7 +145,6 @@ def plotPW6(data, reg, col, dis=dis_flag[0], s=s):
         w_str = m + col
         y = data[w_str + dis]
         p1, _ = pr_value(x, y)
-
         # Coefficients from regression
         if dis == '_i':
             alpha = reg[w_str].iloc[4]
@@ -154,7 +152,6 @@ def plotPW6(data, reg, col, dis=dis_flag[0], s=s):
         else:
             alpha = reg[:4][w_str].iloc[0]
             gamma = reg[:4][w_str].iloc[1]
-
         pred = data['p_' + w_str + dis]
         residuals = data['r_' + w_str + dis]
         r_std = round(residuals.std(ddof=0), 3)
@@ -193,15 +190,12 @@ def plotPLWres(res, reg, ab, col='', dis=dis_flag[0],s=s):
     axs_res = axs_res.flatten()
     for i, m in enumerate(mag[0:6]):
         if dis == '_i':
-            alpha_e = round(reg[m+ab].iloc[6], 3)
-            gamma_e = round(reg[m+ab].iloc[7], 3)
+            alpha_e = round(reg[m+ab+col].iloc[6], 3)
+            gamma_e = round(reg[m+ab+col].iloc[7], 3)
         else:
-            alpha_e = round(reg[m+ab].iloc[2], 3)
-            gamma_e = round(reg[m+ab].iloc[3], 3)
-        if col == '':
-            residuals = res['r_' + m + ab + dis]
-        else:
-            residuals = res['r_' + m + col + dis]
+            alpha_e = round(reg[m+ab+col].iloc[2], 3)
+            gamma_e = round(reg[m+ab+col].iloc[3], 3)
+        residuals = res['r_' + m + ab + col + dis]
         ax_res = axs_res[i]
         stdd = round(residuals.std(ddof=0), 3)
         ax_res.plot(x, residuals, col_dot[i], label=f'{m+ab} $ \\sigma = $ {stdd}')

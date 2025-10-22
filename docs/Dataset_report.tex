@@ -1,0 +1,636 @@
+\documentclass[12pt,a4paper]{article}
+
+% Language setting
+\usepackage[british]{babel}
+% Set page size and margins
+\usepackage[a4paper,top=2cm,bottom=2cm,left=2.5cm,right=2.5cm,marginparwidth=1.75cm]{geometry}
+
+%----------- APA style references & citations (starting) ---
+% Useful packages
+%\usepackage[natbibapa]{apacite} % APA-style citations.
+
+\usepackage[style=apa, backend=biber]{biblatex} % APA 7th edition style citations using biblatex
+\addbibresource{references.bib} % Your .bib file
+
+% Formatting DOI in APA-7 style
+%\renewcommand{\doiprefix}{https://doi.org/}
+
+% Add additional APA 7th edition requirements
+\DeclareLanguageMapping{british}{british-apa} % Set language mapping
+\DeclareFieldFormat[article]{volume}{\apanum{#1}} % Format volume number
+
+% Modify 'and' to '&' in the bibliography
+\renewcommand*{\finalnamedelim}{%
+  \ifnumgreater{\value{liststop}}{2}{\finalandcomma}{}%
+  \addspace\&\space}
+  
+%----------- APA style references & citations (ending) ---
+
+
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{hyperref}
+%\usepackage{orcidlink}
+\usepackage[title]{appendix}
+\usepackage{mathrsfs}
+\usepackage{amsfonts}
+\usepackage{booktabs} % For \toprule, \midrule, \botrule
+\usepackage{caption}  % For \caption
+\usepackage{threeparttable} % For table footnotes
+\usepackage{algorithm}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
+\usepackage{listings}
+\usepackage{enumitem}
+\usepackage{chngcntr}
+\usepackage{booktabs}
+\usepackage{lipsum}
+\usepackage{subcaption}
+\usepackage{authblk}
+\usepackage[T1]{fontenc}    % Font encoding
+\usepackage{csquotes}       % Include csquotes
+\usepackage{diagbox}
+
+% Customize line spacing
+\usepackage{setspace}
+\onehalfspacing % 1.5 line spacing
+
+% Redefine section and subsection numbering format
+\usepackage{titlesec}
+\titleformat{\section} % Redefine section numbering format
+  {\normalfont\Large\bfseries}{\thesection.}{1em}{}
+  
+% Customize line numbering format to right-align line numbers
+\usepackage{lineno} % Add the lineno package
+\renewcommand\linenumberfont{\normalfont\scriptsize\sffamily\color{blue}}
+\rightlinenumbers % Right-align line numbers
+
+%\linenumbers % Enable line numbering
+
+% Define a new command for the fourth-level title.
+\newcommand{\subsubsubsection}[1]{%
+  \vspace{\baselineskip}% Add some space
+  \noindent\textbf{#1\\}\quad% Adjust formatting as needed
+}
+% Change the position of the table caption above the table
+\usepackage{float}   % for customizing caption position
+\usepackage{caption} % for customizing caption format
+\captionsetup[table]{position=top} % caption position for tables
+
+% Define the unnumbered list
+\makeatletter
+\newenvironment{unlist}{%
+  \begin{list}{}{%
+    \setlength{\labelwidth}{0pt}%
+    \setlength{\labelsep}{0pt}%
+    \setlength{\leftmargin}{2em}%
+    \setlength{\itemindent}{-2em}%
+    \setlength{\topsep}{\medskipamount}%
+    \setlength{\itemsep}{3pt}%
+  }%
+}{%
+  \end{list}%
+}
+\makeatother
+
+% Suppress the warning about \@parboxrestore
+\pdfsuppresswarningpagegroup=1
+
+
+%-------------------------------------------
+% Paper Head
+%-------------------------------------------
+\title{COMPOSITE WESENHEIT BASED GALACTIC BVIJHK LEAVITT LAW CALIBRATION}
+
+\author[1]{Shubham Mamgain}
+\author[2]{Dr. Jesper Storm}
+\author[1,2]{Prof. Dr. Maria Rosa Cioni}
+\affil[1]{\small \textit{Institute of Physics and Astronomy, University of Potsdam}}
+\affil[2]{\small \textit{Dwarf Galaxy and Galactic Halo, AIP Potsdam}}
+
+\date{16.10.2025}  % Remove date
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+    From the definition of total-to-selective absorption ratio ($R^{12}_\lambda$), composite wesenheit ($W^{12}_\lambda$) are derived for BVIJHK photometry of Galactic Cepheids. Fouque's extinction law ($A^V_\lambda$) adjusted to achieve near zero deviation between apparent and true wesenheit magnitudes for all the pair combinations of color indexes when $R^{BV}_V = 3.23$. Adjusted extinction law used for determining BVIJHK extinction ($A_\lambda$) of 62 Galactic Cepheid available with Gaia distance ($\mu$) and Fernie reddening ($E_{BV}$). \\
+
+Method: Period-Luminosity relation residuals ($\Delta M^0_\lambda$) correlated with residuals of respective Period-Wesenheit relations ($\Delta W^{12}_\lambda$) to create degeneracy between extinction and distance uncertainities. Metallacity is not considered in this study. Each residual correlation suggests bandwise extinction correction ($\delta A^{12}_\lambda$) corresponds to particular color of wesenheit function $W^12$. Stepwise adjustment of distance $\delta \mu$ converges reddening error across the bands ($\delta E^{BV}_\lambda$), yielding a unique distance-reddening error pair for each individual Cepheid. \\
+ 
+Result: BVIJHK Leavitt Law calibrated with best picked wesenheit colors (V-I), (V-K) and (J-K). 
+(J-K) calibrated K-band relation with IRSB and Gaia distances are: 
+$K^{12}_{IRSB} = -3.016771 (logP-1) ( \pm 0.023477) + -5.693494 (\pm 0.007047)$    
+$K^{12}_{Gaia} = -2.977082 (logP-1) (\pm 0.074146) + -5.884299 (\pm 0.022296)$
+Distance to the megallanic clouds (LMC and SMC) are estimated to be .  \\
+
+Discussion: Deviation in error-pairs for different wesenheit color indexes is discussed. Distance of 17 Cluster Cepheids are compared with calibrated distance.
+   
+\end{abstract}
+\textbf{Keywords: } Interstellar Extinction Law: Wesenheit Magnitude: Galactic Cepheids: Leavitt Law: % must put \@keyword or \@wordskey or directly the text of the keywords
+
+%-------------------------------------------
+% Paper Body
+%-------------------------------------------
+%--- Section ---%
+
+\begin{table}[h]
+    \centering
+    \small
+    \renewcommand{\arraystretch}{1.5}
+    \caption*{Symbols and their descriptions}
+    \begin{tabular}{ll|ll}
+    \hline
+    Symbol & Description & Symbol & Description \\ \hline
+    $m_\lambda$ & Apparent Magnitude  & $\alpha_{\lambda}$ & Period Luminosity Slope \\
+    $\mu$ & Distance Modulus & $\gamma_{\lambda}$ & Period Luminosity Intercept \\
+    $M_\lambda$ & Absolute Magnitude  & $\Delta W^{12}_{\lambda}$ & Period Wesenheit Residuals \\
+    $E_{BV}$ & Interstellar Reddening  & $\alpha^{12}_{\lambda}$ & Period Wesenheit Slope \\
+    $A_\lambda$ & Interstellar Extinction & $\gamma^{12}_{\lambda}$ & Period Wesenheit Intercept \\
+    $R_\lambda^{12}$ & Selective-to-total Absorption & $\rho^{12}_{\kappa \lambda}$ & Residual Correlation Slope  \\
+    $M_\lambda^0$ & True Absolute Magnitude  & $\Delta^{12}_{\kappa \lambda, \mu}$ & PL-PW Correlation Residuals  \\
+    $W_\lambda^{12}$ & Wesenheit Magnitude  & $\delta A^{12}_{\kappa \lambda, \mu}$ & Extinction Correction  \\
+    $\Delta M_{\lambda}$ & Period Luminosity Residuals  & $\delta E^{12}_{\kappa \lambda, \mu}$ & Reddening Correction  \\ \hline
+    \end{tabular}
+    \label{tab:symbols}
+    \end{table}
+
+%--- Section ---%
+\section{Definitions}
+
+\subsection{Luminosity, Distance and Reddening}
+Luminosity is the measurement of incoming photon flux within a wavelength band, here BVIJHK bands. Light emitted by the stars $M_\lambda^0$ travel through the large distances $\mu$ and get extincted $A_\lambda$ when pass over the interstellar medium (ISM) before reaching to the observer's detector with intensity $m_\lambda$. In this framework, say, star's true absolute magnitude is $M_\lambda^0$, then equality for observed apparent magnitude would be:
+
+$$ m_\lambda = \mu + A_\lambda +  M_\lambda^0 $$
+
+On the right hand side, the first term is called distance modulus, $\mu$. In my dataset of 95 Galactic Cepheids, distances to each target calculated by two independent methods: i) InfraRed Surface Brightness (Jesper, 2011) and ii) Parallax (Gaia DR3, 2023). For the ease of calculation, distances measured in the unit of parsec get converted into dimensionless (logarithmic) units called magnitude. 
+
+\begin{align*}
+	\mu & = 5 \log D [pc] - 5
+\end{align*}
+
+ISM scatters, absorbs, and emits photons according to their chemical compositions, size and abundance of the particles; imprinting its signature on the spectrum of light at specific frequencies (or wavelengths). The reduced intensity of light within a band due to the interaction with ISM is termed as interstellar extinction. 
+
+\begin{align*}
+	A_\lambda & = m_\lambda - m_\lambda^0
+\end{align*}
+
+
+Extinction over the wavelength, for individual Cepheid, is determined from the measurement of color excess $E_{BV}$ along the line-of-sight (Fernie, 1995). Using visual Galactic reddening ratio $R_V = 3.23$ (Sandage, 2004) in the framework of Galactic extinction law, $A_\lambda/A_V$ (Fouque, 2007), interstellar extinction  for BVIJHK bands can be estimated as follow:
+
+\begin{align*}
+A_\lambda & = \frac{A_\lambda}{A_V} \times R_V \times E_{BV} \\
+\end{align*}
+
+Here, the last factor - color excess $E_{BV}$ measures the relative extinction difference between any two bands. In other terms it can also be formulated as the deviation of observed color index (B-V) from 'true' color index $(B-V)_0$:
+\begin{align*}
+E_{BV} & = (B-V) - (B-V)_0 \\
+        & = (B-B_0) - (V-V_0) \\
+        & = A_B - A_V \\
+\end{align*}
+
+The middle factor - reddening ratio, $R_V = A_V/E_{BV}$, is extinction-to-reddening ratio in visual band. In the most generalized form, if the color excess between two bands written as $E_{12} = A_{m_1} - A_{m_2}$, then the reddening ratio would be written as:
+
+$$R_\lambda^{12} = A_\lambda/E_{12}$$
+
+Color excess from one combination of bands $E_{12}$ can be transformed into any other bands combination as follows:
+
+\begin{align*}
+E_{12} & = A_{1} - A_{2} \\
+    & = R_{1}^{BV} * E_{BV} - R_{2}^{BV} * E_{BV} \\
+    & = (R_{1}^{BV} - R_{2}^{BV})*E_{BV} \\
+\end{align*}
+
+
+This leads the transformation law for reddening ratio R:
+
+\begin{align*}
+    R_\lambda^{12} = \frac{R_\lambda^{BV}}{R_1^{BV} - R_2^{BV}}
+\end{align*}
+
+Value of $R_\lambda^{BV}$ are calculated from Fouque (2007) with $R_V^{BV} = 3.23$ (Sandage, 2004):
+
+$$R_\lambda^{BV} = \frac{A_\lambda}{A_V} \times R_V^{BV} $$
+
+\begin{table}[h]
+    \centering
+    \small
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{ll|ll}
+    \hline
+    Band & $R_\lambda$ & Band & $R_\lambda$ \\ \hline  
+    B & 4.2313 & J & 0.94316 \\ 
+    V & 3.23 & H & 0.58463 \\ 
+    I & 1.96384 & K & 0.38437 \\ \hline
+    \end{tabular}
+    \label{tab:R_values}
+    \end{table}
+
+
+\subsection{Wesenheit Magnitude}
+
+Since reddening ratio, $R_\lambda^{12}$, measures the impact of interstellar medium on the incoming light, the ratio itself can be used for defining reddening-free magnitude corresponding to true absolute magnitude. It follows as :
+
+\begin{align*}
+R_\lambda^{12} & = A_\lambda / E_{12} \\
+    & = \frac{m_\lambda - m_\lambda^0}{(m_1 - m_2)-(m_1 - m_2)_0} \\
+\end{align*}
+
+On rearranging the terms, one can get
+
+\begin{align}
+m_\lambda - R_\lambda^{12}(m_1 - m_2) & = m_\lambda^0 - R_\lambda^{12}(m_1 - m_2)_0 \\
+W_\lambda^{12} & = W_0
+\end{align}
+
+Comparing the definitions of 'true' absolute magnitude with wesenheit magnitude for (B-V): 
+
+\begin{align*}
+    M_\lambda^0 & = m_\lambda - R_\lambda^{BV}*E(B-V) - \mu\\
+    W_\lambda^{BV} & = m_\lambda - R_\lambda^{BV} * (B-V) - \mu
+\end{align*}
+
+Differentiating above equations. Say, apparent luminosity are precisely measured ($\delta m_\lambda \to 0$), adopted extinction law is correct ($\delta R \to 0$), 
+might distance modulus ($\delta \mu $) and color excess ($\delta E_{BV} $) measurements could
+have error in the case of individual Cepheid. It yields
+\begin{align*}
+    \delta M_\lambda & = - ( R_\lambda^{BV}* \delta E(B-V) + \delta \mu)\\
+    \delta W_\lambda^{BV} & = - \delta \mu
+\end{align*}
+
+This pair of equations suggests that the wesenheit magnitude and absolute magnitude both are sensitive to distance error, 
+though unlike absolute magnitude, wesenheit magnitude is not affected by error in reddening.  It is an important feature of wesenheit magnitude which aids in decoupling the error budget of distance and reddenings, when applied to Cepheids.
+
+\section{Galactic Cepheids: Leavitt Law }
+\begin{figure}
+	\centering
+	% include first image
+	\includegraphics[width=\linewidth]{../Notebooks/Gaia/pics/2extinction_scatter.pdf}  
+	\label{fig:PLrelation}
+	%\begin{center}
+	\caption{\small BVIJHK Leavitt Law for 95 Cepheids. Y-axis is period, X-axis starts with apparent
+		magnitude (m) shifted by 15 mag, then distance modulus, calculated extinction in each band
+		and right most is the absolute magnitude.}
+\end{figure} 
+\begin{figure}
+	\centering
+	% include first image
+	\includegraphics[width=0.8\linewidth]{../Notebooks/Gaia/pics/3wesenheit_comparison.pdf}  
+	\label{fig:PWrelation}
+	%\begin{center}
+	\caption{\small BVIJHK Period Wesenheit relations with respect to different color indexes. Scattered colored region covers area between P$W_B$ and P$W_K$ relations. }
+\end{figure} 
+
+Classical Cepheids follow a linear trend between their pulsation period (logP) and true luminosity ($M_\lambda^0$) which can be modelled as :
+
+$$\bar{M}_\lambda = \alpha_\lambda (logP) + \gamma_\lambda$$
+
+This linear regression equation yields the absolute magnitude ($\bar{M}_\lambda$) of any distant Cepheid from its pulsation period. My dataset contains BVIJHK bands photometry of Galactic Cepheids, resulting 6 Leavitt Laws modelled by two parameters: slope ($\alpha_\lambda$) and intercept ($\gamma_\lambda$). Wesenheit magnitude based Leavitt Law could be derived by choosing a reference color index ($m_1 - m_2$). For each band, reddening free instances of Leavitt Laws would be modelled as: 
+
+$$\bar{W}_\lambda^{12} = \alpha_\lambda^{12} (logP) + \gamma_\lambda^{12}$$
+
+In this way, there can be 15 pair combinations of color indexes for BVIJHK photometry. For six observed bands with each color index gives 90 composite wesenheit magnitudes ($W_\lambda^{12}$).   
+
+The deviation of observed luminosity ($M_\lambda^0$) from the modelled value ($\bar{M}_\lambda$) is denoted by $\Delta M_\lambda$
+
+\begin{align*}
+    \Delta M_\lambda = M_\lambda^0 - \bar{M}_\lambda
+\end{align*}
+
+Similarly, deviation of wesenheit luminosity from the PW relation would be:
+
+\begin{align*}
+    \Delta W_\lambda^{12} = W_\lambda^{12} - \bar{W}_\lambda^{12}
+\end{align*}
+
+To get an overview, two kinds of magnitudes calculated for each band. The resulting magnitudes (6+90) are correlated with the pulsation period of Cepheids which yields a linear equation of two variables with slope, intercept and residual of each Cepheid from the model line.
+\begin{center}
+    PL relation: $\alpha_\lambda$ | $\gamma_\lambda$ | $\Delta_\lambda $ |  $\implies$  $6$ \\
+    PW relation: $\alpha_\lambda^{12}$ | $\gamma_\lambda^{12} $  | $\Delta_\lambda^{12}$ $\implies$  $90$
+\end{center} 
+
+
+%--- Section ---%
+\subsection{PL-PW Residual}
+
+Crucial difference between PW and PL relation is PW driven parameters are free from reddening errors, but not the PL ones. Correlation of PW vs PL residues ($\Delta -\Delta$) gives quantitative insights about the reddening and modulus error budget. To develop a mathematical framework, two cases need to be considered:
+
+\textbf{i) When there is error only in distance, ($\delta \mu \neq 0$, $\delta E_{12}= 0$):} 
+\begin{center}
+Deviation in PL : $\Delta_\lambda + \delta \mu$ \\
+Deviation in PW : $\Delta_\lambda^{12} + \delta \mu$
+\end{center}
+
+\textit{Error in distance deviates the star along the both axes equally from its original position}, it means data with least / no reddening error would perfectly aligned to the line with slope 1. This can be observed with infrared bands as reddening errors must be the least for longer wavelength.
+
+\textbf{ii) When there is error only in reddening, ($\delta E_{12} \neq 0$, $\delta \mu = 0$): }
+\begin{center}
+Deviation in PL : $\Delta_\lambda + \delta E_{12}$ \\
+Deviation in PW : $\Delta_\lambda^{12}$
+\end{center}
+
+In the reddening error case, only PL relation got affected but not the PW relation, as the wesenheit magnitude is reddening independent by definition. It means, star would move along the PL residue axis, but not to the other one. This implies \textit{vertical shift of the star in $\Delta - \Delta$ plots comes from the reddening error}.
+
+\section{$\Delta_\lambda$ - $\Delta_W$ Correlation}
+
+In the generalised form, residuals of PL relations ($\Delta M_\lambda$) plotted against the PW residuals ($\Delta W_\kappa^{12}$), yielding slopes for the regression lines ($\rho_{\kappa \lambda}^{12}$) with zero intercept. Residuals with respect to regression line is denoted by:
+
+\begin{align*}
+       \Delta_{\kappa \lambda}^{12} = \Delta_\lambda - \rho_{\kappa \lambda}^{12} \times \Delta_\kappa^{12}
+\end{align*}
+
+
+
+
+This vertical deviation from the regression line estimates the extinction correction required in the respective band, without considering any correction in the distance modulus.
+
+\begin{align*}
+       \delta A_{\kappa \lambda}^{12} (0) = \Delta_{\kappa \lambda}^{12} 
+\end{align*}
+
+
+
+On normalising with $R_\lambda^{12}$, extinction corrections ($\delta A^{12}_{\kappa \lambda }$) transformed into reddening corrections $\delta E_{\kappa \lambda}^{12}$ as follow: 
+
+\begin{align*}
+\delta E^{12}_{\kappa \lambda} (0) = \frac{\delta A^{12}_{\kappa \lambda }}{R_\lambda^{12}}
+\end{align*}
+
+Assuming adopted Galactic extinction law is true and distances of individual targets are precisely known. For such case, reddening is the only source of error when estimating absolute magnitude and the corrections suggested by each band must be agreeing with each other. 
+
+\begin{align*}
+    \delta E^{12}_{\kappa B } = \delta E^{12}_{\kappa V} = ... = \delta E^{12}_{\kappa K} = \delta E^*_{12}
+\end{align*}
+
+For the correct distances, there will be no dispersion in reddening corrections deduced from different bands. However, existing deviation in estimated reddening corrections from different bands suggest a correction in distance modulus. 
+
+\subsection{Distance - Reddening Correction}
+
+To estimate the error in distances, a range of correction ($\delta \mu$) possibilities are assumed. For each possibility, reddening corrections for each band get estimated. That particular modulus correction for which estimated reddening corrections being consistent in all the bands (or with least variation); physically, that will be the most optimal correction solution pair.
+
+Variation in extinction ($\delta A^{12}_{\kappa \lambda}$) due to distance modulus correction would be calculated as following:
+ {\begin{align*}
+     \delta A_{\kappa \lambda}^{12} (\delta \mu) & = (\Delta_\lambda + \delta \mu) - \rho_{\kappa \lambda}^{12} \times (\Delta_\kappa^{12} + \delta \mu) \\
+     & = \delta A_{\kappa \lambda}^{12}(0) + \delta \mu( 1 - \rho_{\kappa \lambda}^{12} )
+ \end{align*}}
+
+Corresponding reddening corrections would be 
+
+
+ {\begin{align*}
+     \delta E_{\kappa \lambda}^{12} (\delta \mu) = \delta E_{\kappa \lambda}^{12} (0) + \frac{\delta \mu( 1 - \rho_{\kappa \lambda}^{12} )}{R_{\lambda}^{12}}
+ \end{align*}}
+
+A suitable distance-reddening correction pair determined by selecting that value of $\delta \mu$ for which dispersion in estimated reddening corrections from BVIJHK bands would be the least. 
+
+\begin{align*}
+    RMS(\delta E (\delta \mu)) = \frac{1}{6}\sum_{\lambda} (\delta E_{\kappa \lambda}^{12} (\delta \mu) - <\delta E_{\kappa \lambda}^{12} (\delta \mu)>_\lambda)^2
+\end{align*}
+
+\begin{align*}
+    min(RMS(\delta E (\delta \mu))) \implies (\delta \mu^*, \delta E^*_{BV})
+\end{align*}
+
+These corrections will be adjusted with the original data as follow. 
+
+
+\begin{align*}
+    M_\lambda^* = M_\lambda^0 + \delta A_\lambda^* + \delta \mu^*
+\end{align*}
+
+\subsection{Madore Approach}
+
+In his analysis, Madore (2017) used $W_V^{VI}$ as a reference for reddening free magnitude. He correlated the PW residuals ($\Delta_V^{VI}$) 
+with BVRIJHK PL residuals ($\Delta_\lambda$) which corresponds to slopes ($\rho_{V \lambda}^{VI}$) and residuals ($\Delta^{VI}_{V \lambda }$). 
+
+\begin{figure}
+	\centering
+	% include first image
+	\vspace{-3.5cm}
+	\includegraphics[width=0.8\linewidth]{../Notebooks/Gaia/pics/4residueVVI.pdf}  
+	\label{fig:del_delM}
+	%\begin{center}
+	\caption{\small BVIJHK Period Wesenheit relations with respect to different color indexes. Scattered colored region covers area between P$W_B$ and P$W_K$ relations. }
+\end{figure} 
+
+
+Say, $\delta \mu ^*$ is the correction required in distance modulus, then extinction corrections derived by Madore (2017) are:
+
+\begin{align*}
+     \delta A^{VI}_{V \lambda} (\delta \mu^*) = \delta A_{V \lambda}^{VI}(0) + \delta \mu^*( 1 - \rho_{V \lambda}^{VI} )
+\end{align*}
+
+By dividing with $R_\lambda^{VI}$, residuals transformed into reddening corrections $\delta E_{V \lambda}^{VI}$
+
+\begin{align*}
+    \delta E_{\lambda \lambda}^{VI} (\delta \mu^*) & = \frac{\delta A_{\lambda \lambda}^{VI} (\delta \mu^*)}{R_\lambda^{VI}}\\
+ \end{align*}
+ 
+ Converting $E_{VI}$ into $E_{BV}$
+ \begin{align*}
+     \delta E_{\lambda \lambda}^{BV}(\delta \mu^*) & = \frac{\delta A_{\lambda \lambda}^{VI} (\delta \mu^*)}{({R^{BV}_V - R^{BV}_I})R_\lambda^{VI}} \\
+     & = \frac{\delta A_{\lambda \lambda}^{VI}(\delta \mu^*)}{R^{BV}_V}  
+ \end{align*}
+ 
+
+Implimenting these error corrections of reddenings and distances in his dataset of 59 Cepheids, he derived the Leavitt Laws as  follow:
+
+\subsection{My Approach}
+
+Instead of $W_V^{VI}$, I have  used $W_\lambda^{VI}$ - reddening free magnitude for respective band $m_\lambda$. The reason is the definition of wesenheit function. 
+Reddening free magnitude for a given band must be derived from $R_\lambda^{12}$, not from $R_V^{12}$. $R_V^{VI}$ gives reddening free 
+magnitude corresponds to V band only for $(V-I)$ color index. For B band weseheit magnitude, $R_B^{VI}(V-I)$ would be subtracted from $B$. 
+
+\begin{figure}
+	\centering
+	% include first image
+	\vspace{-3.5cm}
+	\includegraphics[width=0.8\linewidth]{../Notebooks/Gaia/pics/4residueMVI.pdf}  
+	\label{fig:del_delM}
+	%\begin{center}
+	\caption{\small BVIJHK Period Wesenheit relations with respect to different color indexes. Scattered colored region covers area between P$W_B$ and P$W_K$ relations. }
+\end{figure} 
+
+
+This imples PW residuals in my approach for each band $\Delta_\lambda^{VI}$ will be 
+slighly different than $\Delta_V^{VI}$ such that: 
+
+
+\begin{align*}
+    \Delta_\lambda^{VI} & = \Delta_V^{VI}  + \delta_V^\lambda \Delta_\lambda^{VI} 
+\end{align*}
+
+Difference between the Madore and my PW residues is represented by the 
+difference operator $\delta_V^\lambda$ and calculated as follow:
+
+\begin{align*}
+    \delta_V^\lambda \Delta_\lambda^{VI} & = \Delta_\lambda^{VI} - \Delta_V^{VI}\\ 
+    & = (W_\lambda^{VI} - \bar{W}_\lambda^{VI}) - (W_V^{VI} - \bar{W}_V^{VI}) \\
+    & = (W_\lambda^{VI} - W_V^{VI}) - (\bar{W}_\lambda^{VI} - \bar{W}_V^{VI}) \\
+    & = ((M_\lambda - M_V) - (R_\lambda^{VI}-R_V^{VI})(V-I)) - ((\alpha_\lambda^{VI}-\alpha_V^{VI}) \log P + (\gamma_\lambda^{VI} - \gamma_V^{VI})) \\
+\end{align*}
+
+This deviation in PW residues affect the slope of delta-delta plot $\rho$, which means correlation residuals $\Delta_{\kappa \lambda}^{12}$ will 
+also be affected. Madore's correlation residuals are denoted by $\Delta_{V \lambda}^{VI}$ as he was correlating $\Delta M_\lambda$ with $\Delta W^{VI}_V$. 
+Instead, I have used $\Delta_{\lambda \lambda}^{VI}$ to derive the 
+corrections as I have correlated  $\Delta M_\lambda$ with $\Delta W^{VI}_\lambda$. Both terms
+can be related as:
+
+\begin{align*}
+    \Delta_{\lambda \lambda}^{VI} & = \Delta_{V \lambda}^{VI} + \delta_{V \lambda}^{\lambda \lambda} \Delta_{\lambda \lambda}^{VI}  
+\end{align*}
+
+Difference between both kinds of correlation residues is:
+
+\begin{align*}
+    \delta_{V \lambda}^{\lambda \lambda} \Delta_{\lambda \lambda}^{VI} & = \Delta_{\lambda \lambda}^{VI} - \Delta_{V \lambda}^{VI} \\
+    & = (\Delta_\lambda - \rho_{\lambda \lambda}^{VI} \times \Delta_\lambda^{VI}) - (\Delta_\lambda - \rho_{V \lambda}^{VI} \times \Delta_V^{VI}) \\
+    & = \rho_{V \lambda}^{VI} \times \Delta_V^{VI} - \rho_{\lambda \lambda}^{VI} \times \Delta_\lambda^{VI} \\
+%& = \rho_{V \lambda}^{VI} \times \Delta_V^{VI} - (\rho_{V \lambda}^{VI} + \delta^{\lambda \lambda}_{V \lambda} \rho_{\lambda \lambda}^{VI}) \times (\Delta_V^{VI}  + \delta_V^\lambda \Delta_\lambda^{VI}) \\
+%& = - \rho_{V \lambda}^{VI} \times \delta_V^\lambda \Delta_\lambda^{VI} - \delta^{ \lambda  \lambda }_{V  \lambda} \rho_{ \lambda \lambda}^{VI} \times \Delta_\lambda^{VI}\\
+\end{align*}
+
+Since deviation is non-zero, derived extinction corrections would be different and could be formulated as:
+
+\begin{align*}
+    \delta A_{\lambda \lambda}^{VI} (\delta \mu^*) &= \Delta_{\lambda \lambda}^{VI} + \delta \mu^*( 1 - \rho_{\lambda \lambda}^{VI} ) \\
+    & =  \Delta_{V \lambda}^{VI} + \delta \mu^*( 1 - \rho_{\lambda \lambda}^{VI} ) + \delta_{V \lambda}^{\lambda \lambda} \Delta_{\lambda \lambda}^{VI} \\
+    & =  \delta A_{V \lambda}^{VI}(\delta \mu^*) + \delta_{V \lambda}^{\lambda \lambda} (\Delta_{\lambda \lambda}^{VI} - \delta \mu^* \times  \rho_{\lambda \lambda}^{VI})\\
+\end{align*}
+
+The conversion of extinction error into reddening error required scaling with $R^{-1}$. 
+Hence reddening correction would be: 
+
+\begin{align*}
+    \delta E_{\lambda \lambda}^{BV}(\delta \mu^*)  & = \frac{\delta A_{\lambda \lambda}^{VI}(\delta \mu^*)}{R^{BV}_V}  
+\end{align*}
+ 
+To compare, Madore's result were:  
+\begin{align*}
+    \delta E_{V \lambda}^{BV}(\delta \mu^*) & = \frac{\delta A_{V \lambda}^{VI}(\delta \mu^*)}{R^{BV}_\lambda} 
+\end{align*}
+
+The difference between both reddening errors is: 
+\begin{align*}
+    \delta E_{\lambda \lambda}^{VI}(\delta \mu^*) -  \delta E_{V \lambda}^{VI}(\delta \mu^*) & = \frac{\delta A_{\lambda \lambda}^{VI}(\delta \mu^*) - \delta A_{V \lambda}^{VI}(\delta \mu^*)}{R^{VI}_\lambda} \\
+    & = \frac{(\Delta_{\lambda \lambda}^{VI} + \delta \mu^*  (1-\rho_{\lambda \lambda}^{VI}))- (\Delta_{V \lambda}^{VI} + \delta \mu^* (1- \rho_{V \lambda}^{VI})}{R^{VI}_\lambda} \\
+    & = \frac{( \Delta_\lambda^{VI}  \times \rho_{\lambda \lambda}^{VI} - \Delta_V^{VI} \times \rho_{V \lambda}^{VI}) - \delta \mu^* \times ( \rho_{\lambda \lambda}^{VI} - \rho_{V \lambda}^{VI})}{R^{VI}_\lambda} \\
+    & = \frac{ (\Delta_\lambda^{VI}  - \delta \mu^* )\times  \rho_{\lambda \lambda}^{VI}  - (\Delta_V^{VI}  - \delta \mu^* )\times \rho_{V \lambda}^{VI} }{R^{VI}_\lambda} \\
+\end{align*}
+
+It can be noticed that the deviation in reddening corrections coming from the choice of wesenheit function. 
+
+\subsection{Physical Significance of $\rho$}
+
+Slope of PL-PW residual correlation plots provides crucial information about the error contributions. In the absence of extinction error, distance remains the only source of error, it implies both PL and PW residual affected equally making then align along the slope 1. This can be observed with longer wavelength data, like in K band. 
+
+$$\lim_{\lambda \to K} \rho (\lambda) = 1$$
+
+This can be noticed for $\rho_{\lambda \lambda}^{VI}$ in below table but not for $\rho_{V \lambda}^{VI}$
+ 
+\begin{table}[h]
+	\centering
+	\small
+	\renewcommand{\arraystretch}{1.5}
+	\begin{tabular}{|c|cc|cc|}
+		\hline
+  	$\Delta_\lambda - \Delta_\lambda^{VI}$ &        $\rho_{\lambda \lambda}^{VI}$ (Gaia) &    Error & $\rho_{\lambda \lambda}^{VI}$ (IRSB) &    Error \\
+\hline
+	B,BVI &  0.797956 &  0.077717 &  0.941061 &  0.050271 \\
+	V,VVI &  0.849508 &  0.060454 &  0.955163 &  0.039847 \\
+	I,IVI &  0.908501 &  0.036756 &  0.972739 &  0.024227 \\
+	J,JVI &  0.977134 &  0.019786 &  0.997045 &  0.011922 \\
+	H,HVI &  0.984627 &  0.012834 &  0.998183 &  0.007469 \\
+	K,KVI &  0.992178 &  0.008549 &  0.999617 &  0.004928 \\
+    \hline
+  	$\Delta_\lambda - \Delta_V^{VI}$ &        $\rho_{V \lambda}^{VI}$ (Gaia) &    Error & $\rho_{V \lambda}^{VI}$ (IRSB) &    Error \\
+\hline
+    B,VVI &  	0.787008 		&  0.081522 &  0.966477 &  0.054158 \\
+	V,VVI &  0.849508 &  0.060454 &  0.955163 &  0.039847 \\
+	I,VVI &  0.908501 &  0.036756 &  0.972739 &  0.024227 \\
+	J,VVI &  0.843314 &  0.035688 &  0.956423 &  0.024787 \\
+	H,VVI &  0.808435 &  0.032532 &  0.945171 &  0.023823 \\
+	K,VVI &  0.799338 &  0.033288 &  0.940388 &  0.024455 \\
+\hline
+
+	\end{tabular}
+	\label{tab:symbols}
+\end{table}
+
+\section{Correction Analysis}	
+	\begin{figure}[h]
+		\centering
+		\begin{subfigure}[b]{0.45\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{../Notebooks/Gaia/pics/stars/4ADGem.pdf}
+			\caption{AD Gem}
+		\end{subfigure}
+		\quad
+		\begin{subfigure}[b]{0.45\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{../Notebooks/Gaia/pics/stars/40CKSct.pdf}
+			\caption{CK Sct}
+		\end{subfigure}
+		\\
+		\begin{subfigure}[b]{0.45\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{../Notebooks/Gaia/pics/stars/51SYAur.pdf}
+			\caption{SY Aur}
+		\end{subfigure}
+		\quad
+		\begin{subfigure}[b]{0.45\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{../Notebooks/Gaia/pics/stars/77CPCep.pdf}
+		\caption{CP Cep}
+		\end{subfigure}
+	\end{figure}
+
+\section{Corrected PL relation}
+	\begin{figure}[h]
+	\centering
+	\begin{subfigure}[b]{0.48\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{../Notebooks/Gaia/pics/5PLB.pdf}
+		\caption{PLB}
+	\end{subfigure}
+	\quad
+	\begin{subfigure}[b]{0.48\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{../Notebooks/Gaia/pics/5PLV.pdf}
+		\caption{PLV}
+	\end{subfigure}
+	\\
+	\begin{subfigure}[b]{0.48\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{../Notebooks/Gaia/pics/5PLI.pdf}
+		\caption{PLI}
+	\end{subfigure}
+	\quad
+	\begin{subfigure}[b]{0.48\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{../Notebooks/Gaia/pics/5PLJ.pdf}
+		\caption{PLJ}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.48\textwidth}
+	\centering
+	\includegraphics[width=\textwidth]{../Notebooks/Gaia/pics/5PLH.pdf}
+	\caption{PLH}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.48\textwidth}
+	\centering
+	\includegraphics[width=\textwidth]{../Notebooks/Gaia/pics/5PLK.pdf}
+	\caption{PLK}
+\end{subfigure}
+\end{figure}
+
+\begin{align*}
+	B_g = -1.915405 (logP-1) ( 0.037904) + -3.209270 ( 0.011101) \\
+	V_g = -2.315307 (logP-1) ( 0.030725) + -3.936832 ( 0.008998) \\
+	I_g = -2.616377 (logP-1) ( 0.032859) + -4.720667 ( 0.009623) \\
+	J_g = -2.839497 (logP-1) ( 0.012398) + -5.203807 ( 0.003631) \\
+	H_g = -2.972906 (logP-1) ( 0.007202) + -5.584565 ( 0.002109) \\
+	K_g = -3.025780 (logP-1) ( 0.003460) + -5.639665 ( 0.001013) \\
+\end{align*}
+
+\end{document}

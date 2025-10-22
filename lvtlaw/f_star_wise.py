@@ -131,7 +131,7 @@ def plot_star_rd_mu(i, stars_rd_mu_list, correction, flag, ab, dis, wes_show = w
 #        ax.legend()
         for spine in ax.spines.values():
             spine.set_visible(False)
-    ax.legend()
+    axs[0].legend()
     plt.tight_layout()
     title = '%i_%i_star_%s%s%s'%(len(correction), i, flag, wes_show[0], dis)
     plt.suptitle(f'{i} {correction.name.iloc[i]} ({flag})')

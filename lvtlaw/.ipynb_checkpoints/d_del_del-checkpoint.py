@@ -20,11 +20,12 @@ import matplotlib.pyplot as plt
 from warnings import simplefilter
 simplefilter(action="ignore", category=pd.errors.PerformanceWarning)
 out_dir = data_out
-
+#####################################################################
 def residue_correlation(residue, col, flag, dis_flag = dis_flag): 
-    del_mc = pd.DataFrame()         # Stores regression results
+    # this function correlates the PL and PW residuals
+    del_mc = pd.DataFrame()         # Stores del-del regression slope and intercept
     del_predictions = pd.DataFrame({'name': residue['name'],'logP': residue['logP'],'EBV': residue['EBV'] })  # Star-by-star predictions
-    del_residuals = del_predictions.copy()   # Star-by-star residuals
+    del_residuals = del_predictions.copy()   # collects deldel residuals
     print('\tColor:', col, '\tMethod:', flag)
     for diss in dis_flag:
         regression_names = []
@@ -44,7 +45,7 @@ def residue_correlation(residue, col, flag, dis_flag = dis_flag):
                 intercepts.append(intercept)
                 slope_errors.append(slope_err)
                 intercept_errors.append(intercept_err)
-                del_residuals[f'd_{regression_name}{diss}'] = residual
+                del_residuals[f'd_{regression_name}{diss}'] = residual #list
                 del_predictions[f'p_{regression_name}{diss}'] = predicted
         # Save regression metadata for this distance flag
         del_mc['name'] = regression_names
@@ -53,9 +54,9 @@ def residue_correlation(residue, col, flag, dis_flag = dis_flag):
         del_mc[f'me{diss}'] = slope_errors
         del_mc[f'ce{diss}'] = intercept_errors
     return del_residuals, del_predictions, del_mc
-
-def residue_analysis(residue, s=s, plots=plots, dis_flag = dis_flag, cols = wes_show, flags = flags):
-    # Initialize result containers
+#####################################################################
+def residue_analysis(residue, plots=plots,s=s, dis_flag = dis_flag, cols = wes_show, flags = flags):
+    # This function calls residue_correlation() for different different wesenheits
     dmc = []
     dres = pd.DataFrame({'name': residue['name'], 'logP': residue['logP'], 'EBV': residue['EBV']})
     dpre = dres.copy()
@@ -83,17 +84,14 @@ def residue_analysis(residue, s=s, plots=plots, dis_flag = dis_flag, cols = wes_
                 for dis in dis_flag:
                     plotdeldel6(merged_data, del_mc, col, dis, flg, '0', s)
     return dres, dpre, del_mc, merged_data
-
+#####################################################################
 def plotdeldel6(data, dmc, col, dis, flag, ab, s):
 # 1. Extracting x-y axis
     print(col)
     fig, axs = plt.subplots(2, 3, figsize=(18, 8), sharex='col')
     axs = axs.flatten()  # Flatten for easy indexing
-    for i, m in enumerate(mag):
-        if flag == 'M':
-            wes_str = col[0] + col
-        else:
-            wes_str = m + col
+    for i, m in enumerate(mag[0:6]):
+        wes_str = f"{m}{col}" if flag == "S" else f"{col[0]}{col}"
         x = data['r_' + wes_str + dis]
         y = data['r_' + m + ab + dis]
         pred = data['p_' + m + ab+ wes_str + dis]
@@ -114,6 +112,8 @@ def plotdeldel6(data, dmc, col, dis, flag, ab, s):
             ax.plot([x[j], x[j]], [y[j], pred[j]], color='red', linestyle='--', alpha=0.5, label=label)
         ax.set_ylabel(f'PL Residue: $\\Delta M_{m+ab}$')
         ax.set_xlabel(f'PW Residue: $\\Delta$ {wes_str}')
+        for k in range(len(data)):
+            ax.annotate('%i'%(k), xy =(x.iloc[k], y.iloc[k]), fontsize = 11) 
         #ax.grid(True)
         ax.tick_params(direction='in', top=True, right=True)
         ax.legend()   
@@ -126,23 +126,20 @@ def plotdeldel6(data, dmc, col, dis, flag, ab, s):
 #            ax.set_xlabel(f'{mag[i]}{col}')
 #        else:
 #            ax.tick_params(labelbottom=False)
-    title = f"{len(x)}_deldel_{flag}{ab}{col}{dis}"
+    title = f"{len(x)}_deldel_{flag}_{ab}{col}{dis}"
     plt.suptitle(f'PL-PW Residuals Correlation')
     plt.tight_layout()
     if s == 1:
         imgsave(title, 2, fil='pdf', p=1)
     plt.show()
-    plotdeldelres(data, dmc, col, dis, flag, ab, s)
-
+    #plotdeldelres(data, dmc, col, dis, flag, ab, s)
+#####################################################################
 def plotdeldelres(data, dmc, col, dis, flag, ab, s):
     fig_res, axs_res = plt.subplots(2, 3, figsize=(18, 6))
     axs_res = axs_res.flatten()
     x = data['logP'] - 1
-    for i, m in enumerate(mag):
-        if flag == 'M':
-            wes_str = m + ab + col[0] + col
-        else:
-            wes_str = m + ab + m + col
+    for i, m in enumerate(mag[0:6]):
+        wes_str = f"{m}{ab}{m}{col}" if flag == "S" else f"{m}{ab}{col[0]}{col}"
         pred = data['p_' + wes_str + dis]
         y = data['d_' + wes_str + dis]
         if dis == '_i':
@@ -168,11 +165,9 @@ def plotdeldelres(data, dmc, col, dis, flag, ab, s):
     for j in range(len(mag), 6):  # Hide any unused axes
         axs_res[j].set_visible(False)
     plt.tight_layout()
-    title=f"{len(x)}_{flag}{ab}{col}{dis}"
+    title=f"{len(x)}_{flag}_{ab}{col}{dis}"
     if s == 1:
         imgsave(title + "_residuals", 2, fil='png', p=1)
     plt.show()
-
-
-
+#####################################################################
 print(f'* * {module} module loaded!')
