@@ -112,8 +112,8 @@ def plotdeldel6(data, dmc, col, dis, flag, ab, s):
             ax.plot([x[j], x[j]], [y[j], pred[j]], color='red', linestyle='--', alpha=0.5, label=label)
         ax.set_ylabel(f'PL Residue: $\\Delta M_{m+ab}$')
         ax.set_xlabel(f'PW Residue: $\\Delta$ {wes_str}')
-        for k in range(len(data)):
-            ax.annotate('%i'%(k), xy =(x.iloc[k], y.iloc[k]), fontsize = 11) 
+#        for k in range(len(data)):
+#            ax.annotate('%i'%(k), xy =(x.iloc[k], y.iloc[k]), fontsize = 11) 
         #ax.grid(True)
         ax.tick_params(direction='in', top=True, right=True)
         ax.legend()   
@@ -126,8 +126,8 @@ def plotdeldel6(data, dmc, col, dis, flag, ab, s):
 #            ax.set_xlabel(f'{mag[i]}{col}')
 #        else:
 #            ax.tick_params(labelbottom=False)
-    title = f"{len(x)}_deldel_{flag}_{ab}{col}{dis}"
-    plt.suptitle(f'PL-PW Residuals Correlation')
+    title = f"{file_name}_deldel_{flag}_{ab}{col}{dis}"
+    plt.suptitle(f'PL-PW Residuals Correlation {col}')
     plt.tight_layout()
     if s == 1:
         imgsave(title, 2, fil='pdf', p=1)
@@ -165,7 +165,7 @@ def plotdeldelres(data, dmc, col, dis, flag, ab, s):
     for j in range(len(mag), 6):  # Hide any unused axes
         axs_res[j].set_visible(False)
     plt.tight_layout()
-    title=f"{len(x)}_{flag}_{ab}{col}{dis}"
+    title=f"{file_name}_{flag}_{ab}{col}{dis}"
     if s == 1:
         imgsave(title + "_residuals", 2, fil='png', p=1)
     plt.show()

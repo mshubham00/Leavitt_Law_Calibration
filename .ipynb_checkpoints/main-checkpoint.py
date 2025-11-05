@@ -1,11 +1,12 @@
 ### File: ./main.py
 import os, sys, pandas as pd ; clear_screen= lambda: os.system('clear'); clear_screen()
-from data.datamapping import file_name, data_cols, skip
-from lvtlaw.a_utils import load_data, open_output_dir
+from data.datamapping import file_name, data_cols, skip, R
+from lvtlaw.a_utils import open_output_dir
 from lvtlaw.main_modules import * 
 from lvtlaw.h_loadoutput import starwise_analysis_ # to load processed data
 #####################################################################################################
 # Display project related details
+#skip=1
 def skip_to(skip = skip):
     if skip == 0:
         #Generate directories for saving output
@@ -22,7 +23,7 @@ def skip_to(skip = skip):
         PLW_mc, residue, prediction, merged_data = PLWcorrection(merged_data) # c_pl_pw
 
         # Correlate residues of PL and PW relations
-        dmc, dres, dpre, merged_data = residual_correlation(merged_data,plots=1) # d_del_del
+        dmc, dres, dpre, merged_data = residual_correlation(merged_data,plots=0) # d_del_del
 
         # Trace reddening error for varying modulus
         ex0_df, rd0_df, mu_df_list_dict, merged_data = rd_mu_error_matrix(merged_data, dmc) # e_error_estimation

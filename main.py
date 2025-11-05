@@ -1,6 +1,6 @@
 ### File: ./main.py
 import os, sys, pandas as pd ; clear_screen= lambda: os.system('clear'); clear_screen()
-from data.datamapping import file_name, data_cols, skip
+from data.datamapping import file_name, data_cols, skip, R
 from lvtlaw.a_utils import open_output_dir
 from lvtlaw.main_modules import * 
 from lvtlaw.h_loadoutput import starwise_analysis_ # to load processed data

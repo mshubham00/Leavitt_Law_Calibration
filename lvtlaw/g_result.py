@@ -12,7 +12,7 @@ Function contained:
     plotresultPL6()
 '''
 module = 'g_result'
-from data.datamapping import s,plots, flags, dis_flag, wes_show, mag, process_step, data_out, dis_list, col_dot, col_das, R, nreg, mode
+from data.datamapping import s,plots, flags, dis_flag, wes_show, mag, process_step, data_out, dis_list, col_dot, col_das, R, nreg, mode, file_name
 from lvtlaw.a_utils import regression, pr_value, imgsave, merge_12
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -23,8 +23,8 @@ def correction_apply(data, correction, wes_show=wes_show, flags=flags, dis_flag=
         for f in flags:
             for col in wes_show:
                 for ab in mode:
-                    corrected['EBV'+f+ab+col+d]  = data['EBV'] - correction['rd'+f+ab+col+d]
-                    corrected['mu'+f+ab+col+d] = data[dis_list[dis_flag.index(d)]] + correction['mu'+f+ab+col+d]
+                    corrected['rd'+f+ab+col+d]  = data['EBV'] + correction['rd'+f+ab+col+d]
+                    corrected['mu'+f+ab+col+d] = data[dis_list[dis_flag.index(d)]] - correction['mu'+f+ab+col+d]
                     for m in mag:
                         corr_ex_mu = - R[m]*correction['rd'+f+ab+col+d] + correction['mu'+f+ab+col+d] # 
                         corrected[m+f+ab+col+d]=data['M_'+m+ab+d] + corr_ex_mu
@@ -42,7 +42,6 @@ def append_PLW(PLW_struct : list,i : int,a : float,b : float,c : list,d : list,e
     PLW_struct[5].append(e)    # slope error
     PLW_struct[6].append(f)    # intercept error
     return PLW_struct
-
 
 def corrected_PL(data, corrected, dis, flag, s=1):
     PL_name, PL_slope, PL_intercept = [], [], []
@@ -138,8 +137,8 @@ def plotresultPL6_(merged_data, merged_reg, col, dis, f, ab, s=s):
             label = rf"$Residue = \delta \mu + R_{{m}} * E_{{BV}}$" if j == 0 else None
             #ax.plot([x[j], x[j]], [y[j], pred[j]], color='red', linestyle='--', alpha=0.5, label=label)
         ax.invert_yaxis()
-        for k in range(len(merged_data)):
-            ax.annotate('%i'%(k), xy =(x.iloc[k], y.iloc[k]), fontsize = 11) 
+        #for k in range(len(merged_data)):
+            #ax.annotate('%i'%(k), xy =(x.iloc[k], y.iloc[k]), fontsize = 11) 
         ax.set_ylabel('True Absolute Magnitude')
         ax.grid(True)
         ax.tick_params(direction='in', top=True, right=True)
@@ -154,11 +153,69 @@ def plotresultPL6_(merged_data, merged_reg, col, dis, f, ab, s=s):
         else:
             ax.tick_params(labelbottom=False)
     plt.tight_layout()
-    title = f'{len(merged_data)}_PL{ab}_{f}{col}{dis}'
+    title = f'{file_name}_PL{ab}_{f}{col}{dis}'
     if s == 1:
         imgsave(title, 7, fil='pdf', p=1)
     plt.show()     
-    
+
+def plotresultPL6_compare(compare, merged_data, merged_reg, col, dis, f, ab, s=s):
+    fig, axs = plt.subplots(2, 3, figsize=(18, 8), sharex='col')
+    axs = axs.flatten()  # Flatten for easy indexing
+    x = merged_data['logP'] - 1
+    for i, m in enumerate(mag[:6]):
+        com = compare['M_' + m + ab + dis]
+        y = merged_data['M_' + m + ab + dis]
+        y_cor = merged_data[m + f + ab+col + dis]
+        # Get regression coefficients
+        if dis == '_i':
+            alpha = merged_reg[m+ab].iloc[4]
+            gamma = merged_reg[m+ab].iloc[5]
+            ralpha = merged_reg[m+ab+col+f].iloc[4]
+            rgamma = merged_reg[m+ab+col+f].iloc[5]
+        else:
+            alpha = merged_reg[m+ab].iloc[0]
+            gamma = merged_reg[m+ab].iloc[1]
+            ralpha = merged_reg[m+ab+col+f].iloc[0]
+            rgamma = merged_reg[m+ab+col+f].iloc[1]
+        rpre = merged_data['p_' + m + ab + col + f + dis ]
+        rres = merged_data['r_' + m + ab + col + f + dis]
+        pred = merged_data['p_' + m + ab + dis]
+        resd = merged_data['r_' + m + ab + dis]
+        r_std = round(rres.std(ddof=0), 3)
+        d_std = round(resd.std(ddof=0), 3)
+        ax = axs[i]
+        ax.plot(x, com, 'gray')
+        ax.plot(x, y, col_dot[i], label=f'{m+ab} Band')
+        ax.plot(x, y_cor, 'ro', label=f'{m+ab} Band ({f}, {col}) | $\sigma$ = {r_std}')
+        ax.plot(x, rpre, 'r-', label=f'$M_{m}^{f}$ = {ralpha:.3f}(logP - 1) + {rgamma:.3f}')
+        ax.plot(x, pred, col_das[i], label=f'$M_{m}$ = {alpha:.3f}(logP - 1) + {gamma:.3f}')
+        # Residual lines
+        for j in range(len(merged_data)):
+            label = rf"$Residue = \delta \mu + R_{{m}} * E_{{BV}}$" if j == 0 else None
+            #ax.plot([x[j], x[j]], [y[j], pred[j]], color='red', linestyle='--', alpha=0.5, label=label)
+        ax.invert_yaxis()
+        #for k in range(len(merged_data)):
+            #ax.annotate('%i'%(k), xy =(x.iloc[k], y.iloc[k]), fontsize = 11) 
+        ax.set_ylabel('True Absolute Magnitude')
+        ax.grid(True)
+        ax.tick_params(direction='in', top=True, right=True)
+        ax.legend()
+        # Clean up spines
+        for spine in ax.spines.values():
+            spine.set_visible(False)
+    # Set x-axis label only on bottom row
+    for i, ax in enumerate(axs):
+        if i >= 3:  # Bottom row
+            ax.set_xlabel('Period (logP - 1)')
+        else:
+            ax.tick_params(labelbottom=False)
+    plt.tight_layout()
+    title = f'{file_name}_PL{ab}_{f}{col}{dis}'
+    if s == 1:
+        imgsave(title, 7, fil='pdf', p=1)
+    plt.show()     
+
+
 def plotresultcleanPL6(merged_data, merged_reg, col, dis, f, ab, s=s):
     fig, axs = plt.subplots(2, 3, figsize=(18, 8), sharex='col')
     axs = axs.flatten()  # Flatten for easy indexing
@@ -200,7 +257,7 @@ def plotresultcleanPL6(merged_data, merged_reg, col, dis, f, ab, s=s):
         else:
             ax.tick_params(labelbottom=False)
     plt.tight_layout()
-    title = f'{len(merged_data)}_PL{ab}_{f}{col}{dis}'
+    title = f'{file_name}_PL{ab}_{f}{col}{dis}'
     if s == 1:
         imgsave(title, 7, fil='pdf', p=1)
     plt.show()     
@@ -270,7 +327,7 @@ def plotresultPL6(merged_data, merged_reg, col, dis, f, ab, s=0):
         spine.set_visible(False)
 
     plt.tight_layout()
-    title = f'{len(merged_data)}_PL_combined_{ab}_{f}{col}{dis}'
+    title = f'{file_name}_PL_combined_{ab}_{f}{col}{dis}'
 
     if s == 1:
         imgsave(title, 7, fil='pdf', p=1)  # Make sure imgsave() is defined elsewhere

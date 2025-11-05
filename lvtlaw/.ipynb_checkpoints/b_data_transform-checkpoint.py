@@ -27,7 +27,7 @@ from data.datamapping import R, mag, data_dir, file_name, dis_flag, data_out, di
 from lvtlaw.a_utils import merge_12, imgsave
 
 #####################################################################
-def extinction_law(mag = mag, A = fouque_extinction_ratios, R = R):
+def extinction_law(A, mag = mag, R = R):
     print('Adopting BVIJHK Extinction law and reddening ratio from Fouque (2007): \n')
     print ('Bands \t Extinction \t Reddening ratio \n \t A(x)/A(v) \t R(x) for E(B-V)')
     for i in mag:
@@ -95,9 +95,9 @@ def reddening_free(absolute, tabsolute, R=R, mag=mag, dis_flag=dis_flag):
         print('###'*30)
     return wesen
 #####################################################################
-def transformation(data, R=R, A=fouque_extinction_ratios, mag=mag, dis_flag=dis_flag, dis_list=dis_list, s=s, z=z):
+def transformation(data, A, R, mag=mag, dis_flag=dis_flag, dis_list=dis_list, s=s, z=z):
+    A, R = extinction_law(A, mag, R) # converts Fouque (2007) extinction law into corresponding reddening ration
     if p==1:
-        A, R = extinction_law(mag = mag, A = A, R = R) # converts Fouque (2007) extinction law into corresponding reddening ration
         print(' \n Reddening ratio values will be multiplied with E(B-V) values to yield extinction in each band for individual Cepheid along the respective line-of-sight.  \n')
         print('###'*30)
         print('\nApparent magnitude transformed into absolute magnitude and weseheit magnitude using the Galactic extinction law, Reddenings (EBV) and Distance modulus (mu).\n M  = m - mu \n M0 = m - mu - R*EBV \n W  = m - mu - R*(m1-m2) \n')
@@ -119,11 +119,11 @@ def transformation(data, R=R, A=fouque_extinction_ratios, mag=mag, dis_flag=dis_
     tabs_data = true_absolute_magnitude(abs_data, ext_data)
     if p==1:
         print('Wesenheit magnitude for each band \n')
-    wes_data = reddening_free(abs_data,tabs_data, R = R)
+    wes_data = reddening_free(abs_data,tabs_data, R)
     merged_data= pd.merge(abs_data, tabs_data, on=['name','logP', 'EBV', f'{dis_list[0]}'])
     merged_data = merge_12(merged_data, wes_data, on = ['name','logP', 'EBV', f'{dis_list[0]}'])
     if s==1:
-        data..to_csv(data_out+process_step[0]+str(len(data))+ file_name +'.csv')
+        data.to_csv(data_out+process_step[0]+file_name +'.csv')
         abs_data.to_csv(data_out+process_step[0]+str(len(abs_data))+ '_abs_data'+'.csv')
         ext_data.to_csv(data_out+process_step[0]+ str(len(ext_data))+ '_ext_data'+'.csv')
         tabs_data.to_csv(data_out+process_step[0]+str(len(tabs_data))+ '_true_abs_data'+'.csv')

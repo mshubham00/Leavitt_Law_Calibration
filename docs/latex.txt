@@ -1,0 +1,76 @@
+
+\begin{figure}
+	\centering
+	% include first image
+	\includegraphics[width=0.8\linewidth]{../Notebooks/Gaia/pics/3wesenheit_comparison.pdf}  
+	\label{fig:PWrelation}
+	%\begin{center}
+	\caption{\small BVIJHK Period Wesenheit relations with respect to different color indexes. Scattered colored region covers area between P$W_B$ and P$W_K$ relations. }
+\end{figure} 
+
+
+\section{Correction Analysis}	
+	\begin{figure}[h]
+		\centering
+		\begin{subfigure}[b]{0.45\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{../Notebooks/Gaia/pics/stars/4ADGem.pdf}
+			\caption{AD Gem}
+		\end{subfigure}
+		\quad
+		\begin{subfigure}[b]{0.45\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{../Notebooks/Gaia/pics/stars/40CKSct.pdf}
+			\caption{CK Sct}
+		\end{subfigure}
+		\\
+		\begin{subfigure}[b]{0.45\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{../Notebooks/Gaia/pics/stars/51SYAur.pdf}
+			\caption{SY Aur}
+		\end{subfigure}
+		\quad
+		\begin{subfigure}[b]{0.45\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{../Notebooks/Gaia/pics/stars/77CPCep.pdf}
+		\caption{CP Cep}
+		\end{subfigure}
+	\end{figure}
+
+\section{Corrected PL relation}
+	\begin{figure}[h]
+	\centering
+	\begin{subfigure}[b]{0.48\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{../Notebooks/Gaia/pics/5PLB.pdf}
+		\caption{PLB}
+	\end{subfigure}
+	\quad
+	\begin{subfigure}[b]{0.48\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{../Notebooks/Gaia/pics/5PLV.pdf}
+		\caption{PLV}
+	\end{subfigure}
+	\\
+	\begin{subfigure}[b]{0.48\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{../Notebooks/Gaia/pics/5PLI.pdf}
+		\caption{PLI}
+	\end{subfigure}
+	\quad
+	\begin{subfigure}[b]{0.48\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{../Notebooks/Gaia/pics/5PLJ.pdf}
+		\caption{PLJ}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.48\textwidth}
+	\centering
+	\includegraphics[width=\textwidth]{../Notebooks/Gaia/pics/5PLH.pdf}
+	\caption{PLH}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.48\textwidth}
+	\centering
+	\includegraphics[width=\textwidth]{../Notebooks/Gaia/pics/5PLK.pdf}
+	\caption{PLK}
+\end{subfigure}
+\end{figure}

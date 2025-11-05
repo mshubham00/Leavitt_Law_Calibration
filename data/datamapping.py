@@ -10,21 +10,24 @@ s=1 ; 						# saves the output
 z=0; 						# z switches output to paging mode
 p=0
 plots=0; 					# plots for genrating plots
-flags = ['S'] 				# Madore and Shubham
+flags = ['S', 'M'] 				# Madore and Shubham
 mode = ['0']  			    # Absolute mag and True absolute mag for PL and PW
-rd_avg_drop = ['J','H', 'K']# Not included in estimating reddening variance (f_star_wise)
-del_mu = [round(i*0.01,2) for i in range(-100,100,2)]
+rd_avg_drop = ['B','V']# Not included in estimating reddening variance (f_star_wise)
+del_mu = [round(i*0.01,3) for i in range(-100,100,2)]
 plot_every_n_star = 15
 #####################################################################
-fouque_extinction_ratios = {'B': 1.31, 'V': 1.0, 'R': 0.845,'I': 0.608,'J': 0.292,'H': 0.181,'K': 0.119 }   			 
-#fouque_extinction_ratios = {'B': 1.2574, 'V': 1.0, 'R': 0.845,'I': 0.609,'J': 0.2967,'H': 0.1816,'K': 0.123 }   			 
+#fouque_extinction_ratios = {'B': 1.31, 'V': 1.0, 'R': 0.845,'I': 0.608,'J': 0.292,'H': 0.181,'K': 0.119 }   			 
+fouque_extinction_ratios = {'B': 1.2574, 'V': 1.0, 'R': 0.845,'I': 0.609,'J': 0.2967,'H': 0.1816,'K': 0.1231 }   	
+LMC_extinction_ratios = {'B': 1.32,'V': 1.00, 'I': 0.65,'J': 0.30,'H': 0.20,'K': 0.15} #Wang & Chen 2023
+SMC_extinction_ratios = {'B': 1.40,'V': 1.00,'R': 0.90,'I': 0.70,'J': 0.38,'H': 0.28,'K': 0.20}
+
 #####################################################################
-def R_ratio(R_v, mag, A=fouque_extinction_ratios):
+def R_ratio(R_v, mag, A):
 	# Wavelength dependent value of ratio of total to selective absorption
-    r = {}
+    R = {}
     for m in mag:
-        r[m] = A[m]*R_v
-    return r, R_v
+        R[m] = A[m]*R_v
+    return R, R_v, A
 #####################################################################
 def colors(mag):
     color_index = []
@@ -40,54 +43,54 @@ def select_data_file(k):
         dis_flag = ['_h']
         mag = ['B','V','R', 'I','J','H','K'];
         wes_show=colors(mag)#['VI']#['BJ', 'BH', 'BK', 'VI', 'VJ', 'VH', 'VK', 'RJ', 'RH' ]
-        R, R_v = R_ratio(R_v = 3.23, mag = mag)
+        R, R_v, A = R_ratio(R_v = 3.23, mag = mag, A = fouque_extinction_ratios)
         file_cols = ['name','logP','EBV'] + dis_list + [f'M_{m}' for m in mag] 
     elif k ==1:
-        filename = '62_gold'
-        mag = ['B', 'V', 'I','J','H','K'];
+        filename = '103_raw_data_IRSB_VJ_JK'
+        mag = ['B','V','I', 'J','H','K'];#
         wes_show=colors(mag)#['VI', 'BJ', 'BH', 'BK', 'VJ', 'VH', 'VK', 'IH', 'IK']
         dis_list = ['IRSB']
         dis_flag = ['_j']
-        R, R_v = R_ratio(R_v = 3.23, mag = mag)
+        R, R_v, A = R_ratio(R_v = 3.23, mag = mag, A = fouque_extinction_ratios)
         file_cols = ['name','logP','EBV'] + dis_list + [f'{m}_mag' for m in mag]
     elif k == 2:
         filename = '20_cluster_cruz'
         wes_show=['VI']#['BJ', 'BH', 'BK', 'VJ', 'IJ','IH', 'IK', 'JH', 'JK' ]
         dis_list = ['mplx']
-        dis_flag = ['_p']
+        dis_flag = ['_c']
         mag = ['B', 'V', 'I','J','H','K'];
-        R, R_v = R_ratio(R_v = 3.23, mag = mag)
+        R, R_v, A = R_ratio(R_v = 3.23, mag = mag, A = fouque_extinction_ratios)
         file_cols = ['name','logP','EBV'] + dis_list + [f'{m}_mag' for m in mag]
     elif k == 3:
         filename = '29_LMC'
-        wes_show=['VI']#,'VJ','VK','IJ','IK', 'JK']
+        wes_show=['VI','VJ','VK','IJ','IK', 'JK']
         dis_list = ['IRSB']
         dis_flag = ['_l']
         mag = ['V', 'I','J', 'K'] 
-        R, R_v = R_ratio(R_v = 3.41, mag = mag) #± 0.06
+        R, R_v, A = R_ratio(R_v = 3.4, mag = mag, A = LMC_extinction_ratios) #± 0.06
         file_cols = ['name','logP','EBV'] + dis_list + [f'{m}_mag' for m in mag]
     elif k == 4:
         filename = '32_SMC_VIJK'
-        wes_show=['VI']#, 'VJ','IJ','IK']
+        wes_show=['VI','VJ','VK','IJ','IK', 'JK']
         dis_list = ['IRSB']
         dis_flag = ['_s']
         mag = ['V', 'I','J', 'K']
-        R, R_v = R_ratio(R_v = 2.74, mag = mag) #± 0.13
+        R, R_v, A = R_ratio(R_v = 2.53, mag = mag, A = SMC_extinction_ratios) #± 0.13
         file_cols = ['name','logP','EBV'] + dis_list + [f'{m}_mag' for m in mag]
-    return filename, file_cols, dis_list, dis_flag, R, mag, R_v, wes_show
+    return filename, file_cols, dis_list, dis_flag, R, A, mag, R_v, wes_show
 #####################################################################
-file_name, data_cols, dis_list, dis_flag, R, mag, R_v, wes_show = select_data_file(k)
+file_name, data_cols, dis_list, dis_flag, R, A, mag, R_v, wes_show = select_data_file(k)
 #####################################################################
 nreg = 5*len(dis_flag)
 data_dir = './data/input/'
 data_out=f'./data/processed/{file_name}_{R_v}/'
 img_out_path = data_out + '9_plots/'
 process_step = ['1_prepared/','2_PLPW/','3_deldel/', '4_reddening/', '5_dispersion/','6_rms/','7_errorpair/', '8_result/', '9_plots/', '0_stars/']
-image_step = ['1_datacleaning/','2_PLPW/','3_deldel/','4_reddening/','5_dispersion/','6_rms/','7_errorpair/', '8_result/']
+image_step = ['1_datacleaning/','2_PLPW/','3_deldel/','4_reddening/','5_dispersion/','6_rms/','7_errorpair/', '8_result/', '9_compare/']
 #####################################################################
 def R123(m:str,c1:str,c2:str,R=R):
     # calculate composite reddening ratio for wesenheit functions
-    R123 = round(R[m] / (R[c1] - R[c2]), 3)
+    R123 = round(R[m] / (round(R[c1],3) - round(R[c2],3)),3)
     return R123
 #####################################################################    
 def R_dic(mag=mag):

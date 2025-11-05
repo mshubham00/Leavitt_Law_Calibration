@@ -89,7 +89,7 @@ def pl_reg(merged_data, s=s, dis_flag = dis_flag, mag = mag):
 ####################################################################################
 def plotPL6(merged_data, reg, ab, dis=dis_flag[0], s=s):
     x = merged_data['logP'] - 1
-    title = f"{len(x)}_{ab}{''.join(mag)}{dis}"
+    title = f"{file_name}_{ab}{''.join(mag)}{dis}"
     fig, axs = plt.subplots(2, 3, figsize=(18, 8), sharex='col')
     axs = axs.flatten()  # Flatten for easy indexing
     for i, m in enumerate(mag[0:6]):
@@ -138,7 +138,7 @@ def plotPL6(merged_data, reg, ab, dis=dis_flag[0], s=s):
 def plotPW6(data, reg, col, dis=dis_flag[0], s=s):
     print('Wesenheit ', col)
     x = data['logP'] - 1
-    title = f"{len(x)}_{col}_{''.join(mag)}{dis}"
+    title = f"{file_name}_{col}_{''.join(mag)}{dis}"
     fig, axs = plt.subplots(2, 3, figsize=(18, 8), sharex='col')
     axs = axs.flatten()
     for i, m in enumerate(mag[0:6]):
@@ -185,7 +185,7 @@ def plotPW6(data, reg, col, dis=dis_flag[0], s=s):
 #####################################################################
 def plotPLWres(res, reg, ab, col='', dis=dis_flag[0],s=s):
     x = res['logP'] - 1
-    title = f"{len(x)}_{ab}{''.join(mag)}_{col}{dis}"
+    title = f"{file_name}_{''.join(mag)}_{col}{ab}{dis}"
     fig_res, axs_res = plt.subplots(2, 3, figsize=(18, 6))
     axs_res = axs_res.flatten()
     for i, m in enumerate(mag[0:6]):

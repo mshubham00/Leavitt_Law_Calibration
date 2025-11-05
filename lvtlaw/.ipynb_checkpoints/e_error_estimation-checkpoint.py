@@ -16,11 +16,11 @@ Function contained:
 '''
 module = 'e_error_estimation'
 from data.datamapping import file_name, data_cols, dis_list, dis_flag, R, mag, wes_show, flags,s, plots,z, mode
-from data.datamapping import data_dir, data_out, process_step, del_mu, plot_every_n_star
+from data.datamapping import data_dir, data_out, process_step, del_mu, plot_every_n_star, R_dic
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-from lvtlaw.a_utils import merge_12
+from lvtlaw.a_utils import merge_12, imgsave
 from lvtlaw.b_data_transform import transformation, extinction_law
 from lvtlaw.c_pl_pw import pl_reg     
 #####################################################################
@@ -32,8 +32,8 @@ def select_regression_parameters(dmc, dis):
         m, c = dmc.iloc[0].T, dmc.iloc[1].T
     return m, c #lists
 #####################################################################
-def error_over_mu(dres, m, dis, col, slope, intercept, flag, s=s): # called by process_reddening()
-    r = R[mag[m]]  # reddening ratio
+def error_over_mu(dres, m, dis, col, slope, intercept, flag, R=R, s=s): # called by process_reddening()
+    r = R[mag[m]]#+col]  # reddening ratio
     mu_rd_ex_df = pd.DataFrame({'name': dres['name'], 'logP': dres['logP']})
     for ab in mode: 
         wm_str = f"{mag[m]}{ab}{mag[m]}{col}" if flag == "S" else f"{mag[m]}{ab}{col[0]}{col}"
@@ -79,10 +79,10 @@ def error_reddening(dres, dmc, del_mu=del_mu,z=z, wes_show=wes_show, dis_flag = 
         ex_df.to_csv(f'{data_out}{process_step[3]}{len(ex_df)}_ext_err0.csv', index=False)
         rd_df.to_csv(f'{data_out}{process_step[3]}{len(rd_df)}_red_err0.csv', index=False)
     if plots == 1:
-        for i in range(0, len(dres),plot_every_n_star):
+        for i in range(0, len(dres),plot_every_n_star):                                                                  
             for d in dis_flag:
                 for ab in mode:
-                    for col in wes_show:
+                    for col in wes_show:                                                                   
                         print(i,d,ab, col)
                         plot_star_rd0(i, rd_df, col, flags, ab, d)
     return ex_df,rd_df, mu_df_list_dict
@@ -94,11 +94,32 @@ def plot_star_rd0(i, red0, col, flag, ab, dis = dis_flag[0]):
         plt.plot([x for x in range(len(mag))], rd, '-o', label = f)
     #plt.ylim(-0.2, 0.2)
         plt.axhline(y=np.mean(rd), color='gray', linestyle='--')
-        plt.annotate(f'avg: {np.mean(rd):.2f}', xy=(len(mag)-1, np.mean(rd)), xytext=(5, 0), textcoords='offset points', va='bottom', ha='right', fontsize=10, color='black')
+        plt.annotate(f'avg: {np.mean(rd):.3f}', xy=(len(mag)-1, np.mean(rd)), xytext=(5, 0), textcoords='offset points', va='bottom', ha='right', fontsize=10, color='black')
         plt.xticks(ticks=range(len(mag)), labels=mag)  # Set x-axis ticks to values in mag
         plt.suptitle(f'{i} {red0.name.iloc[i]} ({col})')
     plt.ylabel('Reddening Error')
     plt.legend()
+    if s == 1:
+        imgsave(file_name + f"_{i}_{col}_{ab}", 3, fil='pdf', p=1)
+    plt.show()
+#####################################################################    
+def plot_star_rd0SM(i, red0, col, ab, dis = dis_flag[0], s=s):
+    plt.figure(figsize=(7, 2))  # width=10, height=5 (in inches)
+    rd = [red0[f"rd_{m}{ab}{m}{col}{dis}"].iloc[i] for m in mag]
+    plt.plot([x for x in range(len(mag))], rd, '-o', label = f'S : {np.mean(rd) :.3f}')
+    plt.axhline(y=np.mean(rd), color='blue', linestyle='--')
+    #plt.annotate(f'avg: {np.mean(rd):.3f}', xy=(len(mag)-1, np.mean(rd)), xytext=(5, 0), textcoords='offset points', va='bottom', ha='right', fontsize=10, color='black')
+    rd = [red0[f"rd_{m}{ab}{col[0]}{col}{dis}"].iloc[i] for m in mag]
+    plt.plot([x for x in range(len(mag))], rd, '-*', label = f'M : {np.mean(rd) :.3f}')
+    plt.axhline(y=np.mean(rd), color='orange', linestyle='--')
+    #plt.annotate(f'avg: {np.mean(rd):.3f}', xy=(len(mag)-1, np.mean(rd)), xytext=(5, 0), textcoords='offset points', va='bottom', ha='right', fontsize=10, color='black')
+    plt.xticks(ticks=range(len(mag)), labels=mag)  # Set x-axis ticks to values in mag
+    plt.suptitle(f'{red0.name.iloc[i]} ({col})')
+    #plt.ylim(-0.2, 0.2)
+    plt.ylabel('Reddening Error')
+    plt.legend()
+    if s == 1:
+        imgsave(file_name + f"_{i}_{col}_{ab}SM", 3, fil='pdf', p=1)
     plt.show()
 #####################################################################
 print(f'* * {module} module loaded!')

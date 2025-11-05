@@ -14,7 +14,7 @@ Function contained:
 '''
 module = 'f_star_wise'
 #####################################################################
-from data.datamapping import dis_flag, flags, wes_show, del_mu, s, plots, mag, data_out, process_step, col_lin, col_dot, col_das, rd_avg_drop, mode, plot_every_n_star
+from data.datamapping import dis_flag, flags, wes_show, del_mu, s, plots, mag, data_out, process_step, col_lin, col_dot, col_das, rd_avg_drop, mode, plot_every_n_star, file_name
 from lvtlaw.a_utils import imgsave
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -84,6 +84,7 @@ def get_error_pair(star_rd_mu, flags = flags, wes_show = wes_show, del_mu = del_
                     else:
                         solution_mu = float(min_var_indx[9:])
                     mu_rd_dict[f'mu{f}{ab}{col}{d}'] = solution_mu
+                    mu_rd_dict[f'vr{f}{ab}{col}{d}'] = min_var_indx
     return mu_rd_dict
 #####################################################################
 def correction_rd_mu(stars_rd_mu_list, raw, plots=plots, s=s ):
@@ -118,13 +119,48 @@ def plot_star_rd_mu(i, stars_rd_mu_list, correction, flag, ab, dis, wes_show = w
         #ax.invert_yaxis()
         for j in range(len(mag)):
             ax.plot(del_mu, del_E.iloc[j].values, col_lin[j], label='%s'%(mag[j]+ab))
+        ax.plot(del_mu, del_E.iloc[-1].values, col_das[0], label=f'rms')
+        ax.plot(mu_c, EBV_c, 'ko') 
+        ax.axhline(y=EBV_c, color='gray', linestyle='--')
+        ax.axvline(x=mu_c, color='gray', linestyle='--')
+        ax.annotate(f'{mu_c:.2f}', xy=(mu_c, axs[1].get_ylim()[-1]), xytext=(0, 5), textcoords='offset points', va='top', ha='left', fontsize=10, color='black')
+        ax.annotate(f'{EBV_c:.2f}', xy=(del_mu[-1], EBV_c), xytext=(5, 0), textcoords='offset points', va='bottom', ha='right', fontsize=10, color='black')
+        ax.set_xlabel(f'$\Delta \mu  $  ({col}  :  {mu_c:.3f})')
+        ax.set_ylabel(f'$\Delta E  $  ({col}  :  {EBV_c:.3f})')
+#        ax.set_ylim(-1, 1)
+    for ax in axs:
+#        ax.legend()
+        for spine in ax.spines.values():
+            spine.set_visible(False)
+    axs[0].legend()
+    plt.tight_layout()
+    title = '%s_%i_star_%s%s%s'%(file_name, i, flag, wes_show[0], dis)
+    plt.suptitle(f'{i} {correction.name.iloc[i]} ({flag})')
+    print(title)
+    if s==1:
+        imgsave(title,5,fil='pdf', p=1)
+    plt.show()
+#####################################################################
+def plot_star_rd_muM(index, stars_rd_mu_list, correction, flag, ab, dis, col = 'VI', s=s):
+    fig, axs = plt.subplots(2, 2, figsize=(13, 5), sharex='col')
+    axs = axs.flatten()  # Flatten for easy indexing
+    for k, i in enumerate(index): 
+        a = stars_rd_mu_list[i]
+        del_E = a[[f'{flag}{ab}{col}{dis}rd_{mu}' for mu in del_mu]]
+        mu_c = correction[f'mu{flag}{ab}{col}{dis}'].iloc[i]
+        EBV_c = correction[f'rd{flag}{ab}{col}{dis}'].iloc[i]
+# === Plotting ===
+        ax = axs[k]
+        #ax.invert_yaxis()
+        for j in range(len(mag)):
+            ax.plot(del_mu, del_E.iloc[j].values, col_lin[j], label='%s'%(mag[j]+ab))
         ax.plot(del_mu, del_E.iloc[-1].values, col_das[0], label='rms')
         ax.plot(mu_c, EBV_c, 'ko') 
         ax.axhline(y=EBV_c, color='gray', linestyle='--')
         ax.annotate(f'{EBV_c:.2f}', xy=(del_mu[-1], EBV_c), xytext=(5, 0), textcoords='offset points', va='bottom', ha='right', fontsize=10, color='black')
         ax.axvline(x=mu_c, color='gray', linestyle='--')
         ax.annotate(f'{mu_c:.2f}', xy=(mu_c, axs[1].get_ylim()[-1]), xytext=(0, 5), textcoords='offset points', va='top', ha='left', fontsize=10, color='black')
-        ax.set_xlabel(r'$\Delta \mu - %s$'%(col))
+        ax.set_xlabel(f'{correction.name.iloc[i]} $\Delta \mu ({col} : {mu_c:.2f}, {EBV_c:.2f})$')
         ax.set_ylabel(r'$\Delta E_{BV}$')
 #        ax.set_ylim(-1, 1)
     for ax in axs:
@@ -133,8 +169,8 @@ def plot_star_rd_mu(i, stars_rd_mu_list, correction, flag, ab, dis, wes_show = w
             spine.set_visible(False)
     axs[0].legend()
     plt.tight_layout()
-    title = '%i_%i_star_%s%s%s'%(len(correction), i, flag, wes_show[0], dis)
-    plt.suptitle(f'{i} {correction.name.iloc[i]} ({flag})')
+    title = '%i_%i_star_%s%s%s'%(len(correction), i, flag, col, dis)
+    #plt.suptitle(f'M_ {correction.name.iloc[i]} ({flag})')
     print(title)
     if s==1:
         imgsave(title,5,fil='pdf', p=1)

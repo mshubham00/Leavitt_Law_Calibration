@@ -1,6 +1,14 @@
 # Ignore Python bytecode files
 *.pyc
+*.aux
+*.bcf
+*.out
+*.log
+*.synctex.gz
+*.synctex
+*.DS_Store
 
 # Ignore a specific folder (e.g., 'folder_name')
 data/processed/
-
+docs/plots/
+.ipynb_checkpoints/
