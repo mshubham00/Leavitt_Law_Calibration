@@ -4,20 +4,20 @@
 '''
 module = 'datamapping'
 #####################################################################
-k=1; 						# k selects dataset [0:Madore, 1:Jesper, 2:Cruz, 3:LMC, 4:SMC]
+k=0; 						# k selects dataset [0:Madore, 1:Jesper, 2:Cruz, 3:LMC, 4:SMC]
 skip=0
 s=1 ; 						# saves the output
 z=0; 						# z switches output to paging mode
 p=0
 plots=0; 					# plots for genrating plots
-flags = ['S', 'M'] 				# Madore and Shubham
+flags = ['S'] 				# Madore and Shubham
 mode = ['0']  			    # Absolute mag and True absolute mag for PL and PW
-rd_avg_drop = ['B','V']# Not included in estimating reddening variance (f_star_wise)
+rd_avg_drop = []# Not included in estimating reddening variance (f_star_wise)
 del_mu = [round(i*0.01,3) for i in range(-100,100,2)]
 plot_every_n_star = 15
 #####################################################################
 #fouque_extinction_ratios = {'B': 1.31, 'V': 1.0, 'R': 0.845,'I': 0.608,'J': 0.292,'H': 0.181,'K': 0.119 }   			 
-fouque_extinction_ratios = {'B': 1.2574, 'V': 1.0, 'R': 0.845,'I': 0.609,'J': 0.2967,'H': 0.1816,'K': 0.1231 }   	
+fouque_extinction_ratios = {'B': 1.2574, 'V': 1.0, 'R': 0.845,'I': 0.609,'J': 0.2969,'H': 0.1816,'K': 0.1231 }   	
 LMC_extinction_ratios = {'B': 1.32,'V': 1.00, 'I': 0.65,'J': 0.30,'H': 0.20,'K': 0.15} #Wang & Chen 2023
 SMC_extinction_ratios = {'B': 1.40,'V': 1.00,'R': 0.90,'I': 0.70,'J': 0.38,'H': 0.28,'K': 0.20}
 
@@ -28,6 +28,7 @@ def R_ratio(R_v, mag, A):
     for m in mag:
         R[m] = A[m]*R_v
     return R, R_v, A
+
 #####################################################################
 def colors(mag):
     color_index = []
@@ -38,7 +39,7 @@ def colors(mag):
 #####################################################################
 def select_data_file(k):
     if k==0:
-        filename = '59_madore'
+        filename = '58_madore_VJ'
         dis_list = ['HST']
         dis_flag = ['_h']
         mag = ['B','V','R', 'I','J','H','K'];
@@ -46,11 +47,12 @@ def select_data_file(k):
         R, R_v, A = R_ratio(R_v = 3.23, mag = mag, A = fouque_extinction_ratios)
         file_cols = ['name','logP','EBV'] + dis_list + [f'M_{m}' for m in mag] 
     elif k ==1:
-        filename = '103_raw_data_IRSB_VJ_JK'
+#        filename = '76_IRSB_IJ_HK'
+        filename = '95_jesper_JK_VI'
         mag = ['B','V','I', 'J','H','K'];#
         wes_show=colors(mag)#['VI', 'BJ', 'BH', 'BK', 'VJ', 'VH', 'VK', 'IH', 'IK']
-        dis_list = ['IRSB']
-        dis_flag = ['_j']
+        dis_list = ['plx']
+        dis_flag = ['_p']
         R, R_v, A = R_ratio(R_v = 3.23, mag = mag, A = fouque_extinction_ratios)
         file_cols = ['name','logP','EBV'] + dis_list + [f'{m}_mag' for m in mag]
     elif k == 2:

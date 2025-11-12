@@ -47,11 +47,12 @@ def regression(x: list, y: list, x_str: str, y_str: str, p = 0):
     c = regression_line.intercept
     prediction = m * x + c; 
     residue = y - prediction
+    stdd = round(residue.std(ddof=0), 3)
     m_error = regression_line.stderr; 
     c_error = regression_line.intercept_stderr
     if p == 1:
-        print('%s = %f %s ( %f) + %f ( %f)'%(y_str, m, x_str, m_error, c, c_error))
-    return m, c, prediction, residue, m_error, c_error
+        print(f'{y_str} ( {stdd: .3f} ) = {m:.3f} {x_str} ( {m_error:.3f}) + {c:.3f} ( {c_error : .3f})')
+    return m, c, prediction, residue, m_error, c_error, stdd
 #####################################################################
 def open_output_dir(path):  
     # Open the output folder after process completion

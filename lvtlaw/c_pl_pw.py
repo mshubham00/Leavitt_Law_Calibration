@@ -19,7 +19,7 @@ import matplotlib.pyplot as plt
 from warnings import simplefilter
 simplefilter(action="ignore", category=pd.errors.PerformanceWarning)
 #####################################################################
-def append_PLW(PLW_struct : list,name : str,m : float,c : float,p : list,r : list,me :float,ce :float,dis :str):
+def append_PLW(PLW_struct : list,name : str,m : float,c : float,p : list,r : list,me :float,ce :float,dis :str, stdd: float):
     # framing multiple regression output into one structure
     PLW_struct[0].append(name) 
     PLW_struct[1].append(m)
@@ -28,27 +28,28 @@ def append_PLW(PLW_struct : list,name : str,m : float,c : float,p : list,r : lis
     PLW_struct[4]['r_'+name+dis] = r
     PLW_struct[5].append(me)
     PLW_struct[6].append(ce)
+    PLW_struct[7].append(stdd)
     return PLW_struct
 #####################################################################
 def plw_relation(merged_data, dis: str, mag: list, wes_show = wes_show):
     residue = pd.DataFrame({'name': merged_data['name'], 'logP': merged_data['logP'], 'EBV': merged_data['EBV']})
     residue[dis_list[dis_flag.index(dis)]] = merged_data[dis_list[dis_flag.index(dis)]]
     prediction = residue.copy()   
-    PL_name, PL_slope, PL_intercept, err_slope, err_intercept  = [], [], [], [], []
-    PLW_struct = [PL_name, PL_slope, PL_intercept, prediction, residue, err_slope, err_intercept]    
+    PL_name, PL_slope, PL_intercept, err_slope, err_intercept, PL_stdd  = [], [], [], [], [], []
+    PLW_struct = [PL_name, PL_slope, PL_intercept, prediction, residue, err_slope, err_intercept, PL_stdd]    
 
     print('Leavitt Law : Absolute Magnitude \n#######  m  - mu = alpha (logP - 1) + gamma  #################\n')
     for ab in mode:
         for i in range(len(mag)):  # Iterate over magnitudes
-            m, c, prediction, residue, m_error, c_error = regression(merged_data['logP'] - 1, merged_data['M_'+mag[i] + ab+ dis], '(logP - 1)', mag[i] + ab + dis, 1)
-            PLW_struct = append_PLW(PLW_struct, mag[i]+ab, m, c, prediction, residue, m_error, c_error, dis)
+            m, c, prediction, residue, m_error, c_error, stdd = regression(merged_data['logP'] - 1, merged_data['M_'+mag[i] + ab+ dis], '(logP - 1)', mag[i] + ab + dis, 1)
+            PLW_struct = append_PLW(PLW_struct, mag[i]+ab, m, c, prediction, residue, m_error, c_error, dis, stdd)
 
     print('\nLeavitt Law : Wesenheit Magnitude \n#######  m - mu - R*(B-V) = alpha (logP - 1) + gamma     #####')
     for color in wes_show:
         print(f'\nWesenheit Magnitude for color index: {color} \n#######  m - mu - R*({color[0]} - {color[1]}) = alpha (logP - 1) + gamma     #####')
         for i in range(len(mag)):
-            m, c, prediction, residue, m_error, c_error = regression(merged_data['logP'] - 1, merged_data[mag[i] + color + dis], '(logP - 1)', mag[i] + color + dis, 1)
-            PLW_struct = append_PLW(PLW_struct, mag[i] + color, m, c, prediction, residue, m_error, c_error, dis)
+            m, c, prediction, residue, m_error, c_error, stdd = regression(merged_data['logP'] - 1, merged_data[mag[i] + color + dis], '(logP - 1)', mag[i] + color + dis, 1)
+            PLW_struct = append_PLW(PLW_struct, mag[i] + color, m, c, prediction, residue, m_error, c_error, dis, stdd)
 
 
     # Convert the results into a DataFrame
@@ -57,7 +58,8 @@ def plw_relation(merged_data, dis: str, mag: list, wes_show = wes_show):
         f'm{dis}': PLW_struct[1],
         f'c{dis}': PLW_struct[2],
         f'err_m{dis}': PLW_struct[5],
-        f'err_c{dis}': PLW_struct[6]
+        f'err_c{dis}': PLW_struct[6],
+        f'stdd{dis}': PLW_struct[7]
     })
     prediction = PLW_struct[3]
     residue = PLW_struct[4]

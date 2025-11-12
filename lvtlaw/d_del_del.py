@@ -28,7 +28,7 @@ def residue_correlation(residue, col, flag, dis_flag = dis_flag):
     del_residuals = del_predictions.copy()   # collects deldel residuals
     print('\tColor:', col, '\tMethod:', flag)
     for diss in dis_flag:
-        regression_names = []
+        regression_names, d_std = [], []
         slopes, intercepts = [], []
         slope_errors, intercept_errors = [], []
         for ab in mode:
@@ -38,9 +38,10 @@ def residue_correlation(residue, col, flag, dis_flag = dis_flag):
                 x_key = 'r_' + wesenheit + diss
                 regression_name = band + ab + wesenheit
             # Perform regression
-                slope, intercept, predicted, residual, slope_err, intercept_err = regression(
+                slope, intercept, predicted, residual, slope_err, intercept_err, stdd = regression(
                     residue[x_key], residue[y_key], wesenheit, band + ab + diss, 1)
                 regression_names.append(regression_name)
+                d_std.append(stdd)
                 slopes.append(slope)
                 intercepts.append(intercept)
                 slope_errors.append(slope_err)
@@ -53,6 +54,7 @@ def residue_correlation(residue, col, flag, dis_flag = dis_flag):
         del_mc[f'c{diss}'] = intercepts
         del_mc[f'me{diss}'] = slope_errors
         del_mc[f'ce{diss}'] = intercept_errors
+        del_mc[f'std{diss}'] = d_std
     return del_residuals, del_predictions, del_mc
 #####################################################################
 def residue_analysis(residue, plots=plots,s=s, dis_flag = dis_flag, cols = wes_show, flags = flags):

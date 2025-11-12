@@ -26,13 +26,15 @@ def correction_apply(data, correction, wes_show=wes_show, flags=flags, dis_flag=
                     corrected['rd'+f+ab+col+d]  = data['EBV'] + correction['rd'+f+ab+col+d]
                     corrected['mu'+f+ab+col+d] = data[dis_list[dis_flag.index(d)]] - correction['mu'+f+ab+col+d]
                     for m in mag:
-                        corr_ex_mu = - R[m]*correction['rd'+f+ab+col+d] + correction['mu'+f+ab+col+d] # 
-                        corrected[m+f+ab+col+d]=data['M_'+m+ab+d] + corr_ex_mu
+                        ex = - R[m]*correction['rd'+f+ab+col+d] 
+                        mu = correction['mu'+f+ab+col+d] #
+                        corr = ex + mu
+                        corrected[m+f+ab+col+d]=data['M_'+m+ab+d] + corr
     if s==1:
         corrected.to_csv('%s%i_corrected.csv'%(data_out+process_step[7],len(corrected)))
     return corrected
 
-def append_PLW(PLW_struct : list,i : int,a : float,b : float,c : list,d : list,e :float,f :float, dis):
+def append_PLW(PLW_struct : list,i : int,a : float,b : float,c : list,d : list,e :float,f :float, dis, st):
     # collect different regression output into one structure
     PLW_struct[0].append(i)    # PL_name
     PLW_struct[1].append(a)    # slope
@@ -41,32 +43,34 @@ def append_PLW(PLW_struct : list,i : int,a : float,b : float,c : list,d : list,e
     PLW_struct[4]['r_'+i+dis ] = d   # PL residue
     PLW_struct[5].append(e)    # slope error
     PLW_struct[6].append(f)    # intercept error
+    PLW_struct[7].append(st)    # intercept error
     return PLW_struct
 
 def corrected_PL(data, corrected, dis, flag, s=1):
-    PL_name, PL_slope, PL_intercept = [], [], []
+    PL_name, PL_slope, PL_intercept, stdd = [], [], [], []
     err_slope, err_intercept = [], []
     residue = pd.DataFrame({'name': data['name'], 'logP': data['logP']})
     residue[dis_list[dis_flag.index(dis)]] = data[dis_list[dis_flag.index(dis)]]
     prediction = residue.copy()   
     # Store regression results
-    PLW_struct = [PL_name, PL_slope, PL_intercept, prediction, residue, err_slope, err_intercept]  
+    PLW_struct = [PL_name, PL_slope, PL_intercept, prediction, residue, err_slope, err_intercept, stdd]  
     for ab in mode:
         for i in range(len(mag)):
             print('\n\t Mag: ', mag[i] + ab, '\t Method: ', flag, '\t Dis:', dis)
         # raw data
-            a,b,c,d,e,f = regression(data['logP']-1, data['M_'+mag[i]+ab+dis], '(logP - 1)', 'M__'+mag[i]+ab, 1)
-            PLW_struct = append_PLW(PLW_struct, mag[i] + ab, a, b, c, d, e, f, dis)
+            a,b,c,d,e,f,g = regression(data['logP']-1, data['M_'+mag[i]+ab+dis], '(logP - 1)', 'M__'+mag[i]+ab, 1)
+            PLW_struct = append_PLW(PLW_struct, mag[i] + ab, a, b, c, d, e, f, dis, g)
         # calibrated data
             for col in wes_show:
-                a,b,c,d,e,f = regression(corrected['logP']-1,corrected[mag[i]+flag+ab+col+dis], '(logP - 1)', 'M%s%s'%(mag[i]+ab,col), p = 1)
-                PLW_struct = append_PLW(PLW_struct, mag[i] +ab+ col+flag, a, b, c, d, e, f, dis)
+                a,b,c,d,e,f, g = regression(corrected['logP']-1,corrected[mag[i]+flag+ab+col+dis], '(logP - 1)', 'M%s%s'%(mag[i]+ab,col), p = 1)
+                PLW_struct = append_PLW(PLW_struct, mag[i] +ab+ col+flag, a, b, c, d, e, f, dis, g)
     PLW = pd.DataFrame({
         'name': PLW_struct[0],
         f'm': PLW_struct[1],
         f'c': PLW_struct[2],
         f'err_m': PLW_struct[5],
-        f'err_c': PLW_struct[6]
+        f'err_c': PLW_struct[6],
+        f'stdd': PLW_struct[7]
     })
     prediction = PLW_struct[3]
     residue = PLW_struct[4]
@@ -102,7 +106,22 @@ def corrected_reg(data, corrected, dis, plots=plots, wes_show = wes_show, flags=
                 for ab in mode:
                     plotresultPL6(merged_data, reg, col, dis, f, ab)
     return reg, res, pre, merged_data
-   
+
+def print_PL(r_reg, col, file_name):
+    print(f'PL for {file_name} calibrated with {col}')
+    s,c = {},{}
+    for m in mag:
+        slope = r_reg[f'{m}0{col}S'].iloc[0]
+        intr = r_reg[f'{m}0{col}S'].iloc[1]
+        serr = r_reg[f'{m}0{col}S'].iloc[2]
+        ierr = r_reg[f'{m}0{col}S'].iloc[3]
+        stdd = r_reg[f'{m}0{col}S'].iloc[4]
+        print(f'{m}({stdd:.3f}) = {slope:.3f}({serr:.3f}) (logP - 1) {intr:.3f}({ierr:.3f})')
+        s[m] = slope
+        c[m] = intr
+    return s, c
+
+
 def plotresultPL6_(merged_data, merged_reg, col, dis, f, ab, s=s):
     fig, axs = plt.subplots(2, 3, figsize=(18, 8), sharex='col')
     axs = axs.flatten()  # Flatten for easy indexing
