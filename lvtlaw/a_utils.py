@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 from scipy import stats
 import pandas as pd
 from data.datamapping import plots,s,file_name,data_dir,z, image_step, data_out, k, process_step, img_out_path, mag, dis_flag, dis_list, data_cols
-img_out_path='./docs/plots/'
+
 #####################################################################
 def output_directories(parent_folder = data_out, s=1,subdirectories = process_step):
     if s==1:

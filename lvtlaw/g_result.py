@@ -104,7 +104,7 @@ def corrected_reg(data, corrected, dis, plots=plots, wes_show = wes_show, flags=
         for f in flags:
             for col in wes_show:
                 for ab in mode:
-                    plotresultPL6(merged_data, reg, col, dis, f, ab)
+                    plotresultPL6_(merged_data, reg, col, dis, f, ab)
     return reg, res, pre, merged_data
 
 def print_PL(r_reg, col, file_name):
@@ -121,6 +121,7 @@ def print_PL(r_reg, col, file_name):
         c[m] = intr
     return s, c
 
+###########################################################################
 
 def plotresultPL6_(merged_data, merged_reg, col, dis, f, ab, s=s):
     fig, axs = plt.subplots(2, 3, figsize=(18, 8), sharex='col')
@@ -177,7 +178,7 @@ def plotresultPL6_(merged_data, merged_reg, col, dis, f, ab, s=s):
         imgsave(title, 7, fil='pdf', p=1)
     plt.show()     
 
-def plotresultPL6_compare(compare, merged_data, merged_reg, col, dis, f, ab, s=s):
+def plotresultPL6_compare(compare, wes, raw_reg, merged_data, merged_reg, col, dis, f, ab, s=s):
     fig, axs = plt.subplots(2, 3, figsize=(18, 8), sharex='col')
     axs = axs.flatten()  # Flatten for easy indexing
     x = merged_data['logP'] - 1
@@ -187,25 +188,27 @@ def plotresultPL6_compare(compare, merged_data, merged_reg, col, dis, f, ab, s=s
         y_cor = merged_data[m + f + ab+col + dis]
         # Get regression coefficients
         if dis == '_i':
-            alpha = merged_reg[m+ab].iloc[4]
-            gamma = merged_reg[m+ab].iloc[5]
+            alpha = raw_reg[m+ab].iloc[4]
+            gamma = raw_reg[m+ab].iloc[5]
             ralpha = merged_reg[m+ab+col+f].iloc[4]
             rgamma = merged_reg[m+ab+col+f].iloc[5]
         else:
-            alpha = merged_reg[m+ab].iloc[0]
-            gamma = merged_reg[m+ab].iloc[1]
+            alpha = raw_reg[m+ab].iloc[0]
+            gamma = raw_reg[m+ab].iloc[1]
             ralpha = merged_reg[m+ab+col+f].iloc[0]
             rgamma = merged_reg[m+ab+col+f].iloc[1]
         rpre = merged_data['p_' + m + ab + col + f + dis ]
         rres = merged_data['r_' + m + ab + col + f + dis]
         pred = merged_data['p_' + m + ab + dis]
         resd = merged_data['r_' + m + ab + dis]
+        rawres = compare['r_' + m + ab + dis]
+        raw_std = round(rawres.std(ddof=0), 3)
         r_std = round(rres.std(ddof=0), 3)
         d_std = round(resd.std(ddof=0), 3)
         ax = axs[i]
-        ax.plot(x, com, 'gray')
-        ax.plot(x, y, col_dot[i], label=f'{m+ab} Band')
-        ax.plot(x, y_cor, 'ro', label=f'{m+ab} Band ({f}, {col}) | $\sigma$ = {r_std}')
+        ax.plot(x, com, 'k.', label=f'Uncorrected | $\sigma$ = {raw_std}')
+        ax.plot(x, y, col_dot[i], label=f'Ist order correction ({f}, {wes}) | $\sigma$ = {d_std}')
+        ax.plot(x, y_cor, 'ro', label=f'calibrated {m+ab} ({f}, {wes}+{col}) | $\sigma$ = {r_std}')
         ax.plot(x, rpre, 'r-', label=f'$M_{m}^{f}$ = {ralpha:.3f}(logP - 1) + {rgamma:.3f}')
         ax.plot(x, pred, col_das[i], label=f'$M_{m}$ = {alpha:.3f}(logP - 1) + {gamma:.3f}')
         # Residual lines
@@ -215,7 +218,7 @@ def plotresultPL6_compare(compare, merged_data, merged_reg, col, dis, f, ab, s=s
         ax.invert_yaxis()
         #for k in range(len(merged_data)):
             #ax.annotate('%i'%(k), xy =(x.iloc[k], y.iloc[k]), fontsize = 11) 
-        ax.set_ylabel('True Absolute Magnitude')
+        ax.set_ylabel(f'Calibrated {m} True Absolute Magnitude')
         ax.grid(True)
         ax.tick_params(direction='in', top=True, right=True)
         ax.legend()

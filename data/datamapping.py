@@ -4,7 +4,7 @@
 '''
 module = 'datamapping'
 #####################################################################
-k=0; 						# k selects dataset [0:Madore, 1:Jesper, 2:Cruz, 3:LMC, 4:SMC]
+k=1; 						# k selects dataset [0:Madore, 1:Jesper, 2:Cruz, 3:LMC, 4:SMC]
 skip=0
 s=1 ; 						# saves the output
 z=0; 						# z switches output to paging mode
@@ -12,7 +12,7 @@ p=0
 plots=0; 					# plots for genrating plots
 flags = ['S'] 				# Madore and Shubham
 mode = ['0']  			    # Absolute mag and True absolute mag for PL and PW
-rd_avg_drop = []# Not included in estimating reddening variance (f_star_wise)
+rd_avg_drop = ['H','K']# Not included in estimating reddening variance (f_star_wise)
 del_mu = [round(i*0.01,3) for i in range(-100,100,2)]
 plot_every_n_star = 15
 #####################################################################
@@ -39,7 +39,7 @@ def colors(mag):
 #####################################################################
 def select_data_file(k):
     if k==0:
-        filename = '58_madore_VJ'
+        filename = '59_madore'
         dis_list = ['HST']
         dis_flag = ['_h']
         mag = ['B','V','R', 'I','J','H','K'];
@@ -47,12 +47,14 @@ def select_data_file(k):
         R, R_v, A = R_ratio(R_v = 3.23, mag = mag, A = fouque_extinction_ratios)
         file_cols = ['name','logP','EBV'] + dis_list + [f'M_{m}' for m in mag] 
     elif k ==1:
+        filename = '109_IRSB_plx_IH'
+#        filename = '71_IRSB_plx_IK'
+        dis_list = ['plx']; dis_flag = ['_p']
 #        filename = '76_IRSB_IJ_HK'
-        filename = '95_jesper_JK_VI'
-        mag = ['B','V','I', 'J','H','K'];#
+#        filename = '109_IRSB_IH_VJ'
+#        dis_list = ['IRSB']; dis_flag = ['_j']
+        mag = ['B','V','I','J','H','K'];#
         wes_show=colors(mag)#['VI', 'BJ', 'BH', 'BK', 'VJ', 'VH', 'VK', 'IH', 'IK']
-        dis_list = ['plx']
-        dis_flag = ['_p']
         R, R_v, A = R_ratio(R_v = 3.23, mag = mag, A = fouque_extinction_ratios)
         file_cols = ['name','logP','EBV'] + dis_list + [f'{m}_mag' for m in mag]
     elif k == 2:
@@ -85,8 +87,9 @@ file_name, data_cols, dis_list, dis_flag, R, A, mag, R_v, wes_show = select_data
 #####################################################################
 nreg = 5*len(dis_flag)
 data_dir = './data/input/'
-data_out=f'./data/processed/{file_name}_{R_v}/'
-img_out_path = data_out + '9_plots/'
+data_out=f'./data/processed/{file_name}{dis_flag[0]}_{R_v}/'
+img_out_path='./docs/reports/plots/'
+#img_out_path = data_out + '9_plots/'
 process_step = ['1_prepared/','2_PLPW/','3_deldel/', '4_reddening/', '5_dispersion/','6_rms/','7_errorpair/', '8_result/', '9_plots/', '0_stars/']
 image_step = ['1_datacleaning/','2_PLPW/','3_deldel/','4_reddening/','5_dispersion/','6_rms/','7_errorpair/', '8_result/', '9_compare/']
 #####################################################################

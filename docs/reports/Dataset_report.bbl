@@ -1,0 +1,414 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{apa/global//global/global}
+    \entry{cruz2023}{article}{}
+      \name{author}{5}{}{%
+        {{un=0,uniquepart=base,hash=cfb20bddc648c51ce943c0eb80938258}{%
+           family={Cruz\bibnamedelima Reyes},
+           familyi={C\bibinitperiod\bibinitdelim R\bibinitperiod},
+           given={N.},
+           giveni={N\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=f07d335718b790d2ccb597fc80539342}{%
+           family={Anderson},
+           familyi={A\bibinitperiod},
+           given={R.\bibnamedelimi I.},
+           giveni={R\bibinitperiod\bibinitdelim I\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=dfcbdbf39f4b5bc7fe7bb075207cd475}{%
+           family={Zinn},
+           familyi={Z\bibinitperiod},
+           given={J.\bibnamedelimi C.},
+           giveni={J\bibinitperiod\bibinitdelim C\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=408c06036e1788acf5589dd12f4b2937}{%
+           family={Casertano},
+           familyi={C\bibinitperiod},
+           given={S.},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=6c5d642bc5d621753f652068b1408adc}{%
+           family={Riess},
+           familyi={R\bibinitperiod},
+           given={A.\bibnamedelimi G.},
+           giveni={A\bibinitperiod\bibinitdelim G\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{84b63262992bd962c53b9289fb970085}
+      \strng{fullhash}{a97278c72354e09cb3e2073bc65854f0}
+      \strng{bibnamehash}{a97278c72354e09cb3e2073bc65854f0}
+      \strng{authorbibnamehash}{a97278c72354e09cb3e2073bc65854f0}
+      \strng{authornamehash}{84b63262992bd962c53b9289fb970085}
+      \strng{authorfullhash}{a97278c72354e09cb3e2073bc65854f0}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Astronomy \& Astrophysics}
+      \field{title}{Cluster Cepheids: Improved Distances from Gaia EDR3 and Open Cluster Membership}
+      \field{volume}{672}
+      \field{year}{2023}
+      \field{pages}{A75}
+      \range{pages}{-1}
+      \verb{doi}
+      \verb 10.1051/0004-6361/202244955
+      \endverb
+    \endentry
+    \entry{fernie1995}{article}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=e7f353d5f6c20b9b0f03b860e98d9206}{%
+           family={Fernie},
+           familyi={F\bibinitperiod},
+           given={J.\bibnamedelimi D.},
+           giveni={J\bibinitperiod\bibinitdelim D\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{e7f353d5f6c20b9b0f03b860e98d9206}
+      \strng{fullhash}{e7f353d5f6c20b9b0f03b860e98d9206}
+      \strng{bibnamehash}{e7f353d5f6c20b9b0f03b860e98d9206}
+      \strng{authorbibnamehash}{e7f353d5f6c20b9b0f03b860e98d9206}
+      \strng{authornamehash}{e7f353d5f6c20b9b0f03b860e98d9206}
+      \strng{authorfullhash}{e7f353d5f6c20b9b0f03b860e98d9206}
+      \field{sortinit}{F}
+      \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Information Bulletin on Variable Stars}
+      \field{number}{4148}
+      \field{title}{Cepheid reddenings and the intrinsic colours of classical Cepheids}
+      \field{year}{1995}
+      \field{pages}{1}
+      \range{pages}{1}
+    \endentry
+    \entry{fouque2007}{article}{}
+      \name{author}{10}{}{%
+        {{un=0,uniquepart=base,hash=ab9d34f96bc28417ed1db98660492427}{%
+           family={Fouqué},
+           familyi={F\bibinitperiod},
+           given={P.},
+           giveni={P\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=518a348522ae25b0140420e756370ed9}{%
+           family={Arriagada},
+           familyi={A\bibinitperiod},
+           given={P.},
+           giveni={P\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=0e4b7ba607fdf88c158f7eb7f460e653}{%
+           family={Storm},
+           familyi={S\bibinitperiod},
+           given={J.},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=23740fa5d9ca8e2c87fe37340ebf0152}{%
+           family={Barnes},
+           familyi={B\bibinitperiod},
+           given={T.\bibnamedelimi G.},
+           giveni={T\bibinitperiod\bibinitdelim G\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=6544d463b1727333610c80c2d25be90a}{%
+           family={Nardetto},
+           familyi={N\bibinitperiod},
+           given={N.},
+           giveni={N\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=4ece36752ac004e0220e8169e009325f}{%
+           family={Mérand},
+           familyi={M\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=08f309bdeb98f5d2a5fe53068d2ecb2f}{%
+           family={Kervella},
+           familyi={K\bibinitperiod},
+           given={P.},
+           giveni={P\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=e36375095bc1884c33ee52261c38f764}{%
+           family={Gieren},
+           familyi={G\bibinitperiod},
+           given={W.},
+           giveni={W\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=04059380a3202b12dda6012b6c4b67de}{%
+           family={Benedict},
+           familyi={B\bibinitperiod},
+           given={G.\bibnamedelimi F.},
+           giveni={G\bibinitperiod\bibinitdelim F\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=b678e4553e21eea1425d69bfca7363be}{%
+           family={McArthur},
+           familyi={M\bibinitperiod},
+           given={B.},
+           giveni={B\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{e7cfd043a2abfafc1507047755dbb884}
+      \strng{fullhash}{7b1fc09d2444c42676ab4303958be02b}
+      \strng{bibnamehash}{7b1fc09d2444c42676ab4303958be02b}
+      \strng{authorbibnamehash}{7b1fc09d2444c42676ab4303958be02b}
+      \strng{authornamehash}{e7cfd043a2abfafc1507047755dbb884}
+      \strng{authorfullhash}{7b1fc09d2444c42676ab4303958be02b}
+      \field{sortinit}{F}
+      \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Astronomy \& Astrophysics}
+      \field{number}{1}
+      \field{title}{A new calibration of Galactic Cepheid period-luminosity relations from B to K bands, and a 0.1 distance to the LMC}
+      \field{volume}{476}
+      \field{year}{2007}
+      \field{pages}{73\bibrangedash 81}
+      \range{pages}{9}
+      \verb{doi}
+      \verb 10.1051/0004-6361:20077611
+      \endverb
+    \endentry
+    \entry{GaiaDR32023}{article}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=86a38bc669f6b96a1b3657c840098333}{%
+           family={{Gaia Collaboration}},
+           familyi={G\bibinitperiod}}}%
+      }
+      \strng{namehash}{86a38bc669f6b96a1b3657c840098333}
+      \strng{fullhash}{86a38bc669f6b96a1b3657c840098333}
+      \strng{bibnamehash}{86a38bc669f6b96a1b3657c840098333}
+      \strng{authorbibnamehash}{86a38bc669f6b96a1b3657c840098333}
+      \strng{authornamehash}{86a38bc669f6b96a1b3657c840098333}
+      \strng{authorfullhash}{86a38bc669f6b96a1b3657c840098333}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Astronomy \& Astrophysics}
+      \field{title}{Gaia Data Release 3: Summary of the contents and survey properties}
+      \field{volume}{674}
+      \field{year}{2023}
+      \field{pages}{A1}
+      \range{pages}{-1}
+    \endentry
+    \entry{madore1982}{article}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=e793734301eab7b3f4cb6633a1a59d4b}{%
+           family={Madore},
+           familyi={M\bibinitperiod},
+           given={Barry\bibnamedelima F},
+           giveni={B\bibinitperiod\bibinitdelim F\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{e793734301eab7b3f4cb6633a1a59d4b}
+      \strng{fullhash}{e793734301eab7b3f4cb6633a1a59d4b}
+      \strng{bibnamehash}{e793734301eab7b3f4cb6633a1a59d4b}
+      \strng{authorbibnamehash}{e793734301eab7b3f4cb6633a1a59d4b}
+      \strng{authornamehash}{e793734301eab7b3f4cb6633a1a59d4b}
+      \strng{authorfullhash}{e793734301eab7b3f4cb6633a1a59d4b}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Astrophysical Journal, Part 1, vol. 253, Feb. 15, 1982, p. 575-579. Research supported by the Natural Sciences and Engineering Research Council of Canada, University of Toronto, and Science Research Council of England.}
+      \field{title}{The period-luminosity relation. IV-Intrinsic relations and reddenings for the Large Magellanic Cloud Cepheids}
+      \field{volume}{253}
+      \field{year}{1982}
+      \field{pages}{575\bibrangedash 579}
+      \range{pages}{5}
+    \endentry
+    \entry{madore2017}{article}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=e793734301eab7b3f4cb6633a1a59d4b}{%
+           family={Madore},
+           familyi={M\bibinitperiod},
+           given={Barry\bibnamedelima F.},
+           giveni={B\bibinitperiod\bibinitdelim F\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=8931824aef1625608e5783976526c908}{%
+           family={Freedman},
+           familyi={F\bibinitperiod},
+           given={Wendy\bibnamedelima L.},
+           giveni={W\bibinitperiod\bibinitdelim L\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=fc2838e05d88c55bf592a3cf59489bbc}{%
+           family={Moak},
+           familyi={M\bibinitperiod},
+           given={Sam\bibnamedelima J.},
+           giveni={S\bibinitperiod\bibinitdelim J\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{09f64a73aa23b565108b807a9d8f9ab5}
+      \strng{fullhash}{d5f6c9dd359359a9392f59da34a67c74}
+      \strng{bibnamehash}{d5f6c9dd359359a9392f59da34a67c74}
+      \strng{authorbibnamehash}{d5f6c9dd359359a9392f59da34a67c74}
+      \strng{authornamehash}{09f64a73aa23b565108b807a9d8f9ab5}
+      \strng{authorfullhash}{d5f6c9dd359359a9392f59da34a67c74}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{The Astrophysical Journal}
+      \field{number}{1}
+      \field{title}{A Method for Improving Galactic Cepheid Reddenings and Distances}
+      \field{volume}{842}
+      \field{year}{2017}
+      \field{pages}{42}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.3847/1538-4357/aa71a0
+      \endverb
+    \endentry
+    \entry{sandage2004}{article}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=b41ecb44cdcdeffdc6ff52e90882d99e}{%
+           family={Sandage},
+           familyi={S\bibinitperiod},
+           given={A.},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=dd8b1fcb491ed2eed90a5a29beeb3986}{%
+           family={Tammann},
+           familyi={T\bibinitperiod},
+           given={G.\bibnamedelimi A.},
+           giveni={G\bibinitperiod\bibinitdelim A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=888a7839bc838b3f38b696f029582f14}{%
+           family={Reindl},
+           familyi={R\bibinitperiod},
+           given={B.},
+           giveni={B\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{fbeae5bc900b6037a558713b4f82152c}
+      \strng{fullhash}{df5053c412eb4ae67fbeca683f464f4c}
+      \strng{bibnamehash}{df5053c412eb4ae67fbeca683f464f4c}
+      \strng{authorbibnamehash}{df5053c412eb4ae67fbeca683f464f4c}
+      \strng{authornamehash}{fbeae5bc900b6037a558713b4f82152c}
+      \strng{authorfullhash}{df5053c412eb4ae67fbeca683f464f4c}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Astronomy \& Astrophysics}
+      \field{title}{New Period–Color and Period–Luminosity Relations for the Cepheid Variables and the Determination of the Hubble Constant}
+      \field{volume}{424}
+      \field{year}{2004}
+      \field{pages}{43\bibrangedash 84}
+      \range{pages}{42}
+      \verb{doi}
+      \verb 10.1051/0004-6361:20041231
+      \endverb
+    \endentry
+    \entry{storm2011}{article}{}
+      \true{moreauthor}
+      \true{morelabelname}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=221a4772e97892166ef04a4829fe0c0e}{%
+           family={Storm},
+           familyi={S\bibinitperiod},
+           given={Jesper},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{9f5e0a791176a7fb111ea6b4f86b860b}
+      \strng{fullhash}{9f5e0a791176a7fb111ea6b4f86b860b}
+      \strng{bibnamehash}{9f5e0a791176a7fb111ea6b4f86b860b}
+      \strng{authorbibnamehash}{9f5e0a791176a7fb111ea6b4f86b860b}
+      \strng{authornamehash}{9f5e0a791176a7fb111ea6b4f86b860b}
+      \strng{authorfullhash}{9f5e0a791176a7fb111ea6b4f86b860b}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Astronomy \& Astrophysics}
+      \field{title}{A new calibration of Galactic Cepheid period-luminosity relations from IRSB method}
+      \field{volume}{534}
+      \field{year}{2011}
+      \field{pages}{A95}
+      \range{pages}{-1}
+      \verb{doi}
+      \verb 10.1051/0004-6361/201117096
+      \endverb
+    \endentry
+    \entry{wang2023}{article}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=cd6c1d35aed39fa11fcfba0d353120d6}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={S.},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=60aeb23a507616b6ae2488ddaab41f0e}{%
+           family={Chen},
+           familyi={C\bibinitperiod},
+           given={X.},
+           giveni={X\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{409cdbc703a2843f8d86a8021bd1ed79}
+      \strng{fullhash}{409cdbc703a2843f8d86a8021bd1ed79}
+      \strng{bibnamehash}{409cdbc703a2843f8d86a8021bd1ed79}
+      \strng{authorbibnamehash}{409cdbc703a2843f8d86a8021bd1ed79}
+      \strng{authornamehash}{409cdbc703a2843f8d86a8021bd1ed79}
+      \strng{authorfullhash}{409cdbc703a2843f8d86a8021bd1ed79}
+      \field{sortinit}{W}
+      \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{year}
+      \true{uniqueprimaryauthor}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{The Astrophysical Journal}
+      \field{number}{1}
+      \field{title}{Revisiting the Extinction Law of the Magellanic Clouds}
+      \field{volume}{951}
+      \field{year}{2023}
+      \field{pages}{92}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.3847/1538-4357/acd8da
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

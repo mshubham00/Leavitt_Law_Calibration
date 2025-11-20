@@ -1,0 +1,343 @@
+\chapter{Calibration Method}
+
+\section{Galactic Cepheid Dataset}
+The golden data contains photometry with quality index less than or equal to 3 and RUWE less than 1.4 for gaia paralax. Raw dataset contains 103 Galactic Cepheids pulsating in fundamental mode. Their periods are measured in days and scaled logarithmically. The distance modulus is derived from the Gaia DR3 parallax filtered with RUWE < 1.4, the color excess is adopted from Fernie measurements, and photometric magnitudes are collected in the BVIJHK bands. The distribution of each observable against the period is depicted in the following sequence of pair plots. A quick glance shows no clear correlation in the plots.
+
+\begin{figure}[!ht]
+	\begin{center}
+	  \includegraphics[width=\textwidth]{clean/110_Jesper_RUWE_QLT.pdf}
+	  \caption{\small 103 Galactic Cepheids BVIJHK photometric data with color excess ($E_{BV}$) and Gaia distance (RUWE < 1.4). No clear correlation with period is observed in any of the pairplot.}
+	  \label{fig:rawdata}
+	\end{center}
+\end{figure}
+
+
+\section{Leavitt Law and their Wesenheits}
+
+Observations in different bands of light provide information about the effect of interstellar reddening on light. For longer wavelengths, the impact of reddening decreases significantly, implying a reduced possibility of reddening errors and leading to a tighter Leavitt Law. In its most generic form, the linear fit to the dataset is expressed as follows:
+
+\begin{wraptable}{r}{0.40\textwidth} 
+  \vspace{-1cm}
+  \centering
+ \caption{\tiny PL relations are shown in six bands, along with the corresponding PW relations in four colors. Notice the decreasing error in the slope and intercept with increasing wavelength.}\label{PLWtable}
+  {\tiny
+	\begin{tabular}{c c c}
+	\hline
+	Band & slope (error) & intercept (error) \\
+	$M_\lambda$ & $\alpha_\lambda$ & $\beta_\lambda$ \\
+	\hline        
+	B &  -1.855 ($\pm$ 0.110) & -3.221 ($\pm$ 0.033) \\
+	V &  -2.259 ($\pm$ 0.098) & -3.951 ($\pm$ 0.029) \\
+	I &  -2.563 ($\pm$ 0.093) & -4.735 ($\pm$ 0.028) \\
+	J &  -2.784 ($\pm$ 0.088) & -5.218 ($\pm$ 0.026) \\
+	H &  -2.917 ($\pm$ 0.084) & -5.598 ($\pm$ 0.025) \\
+	K &  -2.971 ($\pm$ 0.084) & -5.653 ($\pm$ 0.025) \\
+	\hline
+	Wesenheit & slope (error) & intercept (error) \\
+	$W_\lambda$ & $\alpha^{12}_\lambda$ & $\beta^{12}_\lambda$ \\
+	\hline        
+	B,BI &  -3.175 ($\pm$ 0.095) & -6.046 ($\pm$ 0.028) \\
+	V,BI &  -3.267 ($\pm$ 0.095) & -6.108 ($\pm$ 0.028) \\
+	I,BI &  -3.175 ($\pm$ 0.095) & -6.046 ($\pm$ 0.028) \\
+	J,BI &  -3.078 ($\pm$ 0.088) & -5.847 ($\pm$ 0.026) \\
+	H,BI &  -3.100 ($\pm$ 0.085) & -5.988 ($\pm$ 0.025) \\
+	K,BI &  -3.091 ($\pm$ 0.084) & -5.910 ($\pm$ 0.025) \\
+	\\
+	B,VI &  -2.869 ($\pm$ 0.101) & -5.838 ($\pm$ 0.030) \\
+	V,VI &  -3.033 ($\pm$ 0.096) & -5.949 ($\pm$ 0.029) \\
+	I,VI &  -3.033 ($\pm$ 0.096) & -5.949 ($\pm$ 0.029) \\
+	J,VI &  -3.010 ($\pm$ 0.088) & -5.801 ($\pm$ 0.026) \\
+	H,VI &  -3.058 ($\pm$ 0.085) & -5.960 ($\pm$ 0.025) \\
+	K,VI &  -3.063 ($\pm$ 0.084) & -5.891 ($\pm$ 0.025) \\
+	\\
+	B,IH &  -2.944 ($\pm$ 0.091) & -5.870 ($\pm$ 0.027) \\
+	V,IH &  -3.090 ($\pm$ 0.084) & -5.974 ($\pm$ 0.025) \\
+	I,IH &  -3.068 ($\pm$ 0.083) & -5.964 ($\pm$ 0.025) \\
+	J,IH &  -3.027 ($\pm$ 0.085) & -5.808 ($\pm$ 0.025) \\
+	H,IH &  -3.068 ($\pm$ 0.083) & -5.964 ($\pm$ 0.025) \\
+	K,IH &  -3.070 ($\pm$ 0.083) & -5.894 ($\pm$ 0.025) \\
+	\\
+	B,JK &  -3.269 ($\pm$ 0.089) & -6.517 ($\pm$ 0.027) \\
+	V,JK &  -3.338 ($\pm$ 0.082) & -6.468 ($\pm$ 0.024) \\
+	I,JK &  -3.219 ($\pm$ 0.081) & -6.265 ($\pm$ 0.024) \\
+	J,JK &  -3.099 ($\pm$ 0.082) & -5.952 ($\pm$ 0.024) \\
+	H,JK &  -3.113 ($\pm$ 0.081) & -6.054 ($\pm$ 0.024) \\
+	K,JK &  -3.099 ($\pm$ 0.082) & -5.952 ($\pm$ 0.024) \\
+	\hline
+	\hline
+	\end{tabular}
+	}
+
+\end{wraptable}
+
+
+\begin{align}\label{eq:plr}
+	M_\lambda & = \alpha_\lambda (\log P -1) + \beta_\lambda \\
+	W_\lambda^{12} &  = \alpha_\lambda^{12} (\log P -1) + \beta_\lambda^{12}
+\end{align}
+
+
+Since the periodic range of Cepheids lies between 0.49 and 1.8 on a logarithmic scale, 1 is chosen as the pivot point and subtracted from the period before calculating the regression coefficients, i.e., the slope and intercept. The Leavitt Law for each band is shown in Figure \ref{rawLL}, including four selected Wesenheit variants for VI, VK, IH, and JK.
+
+\begin{figure}[!ht]
+	\centering
+	\begin{subfigure}[b]{0.19\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{clean/abs.pdf}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.19\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{clean/wes_BK.pdf}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.19\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{clean/wes_VI.pdf}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.19\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{clean/wes_VK.pdf}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.19\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{clean/wes_JK.pdf}
+	\end{subfigure}
+	\caption{BVIJHK PL and PW relations with their Pearson correlation coefficient (r-value).}
+	\label{rawLL}
+	\hfill
+\end{figure}
+
+The plots above provide a comparative overview of the Leavitt Laws across different bands. In the first column, notice the decreasing width of the PL relation from the B-band to the K-band. The increasing Pearson correlation coefficient indicates a reduction in residuals. Assuming Cepheids align perfectly with the PL relation suggests that the residuals must stem from errors in reddening or distance measurements. 
+
+
+\begin{wrapfigure}{r}{0.4\textwidth}
+	\centering
+	\includegraphics[trim = 0 5mm 0 1cm, clip, width = \linewidth]{clean/PLW_mc.pdf}\label{PLW_mc}
+	\caption{\tiny Slope and Intercept of BVIJHK PL and PW relations. Interestingly, PW seems constant for all the bands, which is not the case for PL relations.}
+	\label{PLW_mc}
+	\vspace{-5mm}
+\end{wrapfigure}
+
+The contribution of residuals due to extinction errors varies with the band, while errors from the distance modulus remain constant. Therefore, the decrease in the width of the PL relation is strongly related to incorrect reddening measurements.
+
+
+The four variants of the PW relation have relatively higher r-values (approaching -1) than their corresponding PL relations, as Wesenheits are independent of extinction-based errors. Being reddening-free, the scatter in the Wesenheit-based Leavitt Law primarily arises from errors in distance and the reddening ratio. In this research, the reddening ratio is assumed to be correctly known ($R_V=3.23$, \cite{2004sandage}), making distance the only source of the scatter. 
+
+
+The slope and intercept of each PL and PW relations are summarized in Table \ref{PLWtable} and Figure \ref{PLW_mc}. The Table \ref{PLWtable} also list the uncertainity in slope and intercept of PL and PW relation, arising due to a larger scatter. After the calibration, these uncertainity will be deminished significantly. 
+
+On the other hand, note the convergence of slope and intercept of PW relations at K band for VI, VK and IH in the adjecent figure. JK based PW relation showing a fine deviation from the rest. These subtle variation in PW slope and intercept suggests a fine-tuning of reddening law for longer wavelength, though such exercise is out of the scope of this thesis. In the next section, procedure for analysing these residual of PL and PW relations is briefly discussed.
+
+\section{Residual Analysis}
+
+The residuals of PL and PW relations are calculated as follows:
+\vspace{-0.3cm}
+\begin{align}
+	\label{eq:del_del}
+	\Delta M_\lambda = & M_\lambda - (\alpha_\lambda \log P + \beta_\lambda) \\
+	\Delta W_\lambda^{12} = & W_\lambda^{12} - (\alpha^{12}_\lambda \log P + \beta^{12}_\lambda) 
+\end{align}
+
+\vspace{-0.2cm}
+
+\begin{figure}[htbp]
+	\centering
+	\begin{subfigure}{\textwidth}
+		\includegraphics[width=\textwidth]{jesper/95_deldel_S0VI_g.pdf}
+		\caption{$\Delta W^{VI}_\lambda$ - $\Delta M_\lambda$ correlation}
+	\end{subfigure}		
+	\begin{subfigure}{\textwidth}
+		\includegraphics[width=\textwidth]{jesper/95_deldel_S0JK_g}
+		\caption{$\Delta W^{JK}_\lambda$ - $\Delta M_\lambda$ correlation}
+	\end{subfigure}			
+	\caption{$\Delta W$ - $\Delta M$ correlation plots shown for three versions of wesenheit - VI and JK. With increasing wavelength, slope is approaching to 1.}
+	\label{deldel_plots}
+	\end{figure}
+
+Here, $\Delta M_\lambda$ represents the residuals of the PL relation, and $\Delta W_\lambda^{12}$ represents the residuals of the PW relation. Since distance modulus $\mu$ term is involved in both the parameters, $M_\lambda$ and $W_\lambda$, thereby $\delta \mu$, impacts both $\Delta W$ and $\Delta M$ equally. However, $\delta E_{BV}$ does not contribute to $\Delta W$, and only affects $\Delta M$ by an amount of $\delta E_{BV} / R_\lambda = \delta A_\lambda$. Since other possible factor like the effect of metallicity is not considered in this work, the equation for PL and PW residuals, equations \ref{mag_error} and \ref{wesen_error}, can be expressed as:
+
+  
+\begin{align*}
+    \Delta M_\lambda & = - ( R_\lambda^{BV}* \delta E(B-V) + \delta \mu)\\
+    \Delta W_\lambda^{BV} & = - \delta \mu
+\end{align*}
+
+Geometrically, these equations suggest that $\delta E_{BV}$ (scaled by $R_\lambda^{-1}$) shifts a star along the y-axis (vertically), while $\delta \mu$ affects both the x and y axes equally, moving the star along a line with slope 1. For the complete ensemble of stars, the slope of the residual correlation, $\rho$, when deviating from 1, suggests a significant contribution from reddening errors, as clearly observed for the case of the B and V bands in Figure \ref{deldel_plots}. For the longer wavelengths---J, H, and K---the contribution from reddening errors is minimized, and distance-based errors become dominant, causing the slope $\rho$ to approach 1.
+
+\begin{wrapfigure}{r}{0.4\textwidth}
+    \vspace{-0.4cm}
+	\centering
+	\includegraphics[width = 0.4\textwidth]{2017_madore}
+	\caption{\small{For each star, multiple trials are conducted to estimate the reddening-distance error pair in the B band. This process is then repeated for the remaining bands to constrain the correct $\delta \mu - \delta E_{BV}$ error pair. \cite{2017madore}}}\label{2017_madore}
+\vspace{-0.6cm}
+\end{wrapfigure}
+
+Tracing an individual Cepheid in every $\Delta W_\lambda^{12}$ - $\Delta M_\lambda$ correlation plots provides valuable insight into the extinction error associated with each band. By converting the extinction error into reddening error for each band and averaging these values, an estimate of the reddening correction for that specific star is obtained. However, at this stage, the correction for the modulus is not yet determined. To estimate the modulus error, a series of trials for $\delta \mu$ are conducted, which shifts the star along the line of slope 1, as shown in Figure~\ref{2017_madore} for stars B and C. The solid black diagonal line represents the regression line derived from one of the $\Delta W - \Delta M$ plots. The vertical deviation from this regression line, for each trial, reflects the amount of reddening correction needed. Several trial combinations for star B are labeled as 'B0' and 'B1', while 'C2', 'C3', and 'C4' correspond to the trial positions for star C. 
+
+These examples illustrate multiple possible error pairs for the B-band. Similar correlation plots are also constructed for the VIJHK bands. Each residual correlation plot provides the corresponding reddening errors for the respective $\delta \mu$ trials, i.e. every $\delta \mu$ trail corresponds to six $\delta E_{BV}$. The $\delta \mu$ trial that minimizes the variance of $\delta E_{BV}$ across the bands identifies the correct distance correction trial. This ultimately decouples the error budget between $\delta \mu$ and $\delta E_{BV}$ for each star.
+
+This method of decoupling errors, introduced by \cite{2017madore}, involves correlating $\Delta W^{VI}_V$ with $\Delta M_\lambda$. In contrast, I have used the composite Wesenheit function, $\Delta W^{VI}_\lambda$, for each correlation instance. The key motivation behind this choice is the definition of the Wesenheit function, which provides a reddening-free magnitude for the respective band. Specifically, for the VI color, the reddening-free magnitude for the J band should be $W_J^{VI}$, not $W_V^{VI}$. This implies that $\Delta M_J$ must be correlated with $\Delta W_J^{VI}$. The slopes of the regression lines for the four families of Wesenheit functions—based on BI, VI, IH, and JK—are summarized in Table \ref{rho}.
+
+
+\begin{table}[ht]
+	\centering
+	\vspace*{3mm}
+	\begin{tabular}{c c c c c}
+	\hline \\
+	Band & $\rho^{BI}_\lambda$ (error) &  $\rho^{VI}_\lambda$ (error) & $\rho^{IH}_\lambda$ (error) & $\rho^{JK}_\lambda$ (error) \\
+\\
+\hline 
+	B &  0.797 ($\pm$  0.088) &  0.819 ($\pm$  0.075) &  0.791 ($\pm$  0.094) &  0.619 ($\pm$  0.111) \\
+	V &  0.818 ($\pm$  0.066) &  0.847 ($\pm$  0.060) &  0.882 ($\pm$  0.079) &  0.778 ($\pm$  0.095) \\
+	I &  0.906 ($\pm$  0.041) &  0.907 ($\pm$  0.036) &  1.022 ($\pm$  0.049) &  0.993 ($\pm$  0.060) \\
+	J &  0.979 ($\pm$  0.022) &  0.976 ($\pm$  0.019) &  1.013 ($\pm$  0.023) &  1.037 ($\pm$  0.028) \\
+	H &  0.986 ($\pm$  0.014) &  0.984 ($\pm$  0.013) &  1.007 ($\pm$  0.015) &  1.023 ($\pm$  0.018) \\
+	K &  0.994 ($\pm$  0.009) &  0.992 ($\pm$  0.008) &  1.007 ($\pm$  0.010) &  1.015 ($\pm$  0.012) \\	\hline		 
+\end{tabular}
+\caption{Slopes of residual correlation  $\Delta W_\lambda^{12} - \Delta M_\lambda$ for BI, VI, IH and JK. Note the systematic decrease in errors as the slope $\rho$ approaching to 1 with increasing wavelength.}
+\label{rho}
+\end{table}
+
+
+\section{Decoupling $\delta \mu - \delta E_{BV}$}
+
+The core process of the calibration is encapsulated in this step. Up until this point, from the Galactic Cepheid dataset, I have derived multiband Leavitt laws and their corresponding Wesenheit Leavitt laws. The correlation of their residuals leads to the results summarized in Table \ref{rho}, which will be used for decoupling the errors $\delta E_{BV}$ and $\delta \mu$ for each star in the dataset. Given the high sensitivity of reddening at shorter wavelengths, to estimate a realistic correction for reddening error ($\delta E_{BV}$), averaging result from the first four bands — B, V, I, and J would be enough.
+
+Since the vertical deviation from the regression line in $\Delta W_\lambda^{12} - \Delta M_\lambda$ suggested the extinction error, mathematically, it can be formulated as:
+
+\begin{align}
+	\label{eq:extictionerror}
+	\delta A^0_\lambda = \Delta M_\lambda - \rho_\lambda^{12} \Delta W_\lambda^{12}  - \sigma_\lambda^{12}
+\end{align}
+
+The superscript '0' on A indicates that the distance error trial is not considered yet. $\rho_\lambda^{12}$ represents the slope of the $\Delta W_\lambda^{12}$ vs. $\Delta M_\lambda$ plot. Since residuals are dispersed around the origin, intercept of the regression lines $\sigma_\lambda$ approach to zero and can be neglected. 
+
+To convert the extinction error into reddening error, dividing by $R^{BV}_\lambda$
+
+\begin{align}
+	\label{eq:reddeningerror}
+	\delta E^0(B-V)_{\lambda} = \frac{\delta A^0_\lambda}{R_\lambda^{BV}} 
+\end{align}
+
+By making trials for the error in the modulus, $\delta \mu^i$, the corresponding reddening error, $\delta A^i_\lambda$, is calculated as follows:
+
+\begin{align*}
+    \delta A_\lambda (\delta \mu^i) 
+        &= (\Delta M_\lambda + \delta \mu^i)
+        - \rho_\lambda^{12} (\Delta W_\lambda^{12} + \delta \mu^i)\\
+        &= (\Delta M_\lambda - \rho_\lambda^{12} \Delta W_\lambda^{12})
+        + \delta \mu^i - \rho_\lambda^{12} \delta \mu^i \\
+        &= \delta A^0_\lambda + \delta \mu^i - \rho_\lambda^{12} \delta \mu^i 
+\end{align*}
+Therefore, for given modulus correction trail, extinction in any band will be calculated as follow:
+
+\begin{align}
+	\label{rderror}
+	\delta A^i_\lambda 	& = \delta A^0_\lambda + \delta \mu^i(1  - \rho_\lambda^{12}) \\ 
+	\delta E^i_\lambda(B-V) 	& = \frac{\delta A^i_\lambda}{R_\lambda^{BV}} \\
+\end{align}
+
+Considering ideal case where extinction law $\frac{A_\lambda}{A_V}$ and reddening ratio $R_\lambda$ are precisely known for the line-of-sight of each Cepheid of the dataset. Let i number of trails made for modulus correction $\delta \mu$ which correspond to six variants of reddening corrections (BVIJHK) for each wesenheit-color (BI, VI, IH and JK). Each Cepheid yields an error matrix of 100 rows ($\delta \mu^i$) and 6 x 4 columns for expected $\delta E^i_\lambda(B-V)$. 
+
+Let, $k^{th}$ trail be the correct one, i.e. reddening corrections $\delta E_\lambda$ suggested by each band must be agreeing with remaining ones., $\delta \mu^k$ must yield the same reddening correction $\delta E^k$ for all the bands, impling their variance is zero. 
+
+\begin{align}
+	\delta E_{BV}(\delta \mu^k) = \delta E^k_B = \delta E^k_V = \delta E^k_I = \delta E^k_J = \delta E^k_H = \delta E^k_K = <\delta E^k_\lambda>_\lambda
+\end{align}
+
+
+
+For  dataset, it  the variance across the bands being the minimum for the best solution, when . 
+
+\begin{align}
+	k & = min(var(\delta E^i_\lambda(B-V))_\lambda)_i  
+\end{align}
+
+
+\begin{figure}[!ht]
+	\centering
+	\begin{subfigure}[b]{\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{9_plots/6_rms/95_0_star_SBI_g.pdf}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{9_plots/6_rms/95_1_star_SBI_g.pdf}
+	\end{subfigure}
+	\begin{subfigure}[b]{\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{9_plots/6_rms/95_2_star_SBI_g.pdf}
+	\end{subfigure}
+	\caption{Determination of reddening error with least variance over modulus error for four family of wesenheit function. Dashed blue line dipects the variance.}
+	\label{rawLL}
+	\hfill
+\end{figure}
+
+
+\section{Calibrated Leavitt Law}
+
+These corrections will be adjusted with the original data as follow. 
+
+\begin{align*}
+    M_\lambda^* = M_\lambda^0 + \delta A_\lambda^* + \delta \mu^*
+\end{align*}
+
+\begin{figure}[!ht]
+	\centering
+	\begin{subfigure}[b]{0.19\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{clean/abs.pdf}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.19\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{clean/95PLBV.pdf}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.19\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{clean/95PLVI.pdf}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.19\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{clean/95PLVK.pdf}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.19\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{clean/95PLJK.pdf}
+	\end{subfigure}
+	\caption{BVIJHK PL and PW relations with their Pearson correlation coefficient (r-value).}
+	\label{rawLL}
+	\hfill
+\end{figure}
+
+\section{cluster Cepheid}
+
+\begin{figure}[!ht]
+	\centering
+	\begin{subfigure}[b]{0.19\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{clean/18_abs.pdf}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.19\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{clean/18PL_BV.pdf}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.19\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{clean/18PL_VI.pdf}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.19\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{clean/18PL_VK.pdf}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.19\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{clean/18PL_JK.pdf}
+	\end{subfigure}
+	\caption{BVIJHK PL and PW relations with their Pearson correlation coefficient (r-value).}
+	\label{rawLL}
+	\hfill
+\end{figure}
+

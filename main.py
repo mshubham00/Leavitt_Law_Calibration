@@ -32,7 +32,7 @@ def skip_to(skip = skip):
         stars, rdmu_list, rd_mu_rms, merged_data = starwise_analysis(merged_data, mu_df_list_dict) # f_star_wise
         
         # Implimenting the corrections in raw data 
-        calibrated_result(merged_data, rd_mu_rms, plots=1) # g_result
+        calibrated_result(merged_data, rd_mu_rms, plots=0) # g_result
 
     else:
 #        ex0_df, rd0_df, mu_df_list_dict, merged_data = rd_mu_error_matrix_() # e_error_estimation

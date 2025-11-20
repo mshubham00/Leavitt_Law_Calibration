@@ -19,9 +19,10 @@ def intro(data_out=data_out, k=k, s=s, z=z):
     Rv = R_v
     print(f"{star*20}\n{star*20}\n\n\nMaster Thesis Project: \tGalactic BVIJHK Leavitt Law Calibration for R_v = {Rv} \n\n  \t\t\tTo Refine systematic errors in luminosity, distance and reddening of individual Cepheid. \n\t\t\t{bar*54}\n\n     \t\t\tAuthor: Shubham Mamgain (mshubham00@gmail.com) \n     \t\t\tSupervisor I: Dr. Jesper Storm (AIP Potsdam)\n     \t\t\tSupervisor II: Prof. Dr. Maria Rosa Cioni")    
     print('\n\n\n\n\t\t\tTo begin the calibration process, store cleaned data at ./data/input/<file_name>.csv \n\n\t\t\tFor datafile selection (k) and columns mapping, edit ./data/datamapping.py file.')
-    print(f'\n\t\t\tAutosave (s = {s}) | Autoprocess (z = {z}) | Generate Plots (plots = {plots})\n\n\t\t\tk : {k}\n\t\t\tdata : {file_name}\n\t\t\tR_v : {Rv}\n\n\t\t\tProcessed data will be saved in {data_out} directory. \n\n'+'###'*30)
+    print(f'\n\t\t\tAutosave (s = {s}) | Paging (z = {z}) | Generate Plots (plots = {plots})\n\n\t\t\tk : {k}\n\t\t\tdata : {file_name}\n\t\t\tR_v : {Rv}\n\n\t\t\tProcessed data will be saved in {data_out} directory. \n\n'+'###'*30)
     if z==1:
         input('\nPress Enter to proceed \n')
+
 # Load data and select relevant coloumns
 input_data, raw, mag, dis = load_data(file_name) # a_utils
 

@@ -23,7 +23,7 @@ simplefilter(action="ignore", category=pd.errors.PerformanceWarning)
 import warnings
 warnings.filterwarnings("ignore", category=UserWarning)
 #####################################################################
-from data.datamapping import R, mag, data_dir, file_name, dis_flag, data_out, dis_list, process_step, k, s, z, fouque_extinction_ratios, R123,p
+from data.datamapping import R, wes_show, mag, img_out_path, file_name, dis_flag, data_out, dis_list, process_step, k, s, z, R123,p
 from lvtlaw.a_utils import merge_12, imgsave
 
 #####################################################################
@@ -142,6 +142,86 @@ def plot_corr(df, Y='logP', title ='', f=12, s=s):
     g.fig.subplots_adjust(top=0.9)  # Adjust top to make room for title
     if s == 1:
         imgsave(title,0)    
+    plt.show()
+#####################################################################
+def color_period(data, ann, outliers, s=0):
+    color = pd.DataFrame()
+    color['name']=data['name']
+    color['logP']=data['logP']
+    color[dis_list[0]]=data[dis_list[0]]
+    color['EBV']=data['EBV']
+    for i in range(0,6):
+        for j in range(i+1,6):
+            color[mag[i]+mag[j]] = data[mag[i]+'_mag'] - data[mag[j]+'_mag'] - (R[mag[i]]-R[mag[j]])*data.EBV
+
+    ls = color.columns[4:]
+    for j in range(0,14,2):
+        fig, axarr = plt.subplots(1,2, sharey='col',gridspec_kw={'hspace': 0, 'wspace': 0})
+        fig = plt.gcf()
+        fig.set_size_inches(15, 6)
+        Y = color['logP']
+        for i,ax in enumerate(axarr):
+#        ax.tick_params(left = False, right = False , labelleft = False , labelbottom = False, bottom = False) 
+            X = color[ls[i+j]]
+            pcm = ax.scatter(X, Y, label='$%s$'%(ls[i+j]), s=color[dis_list[0]], c = color['EBV'])
+        #ax.legend(loc='upper right', prop={'size':6})
+            ax.yaxis.tick_right()
+            if ann == True:
+                #for k in range(len(color)):
+                for k in outliers:
+                    ax.annotate('%i'%(k), xy =(X.iloc[k], Y.iloc[k]), fontsize = 11) 
+            if i%2 ==0:
+                ax.set_ylabel('Period')
+            plt.text(0.05, 0.85, '%s'%(ls[i+j]), transform = ax.transAxes, color = "red",  fontsize = 14)      
+            ax.set_title(f'Color {ls[i+j]}')
+            ax.yaxis.tick_left()
+        title = '%s_PC%i_%s'%(file_name,j,ls[i+j])
+        if s==1:
+            imgsave(title, step=0, img_path=img_out_path, fil = 'pdf', p=0)
+#####################################################################
+
+def pltwes_deviation(m,wesenheit,name, dis, s=0):
+    fig_res, axs_res = plt.subplots(1, 3, figsize=(18, 4),sharey=True)
+    axs_res = axs_res.flatten()
+    for col in range(5):
+        dev = wesenheit[f'{m}{wes_show[col]}{dis}']-wesenheit[f'{m}{wes_show[col]}{dis}0']
+        axs_res[0].axhline(0)#, color='red', linestyle='--', linewidth=1)
+        axs_res[0].plot(wesenheit.logP, dev, '.', label =m+wes_show[col])
+        dev = wesenheit[f'{m}{wes_show[col+5]}{dis}']-wesenheit[f'{m}{wes_show[col+5]}{dis}0']
+        axs_res[1].axhline(0)#, color='red', linestyle='--', linewidth=1)
+        axs_res[1].plot(wesenheit.logP, dev, '.', label =m+wes_show[col+5])
+        dev = wesenheit[f'{m}{wes_show[col+10]}{dis}']-wesenheit[f'{m}{wes_show[col+10]}{dis}0']
+        axs_res[2].axhline(0)#, color='red', linestyle='--', linewidth=1)
+        axs_res[2].plot(wesenheit.logP, dev, '.', label =m+wes_show[col+10])
+    axs_res[0].legend()
+    axs_res[1].legend()
+    axs_res[2].legend()
+    axs_res[0].set_ylabel('$W - W_0$')
+    axs_res[1].set_xlabel('Period')
+    if s==1:
+        imgsave(name+m,img_path=img_out_path)
+    plt.show()
+#####################################################################
+def pltwes_deviation_(m,wesenheit,name, dis, s=0):
+    fig_res, axs_res = plt.subplots(1, 3, figsize=(18, 4),sharey=True)
+    axs_res = axs_res.flatten()
+    for col in [0,3]:
+        dev = wesenheit[f'{m}{wes_show[col]}{dis}']-wesenheit[f'{m}{wes_show[col]}{dis}0']
+        axs_res[0].axhline(0)#, color='red', linestyle='--', linewidth=1)
+        axs_res[0].plot(wesenheit.logP, dev, '.', label =m+wes_show[col])
+        dev = wesenheit[f'{m}{wes_show[col+1]}{dis}']-wesenheit[f'{m}{wes_show[col+1]}{dis}0']
+        axs_res[1].axhline(0)#, color='red', linestyle='--', linewidth=1)
+        axs_res[1].plot(wesenheit.logP, dev, '.', label =m+wes_show[col+1])
+        dev = wesenheit[f'{m}{wes_show[col+2]}{dis}']-wesenheit[f'{m}{wes_show[col+2]}{dis}0']
+        axs_res[2].axhline(0)#, color='red', linestyle='--', linewidth=1)
+        axs_res[2].plot(wesenheit.logP, dev, '.', label =m+wes_show[col+2])
+    axs_res[0].legend()
+    axs_res[1].legend()
+    axs_res[2].legend()
+    axs_res[0].set_ylabel('$W - W_0$')
+    axs_res[1].set_xlabel('Period')
+    if s==1:
+        imgsave(name+m,img_path=img_out_path)
     plt.show()
 #####################################################################
 print(f'* * {module} module loaded!')

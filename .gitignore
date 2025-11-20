@@ -10,5 +10,5 @@
 
 # Ignore a specific folder (e.g., 'folder_name')
 data/processed/
-docs/plots/
+docs/reports/plots/
 .ipynb_checkpoints/
