@@ -4,13 +4,13 @@
 '''
 module = 'datamapping'
 #####################################################################
-k=1; 						# k selects dataset [0:Madore, 1:Jesper, 2:Cruz, 3:LMC, 4:SMC]
+k=0; 						# k selects dataset [0:Madore, 1:Jesper, 2:Cruz, 3:LMC, 4:SMC]
 skip=0
 s=1 ; 						# saves the output
 z=0; 						# z switches output to paging mode
 p=0
 plots=0; 					# plots for genrating plots
-flags = ['S'] 				# Madore and Shubham
+flags = ['S', 'M'] 				# Madore and Shubham
 mode = ['0']  			    # Absolute mag and True absolute mag for PL and PW
 rd_avg_drop = ['H','K']# Not included in estimating reddening variance (f_star_wise)
 del_mu = [round(i*0.01,3) for i in range(-100,100,2)]
@@ -47,12 +47,12 @@ def select_data_file(k):
         R, R_v, A = R_ratio(R_v = 3.23, mag = mag, A = fouque_extinction_ratios)
         file_cols = ['name','logP','EBV'] + dis_list + [f'M_{m}' for m in mag] 
     elif k ==1:
-        filename = '109_IRSB_plx_IH'
+#        filename = '109_IRSB_plx_IH'
 #        filename = '71_IRSB_plx_IK'
-        dis_list = ['plx']; dis_flag = ['_p']
-#        filename = '76_IRSB_IJ_HK'
+#        dis_list = ['plx']; dis_flag = ['_p']
+        filename = '76_IRSB_IJ_HK'
 #        filename = '109_IRSB_IH_VJ'
-#        dis_list = ['IRSB']; dis_flag = ['_j']
+        dis_list = ['IRSB']; dis_flag = ['_j']
         mag = ['B','V','I','J','H','K'];#
         wes_show=colors(mag)#['VI', 'BJ', 'BH', 'BK', 'VJ', 'VH', 'VK', 'IH', 'IK']
         R, R_v, A = R_ratio(R_v = 3.23, mag = mag, A = fouque_extinction_ratios)
