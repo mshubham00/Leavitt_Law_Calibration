@@ -1,0 +1,54 @@
+\babel@toc {USenglish}{}\relax 
+\contentsline {chapter}{Acknowledgements}{ii}{chapter*.1}%
+\contentsline {chapter}{Abstract}{iii}{chapter*.2}%
+\contentsline {chapter}{List of Figures}{vii}{section*.3}%
+\contentsline {chapter}{List of Tables}{ix}{section*.4}%
+\contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Prespective on the Subject}{1}{section.1.1}%
+\contentsline {subsection}{\numberline {1.1.1}Astrophysics, Astronomy and Cosmology}{1}{subsection.1.1.1}%
+\contentsline {subsection}{\numberline {1.1.2}Spectrum of Spatial Scale}{2}{subsection.1.1.2}%
+\contentsline {section}{\numberline {1.2}Historical Background and Development}{5}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}Distance Determination beyond the Galaxy, 1920s}{6}{subsection.1.2.1}%
+\contentsline {subsection}{\numberline {1.2.2}Expansion of the Universe}{7}{subsection.1.2.2}%
+\contentsline {subsection}{\numberline {1.2.3}The Big Bang Model, 1930s}{7}{subsection.1.2.3}%
+\contentsline {subsection}{\numberline {1.2.4}Composition of Stars}{8}{subsection.1.2.4}%
+\contentsline {subsection}{\numberline {1.2.5}Age of the Universe, 1950s}{8}{subsection.1.2.5}%
+\contentsline {subsection}{\numberline {1.2.6}Technological Development, 1960s}{9}{subsection.1.2.6}%
+\contentsline {subsection}{\numberline {1.2.7}Composition of Universe}{9}{subsection.1.2.7}%
+\contentsline {subsubsection}{\numberline {1.2.7.1}$\Lambda $CDM Cosmological Model}{10}{subsubsection.1.2.7.1}%
+\contentsline {subsection}{\numberline {1.2.8}Cosmic Distance Ladder and Hubble Constant}{12}{subsection.1.2.8}%
+\contentsline {subsection}{\numberline {1.2.9}Golden Era of Astronomy - Gaia onwards}{13}{subsection.1.2.9}%
+\contentsline {section}{\numberline {1.3}Scope of this Thesis}{13}{section.1.3}%
+\contentsline {subsection}{\numberline {1.3.1}Part I: Parameters of Leavitt Law}{14}{subsection.1.3.1}%
+\contentsline {subsection}{\numberline {1.3.2}Part II: Calibration Method and Dataset}{14}{subsection.1.3.2}%
+\contentsline {subsection}{\numberline {1.3.3}Part III: Result Implications}{15}{subsection.1.3.3}%
+\contentsline {part}{I\hspace {1em}Parameters of Leavitt Law}{16}{part.1}%
+\contentsline {chapter}{\numberline {2}Observables - Luminosity, Reddening, Distance}{17}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Why does a star shine?}{17}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Light: Color and Luminosity}{18}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Magnitude Scale}{19}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}Color Index \textit {($m_1$ - $m_2$)}}{20}{subsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.2.3}Absolute Magnitude (\textit {M})}{21}{subsection.2.2.3}%
+\contentsline {section}{\numberline {2.3}Distance}{22}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Parallax: Measuring Astronomical Distances Using Geometry}{22}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}Distance Modulus ($\mu $)}{23}{subsection.2.3.2}%
+\contentsline {section}{\numberline {2.4}Interstellar Reddening}{24}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}Reddening Ratio}{24}{subsection.2.4.1}%
+\contentsline {subsection}{\numberline {2.4.2}Interstellar Extinction Law}{25}{subsection.2.4.2}%
+\contentsline {subsection}{\numberline {2.4.3}Wesenheit Magnitude}{26}{subsection.2.4.3}%
+\contentsline {chapter}{\numberline {3}Pulsating Star - Classical Cepheid}{29}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Are all stars the same?}{29}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Discovery of Variable stars}{29}{subsection.3.1.1}%
+\contentsline {section}{\numberline {3.2}Stellar Evolution}{30}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Formation of Star}{30}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Main sequence star and Turn-off point}{33}{subsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.2.3}Red Giant Star and Helium Flash}{33}{subsection.3.2.3}%
+\contentsline {subsection}{\numberline {3.2.4}Horizontal branch and Variable stars}{34}{subsection.3.2.4}%
+\contentsline {subsection}{\numberline {3.2.5}AGB Stars and Planetary Nebulae}{35}{subsection.3.2.5}%
+\contentsline {subsection}{\numberline {3.2.6}Super Novae and Compact Objects}{35}{subsection.3.2.6}%
+\contentsline {section}{\numberline {3.3}Pulsation of Cepheid}{36}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Kappa Mechanism}{36}{subsection.3.3.1}%
+\contentsline {section}{\numberline {3.4}Leavitt Law}{37}{section.3.4}%
+\contentsline {part}{II\hspace {1em}Calibration Method and Dataset}{39}{part.2}%
+\contentsline {chapter}{Bibliography}{40}{section*.23}%
+\contentsline {chapter}{Bibliography}{40}{chapter*.24}%

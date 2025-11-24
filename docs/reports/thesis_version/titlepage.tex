@@ -1,0 +1,70 @@
+\begin{titlepage}
+
+
+%%%% Select the correct front page by changing the reference below %%%% 
+
+% Figures/Frontpage/forside_bachelor_eng.pdf
+% Figures/Frontpage/forside_bachelor_nor.pdf
+% Figures/Frontpage/forside_master_eng.pdf
+% Figures/Frontpage/forside_master_nor.pdf
+
+\AddToShipoutPicture*{
+    \put(-4,0){
+        \parbox[b][\paperheight]{\paperwidth}{%
+            \vfill
+            \centering
+            \vspace{-2cm}
+            \includegraphics[width=0.50\textwidth]{../plots/0_images/uni_logo.png}
+            \vfill
+        }
+    }
+    \put(0,0){%
+        \transparent{0.4}\textcolor{white}{\rule{\paperwidth}{\paperheight}}
+    }
+}
+
+%%%% Type in your data here %%%% 
+
+\newcommand{\projectTitle}{Reddenings, Distances and Luminosities}
+\newcommand{\projectSubTitlel}{of a new sample of Galactic Cepheids for probing the Milky Way and calibrating the extra-galactic distance scale}
+\newcommand{\authors}{SHUBHAM MAMGAIN}
+\newcommand{\id}{794731}
+\newcommand{\supervisor}{Dr. Jesper Storm}
+\newcommand{\group}{Dwarf Galaxies and the Galactic Halo}
+\newcommand{\aip}{Leibniz Institute for Astrophysics Potsdam (AIP)}
+\newcommand{\secsupervisor}{Prof. Dr. Maria Rosa Cioni}
+\newcommand{\projectYear}{2025}
+\newcommand{\facultyName}{Mathematisch-Naturwissenschaftliche Fakultät}
+\newcommand{\departmentName}{Institut für Physik und Astronomie}
+
+
+
+%%%% Page Layout %%%% 
+\begin{tabular}{p{13cm}}
+                                            \\[2cm]
+    \LARGE{\textsc{\textbf{\projectTitle}}}    \\[1 cm]
+    \projectSubTitlel                       \\[1.2cm]
+    \large{\authors}                        \\
+    Master Astrophysics 						\\ 
+    Matr. No. : \id 							\\[7cm]
+    \Large{SUPERVISOR I} \hspace{2 mm}- \supervisor    \\
+    \hspace{4cm} \group									\\
+    \hspace{4cm} \aip								\\[1 cm]
+    \Large{SUPERVISOR II} - \secsupervisor			\\
+    \hspace{4cm} \group									\\
+	\hspace{4cm} \aip								\\[1 cm]
+
+\end{tabular}
+
+
+
+\vfill
+
+
+\begin{flushright}
+\textbf{Universität Potsdam, \projectYear} \\
+\small{\facultyName \\
+\departmentName}
+\end{flushright}
+\vspace{1cm}
+\end{titlepage}

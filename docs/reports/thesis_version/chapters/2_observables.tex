@@ -1,0 +1,320 @@
+
+\chapter{Observables - Luminosity, Reddening, Distance}
+
+\input{chapters/content/0_2_plot_nebula.tex}
+
+\section{Why does a star shine?}
+The Sun, a luminous and intensely hot star, derives its fundamental properties from the enormous gravitational forces acting within its structure. Possessing a mass approximately 333,000 times that of Earth, the Sun’s vast mass is confined within a relatively compact volume, resulting in a continuous gravitational contraction toward its core. This inward collapse generates extremely high pressures and densities, particularly in the central regions. Consequently, core temperatures rise to several million Kelvin, establishing the conditions necessary for nuclear fusion to occur. Within this high-energy environment, surpassing the Coulumb barrier protons collide and fuse to form heavier atomic nuclei, predominantly helium.
+
+At the core of the Sun, approximately 700 million metric tons of hydrogen are converted into helium each second through fusion processes, liberating a tremendous amount of energy. A substantial fraction of this energy is carried away by neutrinos, with a minor portion possibly emitted as gravitational waves. The remainder propagates outward as electromagnetic radiation, manifesting primarily as heat and visible light. This radiant energy escapes the solar surface and travels through space as sunlight, a fraction of which reaches Earth. Upon entering Earth's atmosphere, solar radiation interacts with atmospheric molecules, undergoing scattering that redistributes the light. The portion of the electromagnetic spectrum that penetrates the atmosphere - referred to as the optical band - corresponds to the visible range and is perceived as the bright solar illumination observed from Earth.
+
+\textit{The total energy emitted by the Sun across all wavelengths per unit time is defined as its luminosity}.  
+
+As this radiation traverses the Earth's atmosphere, part of it is absorbed or scattered, a process collectively termed atmospheric extinction. This mechanism modulates both the intensity and spectral distribution of solar radiation at the Earth’s surface. A similar attenuation of starlight occurs in interstellar space, known as \textit{interstellar extinction}, wherein light is absorbed or scattered by interstellar dust and gas. This process affects the transmission of radiation between stellar sources rather than through a planetary atmosphere.
+
+A notable consequence of extinction is the wavelength-dependent nature of absorption and scattering, a phenomenon known as \textit{reddening}. Because shorter wavelengths (i.e., blue light) are more efficiently scattered than longer wavelengths (i.e., red light), light passing through such media often exhibits a shift toward redder colors. This reddening effect serves as a crucial diagnostic tool in astrophysics, enabling the characterization of the intervening interstellar medium and enhancing our understanding of the distribution and composition of cosmic dust and gas.
+
+\section{Light: Color and Luminosity}
+Light is a form of electromagnetic (EM) radiation that travels through space at a constant speed of 299,792,458 meters per second in a vacuum. The human visual system is sensitive to a narrow portion of this spectrum, known as the optical band, which ranges from approximately 350 to 700 nanometers wavelength. This segment represents only a small fraction of the full electromagnetic spectrum, which spans from high-energy gamma rays to low-energy radio waves.
+
+The electromagnetic spectrum also describes the distribution of thermal radiation emitted by objects at various temperatures. When matter is heated, it emits energy in the form of electromagnetic radiation. As the temperature increases, the peak of this emission shifts toward shorter wavelengths and higher frequencies, corresponding to a greater energy output. This fundamental relationship between temperature and spectral energy distribution (SED) is described by Planck’s law \citep{1900planck}, which provides the theoretical foundation for the modern understanding of blackbody radiation and underpins much of contemporary astrophysics.
+
+
+\input{chapters/content/0_2_plot_blackbody.tex}
+
+According to Plank law, a perfect black body absorbs all the incident radiation and emits radiation across the entire electromagnetic spectrum. His formulation of spectral energy distribution as a function of wavelength is given as: 
+
+\begin{equation}
+	B_\lambda (T) = \frac{8 \pi h c}{\lambda^5 (e^{\frac{h c }{\lambda k T }} - 1)}
+\end{equation}
+
+where $B_\lambda$ is radiant energy at given wavelength in [$W.m^{-2}.sr^{-1}.m^{-1}$] unit, $\lambda$ is wavelength, $h$ is Planck's constant, $k$ is Boltzmann constant, $c$ is speed of light and T is the temperature of the object. Integrating it for all the wavelength yields the total energy output of the blackbody at given temperature.  
+
+To estimate radiation flux emitted towards the observer, integrating $B_\lambda (T)$ over the hemisphere above the emitting surface:
+\begin{equation}
+	F_\lambda(T)= \int B_\lambda(T) cos \theta d \omega = \pi B_\lambda(T)
+\end{equation}
+
+
+Now, consider a star of radius $R$ that emits a spectral radiation flux $F_\lambda$ at temperature T. At a distance $d$ from the star, the flux measured by a detector is governed by the inverse-square law, which states that the observed flux decreases with the square of the distance from the source. Accordingly, the observed flux $f_\lambda$ at distance $d$ is given by:
+
+\begin{equation}
+f_\lambda = {\frac{R}{d}}^2 F_\lambda
+\end{equation}
+
+If the sensitivity of detector given by sensitivity function, $E_\lambda$, the total radiation flux recieved by the detector would be
+
+\begin{equation}
+s= \int_{0}^{\infty} f_\lambda E_\lambda d \lambda
+\end{equation}
+
+The amount of flux recieved by a detector measured as photon count per wavelength range, called as \textit{band}, which further converted into more convinient unit of measurement called as \textit{magnitude}. It is the standard unit of measurement of light in photometry. 
+
+\subsection{Magnitude Scale}
+Ancient Greek astronomer, Hipparchus  (c. 190 – c. 120 BCE), had made a star catalogue						 by defining a scale of brightness for stars in the units of magnitude (mag), where '1 mag' refers to the brightest and 6 mag is the dimmest star in the sky, for unaided eye. The definition of magnitude scale revisited by V.Pogson in 1850 and calibrated by J.F. Zöllner in 1861 by using visual photometer. They made a comparison in between an artificial star and a real star using two Nicol prisms to redefine a precise magnitude scale. 
+
+According to Pogson's definition, difference between 'apparent magnitudes' of two stars is proportional to the logarithmic of their radiation flux ratio ($s_1/s_2$). i.e.
+
+\begin{equation}
+m_1 - m_2 = 2.5 \log(s_1/s_2)
+\end{equation}
+It follows as if the magnitude of two stars differ by 5, that means one star appears 100 times brighter than the other star. For instance, it is measured that $\alpha$  Lyr (Vega) has visual magnitude of 0.14 mag and $\alpha $ Cyg (Deneb) has 1.33 magnitude which is fainter than $\alpha$ Lyr. Sun, Moon, Venus, Mars, Jupiter and three stars - Sirius, Canopus and $\alpha$ Centauri are the only celestial objects having negative apparent magnitude, count among the brightest objects in the night sky. 
+
+
+\subsection{Color Index \textit{($m_1$ - $m_2$)}}
+The visible band of light is a small window of electromagnetic spectrum corresponds to the wavelength ranging from 300 nm (Blue) to 700nm (Red). The difference in the photon intensity at different wavelength
+translated as different color index. If one observes the night sky carefully, it would be clear that stars come in different colors, and their magnitude differs on observing with different color bands. For instance, if one observes the sky in red band, Betelguse would appear brighter than Sirius, even if Sirius is the brightest star. It is because Sirius emits its most of the radiation in blue band, while betelguse radiates in red band. It is due to their photosphere's temparature differences.
+
+To determine the precise stellar colors and magnitudes, W.W. Morgan and H. L. Johnson developed UBV system of color bands with effective wavelenght for ultraviolet$_\lambda: 365$ nm , blue$_\lambda: 440$ nm, visual$_\lambda: 548$ nm ) \citep{1953johnson}. Further extension of the UBV system into the red and infrared passband was done by adding following filters in [$\mu m$].
+$$
+\begin{array}{cccccccccc}
+Bands & R & I & J & H & K & L & M & N & Q\\
+\lambda_{eff} & 0.7 & 0.9 & 1.25 & 1.63 & 2.2 & 3.6 & 5.0 & 10.6 & 21
+\end{array}
+$$
+
+\subsubsection*{Temperature \textit{$(T_{eff})$}}
+
+While studying stellar spectra, K. Schwarzchild recognised that the color incides measures the energy distribution, thus it could be used to estimate the temperature of photosphere of the star. 
+
+On fitting energy distribution with Plank radiation law, in Wien's approximation ($c_2/(\lambda T) >> 1$), the radiation flux results
+\begin{equation}
+F_\lambda \propto exp(-c_2/(\lambda T_c))
+\end{equation}
+
+For the sake of simplicity, let the sensitivity function of the photo-detector be at its maxima, then the relation in between color index, B - V , and the effective temperature of the star would be.
+
+\begin{equation}
+B - V = \frac{2.5 c_2 \log e}{T_C} \left(\frac{1}{\lambda_B} - \frac{1}{\lambda_V} \right) + const.
+\end{equation}
+
+with radiation constant $c_2 = 0.014 mK$, $\lambda_B = 440 nm$ and $\lambda_V = 548nm$,
+
+\begin{equation}
+B-V = \frac{0.7 * 10^4}{T_c} + const.
+\end{equation}
+
+The above equation suggests that the color indices (B-V) corresponds to temperature of the star. 
+
+
+
+Refering $\alpha$ Lyr (Vega - A0V type star) as a standard star, the magnitude scale, in U, V and B bands, defined in such a way that : 
+
+\begin{equation}
+U-B = B-V = 0
+\implies C_{UB} = C_{BV} = 0
+\end{equation}
+
+For convenience, the notation for color $U-B$ is adopted as $C_{UB}$. Color index $C_{BV}$ less than 0.5 indicates blue and more than 1.5 indicates red. 
+
+
+
+
+\vspace{2cm}
+
+\subsection{Absolute Magnitude (\textit{M})}
+When a luminous object is observed from different distances, it appears to have varying brightness because flux decreases with increasing distance. So, how can we compare the intrinsic brightness of two remote stars?  To enable standardized comparisons, astronomers adopt a reference distance of 10 parsecs (pc). The radiant flux of a star measured at this distance defines its \textit{absolute magnitude}, denoted as $M_\lambda$. The subscript $\lambda$ indicates the specific photometric band (filter) used in the observation, as brightness varies across different bands.
+
+Given this framework, if $m_\lambda$ represents the apparent magnitude of a star observed at a distance \textit{d} (in parsecs), and $M_\lambda$ is its absolute magnitude, the relationship between them is given by the following formula:
+
+$$M_\lambda = m_\lambda - 2.5\log \left( \frac{d[pc]}{10}\right)^2 $$
+\begin{align}
+M_\lambda = m_\lambda - 5\log{d[pc]}  + 5 
+\end{align}
+
+The above is a simple relation which relates the observable luminosity with the distance of any stellar object. 
+
+\begin{notebox}[sharp corners, width=\textwidth]{True Absolute Magnitude}
+The above relation must be corrected for the effect of interstellar extinction, $A_\lambda$, to obtain the correct \textit{'photometric'} distance. 
+\begin{align}
+M_\lambda^0 = m_\lambda - A_\lambda - 5\log{d[pc]}  + 5 
+\end{align}
+\end{notebox}
+
+
+\section{Distance}
+The introductory chapter makes it clear that the standard units of length used in everyday life are inadequate for astronomical measurements. To address this, astronomers have developed a distinct set of units for measuring astronomical distances. However, different units are used depending on the spatial scale. For example, within the solar system, the astronomical unit (AU) is sufficient, while on the scale of the Milky Way, the light-year is more appropriate. For even larger distances, such as those in extragalactic realm, units like the parsec or megaparsec are commonly used. The relationships between these units are summarized in Table 
+
+\ref{table:distance}.
+\begin{table}[h!]
+	\centering
+	\caption{Conversion of Astronomical Distance Units}
+	\begin{tabular}{c |c c c c} 
+		
+		 & Kilometer & Astronomical Unit & Light Year & Parsec\\  
+		\hline
+		Kilometer & 1 &  &  &\\ 
+		Astronomical Unit & 149597870.700 & 1 &  &\\
+		Light Year & 9460730472580.8 &  63241.077 & 1 &\\
+		Parsec & 30856775814913673 & 206264.806247096 &  3.261563777 & 1\\ 
+
+	\end{tabular}
+	\label{table:distance}
+\end{table}
+
+\subsection{Parallax: Measuring Astronomical Distances Using Geometry}
+
+Parallax is a geometrical method that utilizes trigonometric principles to measure the distance to an object by observing its apparent shift relative to a fixed background, caused by the movement of the observer. While measuring distances between nearby objects on Earth is straightforward using tools like rulers or laser rangefinders, this becomes impractical when dealing with vast astronomical distances. Hence, astronomers rely on methods such as parallax, Leavitt Law, etc.
+
+The choice of method for measuring astronomical distances depends on both the scale of the measurement and the characteristics of the celestial object in question. Since no single technique is effective across all distance ranges in the universe, astronomers must understand the physics of various astrophysical phenomena in order to select the most appropriate method for a given situation. Accurate distance measurement is foundational in astronomy, as it affects our understanding of everything from stellar properties to the large-scale structure of the cosmos.
+
+One of the fundamental tools used in determining distances is trigonometry. In a right-angled triangle, if one side and an angle (other than the right angle) are known, the other sides can be calculated using trigonometric ratios. There are six basic trigonometric functions: sine (sin), cosine (cos), and tangent (tan), along with their respective reciprocals: cosecant (csc), secant (sec), and cotangent (cot). These ratios depend solely on the angle and not on the actual size of the triangle, making them highly useful in astronomical applications where distances are vast and direct measurement is impractical.
+
+\input{chapters/content/0_2_plot_parallax.tex}
+
+
+
+
+
+In the context of stellar parallax, a conceptual triangle is formed between the Earth, the Sun, and a distant star. The baseline of this triangle is the distance between the Earth and the Sun, known as 1 Astronomical Unit (AU). As Earth moves in its orbit over the course of six months, nearby stars appear to shift slightly against the backdrop of more distant stars. This apparent angular shift is called the parallax angle. Because the triangle formed is extremely elongated, the parallax angle is very small, typically measured in arcseconds.
+
+To calculate the distance to a star using the parallax method, astronomers apply the tangent trigonometric ratio, which in this context is:
+
+\begin{equation}
+\tan p = \frac{1 AU}{d}
+\end{equation}
+
+For very small angles (as in astronomical observations), $\tan p$ is approximately equal to $p$ when measured in radians. Therefore, the distance can be simplified to:
+
+\begin{equation}
+d = \lim_{p \to 0} \frac{1 AU}{\tan p} = \frac{1 AU}{p} 
+\end{equation}
+
+
+To standardize distance measurements, astronomers use the parsec as a unit of length.
+
+\vspace{0.3cm}
+\begin{center}
+\textit{1 parsec (pc) is defined as the distance at which 1 AU subtends an angle of 1 arcsecond (1/3600 of a degree).}
+\end{center}
+\vspace{0.3cm}
+
+The Gaia satellite, launched by the European Space Agency in 2014, has revolutionized our understanding of the Milky Way by measuring the parallax and proper motion of billions of celestial objects. Among the vast number of objects observed, several notable types of variable stars, including Cepheid variables and RR Lyrae stars, were also studied. In this thesis, the parallax-driven distances provided by Gaia will be used to calibrate the period-luminosity relation. 
+
+\subsection{Distance Modulus ($\mu$)}
+
+A useful parameter for denoting distance in astronomy is the distance modulus, $\mu$, which provides a logarithmic transformation of the distance to an object, using 10 parsecs as the reference distance. The distance modulus can also be expressed as the difference between the apparent magnitude and the absolute magnitude of an object. Mathematically, it is formulated as:
+
+$$\mu = m - M = 5 log_{10}\left[\frac{d}{10 pc}\right] $$ 
+ 
+
+
+\section{Interstellar Reddening}
+
+In photometric observations, the electromagnetic flux of starlight is quantified by counting the incoming photons within a specific wavelength range of the spectrum. Intervening gas in interstellar space absorbs most of the high-energy photons (X-rays and extreme ultraviolet, EUV) and scatters much of the light in the B and V bands. Radiation with wavelengths longer than the size of dust particles can pass through the interstellar medium largely unaffected, making the sky nearly transparent to infrared, microwave, and radio waves. The diminishing of short-wavelength luminosity makes the source appear redder than its intrinsic color, giving rise to the effect known as reddening.
+
+
+\input{chapters/content/0_2_plot_extinction.tex}
+
+
+This phenomenon can be illustrated by comparing the observed SED of stellar light to the theoretical SED predicted by Planck's Law, as shown in Figure \ref{extinction}. \\
+Let B and V be the apparent luminosities of a star as received by the observer, while $B_0$ and $V_0$ represent the intrinsic (unextincted) luminosities. Then, the effect of extinction can be formulated as follows:
+\begin{align}
+A_B = B - B_0 \\
+A_V = V - V_0 
+\end{align} 
+
+The difference between the two defines the \textit{color excess} - that is, the deviation of a star's apparent color from its intrinsic color. 
+\begin{align}
+E(B-V) = A_B - A_V = (B - V) - (B - V)_0 
+\end{align} 
+
+Color excess is more widely used than extinction to describe the effect of the ISM on starlight, as it can be measured photometrically even when the intrinsic brightness of the star is unknown. 
+
+\subsection{Reddening Ratio}
+The ratio of total-to-selective absorption, $R_\lambda$ summarizes the effect of extinction and reddening on the intensity of light along the line-of-sight. It is formulated as:
+
+\begin{align}\label{eq:reddening_ratio}
+R_\lambda^{BV} = \frac{A_\lambda}{E(B-V)}
+\end{align}
+
+For Milky Way, the reddening ratio in V-band, $R_V$, is evaluated about 3.23 \citep{2004sandage}, whereas in B-band it set to be as $R_B$ = $R_V + 1$
+
+Rearranging the above relation and writting it as:
+\begin{align}\label{eq:extinction}
+	A_\lambda =& R_\lambda E_{BV} = R_\lambda (A_B - A_V) 
+\end{align}
+The above equation is used for transforming measured color excess into extinction for any band, provided $R_\lambda$ is priorily known.  Rearranging it further, for V-band, the equation takes the form:
+\begin{align}
+	\frac{A_B}{A_V} = & 1 + \frac{1}{R_V}
+\end{align}
+
+\cite{1989cardelli} generalised the extinction law in this form for all the bands with V-band as reference as discussed in the following section. 
+
+An another important aspect of the reddening ratio is to convert color excess from one pair of bands, say $E_{BV}$ to another, $E_{1 2}$. It can be done as follows:
+
+\begin{align*}
+E_{12} = (R_{1}^{BV} - R_{2}^{BV}) E_{BV} 
+\end{align*}
+
+
+This leads the transformation law for reddening ratio $R_\lambda$:
+
+\begin{align}\label{R_transform}
+    R_\lambda^{12} = \frac{R_\lambda^{BV}}{R_1^{BV} - R_2^{BV}}
+\end{align}
+
+The values of $R_\lambda^{BV}$ are calculated by \cite{2007fouque} and given in Table \ref{Tab:fouque}.
+
+\subsection{Interstellar Extinction Law}
+
+\input{chapters/content/0_2_plot_extinctionlaw.tex}
+
+
+Observations of the spectral energy distribution (SED) of stellar light by \cite{1966Whiteoak} demonstrated the diminishing effect of interstellar extinction at longer wavelengths. This finding led to the formulation of an extinction law - an inverse relation between extinction and the wavelength of stellar light. In its simplest form, the extinction law formulated as \citep{1989cardelli}: 
+
+\begin{align}\label{eq:CCM_1989}
+	\frac{A(\lambda)}{A(V)} =& a(\lambda^{-1}) + \frac{b(\lambda^{-1})}{R_V} 
+\end{align}
+
+Here $a(\lambda^{-1})$ and $b(\lambda^{-1})$ are determined empirically for different spectral ranges. Since, historically, observational data in the V-band were available for most stars, extinction in the V-band has been used as a reference. The Figure \ref{extinction} depicts that a variation in $R_V$ leads to changes in extinction law, where short wavelength have significantly affected as compared to longer wavelengths. Using the averaged value over all the directions in the Milky Way for $R_V = 3.23$ and the formulation \eqref{eq:CCM_1989}, \cite{2007fouque} evaluated the extinction law for BVRIJHK bands as given in the Table \ref{fouque}
+
+\input{chapters/content/0_2_table_fouque.tex}
+
+
+
+\subsection{Wesenheit Magnitude}
+To account for the effects of reddening, \cite{1982madore} introduced a method based on a pseudo-magnitude derived from the reddening ratio, known as the Wesenheit magnitude. By definition, this quantity is constructed to be free from the effects of reddening. Its mathematical formulation is derived as follows:
+
+\begin{align*}
+R_\lambda^{12} & = A_\lambda / E_{12} \\
+    & = \frac{m_\lambda - m_\lambda^0}{(m_1 - m_2)-(m_1 - m_2)_0} \\
+\end{align*}
+
+On rearranging the terms, 
+
+\begin{align}
+m_\lambda - R_\lambda^{12}(m_1 - m_2) & = m_\lambda^0 - R_\lambda^{12}(m_1 - m_2)_0 \\
+W_\lambda^{12} & = W_0
+\end{align}
+
+It can be observed that, on the left-hand side, all terms except R are observables, while the right-hand side consists of absolute quantities. This implies that if R is known a priori with high precision, the Wesenheit magnitude will yield the same value for both reddened and unreddened sources, effectively making it a reddening-free parameter. \\
+
+\input{chapters/content/0_2_note_wesenheit.tex}
+
+
+
+A comparison of the definitions of the 'true' absolute magnitude and the Wesenheit magnitude in relation to the color index (B-V) reveals:
+
+\begin{align}\label{mag_eq}
+    M_\lambda^0 & = m_\lambda - R_\lambda^{BV} \times E(B-V) - \mu
+\end{align}
+
+\begin{align}\label{wes_eq}
+    W_\lambda^{BV} & = m_\lambda - R_\lambda^{BV}  \times (B-V) - \mu
+\end{align}
+
+It can be observed that absolute magnitude depends on four types of measurements: photometric magnitude, distance, reddening ratio and color excess. In contrast, Wesenheit magnitude requires only three types of measurements and does not depend on color excess. Let's examine how these magnitudes vary with errors in measurement. Assuming that the \textit{apparent luminosities are precisely measured ($\delta m_\lambda = 0$), the adopted extinction law is accurate  ($\delta R = 0$), implies the errors contribution divided among the distance modulus ($\delta \mu $) and color excess ($\delta E_{BV} $) measurements} in the case of an individual Cepheid. Error in above equations leads to:
+
+\begin{align}\label{mag_error}
+    \delta M_\lambda & = - ( R_\lambda^{BV}* \delta E(B-V) + \delta \mu)
+\end{align}
+
+\begin{align}\label{wesen_error}
+    \delta W_\lambda^{BV} & = - \delta \mu
+\end{align}
+
+This pair of equations indicates that both the Wesenheit magnitude and the absolute magnitude are sensitive to distance errors. However, unlike the absolute magnitude, the Wesenheit magnitude remains unaffected by errors in reddening. This characteristic of the Wesenheit magnitude is particularly important, as it helps to decouple the errors contributions of distance and reddening for individual Cepheids. \\
+
+Application of these equations in the Leavitt Law calibration will be discussed in the \textit{Part II} of this thesis. 
+
