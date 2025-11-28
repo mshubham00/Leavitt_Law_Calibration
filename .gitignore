@@ -7,8 +7,10 @@
 *.synctex.gz
 *.synctex
 *.DS_Store
-
+*.swp
+*.save
 # Ignore a specific folder (e.g., 'folder_name')
 data/processed/
 docs/reports/plots/
+
 .ipynb_checkpoints/

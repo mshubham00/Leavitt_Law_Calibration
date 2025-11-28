@@ -17,22 +17,30 @@ Over the course of their lifetimes, stars vary in brightness and luminosity depe
 
 \section{Stellar Evolution}
 
-\input{chapters/content/0_3_plot_evolution.tex} 
+Stars are classified into three broad categories based on their mass: low-mass, intermediate-mass, and massive stars. These categories follow different evolutionary tracks over their lifespan. As the accumulated matter contracts gravitationally, it reaches stages of threshold densities and temperatures, where different nuclear fusion reactions occur in a natural sequence, starting with hydrogen (1 proton) and progressing to silicon (14 protons + 14 neutrons). Energy transformation from mass to radiation, heat, neutrino emission, gravitational waves, and other forms is well modeled by quantum physics and gravitational physics, which ultimately leads to theory of stellar evolution. In this section, I will briefly summarize the physical processes occurring during the different phases of evolution for each category of star. Following this, we will develop an understanding of the physics behind the pulsations of Cepheid variable stars.
 
-Stars are primarily composed of diffuse interstellar gases, mostly hydrogen and helium. Over millions to billions of years, as matter accumulates in a region, the curvature of spacetime intensifies, accelerating the gravitational collapse. This increases pressure in the core, leading to the formation of a temperature gradient within the gas cloud. As the density increases, the core temperature rises steadily. At the point of maximum curvature, the first hydrostatic core forms, with temperatures ranging from 60 to 100 K, which halts further gravitational collapse. According to the virial theorem, as the mass increases, the temperature continues to rise. Once it reaches around 2000 K, molecular hydrogen begins to dissociate. The process continues until the outward pressure balances the inward gravitational collapse, achieving hydrostatic equilibrium. At this stage, a \textit{Hary-Halo object} forms at the core, surrounded by an accretion disk of matter that follows the \textit{tendex line} — the trajectory of matter falling into the central core.
+%\input{chapters/content/0_3_plot_evolution.tex} 
+\input{chapters/content/0_3_plot_1992_chiosi.tex} 
 
-\subsection{Formation of Star}
 
-%\input{chapters/content/0_3_plot_ppchain.tex}
+In the vicinity of interstellar nebulae, dispersed gas can collect into dense cloud-like structures called globules, composed mostly of molecular hydrogen (H₂) with trace amounts of heavier elements. Due to the intrinsic mass of the gas, regions of sufficiently high density begin to gravitationally collapse, creating a pressure gradient that slowly raises the core temperature to around 10–30 K. Thermal motion of molecules and radiative cooling initially balance the collapse, stabilizing the temperature for a period. As the collapse continues, the density increases, leading to higher opacity, blocking the radiation causing a gradual rise in temperature. When core temperatures reach roughly 60–100 K, thermal pressure becomes significant enough to temporarily halt the collapse, forming the first hydrostatic core. According to the virial theorem, as mass continues to accumulate, the core temperature rises further.
 
-Nuclear fusion requires physical contact between atomic nuclei, but they repel each other due to their positive charges. This repulsive force, known as the Coulomb barrier, prevents fusion under normal conditions. To overcome this barrier, nuclei must achieve extremely high kinetic energy, which occurs at the high temperatures and pressures in a star's core. When fusion begins in a protostar—converting four hydrogen atoms into one helium atom—this marks the birth of a star, known as a main sequence star.
+Once the core temperature reaches approximately 2000 K, molecular hydrogen begins to dissociate, absorbing energy and slowing the temperature rise. This triggers a second, rapid collapse until the core temperature reaches ~10,000–20,000 K, at which point hydrogen becomes fully ionized. The second hydrostatic core is established, supported by the thermal pressure of dense, opaque ionized hydrogen. During this stage, the core’s rotation causes the formation of a rotating accretion disk of infalling material. Gas in the disk follows the trajectories determined by the gravitational potential, often guided along magnetic field lines. Along the polar regions, magnetic pressure dominates over gas pressure, accelerating ionized gas along open field lines and producing highly collimated, supersonic bipolar jets, which manifest observationally as Herbig–Haro objects.
 
-The first basic nuclear reaction, the formation of Deuterium (nucleus containing one proton and one neutron), requires a temperature of 10 - 18 million Kelvin. In this senario, two protoniums (hydrogen ions) collide with each other at a very high velocity, surpassing the Coulomb barrier and entering to field of strong nuclear force at femto scale. Consequently, one of the protons emits its positive charge in the form of a positron with a neutrino particle, and converts into a neutron. This process is called as $\beta^{-}$ decay process. Both elementary particles, proton and neutron, stick together to form nucleus of Deuturium. Series of such nuclear reactions release an immense amount of energy radiating outwards. Radiation pressure counter balances the continous gravitation collapse of the matter, sustaining the spherical structure of the protostar for thousand to million years. The energy released from fusion reactions in stars calculated by Bethe and published under title - 'Energy production in stars'\citep{1939bethe}. At the heart of these calculation, Einstein's famous equality $E = \Delta m c^2$ underlies. Here, c is the speed of light and $\Delta m$ is the difference between the mass of reactants and products of the fusion reactions. 
+At temperatures ranging from 60 to 100 K, thermal pressure halts the continous gravitational collapse As the protostar continues to accrete mass, it contracts over the Kelvin–Helmholtz timescale, converting gravitational energy into heat. The core temperature steadily rises, eventually reaching $~10^7$ K, sufficient to initiate nuclear fusion.
+
+Nuclear fusion requires that atomic nuclei come sufficiently close for the strong nuclear force to bind them together. However, the positive charges of the nuclei cause Coulomb repulsion, forming the Coulomb barrier. Only at the extreme temperatures and pressures in the protostar’s core do nuclei achieve enough kinetic energy to overcome this barrier. When hydrogen nuclei fuse, primarily via the proton–proton chain, four hydrogen nuclei combine to form one helium nucleus, releasing energy as photons and neutrinos. The onset of sustained hydrogen fusion marks the birth of a star, which enters the main-sequence phase of stellar evolution.
+
+\input{chapters/content/0_3_plot_1934_bethe.tex} 
+
+The first fundamental nuclear reaction in stellar cores is the formation of deuterium (a nucleus containing one proton and one neutron), which occurs at core temperatures of approximately 10–18 million Kelvin. In this process, two protons (hydrogen nuclei) collide at very high velocities, sufficient to overcome the Coulomb barrier and approach within the range of the strong nuclear force (on the order of femtometers). To stabilize the newly forming nucleus, one of the protons undergoes a β⁺ decay (positron emission) process, in which a proton converts into a neutron. At the quark level, this corresponds to an up quark (charge +2/3 e) changing into a down quark (charge –1/3 e), accompanied by the emission of a positron (e⁺) and an electron antineutrino (ν̅ₑ). The resulting proton and neutron then bind together via the strong nuclear force to form a deuterium nucleus. This reaction is the first step in the proton–proton chain, a series of nuclear reactions that release a tremendous amount of energy. The energy output generates radiation pressure, which counteracts the inward pull of gravity, stabilizing the protostar and sustaining its roughly spherical structure over thousands to millions of years.
+
+The first basic nuclear reaction, the formation of Deuterium (nucleus containing one proton and one neutron), requires a temperature of 10 - 18 million Kelvin. In this senario, two protoniums (hydrogen ions) collide with each other at a very high velocity, surpassing the Coulomb barrier and entering to field of strong nuclear force at femto scale. To stablise the new configuration, one of the proton changes its up quark (+1/3) to down quark (-2/3), releasing positron and an electron antineutrino, to converts into a neutron. This process is called as $\beta^{+}$ decay process. Both elementary particles, proton and neutron, stick together to form nucleus of Deuturium. Series of such nuclear reactions release an immense amount of energy radiating outwards. Radiation pressure counter balances the continous gravitation collapse of the matter, sustaining the spherical structure of the protostar for thousand to million years. The energy released from fusion reactions in stars calculated by Bethe and published under title - 'Energy production in stars'\citep{1939bethe}. At the heart of these calculation, Einstein's famous equality $E = \Delta m c^2$ underlies which tranforms mass into energy. Here, c is the speed of light and $\Delta m$ is the difference between the mass of reactants and products of the fusion reactions. 
 
 
 \input{chapters/content/0_3_note_fusion.tex}
 
-The fusion of elements releases vast amounts of heat and radiation, some of which we perceive as visible light from stars. A star's evolution depends primarily on its initial mass. Massive stars experience stronger gravitational pressure, higher core temperatures, and faster fusion rates, causing them to burn through their fuel more quickly and live shorter lives compared to lower-mass stars. Stars progress through several phases during their evolution, driven by their mass, as shown in Figure \ref{evolution}.
+The fusion of elements releases vast amounts of heat, radiation and neutrino flux. A star's evolution depends primarily on its initial mass. Massive stars experience stronger gravitational pressure, higher core temperatures, and faster fusion rates, causing them to burn through their fuel more quickly and live shorter lives compared to lower-mass stars. Stars progress through several phases during their evolution, driven by their mass, as shown in Figure \ref{evolution}.
 
 
 \vspace{1cm}
@@ -78,6 +86,23 @@ If a white dwarf exceeds its mass than 1.44 solar mass, then gravitational pull 
 
 \section{Pulsation of Cepheid}
 
+More classical studies done long ago by
+Cox, King, and Tabor (1973) show that the
+Cepheids will not pulsate unless the helium
+content is at least Y=0.25 \cite{1973cox}
+
+\input{chapters/content/0_3_plot_1926_eddington.tex}
+
+\input{chapters/content/0_3_plot_1926_binary.tex}
+
+\input{chapters/content/0_3_plot_1968_pulsation.tex}
+
+\textit{If the leakage of heat decreases during compression and increases during expansion, then driving of pulsation is possible.} \cite{1998noels}
+
+\subsection{Light Curve}
+progression of curve shapes with period is called Hertzsprung sequence
+\cite{1981Simon}
+
 \subsection{Kappa Mechanism}
 
 The kappa mechanism is a key process that drives the pulsations in Cepheid stars. 
@@ -100,7 +125,10 @@ Energy Transfer: The contraction of the outer layers increases the temperature, 
 
 Feedback Loop: The expansion of the outer layers leads to a decrease in temperature, triggering recombination and an increase in opacity. This increased opacity restricts radiation pressure, causing the outer layers to contract again. This cycle repeats, creating the pulsations observed in Cepheid stars.
 
+\section{Hydrogen Ionization Front:}
+At base of HIF, opacity increases sharply limiting the depth of Cepheids photosphere. Hydrogen ionizes at 6000K \cite{1995kanbur}
 
+Motion HIF over envolopes \cite{1971keller}
 
 
 \section{Leavitt Law}

@@ -12,7 +12,7 @@ Function contained:
     plotresultPL6()
 '''
 module = 'g_result'
-from data.datamapping import s,plots, flags, dis_flag, wes_show, mag, process_step, data_out, dis_list, col_dot, col_das, R, nreg, mode, file_name
+from data.datamapping import *
 from lvtlaw.a_utils import regression, pr_value, imgsave, merge_12
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -98,7 +98,7 @@ def corrected_reg(data, corrected, dis, plots=plots, wes_show = wes_show, flags=
     if s==1:
         res.to_csv('%s%i_result_residue.csv'%(data_out+process_step[7],len(res)))
         pre.to_csv('%s%i_result_prediction.csv'%(data_out+process_step[7],len(pre)))
-        reg.to_csv('%s%i_%i_result_regression.csv'%(data_out+process_step[7],len(res),nreg))
+        reg.to_csv('%s%i_result_regression.csv'%(data_out+process_step[7],len(res)))
         merged_data.to_csv('%s%i_merged_data.csv'%(data_out+process_step[7],len(res)))
     if plots == 1:
         for f in flags:
@@ -107,8 +107,8 @@ def corrected_reg(data, corrected, dis, plots=plots, wes_show = wes_show, flags=
                     plotresultPL6_(merged_data, reg, col, dis, f, ab)
     return reg, res, pre, merged_data
 
-def print_PL(r_reg, col, file_name):
-    print(f'PL for {file_name} calibrated with {col}')
+def print_PL(r_reg, col, file_name, dis):
+    print(f'PL for {file_name}{dis} calibrated with {col}')
     s,c = {},{}
     for m in mag:
         slope = r_reg[f'{m}0{col}S'].iloc[0]
@@ -122,6 +122,24 @@ def print_PL(r_reg, col, file_name):
     return s, c
 
 ###########################################################################
+
+def plt_dev(col, file_name = file_name,  s=0):
+    data = pd.read_csv(f'./data/input/{file_name}.csv')
+    n = len(data)
+    gaia = pd.read_csv(f'./data/processed/{file_name}_p_3.23/8_result/{n}_corrected.csv')
+    IRSB = pd.read_csv(f'./data/processed/{file_name}_j_3.23/8_result/{n}_corrected.csv')
+    plt.plot(data.logP, data.IRSB - data.plx ,'+', label = 'raw IRSB - plx mod')
+    
+    plt.plot(gaia.logP, IRSB[f'muS0{col}_j']-gaia[f'muS0{col}_p'],'.', label = 'calibrated modulus')
+    plt.plot(IRSB.logP, IRSB[f'rdS0{col}_j']-gaia[f'rdS0{col}_p'],'.', label = 'calibrated reddening')
+    plt.xlabel(f'Period (log P)')
+    plt.ylabel(f'IRSB - Gaia ({n} Calibrated {col})')
+    plt.legend()
+    if s==1:
+        imgsave(f'mudev{col}',step=8,img_path=img_out_path)
+    plt.show()
+    return data, gaia, IRSB
+
 
 def plotresultPL6_(merged_data, merged_reg, col, dis, f, ab, s=s):
     fig, axs = plt.subplots(2, 3, figsize=(18, 8), sharex='col')

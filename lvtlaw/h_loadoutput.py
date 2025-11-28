@@ -72,12 +72,11 @@ def pick_star(i):
     ex_red_mu = pd.read_csv('%s%i_%istars_ex_red_mu.csv'%(data_out+process_step[5],n,i), index_col=0) 
     return f, ex_red_mu
 
-def calibrated_result_():
+def calibrated_result_(data_out = data_out, n=n):
     merged_data = pd.read_csv('%s%i_merged_data.csv'%(data_out+process_step[7],n))      
-    reg = pd.read_csv('%s%i_%i_result_regression.csv'%(data_out+process_step[7],n, nreg))      
+    reg = pd.read_csv('%s%i_result_regression.csv'%(data_out+process_step[7],n))      
     res = pd.read_csv('%s%i_result_residue.csv'%(data_out+process_step[7],n))      
     pre = pd.read_csv('%s%i_result_prediction.csv'%(data_out+process_step[7],n))  
-    
     return merged_data, reg, res, pre
 
 

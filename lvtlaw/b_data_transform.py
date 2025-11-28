@@ -25,7 +25,6 @@ warnings.filterwarnings("ignore", category=UserWarning)
 #####################################################################
 from data.datamapping import R, wes_show, mag, img_out_path, file_name, dis_flag, data_out, dis_list, process_step, k, s, z, R123,p
 from lvtlaw.a_utils import merge_12, imgsave
-
 #####################################################################
 def extinction_law(A, mag = mag, R = R):
     print('Adopting BVIJHK Extinction law and reddening ratio from Fouque (2007): \n')
@@ -58,7 +57,6 @@ def absolute_magnitude(data, R=R, mag=mag, dis_flag=dis_flag, dis_list=dis_list,
                 absolute[f'M_{m}{dis_flag[d]}'] = data[f'{m}_mag'] #- data[dis_list[d]]
             else:
                 absolute[f'M_{m}{dis_flag[d]}'] = data[f'{m}_mag'] - data[dis_list[d]]
-                
     if p==1:
         print(absolute.head())
         print('###' * 30)

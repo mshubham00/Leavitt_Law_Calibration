@@ -11,7 +11,7 @@ Function contained:
 '''
 module = 'c_pl_pw'
 #####################################################################
-from data.datamapping import R, mag, data_dir, file_name, dis_flag, data_out, dis_list, process_step, k, s, z, wes_show, nreg, col_dot, col_lin, mode
+from data.datamapping import R, mag, data_dir, file_name, dis_flag, data_out, dis_list, process_step, k, s, z, wes_show, col_dot, col_lin, mode
 from lvtlaw.a_utils import regression, merge_12, pr_value,imgsave
 import pandas as pd, numpy as np
 from functools import reduce
@@ -37,7 +37,6 @@ def plw_relation(merged_data, dis: str, mag: list, wes_show = wes_show):
     prediction = residue.copy()   
     PL_name, PL_slope, PL_intercept, err_slope, err_intercept, PL_stdd  = [], [], [], [], [], []
     PLW_struct = [PL_name, PL_slope, PL_intercept, prediction, residue, err_slope, err_intercept, PL_stdd]    
-
     print('Leavitt Law : Absolute Magnitude \n#######  m  - mu = alpha (logP - 1) + gamma  #################\n')
     for ab in mode:
         for i in range(len(mag)):  # Iterate over magnitudes
@@ -85,7 +84,7 @@ def pl_reg(merged_data, s=s, dis_flag = dis_flag, mag = mag):
         merged_data.to_csv('%s%i_merged_data.csv'%(data_out+process_step[1],len(res)))    
         res.to_csv('%s%i_residue.csv'%(data_out+process_step[1],len(res)))
         pre.to_csv('%s%i_prediction.csv'%(data_out+process_step[1],len(pre)))
-        reg.to_csv('./%s%i_%i_regression.csv'%(data_out+process_step[1],len(res),nreg))
+        reg.to_csv('./%s%i_regression.csv'%(data_out+process_step[1],len(res)))
         print(f'\nData saved in ./{data_out+process_step[1]}')
     return reg, res, pre, merged_data
 ####################################################################################
