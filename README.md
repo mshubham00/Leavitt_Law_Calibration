@@ -4,22 +4,22 @@ This python package calibrates multiband Period-Luminosity relations of Cepheid 
 # Code Execution
 1. Clone the repository
 
-	git clone <repo_link>
+		git clone https://github.com/mshubham00/Leavitt_Law_Calibration.git
 
 2. To pull updated repo
     
-	git pull origin main
+		git pull origin main
 
 3. install the require packages from requirements.txt
 
-	pip install -r requirements.txt
+		pip install -r requirements.txt
 
 4. Add your dataset in ./data/input/<file_name.csv>. Default dataset : 59_madore.csv
 5. Map your dataset columns in ./data/datamapping.py. Default : k=0
 6. Adjust parameters in datamapping file: extinction_law, reddening_ratio, etc.
 7. Run the main.py file. 
 
-	python3 main.py
+		python3 main.py
 
 8. Result in ./data/processed/<file_name.csv>
 
