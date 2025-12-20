@@ -16,7 +16,7 @@ Function contained:
 '''
 module = 'e_error_estimation'
 from data.datamapping import file_name, data_cols, dis_list, dis_flag, R, mag, wes_show, flags,s, plots,z, mode
-from data.datamapping import data_dir, data_out, process_step, del_mu, plot_every_n_star, R_dic
+from data.datamapping import data_dir, data_out, process_step, del_mu, plot_every_n_star, R_dic, R123
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -34,6 +34,7 @@ def select_regression_parameters(dmc, dis):
 #####################################################################
 def error_over_mu(dres, m, dis, col, slope, intercept, flag, R=R, s=s): # called by process_reddening()
     r = R[mag[m]]#+col]  # reddening ratio
+    #r = R123(mag[m],col[0], col[1])
     mu_rd_ex_df = pd.DataFrame({'name': dres['name'], 'logP': dres['logP']})
     for ab in mode: 
         wm_str = f"{mag[m]}{ab}{mag[m]}{col}" if flag == "S" else f"{mag[m]}{ab}{col[0]}{col}"
@@ -119,7 +120,7 @@ def plot_star_rd0SM(i, red0, col, ab, dis = dis_flag[0], s=s):
     plt.ylabel('Reddening Error')
     plt.legend()
     if s == 1:
-        imgsave(file_name + f"_{i}_{col}_{ab}SM", 3, fil='pdf', p=1)
+        imgsave(file_name + f"{dis}_{i}_{col}_{ab}SM", 3, fil='pdf', p=1)
     plt.show()
 #####################################################################
 print(f'* * {module} module loaded!')

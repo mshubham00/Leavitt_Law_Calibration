@@ -3,21 +3,13 @@
 \contentsline {chapter}{Abstract}{iii}{chapter*.2}%
 \contentsline {chapter}{List of Figures}{v}{section*.3}%
 \contentsline {chapter}{List of Tables}{vi}{section*.4}%
-\contentsline {part}{I\hspace {1em}Parameters of Leavitt Law}{1}{part.1}%
-\contentsline {chapter}{\numberline {1}Pulsating Star - Classical Cepheid}{2}{chapter.1}%
-\contentsline {section}{\numberline {1.1}Are all stars the same?}{2}{section.1.1}%
-\contentsline {subsection}{\numberline {1.1.1}Discovery of Variable stars}{2}{subsection.1.1.1}%
-\contentsline {section}{\numberline {1.2}Stellar Evolution}{3}{section.1.2}%
-\contentsline {subsection}{\numberline {1.2.1}Main sequence star and Turn-off point}{6}{subsection.1.2.1}%
-\contentsline {subsection}{\numberline {1.2.2}Red Giant Star and Helium Flash}{7}{subsection.1.2.2}%
-\contentsline {subsection}{\numberline {1.2.3}Horizontal branch and Variable stars}{8}{subsection.1.2.3}%
-\contentsline {subsection}{\numberline {1.2.4}AGB Stars and Planetary Nebulae}{9}{subsection.1.2.4}%
-\contentsline {subsection}{\numberline {1.2.5}Super Novae and Compact Objects}{9}{subsection.1.2.5}%
-\contentsline {section}{\numberline {1.3}Pulsation of Cepheid}{10}{section.1.3}%
-\contentsline {subsection}{\numberline {1.3.1}Light Curve}{11}{subsection.1.3.1}%
-\contentsline {subsection}{\numberline {1.3.2}Kappa Mechanism}{12}{subsection.1.3.2}%
-\contentsline {section}{\numberline {1.4}Hydrogen Ionization Front:}{13}{section.1.4}%
-\contentsline {section}{\numberline {1.5}Leavitt Law}{13}{section.1.5}%
-\contentsline {part}{II\hspace {1em}Calibration Method and Dataset}{15}{part.2}%
-\contentsline {chapter}{Bibliography}{16}{section*.12}%
-\contentsline {chapter}{Bibliography}{16}{chapter*.13}%
+\contentsline {part}{I\hspace {1em}Calibration Method and Dataset}{1}{part.1}%
+\contentsline {chapter}{\numberline {1}Calibration Method}{2}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Galactic Cepheid Dataset}{2}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Leavitt Law and their Wesenheits}{2}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Residual Analysis}{4}{section.1.3}%
+\contentsline {section}{\numberline {1.4}Decoupling $\delta \mu - \delta E_{BV}$}{7}{section.1.4}%
+\contentsline {section}{\numberline {1.5}Calibrated Leavitt Law}{8}{section.1.5}%
+\contentsline {section}{\numberline {1.6}cluster Cepheid}{9}{section.1.6}%
+\contentsline {chapter}{Bibliography}{9}{figure.caption.16}%
+\contentsline {chapter}{Bibliography}{12}{chapter*.17}%

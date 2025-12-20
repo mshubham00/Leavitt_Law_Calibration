@@ -1,5 +1,74 @@
 \chapter{Galactic Cepheid Dataset}
 
+
+
+\begin{figure}[!ht]
+	\begin{center}
+	  \includegraphics[width=\textwidth]{../plots/1_datacleaning/dataset_histogram.pdf}
+	  \caption{\small Galactic Cepheids data.}
+	  \label{fig:rawdata}
+	\end{center}
+\end{figure}
+
+
+The golden data contains photometry with quality index less than or equal to 3 and RUWE less than 1.4 for gaia paralax. Raw dataset contains 103 Galactic Cepheids pulsating in fundamental mode. Their periods are measured in days and scaled logarithmically. The distance modulus is derived from the Gaia DR3 parallax filtered with RUWE < 1.4, the color excess is adopted from Fernie measurements, and photometric magnitudes are collected in the BVIJHK bands. The distribution of each observable against the period is depicted in the following sequence of pair plots. A quick glance shows no clear correlation in the plots.
+
+
+\begin{table}[h!]
+\centering
+\caption{71 Galactic Cepheids based BVIJHK Leavitt Law Calibration. Comparing Madore's calibrated (2017) LLs with Shubham's LLs using i. ISRB and ii. Gaia}
+\label{71_shubham}
+{\small
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+\input{chapters/content/0_4_table_71_shubham.tex}
+\hline
+\end{tabular}
+}
+\end{table}
+
+\begin{table}[h!]
+\centering
+\caption{103 Galactic Cepheids based BVIJHK Leavitt Law Calibration. Comparing Madore's calibrated (2017) LLs with Shubham's LLs using i. ISRB and ii. Gaia}
+\label{103_shubham}
+{\small
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+\input{chapters/content/0_4_table_103_shubham.tex}
+\hline
+\end{tabular}
+}
+\end{table}
+
+
+\begin{table}[h!]
+\centering
+\caption{118 Galactic Cepheids based BVIJHK Leavitt Law Calibration. Comparing Madore's calibrated (2017) LLs with Shubham's LLs using i. ISRB and ii. Gaia}
+\label{103_shubham}
+{\small
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+\input{chapters/content/0_4_table_118_shubham.tex}
+\hline
+\end{tabular}
+}
+\end{table}
+
+
+\begin{table}[h!]
+\centering
+\caption{129 Galactic Cepheids based BVIJHK Leavitt Law Calibration. Comparing Madore's calibrated (2017) LLs with Shubham's LLs using i. ISRB and ii. Gaia}
+\label{103_shubham}
+{\small
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+\input{chapters/content/0_4_table_129_shubham.tex}
+\hline
+\end{tabular}
+}
+\end{table}
+
+
 A dataset of 150 Galactic Classical Cepheid (GCC) is prepared for the calibration of Period-Luminosity (PL) relation. The raw dataset partially adopted from \cite{storm2011calibrating}. For each Cepheid, pulsation period is given in logarithmic scale, color excess is estimated with respect to B-V index using \cite{1994fernie} method, distance modulus is measured using IRBS method \cite{storm2011calibrating} and the apparent magnitude is observed in six bands - B, V, R, I, J, H and K. The dataset is given in table . 
 
 \section{Dataset Cleaning}

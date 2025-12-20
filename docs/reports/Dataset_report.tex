@@ -45,11 +45,11 @@
 \affil[1]{\small \textit{Institute of Physics and Astronomy, University of Potsdam}}
 \affil[2]{\small \textit{Dwarf Galaxy and Galactic Halo, AIP Potsdam}}
 
-\date{17.11.2025}  % Remove date 
+\date{10.12.2025}  % Remove date 
    
-\newcommand{\stars}{109}  % defines \mydistance to print μ
+\newcommand{\stars}{110}  
 \newcommand{\dis}{j}
-\newcommand{\filename}{109_IRSB}
+\newcommand{\filename}{110_IRSB_plx}
 \newcommand{\ufilename}{109_IRSB_IH}
 \newcommand{\golden}{76_IRSB_IJ}
 
@@ -58,11 +58,12 @@
 
 {\small
 \begin{abstract}
-Extragalactic distance measurement relies critically on the Cepheid period–luminosity relation, yet luminosity-based distances are significantly affected by interstellar extinction, introducing a three-fold uncertainty: Luminosity-Reddening-Distance. Using the total-to-selective absorption ratio, composite Wesenheit magnitudes constructed for $BVIJHK$ photometry of Galactic Cepheids to minimize reddening effects. Fouqué’s extinction law is recalibrated to yield near-zero offsets between apparent and true Wesenheit magnitudes across fifteen color combinations at $R^{BV}_V = 3.23$. Adjusted extinction law is then used to determine $BVIJHK$ extinctions for \stars{} Galactic Cepheids with available Fernie reddenings and IRSB-based distances. Using refined reddening ratios and a prepared dataset, the distance–reddening calibration is performed by correlating the residuals of the Leavitt Laws with the corresponding residuals of the Wesenheit Leavitt Law. Metallicity effects are not considered in this study. \\
+Extragalactic distance measurement relies critically on the Cepheid period--luminosity relation; however, luminosity-based distances are significantly affected by interstellar extinction, introducing a three-fold degeneracy among luminosity, reddening, and distance. Using the total-to-selective absorption ratio, \(R_\lambda\), we construct composite Wesenheit magnitudes for \(BVIJHK\) photometry of Galactic Cepheids to minimize reddening effects. Fouqué's extinction law is recalibrated to yield near-zero offsets between apparent and true Wesenheit magnitudes across fifteen color combinations at \(R^{BV}_V = 3.23\). The adjusted extinction law is then applied to determine the \(BVIJHK\) absolute magnitudes for \stars{} Galactic Cepheids with Fernie reddenings and IRSB-based distances. 
 
-\textbf{Two step calibration:} First step focuses on distance calibration, $IJHK$ Period-Luminosity (PL) residuals are correlated with the corresponding Period-Wesenheit (PW) residuals, excluding the $B$ and $V$ bands, in order to resolve the degeneracy between band-dependent extinction and band-independent distance uncertainties. The infrared Wesenheit index $(I-H)$ is used in this initial step. A star-by-star adjustment of the distance modulus is performed to minimize the dispersion in reddening across bands, resulting in a distance-reddening correction pair for each individual Cepheid. After applying the first-order corrections to the input data, the procedure is repeated for the $BVIJ$ bands to derive more accurate reddening corrections, using the Wesenheit color $(V-J)$. The final corrections are then applied to derive the $BVIJHK$ Leavitt Laws, which are verified using 17 cluster Cepheids. For comparison, Gaia parallax-based Leavitt Laws are also derived for the same set stars.\\
+\textbf{Calibration process:} 
+The $BVIJHK$ Period--Luminosity (PL) residuals are correlated with the corresponding Period--Wesenheit (PW) residuals to resolve the degeneracy between band-dependent extinction and band-independent distance uncertainties. Multiple Wesenheit combinations are employed in this step to suppress uncertainties arising from photometric errors. In distance--reddening space, the band-wise residuals of individual Cepheids are analyzed. The dispersion in reddening error across bands is minimized by adjusting the distance modulus, yielding a distance--reddening correction pair for each Cepheid. These final corrections are then applied to derive the calibrated $BVIJHK$ Leavitt Laws, which are subsequently verified using Gaia parallax-based Leavitt Laws. The corrected distances are further validated with a smaller set of 17 cluster Cepheids.\\
 
-\textbf{Result:} Gold dataset of 76 Cepheids, with first-order calibration in $(I-J)$ and second-order calibration in $(H - K)$, yields the Galactic Leavitt Laws as follows.
+\textbf{Result:} Gold dataset of 76 Cepheids, with calibration in $(I-J)$ yields the Galactic Leavitt Laws as follows.
 
 \begin{table}[h]
 \centering
@@ -83,16 +84,6 @@ I & $(0.034)_\sigma$ &-2.581 & ($\pm$ 0.015) &-4.691 &($\pm$ 0.004)\\
 J & $(0.016)_\sigma$ &-2.799 & ($\pm$ 0.007) &-5.177 &($\pm$ 0.002)\\
 H & $(0.015)_\sigma$ &-2.931 & ($\pm$ 0.006) &-5.552 &($\pm$ 0.002)\\
 K & $(0.005)_\sigma$ &-2.981 & ($\pm$ 0.002) &-5.613 &($\pm$ 0.001)\\
-\hline
-\hline
-\multicolumn{6}{|c|}{71 Galactic Cepheids Gaia I: (V-K) and II: (H-K)} \\ % <-- added \\ and |l| for border alignment
-\hline
-B & $(0.056)_\sigma$ &-1.954 & ($\pm$ 0.025) &-3.100 &($\pm$ 0.007)\\
-V & $(0.019)_\sigma$ &-2.343 & ($\pm$ 0.009) &-3.908 &($\pm$ 0.002)\\
-I & $(0.028)_\sigma$ &-2.640 & ($\pm$ 0.013) &-4.690 &($\pm$ 0.003)\\
-J & $(0.013)_\sigma$ &-2.860 & ($\pm$ 0.006) &-5.174 &($\pm$ 0.002)\\
-H & $(0.008)_\sigma$ &-2.988 & ($\pm$ 0.004) &-5.549 &($\pm$ 0.001)\\
-K & $(0.011)_\sigma$ &-3.039 & ($\pm$ 0.005) &-5.609 &($\pm$ 0.001)\\
 \hline
 \hline
 \multicolumn{6}{|c|}{29 LMC IRSB I: (I-K)} \\ % <-- added \\ and |l| for border alignment
@@ -153,65 +144,61 @@ The distance moduli to the Magellanic Clouds, from $VIJK$ photometry, are estima
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
  
 %--- Section ---%
 \section{Definitions}
 
 \subsection{Distance, Reddening and Luminosity}
 \sloppy
-Luminosity represents the measured photon flux received within a specific wavelength band, here corresponding to the $BVIJHK$ bands. The light emitted by a star, characterized by its intrinsic absolute magnitude $M_\lambda^0$, travels over large distances $\mu$ and undergoes extinction $A_\lambda$ as it passes through the interstellar medium (ISM) before reaching the observer’s detector with the observed intensity $m_\lambda$. 
+Luminosity, \(m_\lambda\), represents the received photon flux within a specific wavelength band by the detector, here corresponding to the \(BVIJHK\) bands. The light emitted by a star, characterized by its intrinsic absolute magnitude \(M_\lambda^0\), travels over large distances \(\mu\) and undergoes extinction \(A_\lambda\) as it passes through the interstellar medium (ISM) before reaching the observer's detector with the observed intensity.
   
 In this framework, the relation for the observed apparent magnitude can be expressed as:
 \begin{align}
- m_\lambda = \mu + A_\lambda +  M_\lambda^0 
+\label{lum-dis-red}
+ m_\lambda =  M_\lambda^0 + \mu + A_\lambda
 \end{align}
-where $m_\lambda$ is the apparent magnitude in a given band $\lambda$, $M_\lambda^0$ is the intrinsic absolute magnitude, $\mu$ is the distance modulus, and $A_\lambda$ is the interstellar extinction in that band.
-
   
-On the right-hand side, the first term represents the distance modulus, $\mu$. For computational convenience, distances measured in parsecs are converted into dimensionless logarithmic units, expressed in magnitudes. The distances for the \stars Galactic Cepheids in the dataset are determined using two independent methods: (i) the Infrared Surface Brightness (IRSB) method \textcite{storm2011}, and (ii) parallax measurements from \textit{Gaia} DR3 \textcite{GaiaDR32023}. In this report, calibration is done for Gaia distances.
-   
-\begin{align*}
-	\mu & = 5 \log D [pc] - 5
-\end{align*}
+For computational convenience, all the measurements are expressed in dimensionless logarithmic units, i.e., magnitudes. 
 
-The interstellar medium (ISM) scatters, absorbs, and emits photons depending on the chemical composition, size, and abundance of its constituent particles, thereby imprinting characteristic signatures on the light spectrum at specific frequencies (or wavelengths). The reduction in light intensity within a given band due to these interactions with the ISM is referred to as \textit{interstellar extinction}.
+The \emph{true} absolute magnitude, $M_{\lambda}^{0}$, is the intrinsic luminosity a star would have if placed at the standard distance of 10 parsecs. By modeling the physical properties of the star, this quantity can be inferred indirectly. Any object whose $M_{\lambda}^{0}$ can be estimated intrinsically is considered a standard candle in astronomy. Cepheid variables are one such class of standard candles, as their luminosity is strongly correlated with their pulsation period. This statistical relation between period and luminosity is known as the Leavitt Law and will be discussed in next section briefly.
+
+For the dataset of \stars{} Galactic Cepheids, distances are determined using two independent methods: (i) the Infrared Surface Brightness (IRSB) method \parencite{storm2011}, and (ii) parallax measurements from \textit{Gaia} DR3 \parencite{GaiaDR32023}. These distances are then converted into distance moduli using the following relation:
+   
+\begin{align}
+	\mu & = 5 \log D [pc] - 5
+\end{align}
+
+The interstellar medium (ISM) scatters, absorbs, and emits photons depending on the chemical composition, size, and abundance of its constituent particles, thereby imprinting characteristic signatures on the light spectrum at specific frequencies (or wavelengths). The ISM along the line of sight absorbs shorter wavelengths more than longer ones, making objects appear redder; this effect is called interstellar reddening, $E_{BV}$ (also known as color excess). The band-wise reduction in light intensity due to the ISM is referred to as \emph{interstellar extinction}.
 
 \begin{align*}
 	A_\lambda & = m_\lambda - m_\lambda^0
 \end{align*}
 
-The wavelength-dependent extinction for each individual Cepheid is determined from the measurement of the color excess, $E_{BV}$, along the line of sight \textcite{fernie1995}. Using the visual Galactic reddening ratio, $R_V = 3.23$ \textcite{sandage2004}, within the framework of the Galactic extinction law, $A_\lambda / A_V$ \textcite{fouque2007}, the interstellar extinction for the $BVIJHK$ bands can be estimated as follows:
+Here, $m_\lambda^0$ represents the apparent magnitude of the star in the absence of the ISM. For the Cepheids in the dataset, the color excess is fairly known \parencite{fernie1995}. Their band-dependent interstellar extinction can be estimated from the color excess as follows:
+
+\begin{align}
+A_\lambda &= R^{BV}_\lambda \times E_{BV}
+\end{align}
+
+In this expression, the first factor, $R^{BV}_\lambda$, represents the extinction-to-reddening ratio, which is the band-wise extension of the visual reddening ratio, $R_V^{BV}$ \parencite{sandage2004}, along with the Galactic extinction law \parencite{fouque2007}. The values are summarized in Table 1 using following relation:
 
 \begin{align*}
-A_\lambda & = \frac{A_\lambda}{A_V} \times R_V \times E_{BV} \\
+R_\lambda^{BV} = \frac{A_\lambda}{A_V} \times R_V^{BV} 
 \end{align*}
 
-Here, the final factor, the color excess $E_{BV}$, quantifies the relative extinction difference between two photometric bands. In other words, it can also be expressed as the deviation of the observed color index $(B-V)$ from the intrinsic (or 'true') color index $(B-V)_0$:
+The second factor, the color excess $E_{BV}$, quantifies the relative extinction difference between two photometric bands. In other words, it can also be expressed as the deviation of the observed color index $(B-V)$ from the intrinsic (or 'true') color index $(B-V)_0$:
 
 \begin{align*}
-E_{BV} & = (B-V) - (B-V)_0 \\
-        & = (B-B_0) - (V-V_0) \\
-        & = A_B - A_V \\
+E_{BV} &= A_B - A_V \\
+       &= (B-B_0) - (V-V_0) \\
+       &= (B-V) - (B-V)_0
 \end{align*}
 
-The intermediate factor, the reddening ratio $R_V = A_V / E_{BV}$, represents the extinction-to-reddening ratio in the visual band. In the most general form, if the color excess between two bands is defined as $E_{12} = A_{m_1} - A_{m_2}$, then the corresponding reddening ratio can be expressed as:
+In the most general form, if the color excess between two bands is defined as $E_{12} = A_{m_1} - A_{m_2}$, then the corresponding reddening ratio can be expressed as:
 
-\begin{align*}
+\begin{align}
 R_\lambda^{12} = A_\lambda/E_{12}
-\end{align*}
+\end{align}
 
 Color excess from one combination of bands $E_{12}$ can be transformed into any other bands combination as follows:
 
@@ -221,31 +208,130 @@ E_{12} & = A_{1} - A_{2} \\
     & = (R_{1}^{BV} - R_{2}^{BV})*E_{BV} \\
 \end{align*}
 
-
 This leads the transformation law for reddening ratio R:
 
-\begin{align*}
+\begin{align}
     R_\lambda^{12} = \frac{R_\lambda^{BV}}{R_1^{BV} - R_2^{BV}}
     \label{eq:Rlambda}
-\end{align*}
+\end{align}
 
-The values of $R_\lambda^{BV}$ are calculated using extinction law as mentioned in Table 1.
 
-\begin{align*}
-R_\lambda^{BV} = \frac{A_\lambda}{A_V} \times R_V^{BV} 
-\end{align*}
+For Galactic Cepheids, the apparent magnitude $m_{\lambda}$, distance modulus $\mu$, and reddening $E_{BV}$ are all measured with high accuracy, and their pulsation periods are well determined. These measurements yield reliable values of the true absolute magnitude $M_{\lambda}^{0}$, meaning that all parameters in Equation~\ref{lum-dis-red} are well constrained. As a result, the Leavitt Law provides a robust method for determining distances to extragalactic systems that host Cepheids. 
 
-\subsection{Wesenheit Magnitude}
+However, small errors in the estimation of reddening, distance, and apparent magnitude of Cepheids can lead to scatter in the Leavitt Law. 
 
-Since the reddening ratio, $R_\lambda^{12}$, quantifies the effect of the interstellar medium on the incoming light, it can be used to define a reddening-free magnitude corresponding to the star's true absolute magnitude \textcite{madore1982}. This relation can be expressed as:
+The Wesenheit magnitude is a pseudo-magnitude that removes the effect of reddening from the apparent magnitude \parencite{madore1982}. It is derived from the reddening ratio, $R_\lambda^{12}$, as it quantifies the effect of the interstellar medium on the incoming light. 
 
 \begin{align*}
-R_\lambda^{12} & = A_\lambda / E_{12} \\
-    & = \frac{m_\lambda - m_\lambda^0}{(m_1 - m_2)-(m_1 - m_2)_0} \\
+R_\lambda^{12} & = \frac{m_\lambda - m_\lambda^0}{(m_1 - m_2)-(m_1 - m_2)_0} \\
 \end{align*}
 
 
-	\begin{figure}[h]
+On rearranging the terms, apparent magnitude one side and true apparent magnitude other side, one can get the Wesenheit function $W_\lambda^{12}$ corresponding to color index $m_1 - m_2$.
+
+\begin{align*}
+m_\lambda - R_\lambda^{12}(m_1 - m_2) & = m_\lambda^0 - R_\lambda^{12}(m_1 - m_2)_0 \\
+\end{align*}
+
+This implies that, if $R$ is accurately known, the apparent Wesenheit magnitude and the absolute Wesenheit magnitude should be identical, suggesting an absolute measure independent of color excess or interstellar extinction. 
+
+\begin{align}
+W_\lambda^{12} & = W_0
+    \label{weseq}
+\end{align}
+
+This research project aims to mitigate such errors in distance and reddening of individual Cepheid by using multiband photometry and the corresponding Wesenheit magnitudes, ultimately reducing the scatter in the Leavitt Law.
+
+\section{Galactic Cepheids Dataset}
+
+\subsection{Data Cleaning}
+\subsubsection{Pulsation mode}
+Out of 150 Cepheids, 14 pulsates in first tone, 136 Cepheids remains pulsating in fundamental mode.
+
+\begin{table}[h]
+\centering
+\caption{List of 14 Cepheids pulsating in first overtone. 136 Galactic Cepheid repulsating in fundamental mode, after cleaning on photometry basis, 110 Cepheids remains. }
+\hline
+\begin{tabular}{llll}
+FFAql     & YOph      & V496Aql  & SUCas \\
+DTCyg     & V0465Mon  & EVSct    & V340Nor \\
+SZTau     & QZNor     & XLac     & CSOri \\
+TYMon     & GHLup     &          &        \\
+\end{tabular}
+\end{table}
+
+\subsubsection{Photometric Error}
+
+\begin{table}[h]
+\centering
+\caption{26 outliers on photometry basis of 136 Galactic Cepheid pulsating in fundamental mode. 110 Cepheids remains. }
+\begin{tabular}{r l r l r l r l}
+\hline
+Index & Name & Index & Name & Index & Name & Index & Name \\
+\hline
+0   & BEMon     & 6   & AAMon     & 10  & V0508Mon  & 11  & XSct \\
+53  & V0600Aql  & 55  & V0336Aql  & 57  & TZMon     & 65  & UVul \\
+75  & CNSct     & 77  & SYAur     & 87  & HZPer     & 93  & SUCru \\
+95  & V0916Aql  & 103 & VWCen     & 110 & AASer     & 111 & CPCep \\
+112 & CTCar     & 113 & YZAur     & 115 & RUSct     & 117 & RYSco \\
+122 & VZPup     & 126 & RYVel     & 127 & KQSco     & 133 & SVVul \\
+134 & GYSge     & 135 & SVul      &     &           &     &      \\
+\hline
+\end{tabular}
+\end{table}
+
+Among 136 Cepheids, 26 Cepheids has error in one or more individual photometric bands. Considering Leavitt Law, Color-period chart can be percieve analogous to Color-Magnitude diagram exhibiting instability strip of Cepheid.
+
+15 color index from BVIJHK photometry involves pairwise deviation between any two bands. Systematic shift of individual Cepheid in each color-period indicates relibiliby of photometric observation for particular\ bands.
+
+
+	\begin{figure}[H]
+		\centering
+		\begin{subfigure}[b]{\textwidth}
+			\centering
+            \includegraphics[width=\textwidth]{./plots/1_datacleaning/\filename_PC0_BI.pdf}
+		\end{subfigure}
+        \begin{subfigure}[b]{\textwidth}
+			\centering
+            \includegraphics[width=\textwidth]{./plots/1_datacleaning/\filename_PC6_VH.pdf}
+		\end{subfigure}
+        \caption{For $BVI$ photometry, the deviation between apparent Wesenheit magnitude and absolute Wesenheit magnitude for all the color combination indicates a potential error in the reddening law.}
+	\end{figure}
+
+Here, absolute color derived using Fouque extinction law, Sandage Reddening ratio and Fernie Reddenings of Galactic Cepheids. 
+
+	\begin{figure}[H]
+		\centering
+        \begin{subfigure}[b]{\textwidth}
+			\centering
+            \includegraphics[width=\textwidth]{./plots/1_datacleaning/\filename_PC4_VI.pdf}
+		\end{subfigure}
+		\begin{subfigure}[b]{\textwidth}
+			\centering
+            \includegraphics[width=\textwidth]{./plots/1_datacleaning/\filename_PC8_IJ.pdf}
+		\end{subfigure}
+		\begin{subfigure}[b]{\textwidth}
+			\centering
+            \includegraphics[width=\textwidth]{./plots/1_datacleaning/\filename_PC10_IK.pdf}
+		\end{subfigure}
+        \caption{For $BVI$ photometry, the deviation between apparent Wesenheit magnitude and absolute Wesenheit magnitude for all the color combination indicates a potential error in the reddening law.}
+	\end{figure}
+
+    \begin{figure}[H]
+			\centering
+            \includegraphics[width=\textwidth]{./plots/1_datacleaning/\filename_PC12_JK.pdf}
+        \caption{For $BVI$ photometry, the deviation between apparent Wesenheit magnitude and absolute Wesenheit magnitude for all the color combination indicates a potential error in the reddening law.}
+	\end{figure}
+
+\subsection{Extinction Law and Reddening Ratio Calibration}
+
+
+
+Here, we test the validity of equation \ref{weseq} by comparing the deviations between the two versions of the Wesenheit magnitudes for the cleaned dataset, where $R$ is derived from the Fouque extinction law as given in Table 1. 
+
+
+Considering the last term of the above equation, \textcite{fouque2007} extinction law have been adjusted to achieve minimum deviation in the wesenheit magnitudes.
+	\begin{figure}[H]
 		\centering
 		\begin{subfigure}[b]{\textwidth}
 			\centering
@@ -262,26 +348,46 @@ R_\lambda^{12} & = A_\lambda / E_{12} \\
         \caption{For $BVI$ photometry, the deviation between apparent Wesenheit magnitude and absolute Wesenheit magnitude for all the color combination indicates a potential error in the reddening law.}
 	\end{figure}
 
-
-On rearranging the terms, one can get the Wesenheit function $W_\lambda^{12}$ corresponding to color $m_1 - m_2$.
-
-\begin{align}
-m_\lambda - R_\lambda^{12}(m_1 - m_2) & = m_\lambda^0 - R_\lambda^{12}(m_1 - m_2)_0 \\
-W_\lambda^{12} & = W_0
-\end{align}
-
-This implies that, if $R$ is accurately known, the apparent Wesenheit magnitude and the absolute Wesenheit magnitude should be identical. Here, we test the validity of this claim by comparing the deviations between the two versions of the Wesenheit magnitudes, where $R$ is derived from the Fouque extinction law as given in Table 1.
-
 This deviation in wesenheit $W-W_0$ would be zero, when following equality would be satisfying:
 
 \begin{align}
     \delta A_\lambda - R_\lambda \delta E_{BV} - \delta R E_{BV} = 0
     \label{eq:wes_dev}
 \end{align}
- 
-Considering the last term of the above equation, \textcite{fouque2007} extinction law have been adjusted to achieve minimum deviation in the wesenheit magnitudes.
 
-	\begin{figure}[h]
+I tuned the Galactic Extinction law along with reddening ratio in such a way that the deviation between two kind of wesenheit magnitude reaches to the minimal for all 90 wesenheit magnitudes. 
+
+\begin{figure}[H]
+		\centering
+        \begin{subfigure}[b]{\textwidth}
+		\centering
+            \includegraphics[width=\textwidth]{./plots/1_datacleaning/Extinction_compare.pdf}
+		\end{subfigure}		
+        \caption{With the adjusted Fouqué extinction law, the deviation between the apparent and absolute Wesenheit magnitudes is reduced by a factor of ten.}
+	\end{figure}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|cc|cc|}
+\hline
+ & \multicolumn{2}{c|}{Extinction Law $A_\lambda / A_V $} & \multicolumn{2}{c}{Reddening Ratio $R^{BV}_\lambda $} \\
+Band & Fouqu\'e & Adjusted & Sandage & Adjusted \\
+\hline
+B & 1.3100 & 1.3100 & 4.2313 & 4.1789 \\
+V & 1.0000 & 1.0000 & 3.2300 & 3.1900 \\
+I & 0.6080 & 0.6080 & 1.9638 & 1.9395 \\
+J & 0.2920 & 0.2969 & 0.9432 & 0.9471 \\
+H & 0.1810 & 0.1805 & 0.5846 & 0.5758 \\
+K & 0.1190 & 0.1231 & 0.3844 & 0.3927 \\
+\hline
+\end{tabular}
+\caption{Extinction ratios ($A_\lambda/A_V$) under “Extinction Law” and reddening ratios under “Reddening Ratio” (values rounded to four decimal places).}
+\end{table}
+
+
+
+
+	\begin{figure}[H]
 		\centering
         \begin{subfigure}[b]{\textwidth}
 		\centering
@@ -300,15 +406,16 @@ Considering the last term of the above equation, \textcite{fouque2007} extinctio
 	\end{figure}
 
 
-\input{tables/1_reddening_ratio.tex}
 
 
-After fine-tuning the Fouqué extinction law for our dataset, $R_\lambda$ is assumed to be accurately known to the required precision, eliminating the last term in the above equation.
+%\input{tables/1_reddening_ratio.tex}
+
+
+After fine-tuning the Fouqué extinction law for our dataset, $R_\lambda$ is assumed to be accurately known to the required precision, eliminating the last term in the above equation. 
 
 \subsection{Error Contribution in Absolute and Wesenheit magnitude}
 
-
-Following are the definitions of 'true' absolute magnitude and wesenheit magnitude for color (B-V): 
+Till now, I defined the useful parameters which are relevant for the Leavitt Law calibration. Now on I will be discussing how the error in measured data affecting the parameter of Leavitt Law. Following are the definitions of 'true' absolute magnitude and wesenheit magnitude for color (B-V): 
 
 \begin{align}
     M_\lambda^0 & = m_\lambda - R_\lambda^{BV}*E(B-V) - \mu\\
@@ -323,7 +430,7 @@ Differentiating above equations.
 \end{align*}
 
 
-Assume that the apparent luminosities are measured precisely ($\delta m_\lambda \to 0$) and that the adjusted extinction law is accurate ($\delta R \to 0$). Even so, the distance modulus ($\delta \mu$) and the color excess ($\delta E_{BV}$) may still contain errors for individual Cepheids. Under these conditions, it follows that:
+Assume that the apparent luminosities are measured precisely ($\delta m_\lambda \to 0$) and that the adjusted reddening law is accurate ($\delta R \to 0$). Even so, the distance modulus ($\delta \mu$) and the color excess ($\delta E_{BV}$) may still contain errors for individual Cepheids. Under these conditions, it follows that:
 
 \begin{align}
     \delta M_\lambda & = - ( R_\lambda^{BV}* \delta E(B-V) + \delta \mu)\\
@@ -332,7 +439,7 @@ Assume that the apparent luminosities are measured precisely ($\delta m_\lambda 
 
 This pair of equations indicates that both the Wesenheit magnitude and the absolute magnitude are sensitive to errors in distance. However, unlike the absolute magnitude, the Wesenheit magnitude is insensitive to errors in reddening. This key property of the Wesenheit magnitude is particularly useful for decoupling the error budget between distance and reddening when applied to Cepheids.
 
-\section{Galactic Cepheids: Leavitt Law }
+\section{Leavitt Law }
 
 Classical Cepheids exhibit a linear relationship between their pulsation period ($\log P$) and their true luminosity ($M_\lambda^0$), which can be modeled as:
 
@@ -348,7 +455,7 @@ The dataset includes $BVIJHK$ photometry of Galactic Cepheids, resulting in six 
 		\centering
             \includegraphics[width=\textwidth]{./plots/2_PLPW/\filename_0BVIJHK_\dis.pdf}
 		\end{subfigure}		
-        \caption{109 Galactic Cepheids based BVIJHK Leavitt Law prior to calibration.}
+        \caption{\stars{} Galactic Cepheids based BVIJHK Leavitt Law prior to calibration.}
 	\end{figure}
 
 The deviation of the observed luminosity ($M_\lambda^0$) from the modeled value ($\bar{M}_\lambda$) is denoted as $\Delta M_\lambda$.
@@ -640,6 +747,17 @@ To derive the distance correction, I used the longer-wavelength $IJHK$ bands, wh
 
 For the colors $(I-J)$, $(I-H)$, $(I-K)$, and $(J-K)$, the Wesenheit magnitudes remain effectively reddening - free even in the presence of intrinsic uncertainties in the extinction law, as described by Equation~\ref{rho_S}. This is supported by the highly consistent values of $\delta \mu$ across all four colors (see Fig.~\ref{dis_correction2}). To illustrate the decoupling of distance and reddening errors, residual-correlation plots for the $(J-K)$ and $(I-H)$ colors are shown  (see Fig.~\ref{residue_corr}). 
 
+
+40 AW Per 
+2 AD Gem
+3 SU CYG
+7 SY cas
+13 T vel 
+15 RY CMa 
+17 CF Cas 
+19 V Lac 
+
+
 \begin{figure}[htp]
     \centering
     \begin{subfigure}[b]{\textwidth}
@@ -849,8 +967,8 @@ Comparing the intercepts with Galactic Leavitt Law in each band yields distance 
     \label{fig:wrapped}
 \end{figure}
 
-%\bibliographystyle{aasjournal}   % or plainnat, apj, mnras, etc.
-%\bibliography{references}        % name of your .bib file (without .bib)
+\bibliographystyle{aasjournal}   % or plainnat, apj, mnras, etc.
+\bibliography{references}        % name of your .bib file (without .bib)
 
 \printbibliography
  

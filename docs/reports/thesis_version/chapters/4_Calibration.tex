@@ -1,18 +1,10 @@
 \chapter{Calibration Method}
 
-\section{Galactic Cepheid Dataset}
-The golden data contains photometry with quality index less than or equal to 3 and RUWE less than 1.4 for gaia paralax. Raw dataset contains 103 Galactic Cepheids pulsating in fundamental mode. Their periods are measured in days and scaled logarithmically. The distance modulus is derived from the Gaia DR3 parallax filtered with RUWE < 1.4, the color excess is adopted from Fernie measurements, and photometric magnitudes are collected in the BVIJHK bands. The distribution of each observable against the period is depicted in the following sequence of pair plots. A quick glance shows no clear correlation in the plots.
-
-\begin{figure}[!ht]
-	\begin{center}
-	  \includegraphics[width=\textwidth]{clean/110_Jesper_RUWE_QLT.pdf}
-	  \caption{\small 103 Galactic Cepheids BVIJHK photometric data with color excess ($E_{BV}$) and Gaia distance (RUWE < 1.4). No clear correlation with period is observed in any of the pairplot.}
-	  \label{fig:rawdata}
-	\end{center}
-\end{figure}
-
 
 \section{Leavitt Law and their Wesenheits}
+
+
+%\input{chapters/content/0_4_table_madore_compare.tex}
 
 Observations in different bands of light provide information about the effect of interstellar reddening on light. For longer wavelengths, the impact of reddening decreases significantly, implying a reduced possibility of reddening errors and leading to a tighter Leavitt Law. In its most generic form, the linear fit to the dataset is expressed as follows:
 

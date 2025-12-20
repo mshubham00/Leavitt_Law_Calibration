@@ -106,6 +106,16 @@ def correction_rd_mu(stars_rd_mu_list, raw, plots=plots, s=s ):
                         plot_star_rd_mu(i, stars_rd_mu_list, correction_rd_mu_stars_df, f, ab, d)
     return correction_rd_mu_stars_df    
 #####################################################################
+'''
+def star_rd_mu(i, stars_rd_mu_list, correction, flag, ab, dis, wes_show = wes_show, s=s):
+    a = stars_rd_mu_list[i]
+    for k, col in enumerate(wes_show):
+        del_E = a[[f'{flag}{ab}{col}{dis}rd_{mu}' for mu in del_mu]]
+        mu_c = correction[f'mu{flag}{ab}{col}{dis}'].iloc[i]
+        EBV_c = correction[f'rd{flag}{ab}{col}{dis}'].iloc[i]
+        rms = del_E.iloc[-1].values
+'''    
+
 def plot_star_rd_mu(i, stars_rd_mu_list, correction, flag, ab, dis, wes_show = wes_show, s=s):
     a = stars_rd_mu_list[i]
     fig, axs = plt.subplots(2, 2, figsize=(13, 5), sharex='col')

@@ -107,38 +107,49 @@ def corrected_reg(data, corrected, dis, plots=plots, wes_show = wes_show, flags=
                     plotresultPL6_(merged_data, reg, col, dis, f, ab)
     return reg, res, pre, merged_data
 
-def print_PL(r_reg, col, file_name, dis):
-    print(f'PL for {file_name}{dis} calibrated with {col}')
-    s,c = {},{}
-    for m in mag:
-        slope = r_reg[f'{m}0{col}S'].iloc[0]
-        intr = r_reg[f'{m}0{col}S'].iloc[1]
-        serr = r_reg[f'{m}0{col}S'].iloc[2]
-        ierr = r_reg[f'{m}0{col}S'].iloc[3]
-        stdd = r_reg[f'{m}0{col}S'].iloc[4]
-        print(f'{m}({stdd:.3f}) = {slope:.3f}({serr:.3f}) (logP - 1) {intr:.3f}({ierr:.3f})')
-        s[m] = slope
-        c[m] = intr
-    return s, c
+
+def print_PL(r, file_name, wes_show):
+    slp, inr, esl, ein, stt = {}, {}, {}, {}, {}
+
+    for col in mag:
+        cols = [f'{col}0{m}S' for m in wes_show]
+        slp[col] = r[cols].rename(columns=dict(zip(cols, wes_show))).iloc[0]
+        inr[col] = r[cols].rename(columns=dict(zip(cols, wes_show))).iloc[1]
+        esl[col] = r[cols].rename(columns=dict(zip(cols, wes_show))).iloc[2]
+        ein[col] = r[cols].rename(columns=dict(zip(cols, wes_show))).iloc[3]
+        stt[col] = r[cols].rename(columns=dict(zip(cols, wes_show))).iloc[4]
+
+    slope     = pd.DataFrame(slp)
+    intercept = pd.DataFrame(inr)
+    serr      = pd.DataFrame(esl)
+    ierr      = pd.DataFrame(ein)
+    standard  = pd.DataFrame(stt)
+
+    return slope, intercept, serr, ierr, standard
+
 
 ###########################################################################
 
-def plt_dev(col, file_name = file_name,  s=0):
+def plt_dev(col, dis_list, dis_flag, file_name = file_name, Rv=R_v, s=0):
     data = pd.read_csv(f'./data/input/{file_name}.csv')
     n = len(data)
-    gaia = pd.read_csv(f'./data/processed/{file_name}_p_3.23/8_result/{n}_corrected.csv')
-    IRSB = pd.read_csv(f'./data/processed/{file_name}_j_3.23/8_result/{n}_corrected.csv')
-    plt.plot(data.logP, data.IRSB - data.plx ,'+', label = 'raw IRSB - plx mod')
-    
-    plt.plot(gaia.logP, IRSB[f'muS0{col}_j']-gaia[f'muS0{col}_p'],'.', label = 'calibrated modulus')
-    plt.plot(IRSB.logP, IRSB[f'rdS0{col}_j']-gaia[f'rdS0{col}_p'],'.', label = 'calibrated reddening')
-    plt.xlabel(f'Period (log P)')
+    dis1 = pd.read_csv(f'./data/processed/{file_name}{dis_flag[0]}_{Rv}/8_result/{n}_corrected.csv')
+    dis2 = pd.read_csv(f'./data/processed/{file_name}{dis_flag[1]}_{Rv}/8_result/{n}_corrected.csv')
+    dis = data[dis_list[0]] - data[dis_list[1]]
+    plt.plot(data.logP-1, dis ,'+', label = f'raw IRSB - plx mod: {dis.std() :.3f}')
+    mu = dis1[f'muS0{col}{dis_flag[0]}']-dis2[f'muS0{col}{dis_flag[1]}']
+    rd = dis1[f'rdS0{col}{dis_flag[0]}']-dis2[f'rdS0{col}{dis_flag[1]}']
+    plt.plot(dis2.logP-1, mu,'.', label = f'calibrated modulus: {mu.std() : .3f}, {mu.mean() : .3f}')
+    plt.plot(dis2.logP-1, rd,'.', label = f'calibrated reddening: {rd.std() : .3f}, {rd.mean() : .3f}')
+    plt.xlabel(f'Period (log P - 1)')
     plt.ylabel(f'IRSB - Gaia ({n} Calibrated {col})')
     plt.legend()
+    data['mu'] = mu
+    data['rd'] = rd
     if s==1:
         imgsave(f'mudev{col}',step=8,img_path=img_out_path)
     plt.show()
-    return data, gaia, IRSB
+    return data, dis1, dis2
 
 
 def plotresultPL6_(merged_data, merged_reg, col, dis, f, ab, s=s):

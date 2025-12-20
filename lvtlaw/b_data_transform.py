@@ -23,27 +23,69 @@ simplefilter(action="ignore", category=pd.errors.PerformanceWarning)
 import warnings
 warnings.filterwarnings("ignore", category=UserWarning)
 #####################################################################
-from data.datamapping import R, wes_show, mag, img_out_path, file_name, dis_flag, data_out, dis_list, process_step, k, s, z, R123,p
+from data.datamapping import R, A, wes_show, mag, img_out_path, file_name, dis_flag, data_out, dis_list, process_step, k, s, z, R123,p, R_ratio
 from lvtlaw.a_utils import merge_12, imgsave
 #####################################################################
-def extinction_law(A, mag = mag, R = R):
+def extinction_law(A, mag, R):
     print('Adopting BVIJHK Extinction law and reddening ratio from Fouque (2007): \n')
     print ('Bands \t Extinction \t Reddening ratio \n \t A(x)/A(v) \t R(x) for E(B-V)')
     for i in mag:
         print(i,'\t', A[i], '\t \t', R[i], '\n')
     return A, R 
+
 #####################################################################
-def bandwise_extinction(data, R=R, mag = mag, p=p):
-    #converts reddening into extinction
-    extinction = pd.DataFrame({'name': data['name'], 'logP': data['logP'], 'EBV': data['EBV']})
-    for i in mag:
-        extinction['A_'+i]=data['EBV']*R[i]
-    if p ==1:
-        print(extinction.head())
+def wes_deviation(m,wesenheit,n, name, dis, s=0):
+    wes_col = {}
+    for col in wes_show:
+        dev = wesenheit[f'{m}{col}{dis}']-wesenheit[f'{m}{col}{dis}0']
+        wes_col[f'{col}'] = dev.std()*10**n
+    return wes_col
+#####################################################################
+def extinction_law_compare(data, plist, precision, s=0):
+    fig, axes = plt.subplots(1, 2, figsize=(20, 8), sharey=True)
+    axes = axes.flatten()
+    heatmaps = []
+    data_matrices = []
+    for i in range(len(plist)):
+        Rv, ex, exlabel = plist[i]
+        R, Rv, _ = R_ratio(Rv, mag, ex)
+        print(R)
+        wes = reddening_free(data, R, mag)
+        c = pd.DataFrame()
+        for m in mag:
+            c[m] = wes_deviation(m, wes, precision, f'{file_name}{exlabel}', dis_flag[0], s=1)
+        data_matrices.append(c)
+    global_vmin = min(df.min().min() for df in data_matrices)
+    global_vmax = max(df.max().max() for df in data_matrices)
+    for i, c in enumerate(data_matrices):
+        ax = axes[i]
+        hm = sns.heatmap(
+            c, annot=True, cmap="viridis", ax=ax,
+            vmin=global_vmin, vmax=global_vmax, cbar=False
+        )
+        axes[i].set_title(f"Rv = {plist[i][0]} Ex Law: {plist[i][2]} = {plist[i][1]}")
+        heatmaps.append(hm)
+
+    # ---- Add one central colorbar between the two plots ----
+    from mpl_toolkits.axes_grid1 import make_axes_locatable
+
+    # Create axis for central colorbar: attached to the right side of axes[0]
+    divider = make_axes_locatable(axes[0])
+    cax = divider.append_axes("right", size="3%", pad=0.25)
+
+    # Shared colorbar
+    fig.colorbar(heatmaps[0].get_children()[0], cax=cax)
+
+    plt.tight_layout()
+    if s==1:            
+        imgsave('Extinction_compare',img_path=img_out_path)
+    plt.show()
+
+#####################################################################
+def absolute_magnitude(data, R, mag, dis_flag=dis_flag, dis_list=dis_list, k=k, p=p):
+    if p==1:
         print('###'*30)
-    return extinction
-#####################################################################
-def absolute_magnitude(data, R=R, mag=mag, dis_flag=dis_flag, dis_list=dis_list, k=k):
+        print('Absolute magnitude for each band \n')
     absolute = pd.DataFrame({
         'name': data['name'],
         'logP': data['logP'],
@@ -53,6 +95,8 @@ def absolute_magnitude(data, R=R, mag=mag, dis_flag=dis_flag, dis_list=dis_list,
         for i, m in enumerate(mag):
             if k == 0:  # Madore dataset
                 absolute[f'M_{m}{dis_flag[d]}'] = data[f'M_{m}'] + R[m]*data['EBV']
+                #else:
+                #absolute[f'M_{m}{dis_flag[d]}'] = data[f'{m}_mag'] - data[dis_list[d]]
             elif k ==3 or k == 4:
                 absolute[f'M_{m}{dis_flag[d]}'] = data[f'{m}_mag'] #- data[dis_list[d]]
             else:
@@ -62,7 +106,23 @@ def absolute_magnitude(data, R=R, mag=mag, dis_flag=dis_flag, dis_list=dis_list,
         print('###' * 30)
     return absolute
 #####################################################################
-def true_absolute_magnitude(absolute, extinction, mag=mag, dis_flag=dis_flag, dis_list=dis_list):
+def bandwise_extinction(data, R, mag, p=p):
+    if p==1:
+        print('Calculated extinction for each band \n')
+    #converts reddening into extinction
+    extinction = pd.DataFrame({'name': data['name'], 'logP': data['logP'], 'EBV': data['EBV']})
+    for i in mag:
+        extinction['A_'+i]=data['EBV']*R[i]
+    if p ==1:
+        print(extinction.head())
+        print('###'*30)
+    return extinction
+#####################################################################
+def true_absolute_magnitude(data, R, mag, dis_flag=dis_flag, dis_list=dis_list):
+    absolute = absolute_magnitude(data, R, mag)
+    extinction = bandwise_extinction(data, R, mag)
+    if p==1:
+        print(f'True absolute magnitude for each band \n')
     tabsolute = pd.DataFrame({'name': absolute['name'], 'logP': absolute['logP'], 'EBV': absolute['EBV']})
     for d,dis in enumerate(dis_list):
         tabsolute[dis] = absolute[dis]    
@@ -71,9 +131,10 @@ def true_absolute_magnitude(absolute, extinction, mag=mag, dis_flag=dis_flag, di
     if p==1:
         print(tabsolute.head())
         print('###'*30) 
-    return tabsolute
+    return tabsolute, extinction, absolute
 #####################################################################
-def reddening_free(absolute, tabsolute, R=R, mag=mag, dis_flag=dis_flag):
+def reddening_free(data, R, mag, dis_flag=dis_flag, dis_list=dis_list):
+    tabsolute, extinction, absolute = true_absolute_magnitude(data, R, mag, dis_flag, dis_list)
     wesen = pd.DataFrame({'name': absolute['name'], 'logP': absolute['logP'], 'EBV': absolute['EBV']})
     #print(R, '\n')
     for d,dis in enumerate(dis_flag):
@@ -93,31 +154,21 @@ def reddening_free(absolute, tabsolute, R=R, mag=mag, dis_flag=dis_flag):
         print('###'*30)
     return wesen
 #####################################################################
-def transformation(data, A, R, mag=mag, dis_flag=dis_flag, dis_list=dis_list, s=s, z=z):
-    A, R = extinction_law(A, mag, R) # converts Fouque (2007) extinction law into corresponding reddening ration
+def transformation(data, A=A, R=R, mag=mag, dis_flag=dis_flag, dis_list=dis_list, s=s, z=z):
     if p==1:
+        extinction_law(A, mag, R) # converts Fouque (2007) extinction law into corresponding reddening ration
         print(' \n Reddening ratio values will be multiplied with E(B-V) values to yield extinction in each band for individual Cepheid along the respective line-of-sight.  \n')
         print('###'*30)
         print('\nApparent magnitude transformed into absolute magnitude and weseheit magnitude using the Galactic extinction law, Reddenings (EBV) and Distance modulus (mu).\n M  = m - mu \n M0 = m - mu - R*EBV \n W  = m - mu - R*(m1-m2) \n')
+        print('###'*30)
+        print('Apparent magnitude data')
+        print(data.head())
     if z==1:
         input('\n')
-    data = data
-    if p==1:
-        print('###'*30)
-        print('Apparent magnitude')
-        print(data.head())
-        print('###'*30)
-        print('Absolute magnitude for each band \n')
-    abs_data = absolute_magnitude(data)    
-    if p==1:
-        print('Calculated extinction for each band \n')
-    ext_data = bandwise_extinction(data)
-    if p==1:
-        print('True absolute magnitude for each band \n')
-    tabs_data = true_absolute_magnitude(abs_data, ext_data)
+    tabs_data, ext_data, abs_data = true_absolute_magnitude(data, R, mag)
     if p==1:
         print('Wesenheit magnitude for each band \n')
-    wes_data = reddening_free(abs_data,tabs_data, R)
+    wes_data = reddening_free(data, R, mag, dis_flag=dis_flag, dis_list=dis_list)
     merged_data= pd.merge(abs_data, tabs_data, on=['name','logP', 'EBV', f'{dis_list[0]}'])
     merged_data = merge_12(merged_data, wes_data, on = ['name','logP', 'EBV', f'{dis_list[0]}'])
     if s==1:
@@ -151,7 +202,6 @@ def color_period(data, ann, outliers, s=0):
     for i in range(0,6):
         for j in range(i+1,6):
             color[mag[i]+mag[j]] = data[mag[i]+'_mag'] - data[mag[j]+'_mag'] - (R[mag[i]]-R[mag[j]])*data.EBV
-
     ls = color.columns[4:]
     for j in range(0,14,2):
         fig, axarr = plt.subplots(1,2, sharey='col',gridspec_kw={'hspace': 0, 'wspace': 0})
@@ -170,27 +220,27 @@ def color_period(data, ann, outliers, s=0):
                     ax.annotate('%i'%(k), xy =(X.iloc[k], Y.iloc[k]), fontsize = 11) 
             if i%2 ==0:
                 ax.set_ylabel('Period')
+            ax.set_xlabel(ls[i+j])
             plt.text(0.05, 0.85, '%s'%(ls[i+j]), transform = ax.transAxes, color = "red",  fontsize = 14)      
-            ax.set_title(f'Color {ls[i+j]}')
+            #ax.set_title(f'Color {ls[i+j]}')
             ax.yaxis.tick_left()
         title = '%s_PC%i_%s'%(file_name,j,ls[i+j])
         if s==1:
-            imgsave(title, step=0, img_path=img_out_path, fil = 'pdf', p=0)
+            imgsave(title, step=0, img_path=img_out_path, fil = 'pdf', p=1)
 #####################################################################
-
 def pltwes_deviation(m,wesenheit,name, dis, s=0):
     fig_res, axs_res = plt.subplots(1, 3, figsize=(18, 4),sharey=True)
     axs_res = axs_res.flatten()
     for col in range(5):
         dev = wesenheit[f'{m}{wes_show[col]}{dis}']-wesenheit[f'{m}{wes_show[col]}{dis}0']
         axs_res[0].axhline(0)#, color='red', linestyle='--', linewidth=1)
-        axs_res[0].plot(wesenheit.logP, dev, '.', label =m+wes_show[col])
+        axs_res[0].plot(wesenheit.logP, dev, '.', label =f'{m}{wes_show[col]}{dev.std()*10000 : .3f}4')
         dev = wesenheit[f'{m}{wes_show[col+5]}{dis}']-wesenheit[f'{m}{wes_show[col+5]}{dis}0']
         axs_res[1].axhline(0)#, color='red', linestyle='--', linewidth=1)
-        axs_res[1].plot(wesenheit.logP, dev, '.', label =m+wes_show[col+5])
+        axs_res[1].plot(wesenheit.logP, dev, '.', label =f'{m}{wes_show[col+5]}{dev.std()*10000 : .3f}')
         dev = wesenheit[f'{m}{wes_show[col+10]}{dis}']-wesenheit[f'{m}{wes_show[col+10]}{dis}0']
         axs_res[2].axhline(0)#, color='red', linestyle='--', linewidth=1)
-        axs_res[2].plot(wesenheit.logP, dev, '.', label =m+wes_show[col+10])
+        axs_res[2].plot(wesenheit.logP, dev, '.', label =f'{m}{wes_show[col+10]}{dev.std()*10000 : .3f}')
     axs_res[0].legend()
     axs_res[1].legend()
     axs_res[2].legend()
