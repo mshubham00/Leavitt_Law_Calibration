@@ -1,3 +1,12 @@
+I band filling
+BE Mon 9.637
+CNSct 9.61
+CYAur 9.962
+HZPer 10.646
+V0336Aql 8.63
+BM per 8.214
+
+
 
 Fouque
         slope a             intercept b         σ
