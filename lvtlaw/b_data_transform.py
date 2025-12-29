@@ -224,9 +224,11 @@ def color_period(data, ann, outliers, s=0):
             plt.text(0.05, 0.85, '%s'%(ls[i+j]), transform = ax.transAxes, color = "red",  fontsize = 14)      
             #ax.set_title(f'Color {ls[i+j]}')
             ax.yaxis.tick_left()
-        title = '%s_PC%i_%s'%(file_name,j,ls[i+j])
+        title = '%i_PC%i_%s'%(len(data),j,ls[i+j])
         if s==1:
             imgsave(title, step=0, img_path=img_out_path, fil = 'pdf', p=1)
+            color.to_csv(data_out+process_step[0]+str(len(color))+ '_color'+'.csv')
+    return color
 #####################################################################
 def pltwes_deviation(m,wesenheit,name, dis, s=0):
     fig_res, axs_res = plt.subplots(1, 3, figsize=(18, 4),sharey=True)

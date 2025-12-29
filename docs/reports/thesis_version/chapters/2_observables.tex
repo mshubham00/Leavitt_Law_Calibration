@@ -133,9 +133,8 @@ M_\lambda^0 = m_\lambda - A_\lambda - 5\log{d[pc]}  + 5
 
 
 \section{Distance}
-The introductory chapter makes it clear that the standard units of length used in everyday life are inadequate for astronomical measurements. To address this, astronomers have developed a distinct set of units for measuring astronomical distances. However, different units are used depending on the spatial scale. For example, within the solar system, the astronomical unit (AU) is sufficient, while on the scale of the Milky Way, the light-year is more appropriate. For even larger distances, such as those in extragalactic realm, units like the parsec or megaparsec are commonly used. The relationships between these units are summarized in Table 
+The introductory chapter makes it clear that the standard units of length used in everyday life are inadequate for astronomical measurements. To address this, astronomers have developed a distinct set of units for measuring astronomical distances. However, different units are used depending on the spatial scale. For example, within the solar system, the astronomical unit (AU) is sufficient, while on the scale of the Milky Way, the light-year is more appropriate. For even larger distances, such as those in extragalactic realm, units like the parsec or megaparsec are commonly used. The relationships between these units are summarized in Table \ref{table:distance}.
 
-\ref{table:distance}.
 \begin{table}[h!]
 	\centering
 	\caption{Conversion of Astronomical Distance Units}
@@ -152,7 +151,7 @@ The introductory chapter makes it clear that the standard units of length used i
 	\label{table:distance}
 \end{table}
 
-\subsection{Parallax: Measuring Astronomical Distances Using Geometry}
+\subsection{Parallax method}
 
 Parallax is a geometrical method that utilizes trigonometric principles to measure the distance to an object by observing its apparent shift relative to a fixed background, caused by the movement of the observer. While measuring distances between nearby objects on Earth is straightforward using tools like rulers or laser rangefinders, this becomes impractical when dealing with vast astronomical distances. Hence, astronomers rely on methods such as parallax, Leavitt Law, etc.
 
@@ -161,10 +160,6 @@ The choice of method for measuring astronomical distances depends on both the sc
 One of the fundamental tools used in determining distances is trigonometry. In a right-angled triangle, if one side and an angle (other than the right angle) are known, the other sides can be calculated using trigonometric ratios. There are six basic trigonometric functions: sine (sin), cosine (cos), and tangent (tan), along with their respective reciprocals: cosecant (csc), secant (sec), and cotangent (cot). These ratios depend solely on the angle and not on the actual size of the triangle, making them highly useful in astronomical applications where distances are vast and direct measurement is impractical.
 
 \input{chapters/content/0_2_plot_parallax.tex}
-
-
-
-
 
 In the context of stellar parallax, a conceptual triangle is formed between the Earth, the Sun, and a distant star. The baseline of this triangle is the distance between the Earth and the Sun, known as 1 Astronomical Unit (AU). As Earth moves in its orbit over the course of six months, nearby stars appear to shift slightly against the backdrop of more distant stars. This apparent angular shift is called the parallax angle. Because the triangle formed is extremely elongated, the parallax angle is very small, typically measured in arcseconds.
 
@@ -189,15 +184,67 @@ To standardize distance measurements, astronomers use the parsec as a unit of le
 \end{center}
 \vspace{0.3cm}
 
-The Gaia satellite, launched by the European Space Agency in 2014, has revolutionized our understanding of the Milky Way by measuring the parallax and proper motion of billions of celestial objects. Among the vast number of objects observed, several notable types of variable stars, including Cepheid variables and RR Lyrae stars, were also studied. In this thesis, the parallax-driven distances provided by Gaia will be used to calibrate the period-luminosity relation. 
+The Gaia satellite, launched by the European Space Agency in 2013, has revolutionized our understanding of the Milky Way by measuring precise the parallax and proper motion of billions of objects within the Galaxy and beyond. Among the vast number of objects observed, several notable types of variable stars, including Cepheid variables and RR Lyrae stars, were also studied. In this thesis, the parallax-driven distances provided by Gaia will be used to calibrate the period-luminosity relation. 
+
+Since Cepheid variable are bright yellow giants, their high intensity of photons saturates the sensitive pixels of CCD camera resulting some systematics in parallax measurement. Hence, parallax based distances of Cepheids can have marginal errors which I would be determining in this thesis. 
+
+
+\\subsection{Infrared Surface Brightness Method}
+
+This method relies on a simple analogy that larger object covers larger area on the sky. If larger object covering smaller area of sky, that means it is located far away. Mathematically, it can be written as: 
+
+$$Distance, d = \frac{Physical diameter}{Angular Diameter}$$
+
+The angular diameter of Cepheid is determined from the infrared color (V-K), which corresponds to the surface temperature and further can be transformed into luminosity using stefan-boltzmann law. Using emperical correlation formula, color can be related to surface brightness as:
+
+$$S_V = a (V-K) + b$$
+
+where $S_V$ represents the surface brightness in V-band. 
+
+And the empirical relation between absolute luminosity, surface brighness and angular diameter (in mas) is given as:
+
+$$S_V = V_0 + 5 log \theta$$
+
+Both together leads to 
+$$\theta (\phi) = 10^{0.2[a(V-K)_0(\phi) + b - V_0(\phi)]}$$
+
+To estimate physical diameter, first radial velocity is measured using spectroscopic observation (dopper effect). The radial velocity is then converted into photospheric pulsation velocity by calibrating for projection factor (p-factor). The projection factor includes the effect of geometrical projection as central region moves along the line-of-sight but not that not the case around the edges. Another effect is limb darkening as centeral region appears much brighter than surrounding disk affecting the contribution of spectral lines. It is also important to acknowledge that the different spectral lines forms at different depth which moving with different velocities. And over the pulsation cycle, optical depth also varies with the temperature shifting the photosphere over the different layer of gases. The product of these factors altogether yields the p-factor. Upon calibration for p-factor, the pulsation velocity can be written as:   
+
+$v_p(t) = p[v_r(t) - v_{\gamma}]$
+
+where $v_p$ is pulsation velocity, $v_r$ is radial velocity, $p$ is projection factor and $v_{\gamma}$ is mean velocity. Integrating the pulsation velocity of the Cepheid for the cycle gives the change in radius.
+
+$$\Delta R = \int{t_1}{t_0} v_p(t)dt$$
+
+Instead of time, pulsation phase is used as the system is periodic. 
+
+$$\phi = \frac{t-t_0}{P}   \implies dt = P d\phi$$
+
+$$\Delta R = pP \int{\phi}{0}[v_r(\phi') - v_{\gamma}]d\phi '$$
+
+Hence, angular radius at any phase given as:
+
+$$R(\phi) = R_0 + \Delta R(\phi)$$
+
+Substituting angular diameter and physical diameter in the first relation:
+
+$$\theta (\phi) = \frac{2R_0}{d} + \frac{2pP}{d} \int{\phi}{0}(v_r - v_{\gamma})d\phi $$
+
+which can be compared with linear equation form:
+
+$$\theta (\phi) = A + B X(\phi)$$
+here $\theta (\phi)$ and $X (\phi)$ are deduced from the observation leading to the values of intercept A and slope B
+
+The value of slope B leads to the measurment of distance. 
+
+$d = \frac{2pP}{B}$
 
 \subsection{Distance Modulus ($\mu$)}
 
-A useful parameter for denoting distance in astronomy is the distance modulus, $\mu$, which provides a logarithmic transformation of the distance to an object, using 10 parsecs as the reference distance. The distance modulus can also be expressed as the difference between the apparent magnitude and the absolute magnitude of an object. Mathematically, it is formulated as:
+For the ease of calculation, a dimensionless measure of distance is used in astronomy called as the distance modulus, $\mu$, which provides a logarithmic transformation of the distance to an object, by setting 10 parsecs as the reference distance. It can also be expressed as the difference between the apparent magnitude and the absolute magnitude of an object as the absolute magnitude is the measure of luminosity at the 10 pc distance from the source. Mathematically, distance modulus can be formulated as:
 
 $$\mu = m - M = 5 log_{10}\left[\frac{d}{10 pc}\right] $$ 
  
-
 
 \section{Interstellar Reddening}
 

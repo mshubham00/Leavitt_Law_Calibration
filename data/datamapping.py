@@ -4,7 +4,7 @@
 '''
 module = 'datamapping'
 #####################################################################
-k=2; 						# k selects dataset [0:Madore, 1:Jesper, 2:Cruz, 3:LMC, 4:SMC]
+k=1; 						# k selects dataset [0:Madore, 1:Jesper, 2:Cruz, 3:LMC, 4:SMC]
 skip=0;
 s=1; 						# saves the output
 z=0; 						# z switches output to paging mode
@@ -55,12 +55,12 @@ def select_data_file(k):
 #        filename = '71_IRSB_plx'
 #        filename = '76_IRSB_IJ_HK'
 #        filename = '99_IRSB_plx'
-        filename = '123_Cepheids'
+        filename = '143_Cepheids'
 #        filename = '150_IRSB_plx'
-        dis_list = ['mMplx']; dis_flag = ['_g']
-#        dis_list = ['mM0']; dis_flag = ['_j']
+#        dis_list = ['mMplx']; dis_flag = ['_g']
+        dis_list = ['mM0']; dis_flag = ['_j']
 #        dis_list = ['HST']; dis_flag = ['_h']
-        mag = ['B','V','I', 'J', 'H', 'K'];#
+        mag = ['B','V','I', 'J', 'K'];#
         wes_show=colors(mag)#['VI', 'BJ', 'BH', 'BK', 'VJ', 'VH', 'VK', 'IH', 'IK']
         R, R_v, A = R_ratio(R_v = Rv, mag = mag, A = extinction_ratios)
         file_cols = ['name','logP','EBV'] + dis_list + [f'{m}_mag' for m in mag]

@@ -134,7 +134,7 @@ def plotPL6(merged_data, reg, ab, dis=dis_flag[0], s=s):
     if s == 1:
         imgsave(title, step=1)
     plt.show()
-    plotPLWres(merged_data, reg, ab, col='')
+    plotPLWres(merged_data, reg, ab, col='', dis=dis, s=s)
 #####################################################################
 def plotPW6(data, reg, col, dis=dis_flag[0], s=s):
     print('Wesenheit ', col)
@@ -182,7 +182,7 @@ def plotPW6(data, reg, col, dis=dis_flag[0], s=s):
     if s == 1:
         imgsave(title, 1)
     plt.show()
-    plotPLWres(data, reg, ab = '', col = col)
+    plotPLWres(data, reg, ab = '', col = col, dis=dis, s=s)
 #####################################################################
 def plotPLWres(res, reg, ab, col='', dis=dis_flag[0],s=s):
     x = res['logP'] - 1
