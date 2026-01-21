@@ -33,10 +33,10 @@ def residue_correlation(residue, col, flag, dis_flag = dis_flag):
         slope_errors, intercept_errors = [], []
         for ab in mode:
             for band in mag:
-                y_key = 'r_' + band + ab + diss
                 wesenheit = f"{band}{col}" if flag == "S" else f"{col[0]}{col}"
-                x_key = 'r_' + wesenheit + diss
                 regression_name = band + ab + wesenheit
+                y_key = 'r_' + band + ab + diss
+                x_key = 'r_' + wesenheit + diss
             # Perform regression
                 slope, intercept, predicted, residual, slope_err, intercept_err, stdd = regression(
                     residue[x_key], residue[y_key], wesenheit, band + ab + diss, 1)

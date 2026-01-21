@@ -102,7 +102,7 @@ def calibrated_result(merged_data,correction_rd_mu_stars, plots = plots, flags=f
         input('###'*30+'\n')
     corrected = correction_apply(merged_data, correction_rd_mu_stars)
 #    print('Calibrated data: \n', corrected.head(-1))
-    reg, res, pre, merged_data = corrected_reg(merged_data, corrected, dis_flag[0], plots)
+    reg, res, pre, merged_data = corrected_reg(merged_data, corrected, dis_flag, plots)
     print('calibrated_result module ended!')   
     return corrected, merged_data
 '''

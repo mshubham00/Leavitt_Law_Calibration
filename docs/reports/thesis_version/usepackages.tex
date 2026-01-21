@@ -1,6 +1,46 @@
 % This file contains all the packages used in the template
 % Remove or add new packages to suit your needs
 
+% ========== HEADER, FOOTER & PAGENUMBER ==========
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\rfoot{\thepage} % Page number on bottom right
+
+% ========== HEADINGS ==========
+\usepackage{titlesec}
+\titleformat{\chapter}[hang]{\normalfont\huge\bfseries}{\thechapter}{1em}{}
+\titleformat{\section}[hang]{\normalfont\Large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}[hang]{\normalfont\large\bfseries}{\thesubsection}{1em}{}
+\usepackage{tocloft}
+\setcounter{secnumdepth}{3}  % Number subsubsections
+
+%% Other Packages %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{longtable} %%For tables, that exceed one page
+\usepackage{color}
+\definecolor{darkgreen}{rgb}{0.3,0.6,0.3}
+
+\setlength{\oddsidemargin}{0mm}
+\setlength{\evensidemargin}{0mm}
+\setlength{\topmargin}{-20mm}
+\setlength{\textwidth}{165mm}
+\setlength{\textheight}{260mm}
+
+\usepackage{hyperref}
+\hypersetup{
+   pdfauthor={Shubham Mamgain},
+   pdftitle={Master Thesis},
+   pdfkeywords={report, Astrophysics, University of Potsdam},
+   pdfsubject={Project Report},
+   colorlinks=true,
+   citecolor=darkgreen,
+   urlcolor=darkgreen,
+   linkcolor=black,
+   pdfstartview=Fit,
+   pdfpagelayout=SinglePage,
+   pdfcreator=pdflatex,
+   pdfproducer=pdflatex
+}
 
 
 
@@ -13,8 +53,8 @@
 \usepackage[T1]{fontenc}
 
 %% Andre pakker %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\usepackage{hyperref}
 \usepackage{natbib}
+\usepackage{amssymb}
 \usepackage{csquotes}
 \usepackage{graphicx} %%For loading graphic files
 \usepackage{amsmath}
@@ -75,42 +115,3 @@
 \setlength{\parskip}{6pt}
 \setlength{\parindent}{0pt}
 
-% ========== HEADER, FOOTER & PAGENUMBER ==========
-\usepackage{fancyhdr}
-\pagestyle{fancy}
-\fancyhf{}
-\rfoot{\thepage} % Page number on bottom right
-
-% ========== HEADINGS ==========
-\usepackage{titlesec}
-\titleformat{\chapter}[hang]{\normalfont\huge\bfseries}{\thechapter}{1em}{}
-\titleformat{\section}[hang]{\normalfont\Large\bfseries}{\thesection}{1em}{}
-\titleformat{\subsection}[hang]{\normalfont\large\bfseries}{\thesubsection}{1em}{}
-\usepackage{tocloft}
-\setcounter{secnumdepth}{3}  % Number subsubsections
-
-%% Other Packages %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\usepackage{longtable} %%For tables, that exceed one page
-\usepackage{color}
-\definecolor{darkgreen}{rgb}{0.3,0.6,0.3}
-
-\setlength{\oddsidemargin}{0mm}
-\setlength{\evensidemargin}{0mm}
-\setlength{\topmargin}{-20mm}
-\setlength{\textwidth}{165mm}
-\setlength{\textheight}{260mm}
-
-\hypersetup{
-   pdfauthor={Shubham Mamgain},
-   pdftitle={Master Thesis},
-   pdfkeywords={report, Astrophysics, University of Potsdam},
-   pdfsubject={Project Report},
-   colorlinks=true,
-   citecolor=darkgreen,
-   urlcolor=darkgreen,
-   linkcolor=black,
-   pdfstartview=Fit,
-   pdfpagelayout=SinglePage,
-   pdfcreator=pdflatex,
-   pdfproducer=pdflatex
-}

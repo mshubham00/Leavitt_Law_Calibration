@@ -10,7 +10,7 @@ s=1; 						# saves the output
 z=0; 						# z switches output to paging mode
 p=0;
 plots=0; 					# plots for genrating plots
-flags = ['S'] 				# Madore and Shubham
+flags = ['S', 'M'] 				# Madore and Shubham
 mode = ['0']  			    # Absolute mag and True absolute mag for PL and PW
 rd_avg_drop = []# Not included in estimating reddening variance (f_star_wise)
 del_mu = [round(i*0.01,3) for i in range(-100,100,2)]
@@ -55,18 +55,19 @@ def select_data_file(k):
 #        filename = '71_IRSB_plx'
 #        filename = '76_IRSB_IJ_HK'
 #        filename = '99_IRSB_plx'
-        filename = '143_Cepheids'
+        filename = '121_Cepheids'
 #        filename = '150_IRSB_plx'
-#        dis_list = ['mMplx']; dis_flag = ['_g']
-        dis_list = ['mM0']; dis_flag = ['_j']
+        dis_list = ['mMplx']; dis_flag = ['_g']
+#        dis_list = ['mM0']; dis_flag = ['_j']
+#        dis_list = ['mM0', 'mMplx']; dis_flag = ['_j', '_g']
 #        dis_list = ['HST']; dis_flag = ['_h']
-        mag = ['B','V','I', 'J', 'K'];#
+        mag = ['B','V','I', 'J', 'H','K'];#
         wes_show=colors(mag)#['VI', 'BJ', 'BH', 'BK', 'VJ', 'VH', 'VK', 'IH', 'IK']
         R, R_v, A = R_ratio(R_v = Rv, mag = mag, A = extinction_ratios)
         file_cols = ['name','logP','EBV'] + dis_list + [f'{m}_mag' for m in mag]
     elif k == 2:
         filename = '20_cluster_cruz'
-        wes_show=['VI']#['BJ', 'BH', 'BK', 'VJ', 'IJ','IH', 'IK', 'JH', 'JK' ]
+        wes_show=['VK']#['BJ', 'BH', 'BK', 'VJ', 'IJ','IH', 'IK', 'JH', 'JK' ]
         dis_list = ['cplx']
         dis_flag = ['_c']
         mag = ['B', 'V', 'I','J','H','K'];
@@ -114,9 +115,9 @@ def R_dic(mag=mag):
                 R_[m+c1+c2] = R123(m,c1,c2)
     return R_
 #####################################################################
-col_dot = ['b.', 'g*', 'y+', 'c*', 'g+', 'k.', 'c+', 'r+'] ;
-col_lin = ['b-', 'g-', 'y-', 'c-', 'g-', 'k-', 'c-', 'r-'] ;
-col_das = ['b--', 'g--', 'y--', 'c--', 'g--', 'k--', 'c--', 'r--']
-col_ = ['b', 'g', 'y', 'c', 'g', 'k', 'c', 'r'] ;
+col_dot = ['b.', 'm*', 'y+', 'c*', 'g+', 'k.', 'c+', 'r+'] ;
+col_lin = ['b-', 'm-', 'y-', 'c-', 'g-', 'k-', 'c-', 'r-'] ;
+col_das = ['b--', 'm--', 'y--', 'c--', 'g--', 'k--', 'c--', 'r--']
+col_ = ['b', 'm', 'y', 'c', 'g', 'k', 'c', 'r'] ;
 #####################################################################
 print(f'* * {module} module loaded!')

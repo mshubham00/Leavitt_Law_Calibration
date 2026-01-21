@@ -6,7 +6,7 @@ from lvtlaw.main_modules import *
 from lvtlaw.h_loadoutput import starwise_analysis_ # to load processed data
 #####################################################################################################
 # Display project related details
-#skip=1
+skip=0
 def skip_to(skip = skip):
     if skip == 0:
         #Generate directories for saving output
@@ -39,7 +39,7 @@ def skip_to(skip = skip):
         stars, rdmu_list, rd_mu_rms, merged_data = starwise_analysis_()
 
         # Implimenting the corrections in raw data
-        calibrated_result(merged_data, rd_mu_rms, plots=1) # g_result
+        calibrated_result(merged_data, rd_mu_rms, plots=0) # g_result
 
 skip_to()
 print(f'All the processed data is saved in {data_out} directory.')

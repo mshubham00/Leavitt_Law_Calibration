@@ -34,7 +34,7 @@ def correction_apply(data, correction, wes_show=wes_show, flags=flags, dis_flag=
         corrected.to_csv('%s%i_corrected.csv'%(data_out+process_step[7],len(corrected)))
     return corrected
 
-def append_PLW(PLW_struct : list,i : int,a : float,b : float,c : list,d : list,e :float,f :float, dis, st):
+def append_PLW(PLW_struct : list,i : str,a : float,b : float,c : list,d : list,e :float,f :float, dis: str, st: float):
     # collect different regression output into one structure
     PLW_struct[0].append(i)    # PL_name
     PLW_struct[1].append(a)    # slope
@@ -43,45 +43,46 @@ def append_PLW(PLW_struct : list,i : int,a : float,b : float,c : list,d : list,e
     PLW_struct[4]['r_'+i+dis ] = d   # PL residue
     PLW_struct[5].append(e)    # slope error
     PLW_struct[6].append(f)    # intercept error
-    PLW_struct[7].append(st)    # intercept error
+    PLW_struct[7].append(st)    # 
     return PLW_struct
 
-def corrected_PL(data, corrected, dis, flag, s=1):
-    PL_name, PL_slope, PL_intercept, stdd = [], [], [], []
-    err_slope, err_intercept = [], []
+def corrected_PL(data, corrected, dis_flag, flag, s=1):
     residue = pd.DataFrame({'name': data['name'], 'logP': data['logP']})
-    residue[dis_list[dis_flag.index(dis)]] = data[dis_list[dis_flag.index(dis)]]
     prediction = residue.copy()   
-    # Store regression results
-    PLW_struct = [PL_name, PL_slope, PL_intercept, prediction, residue, err_slope, err_intercept, stdd]  
-    for ab in mode:
-        for i in range(len(mag)):
-            print('\n\t Mag: ', mag[i] + ab, '\t Method: ', flag, '\t Dis:', dis)
-        # raw data
-            a,b,c,d,e,f,g = regression(data['logP']-1, data['M_'+mag[i]+ab+dis], '(logP - 1)', 'M__'+mag[i]+ab, 1)
-            PLW_struct = append_PLW(PLW_struct, mag[i] + ab, a, b, c, d, e, f, dis, g)
-        # calibrated data
-            for col in wes_show:
-                a,b,c,d,e,f, g = regression(corrected['logP']-1,corrected[mag[i]+flag+ab+col+dis], '(logP - 1)', 'M%s%s'%(mag[i]+ab,col), p = 1)
-                PLW_struct = append_PLW(PLW_struct, mag[i] +ab+ col+flag, a, b, c, d, e, f, dis, g)
-    PLW = pd.DataFrame({
-        'name': PLW_struct[0],
-        f'm': PLW_struct[1],
-        f'c': PLW_struct[2],
-        f'err_m': PLW_struct[5],
-        f'err_c': PLW_struct[6],
-        f'stdd': PLW_struct[7]
-    })
-    prediction = PLW_struct[3]
-    residue = PLW_struct[4]
+    PLW = pd.DataFrame()
+    PLW_all = []
+    for dis in dis_flag:
+        PLW = pd.DataFrame()
+        PL_name, PL_slope, PL_intercept, stdd = [], [], [], []
+        err_slope, err_intercept = [], []
+        PLW_struct = [PL_name, PL_slope, PL_intercept, prediction, residue, err_slope, err_intercept, stdd]  
+        for ab in mode:
+            for i in range(len(mag)):
+                print('\n\t Mag: ', mag[i] + ab, '\t Method: ', flag, '\t Dis:', dis)
+                a,b,c,d,e,f,g = regression(data['logP']-1, data['M_'+mag[i]+ab+dis], '(logP - 1)', 'M__'+mag[i]+ab, 1)
+                PLW_struct = append_PLW(PLW_struct, mag[i] + ab, a, b, c, d, e, f, dis, g)
+            # calibrated data
+                for col in wes_show:
+                    a,b,c,d,e,f,g = regression(corrected['logP']-1,corrected[mag[i]+flag+ab+col+dis], '(logP - 1)', 'M%s%s'%(mag[i]+ab,col), p = 1)
+                    PLW_struct = append_PLW(PLW_struct, mag[i]+ab+col+flag, a, b, c, d, e, f, dis, g)
+        PLW['name'] = PLW_struct[0]
+        PLW['m'+dis] = PLW_struct[1]
+        PLW['c'+dis] = PLW_struct[2]
+        PLW['err_m'+dis] = PLW_struct[5]
+        PLW['err_c'+dis] = PLW_struct[6]
+        PLW['stdd'+dis] = PLW_struct[7]
+        PLW_all.append(PLW)
+        prediction = pd.concat([prediction, PLW_struct[3]], axis=1)
+        residue = pd.concat([residue, PLW_struct[4]], axis=1)
+    PLW = pd.concat(PLW_all, axis=1)
     return PLW, residue, prediction        
 
-def corrected_reg(data, corrected, dis, plots=plots, wes_show = wes_show, flags=flags,s=s):
+def corrected_reg(data, corrected, dis_flag, plots=plots, wes_show = wes_show, flags=flags,s=s):
     reg = pd.DataFrame()
     res = pd.DataFrame()
     pre = pd.DataFrame()
     for f in flags:
-        PLW, residue, prediction = corrected_PL(data, corrected, dis, f, s)
+        PLW, residue, prediction = corrected_PL(data, corrected, dis_flag, f, s)
         reg = pd.concat([reg, PLW], axis=0)
         res = pd.concat([res, residue], axis=1)
         pre = pd.concat([pre, prediction], axis=1)

@@ -3,8 +3,8 @@
 % Apply a background image to the epigraph region
 \begin{tikzpicture}[remember picture, overlay]
   % Place the image (background) in the epigraph area
-  \node[anchor=north west, opacity=0.5, scale=1.4,yshift=0.2cm,xshift=-0.2cm] at (current page.north west) {
-    \includegraphics[width=\paperwidth]{../plots/0_images/hubble_ultra_deep.png} % Your image path
+  \node[anchor=north west, opacity=0.5, scale=1,yshift=6.5cm,xshift=-0.2cm] at (current page.north west) {
+    \includegraphics[width=\paperwidth]{../plots/0_images/hubble_ultra_deep_.png} % Your image path
   };
 \end{tikzpicture}
 
@@ -13,7 +13,8 @@
 \epigraph{Who really knows? \\ Who will unfold it? \\ How did this Universe formed?\\ Where does it come from? \\ Gods came after the creation. \\ Then, who really witnessed the origin of this existence?} {Rigved X.129.6}
 
 \section{Perspective on the Subject}
-\textit{Have you ever wondered why the Sun shines, why stars exhibit different colors, or what the structure of the Milky Way is? How far is the Andromeda galaxy from Earth? Do structures larger than galaxies exist? How far into the Universe can we observe? And perhaps most intriguingly, are we alone in this vast cosmos?}
+\textit{Have you ever wondered why the Sun shines, why stars exhibit different colors, or what the structure of the Milky Way is? How far is the Andromeda galaxy from Earth? Do structures larger than galaxies exist? How far into the Universe can we observe? And perhaps most intriguingly, are we alone in this vast cosmos?} \footnotetext{Background Image: The Hubble Ultra Deep Field. Credit: Hubble Deep Field Activity (March 2009), NASA.}
+
 
 \subsection{Astrophysics, Astronomy, and Cosmology}
 
@@ -25,7 +26,8 @@ On the largest scales, cosmology treats the Universe as a single, interconnected
 
 Constrained by observational evidence yet concerned with the most fundamental questions of existence, cosmology occupies a unique position at the intersection of empirical science and philosophical inquiry, and is among the oldest intellectual pursuits of human civilization. Early reflections on the origin and nature of the Universe can be found in ancient texts, including the \emph{Nāsadīya Sūkta} (RV. X.129) of the \emph{Rigveda}, composed in Sanskrit over 2,500 years ago. This hymn offers a speculative meditation on the primordial state of the cosmos, describing an initial condition characterized by darkness, undifferentiated existence, and a generative principle associated with heat or energy preceding the emergence of structure and order.
 
-\textit{There was neither death nor immortality then;\\
+\begin{quote}
+There was neither death nor immortality then;\\
 No distinguishing sign of night nor of day;\\
 That One breathed, windless, by its own impulse;\\
 Other than that there was nothing beyond.\\
@@ -33,42 +35,44 @@ Other than that there was nothing beyond.\\
 Darkness there was at first, by darkness hidden;\\
 Without distinctive marks, this all was water;\\
 That which, becoming, by the void was covered;\\
-That One by force of heat came into being.}
-
-\hfill -- RV~X.129.4--5, translation from \cite{2011MapsOfTime}
+That One by force of heat came into being.
+\end{quote}
+\hfill -- \textit{Rigveda}~X.129.4--5, translation from \cite{2011MapsOfTime}
 
 As an ancient conceptual precursor to modern cosmological thought, such texts reflect a deep philosophical engagement with questions concerning the origin, scale, and structure of the Universe---an inquiry that continues today through increasingly precise observations and theoretical advancements.
 
-\subsection{Spectrum of Spatial Scale}
+\section{Spectrum of Spatial Scale}
 In this section, a brief overview of the hierarchical structure of the Universe is presented, as revealed by contemporary astronomical observations.
 
 \input{chapters/content/0_1_tikz_spatial_scale.tex}
 
-\subsubsection*{Milky Way in Perspective}
+\subsection{Our Galaxy: Milky Way}
 
 To develop an intuition for cosmic scales, it is instructive to compare distances across different astronomical regimes. The nearest star to the Sun, Proxima Centauri, lies at a distance of approximately 4.24 light-years. By definition, one light-year is the distance traveled by light in vacuum over one year, corresponding to about 9.46 trillion kilometers. Within a radius of 10 light-years from the Sun, roughly 20 stars are known, while nearly 2,000 stars reside within 100 light-years. More distant stellar landmarks, such as the stars forming the Orion Belt, are located at distances ranging from approximately 800 to 1,300 light-years.
 
+\input{chapters/content/0_1_plot_solar_system.tex}
+
 The Milky Way is a barred spiral galaxy composed of several spiral arms. Its primary spiral arms include the Perseus Arm and the Scutum--Centaurus Arm, while secondary features include the Sagittarius Arm, the Norma Arm, and the Orion Spur. The Solar System is located within the Orion Spur, a minor spiral feature situated between the Perseus Arm and the Scutum--Centaurus Arm, and containing millions of stars.
 
-\input{chapters/content/0_1_plot_solar_system.tex}
 
 Near the Galactic center, the Perseus and Scutum--Centaurus arms appear to originate close to the ends of the Milky Way’s central bar, known as the Long Bar, which extends roughly 15,000--16,000 light-years across the inner Galaxy. At the very center lies Sagittarius~A*, a supermassive black hole with a mass of approximately 4 million solar masses, believed to mark the dynamical nucleus of the Milky Way. Sagittarius~A* is located at a distance of about 27,000~light-years from Earth. Together, these components define the characteristic structure of the Milky Way: a flattened spiral disk with a central bulge and an extended stellar halo.
 
 
-\subsubsection*{Galactic Halo and Surrounding Galaxies}
+\subsection{Galactic Halo and Surrounding Galaxies}
 
 The Milky Way’s stellar disk spans approximately 100,000 light-years in diameter and is embedded within an extended, roughly spherical dark matter halo that reaches several times this scale. This halo hosts a population of satellite galaxies, stellar streams, and globular clusters. Among the most prominent satellites is the Large Magellanic Cloud (LMC), the most massive companion of the Milky Way, located at a distance of approximately 160,000 light-years ($\sim 50$ kpc). The LMC itself possesses a companion, the Small Magellanic Cloud (SMC), situated roughly 200,000 light-years ($\sim 60$ kpc) from Earth. 
 
-To date, more than 50 satellite galaxies of the Milky Way have been identified, ranging from relatively massive systems such as the Magellanic Clouds to ultra-faint dwarf galaxies. The nearest large external galaxy is the Andromeda Galaxy (M31), located at a distance of about 2.54 million light-years ($\sim 778$ kpc). Andromeda is estimated to be two to three times more massive than the Milky Way and is expected to merge with it in several billion years.
-
 \input{chapters/content/0_1_plot_milkyway.tex}
+
+
+To date, more than 50 satellite galaxies of the Milky Way have been identified, ranging from relatively massive systems such as the Magellanic Clouds to ultra-faint dwarf galaxies. The nearest large external galaxy is the Andromeda Galaxy (M31), located at a distance of about 2.54 million light-years ($\sim 778$ kpc). Andromeda is estimated to be two to three times more massive than the Milky Way and is expected to merge with it in several billion years.
 
 Extending the observational horizon to a radius of roughly 10 million light-years reveals a population of several dozen galaxies, dominated by the Milky Way and Andromeda as the most massive members. This ensemble, known as the Local Group, constitutes a gravitationally bound system and occupies a peripheral region of the Virgo Supercluster.
 
 \input{chapters/content/0_1_plot_voids.tex}
 
 
-\subsubsection*{Galaxy Clusters and Superclusters}
+\subsection{Galaxy Clusters and Superclusters}
 
 At increasingly larger distances, the megaparsec (Mpc) becomes the standard unit for cosmological measurements, with $1 \mathrm{Mpc} \approx 3.26$ million light-years. The Virgo Supercluster, which includes the Local Group, the Virgo Cluster, and numerous smaller galaxy groups, extends over a scale of approximately 30--35~Mpc (corresponding to $\sim 100$ million light-years).
 
@@ -76,13 +80,13 @@ The Virgo Supercluster itself is a constituent of the much larger Laniakea Super
 
 Near the dynamical center of Laniakea, within the Hydra--Centaurus region, lies the so-called Great Attractor---a concentration of mass inferred from galaxy peculiar velocities. Many galaxies within Laniakea, including the Milky Way, exhibit bulk motions directed toward this region under its gravitational influence.
 
-\subsubsection*{Cosmic Web: Filaments, Walls, and Voids}
+\subsection{Cosmic Web: Filaments, Walls, and Voids}
 
 On the largest observable scales, matter in the Universe is distributed in a complex network known as the cosmic web. Superclusters such as Laniakea, Shapley, Hercules, Coma, and Perseus--Pisces are connected through extended filamentary structures composed of galaxies, gas, and dark matter. One such structure is the Pisces--Cetus Supercluster Complex, a filamentary arrangement estimated to span nearly one billion light-years in length.
 
 Adjacent large-scale features include the Perseus--Pegasus Filament and other interconnected structures of comparable scale. Among the most extensive reported structures is the Hercules--Corona Borealis Great Wall, which may extend over several billion light-years, although its precise size and coherence remain subjects of ongoing investigation. 
 
-Together, these filaments, sheets, and vast underdense regions known as cosmic voids form the cosmic web, which defines the large-scale architecture of the observable Universe. This hierarchical distribution of matter is illustrated schematically in Figure~\ref{scal}.
+Together, these filaments, sheets, and vast under-dense regions known as cosmic voids form the cosmic web, which defines the large-scale architecture of the observable Universe. This hierarchical distribution of matter is illustrated schematically in Figure~\ref{scal}.
 
 \input{chapters/content/0_1_plot_large_scale.tex}
 
@@ -101,7 +105,7 @@ M \propto \log P,
 \]
 where $M$ denotes the absolute magnitude and $P$ the pulsation period.
 
-This relation provided, for the first time, a reliable standard candle for estimating distances well beyond the confines of the Milky Way. Its application by Edwin Hubble to Cepheid variables in nearby spiral nebulae led to the unambiguous demonstration that these objects were external galaxies, thereby vastly expanding the known scale of the Universe. The role of the Leavitt Law in establishing the extragalactic distance scale is illustrated in Figure~\ref{Leavitt-Hubble}.
+This relation provided, for the first time, a reliable standard candle for estimating distances well beyond the confines of the Milky Way. Its application by Edwin Hubble to Cepheid variables in nearby spiral nebulae led to the unambiguous demonstration that these objects were external galaxies, thereby vastly expanding the known scale of the Universe. The role of the Leavitt Law in establishing the extragalactic distance scale is illustrated in Figure~\ref{Leavitt_Hubble}.
 
 \input{chapters/content/0_1_plot_Leavitt_Hubble.tex}
 
@@ -117,7 +121,7 @@ By extending his observations to additional galaxies, Hubble subsequently uncove
 \[
 v = H_0 D,
 \]
-where $H_0$ is the Hubble constant \citep{1929hubble}; see Figure~\ref{Leavitt-Hubble}. This empirical law provided the first direct evidence that the Universe is undergoing a global expansion, fundamentally contradicting Einstein’s earlier static model.
+where $H_0$ is the Hubble constant \citep{1929hubble}; see Figure~\ref{Leavitt_Hubble}. This empirical law provided the first direct evidence that the Universe is undergoing a global expansion, fundamentally contradicting Einstein’s earlier static model.
 
 The Hubble constant is a cornerstone of modern cosmology, as it sets the present-day expansion rate of the Universe and provides a means to estimate its age and size. Achieving an accurate and precise determination of $H_0$ remains one of the central objectives of contemporary observational cosmology.
 
@@ -146,72 +150,50 @@ This revision was further refined by Allan Sandage, who extended the Leavitt rel
 
 \subsection{Technological Development: 1960s}
 
-Despite persistent theoretical and observational challenges, technological progress has continually driven advances in astronomy. Beginning in the 1960s, the transition from photographic plates to electronic detectors marked a major transformation in observational capabilities. The introduction of charge-coupled devices (CCDs) in astronomical photometry dramatically improved sensitivity, dynamic range, and measurement precision.
+Despite persistent theoretical and observational challenges, technological progress has continually driven advances in astronomy. Beginning in the 1960s, the transition from photographic plates to electronic detectors marked a major transformation in observational capabilities. The introduction of charge-coupled devices (CCDs) in astronomical photometry dramatically improved sensitivity, observation range, and measurement precision \cite{2023roth}. While photographic plates could only detect 1–2 \% of incoming photons, CCDs can register up to 90\% of incident flux, enabling the observation of much fainter objects. An important advantage of CCD imaging is the digitalization of photometric data. Each CCD chip contains an array of photosensitive pixels, which emits electrons upon absorbing incoming photons via the photoelectric effect \cite{1905einstein}. Higher light intensity leads to higher voltage potential, corresponding to higher pixel values in the resulting area of image. The full grid of pixels digitally maps the segment of the sky exposed to the camera through telescope.
 
-The deployment of space-based observatories further revolutionized the field by enabling access to the full electromagnetic spectrum, free from atmospheric absorption and turbulence that limit ground-based observations. Together, these technological innovations laid the foundation for precision photometry and distance measurements, which are essential for the calibration of standard candles such as Cepheid variables.
+As the light of different frequencies interact with materials differently, CCD imaging technique enable astronomers to observer in wider range of wavelengths. Standard silicon-based CCDs operate efficiently within the optical band. Though, silicon CCDs coated with magnesium fluoride (\ce{MgF2}) extend the absorption in UV band \cite{2011hamden}. For Infrared band (700 - 2500 nm), mercury cadmium telluride (\ce{HgCdTe}) based detectors are used to achieve higher absorption\cite{2009fox}.
 
-\subsection{Understanding the Universe: 1990s}
+On the computational front, sustained advances in high-performance computing have profoundly transformed astronomical research by enabling detailed numerical investigations of complex astrophysical systems. These include simulations of stellar interiors \cite{1990kippenhahn}, galaxy formation and evolution \cite{1993navarro}, and cosmological structure formation within large-scale simulations \cite{2025TNGCluster}. Such studies rely on parallel computing and supercomputing architectures to solve coupled gravitational, hydrodynamical, and radiative processes across a wide range of spatial and temporal scales.
 
-A major milestone in the extragalactic distance ladder was achieved in 1998 with the incorporation of Type~Ia supernovae as standardizable candles. The development of robust empirical methods to measure distances to galaxies hosting these supernovae, calibrated using the Cepheid period--luminosity relation, extended reliable distance measurements from scales of $\sim 100$~million light-years to several billion light-years. This dramatic extension of the cosmic distance scale led to one of the most surprising discoveries in modern cosmology: the expansion of the Universe is accelerating.
+The rapid growth of data from ground- and space-based surveys has necessitated advanced infrastructures for data processing, archiving, and dissemination. Initiatives such as the Virtual Observatory (VO) provide standardized, interoperable frameworks for the efficient analysis of distributed astronomical datasets \cite{2009hatziminaoglou}. Complementing these efforts, specialized software tools such as TOPCAT enable efficient visualization, cross-matching, and statistical analysis of large astronomical catalogues while maintaining compatibility with VO standards \cite{2005TOPCAT}. Together, these tools underpin the efficiency, reproducibility, and scientific impact of modern data-driven astronomy.
 
-This acceleration implies the presence of a component with negative effective pressure that drives the expansion of spacetime. This unknown component was termed \emph{dark energy}. Despite extensive observational and theoretical efforts, the physical nature of dark energy remains unknown. Its discovery has underscored the importance of understanding not only the geometry of spacetime but also the detailed composition of the Universe. A simplified description of the Universe can be framed in terms of its total mass--energy content and the geometry it induces, where energy appears in various forms such as mass, radiation, and thermal energy.
+\subsection{The Space Age: Gamma, X-Ray, UV, Infrared, Microwave, and Radio Astronomy}
 
-\input{chapters/content/0_1_plot_uni_composition.tex}
+The advent of space-based observatories enabled observations across the full electromagnetic spectrum, free from atmospheric absorption, scattering, and turbulence that severely limit ground-based measurements. Early space missions such as the \emph{Orbiting Astronomical Observatory-2} (OAO-2, 1968) and the \emph{International Ultraviolet Explorer} (IUE, 1978) opened access to the ultraviolet (UV) regime, allowing astronomers to probe high-energy stellar and interstellar processes. Observations at even shorter wavelengths became possible with X-ray missions including \emph{Uhuru} (SAS-1, 1970), the \emph{Einstein Observatory} (HEAO-2, 1978), and later the \emph{Chandra X-ray Observatory} (1999). While the first systematic study of high-energy gamma-ray emission began with the \emph{COS-B} mission in 1975.
 
-In the standard cosmological framework, the Universe is composed primarily of three components: baryonic matter, dark matter, and dark energy. Ordinary, or \emph{baryonic}, matter consists of protons, neutrons, and electrons and accounts for only about $5\%$ of the total energy density of the Universe. This component forms the stars, galaxies, and large-scale structures directly observable through electromagnetic radiation.
+Among these pioneering space missions, a particularly significant milestone was achieved in astrometry with the launch of the \emph{Hipparcos} (\emph{High Precision Parallax Collecting Satellite}, 1989). Hipparcos measured precise trigonometric parallaxes for approximately 120,000 stars within a distance of about 1,000 light-years ($\sim 300$ pc) \cite{1997esa}. As the first mission dedicated exclusively to high-precision astrometry, Hipparcos enabled the direct calibration of the Leavitt Law using Galactic Cepheid variables, thereby providing a fundamental rung in the cosmic distance ladder \cite{1997feats}.
 
-Dark matter constitutes approximately $27\%$ of the total energy content of the Universe. It is hypothesized to possess fundamentally different properties from baryonic matter, as it neither emits nor absorbs electromagnetic radiation, rendering it invisible to direct observation. Its existence is inferred through its gravitational influence on visible matter and radiation. Strong observational evidence for dark matter arises from gravitational lensing, galaxy rotation curves, and the fine-scale anisotropies observed in the cosmic microwave background (CMB). Importantly, the interpretation of these phenomena depends critically on accurate distance measurements; for example, lensing geometries and dynamical mass estimates are highly sensitive to the assumed distances of the relevant systems. Despite its well-established gravitational effects, the physical nature of dark matter remains one of the most significant open questions in contemporary astrophysics.
+\subsection{The Golden Era of Astronomy: Hubble, Planck, Gaia, and JWST}
 
-Dark energy dominates the cosmic energy budget, contributing approximately $68\%$ of the total energy density of the Universe. In contrast, all other components---including radiation, neutrinos, and possible exotic particles---together contribute less than $1\%$. Determining the relative proportions of these components relies heavily on precise distance measurements across cosmic scales, as such measurements underpin estimates of luminosity, redshift, and volume, all of which are essential for reconstructing the Universe’s composition and its evolutionary history.
-
-\subsubsection{$\Lambda$CDM Cosmological Model}
-
-Observations of the distant Universe allow us to probe earlier cosmic epochs, as light requires finite time to traverse space. This fundamental property enables direct investigation of the Universe’s evolution. One approach to characterizing cosmic expansion involves measuring distances to the most distant observable objects, effectively constraining the size of the observable Universe and the cosmological horizon.
-
-By combining insights from high-energy particle physics with general relativity, cosmologists have been able to model the evolution of the Universe back to fractions of a second after the Big Bang. Integrating these theoretical frameworks with a broad range of observational data has led to the formulation of the standard cosmological model, known as the $\Lambda$CDM (Lambda Cold Dark Matter) model. This model is characterized by a small set of parameters, including the densities of dark energy, dark matter, and baryonic matter; the Hubble constant ($H_0$); the scalar spectral index describing primordial density fluctuations; and the curvature parameter that determines the geometry of spacetime. Many of these parameters are tightly constrained by measurements of the cosmic microwave background and are independently supported by large-scale structure surveys, baryon acoustic oscillations, and supernova observations.
-
-The full-sky temperature anisotropy map shown on the introductory page is a snapshot of the early Universe obtained by the \emph{Planck} satellite, a mission of the European Space Agency operational between 2009 and 2013. This map depicts the cosmic microwave background radiation, the relic thermal emission from the epoch of recombination. The small temperature fluctuations observed across the sky correspond to primordial density perturbations in the early Universe. Over billions of years, these perturbations grew through gravitational instability, ultimately giving rise to galaxies, clusters, and the large-scale structure observed today.
-
-The CMB represents the earliest observable relic of the Universe, providing a view of conditions approximately 380{,}000~years after the Big Bang. Its precise measurement enables robust constraints on fundamental cosmological parameters, including the age, composition, and expansion rate of the Universe. Among the most significant results derived from the \emph{Planck} mission is a high-precision determination of the Hubble constant, $H_0$, which plays a central role in understanding both the past evolution and the future fate of the Universe.
-
-\subsection{Cosmic Distance Ladder and the Hubble Constant: The Twenty-First Century}
-
-Distance measurements across cosmic scales rely on a hierarchical set of interconnected methods collectively known as the \emph{cosmic distance ladder}, in which each rung is calibrated using more local and direct techniques. This framework allows distances to be extended progressively to cosmological scales, where they can be compared with early-Universe inferences from the cosmic microwave background (CMB).
-
-\input{chapters/content/0_1_plot_ladder.tex}
-
-A major refinement of the ladder was achieved by Riess and collaborators using Type~Ia supernovae (SNIa) as distance indicators. These thermonuclear explosions of white dwarfs exhibit a well-defined correlation between peak luminosity and light-curve shape, enabling their use as standardizable candles. By calibrating SNIa luminosities with Cepheid variable stars via the Leavitt Law, distances were extended from the Cepheid-accessible local volume of $\sim 30$~Mpc ($\sim 10^8$~ly) to beyond $1000$~Mpc ($\sim 10^{10}$~ly) \citep{1998riess}. 
-
-Figure~\ref{ladder} illustrates the cosmic distance ladder, beginning with geometric parallax, progressing through Cepheids, and culminating in SNIa measurements at high redshift. Applying this calibrated framework to the Hubble--Lemaître relation yields
+The launch of the \emph{Hubble Space Telescope} (HST) in 1990 marked a pivotal advance in observational astronomy. One of its flagship programs, the \emph{Key Project on the Extragalactic Distance Scale} \cite{2001freedman}, aimed to determine the Hubble constant ($H_0$) by observing Cepheid variables in galaxies out to $\sim 25$~Mpc. The decade-long HST Key Project reported
 \[
-H_0 = 73.30 \pm 1.04 \; \mathrm{km\,s^{-1}\,Mpc^{-1}},
+H_0 = 72 \pm 8\ \mathrm{km\,s^{-1}\,Mpc^{-1}}
 \]
-which differs by $\sim 5\sigma$ from the value inferred by \emph{Planck} CMB observations under $\Lambda$CDM assumptions \citep{2022riess,2018planck}. This persistent discrepancy, known as the \emph{Hubble tension}, may reflect unaccounted systematic uncertainties or signal new physics beyond the standard cosmological model, and remains a central challenge in contemporary cosmology.
 
-\subsection{Golden Era of Astronomy: Gaia and Beyond (2013--Present)}
+Leveraging the unprecedented photometric capabilities of the \emph{Hubble Space Telescope}, the \emph{SHOES} (Supernovae, $H_0$, for the Equation of State of Dark Energy) project calibrated Type~Ia supernovae as standard candles \cite{1998riess}. Adam Riess standardized Type~Ia supernovae using the Phillips relation \cite{1993phillips}, which correlates the peak luminosity of the light curve with the rate of declining brightness, enabling precise distance measurements to their host galaxies. This methodology extended reliable distance measurements to gigaparsec scales and led to the discovery of the accelerated expansion of the Universe, ushering in the era of precision cosmology \cite{1998riess}.
 
-The launch of the \emph{Gaia} satellite by the European Space Agency (ESA) in 2013 marked a transformative step in precision astrophysics. By measuring geometric parallaxes with unprecedented accuracy, Gaia has determined distances to over 1.8 billion stars in the Milky Way and its surroundings, providing a definitive foundation for the calibration of standard candles such as Cepheid variable stars. These precise parallax measurements directly improve the zero-point determination of the Leavitt Law, reducing systematic uncertainties in the local distance ladder and enabling more accurate estimates of the Hubble constant ($H_0$). This work relies on distance measurements derived from Gaia Data Release 3 (DR3).
+Complementing local measurements, the \emph{Planck} satellite (2009) conducted an all-sky photometric and polarimetric survey of the cosmic microwave background (CMB), mapping temperature fluctuations and polarization anisotropies that encode information about early-Universe density and velocity fields \citep{2018planck,2018planckVI}. By fitting these observations to the standard $\Lambda$CDM cosmological model, Planck team inferred
+\[
+H_0 = 67.4 \pm 0.5\ \mathrm{km\,s^{-1}\,Mpc^{-1}},
+\]
 
-The James Webb Space Telescope (JWST), launched in 2021, complements Gaia by extending observations into the infrared, where Cepheids are less affected by dust extinction and metallicity effects. JWST’s sensitivity allows high-precision photometry of Cepheid variables in nearby and distant galaxies, further refining their period--luminosity relation and extending the reach of the cosmic distance ladder deeper into the Hubble flow.
+The resulting discrepancy between local and early-Universe measurements—termed the \emph{Hubble tension}—currently exceeds $5\sigma$, underscoring the need for improved calibration of the cosmic distance ladder and a deeper understanding of cosmology \cite{2022riess_tension}.
 
-In addition to these missions, major surveys and observatories such as SDSS, Planck, and 2dFGRS have provided critical data for cross-checking and anchoring distance measurements. Future facilities—including the Vera C. Rubin Observatory, DESI, 4MOST, Euclid, SKA, and LISA—promise to deliver even more precise observations, offering independent calibration pathways for standard candles and the local expansion rate.
+The \emph{Gaia} satellite, launched by ESA in 2013, represents a transformative advance in addressing this tension. Gaia provides microarcsecond-precision astrometry for over 1.8 billion stars upto 10 kiloparsec, yielding accurate parallaxes, proper motions, and a detailed three-dimensional map of the Milky Way \cite{2021bailer}. These measurements refine the zero-point of the Leavitt Law — a key objective aligned with the focus of this thesis. This ultimately reduces the systematic uncertainties in local distance determinations, directly enabling more precise estimates of $H_0$ through Cepheid-based calibration
 
-Beyond photometry and astrometry, the advent of multimessenger astronomy—through the detection of cosmic rays, neutrinos, and gravitational waves—introduces alternative distance indicators, such as standard sirens, which can independently validate Cepheid- and SNIa-based distances. 
-
-Collectively, these technological and observational advances mark the golden era of modern astronomy. By providing highly accurate distances,  they enable precise calibration of the Leavitt Law, strengthening the foundation of the cosmic distance ladder and advancing our ability to determine the Hubble constant with reduced systematic uncertainties.
+Combined with ongoing HST observations and the deployment of the \emph{James Webb Space Telescope} (JWST, 2021), Gaia firmly establishes the present era as a golden age of astronomy, characterized by multiwavelength coverage, high-precision measurements, and transformative insights into the structure, evolution, and expansion of the Universe.
 
 \section{Scope of this Thesis}
 
 It is evident from the previous sections that accurate distance measurements are essential in astronomy, as they underpin the determination of fundamental physical properties—such as size, mass, and age—across diverse astrophysical and cosmological contexts. Building on this principle, the primary focus of this master’s thesis is the calibration of a key distance indicator—the Leavitt Law—by minimizing systematic errors that contribute to scatter in the period--luminosity (PL) relation.
 
-\input{chapters/content/0_1_plot_PLjesper.tex}
-
-Systematic uncertainties in reddening and distances of Galactic Cepheids directly affect the slope and zero-point of the PL relation, while the effect of metallicity is not considered in this thesis. Since the PL relation forms the foundation for the next rung of the cosmic distance ladder, even small errors can propagate and amplify at larger scales. Achieving a precise and well-constrained PL relation is therefore crucial for reliable cosmological measurements. In this thesis, the refinement of the Leavitt Law is implemented through a structured methodology, summarized as follows:
+Systematic uncertainties in reddening and distances of Galactic Cepheids directly affect the slope and zero-point of the PL relation. The effect of metallicity is not considered in this thesis. Since the PL relation forms the foundation for the next rung of the cosmic distance ladder, even small errors can propagate and amplify at larger scales. Achieving a precise and well-constrained PL relation is therefore crucial for reliable cosmological measurements. In this thesis, the refinement of the Leavitt Law is implemented through a structured methodology, summarized as follows:
 
 \begin{itemize}
-    \item Identify and remove outliers from the BVIJHK photometric dataset of Galactic Cepheids.
+    \item Identify and remove outliers from the BVIJHK photometric dataset of 150 Galactic Cepheids.
     \item Refine the Galactic reddening law \cite{2007fouque} to minimize deviations between apparent and absolute magnitudes using Wesenheit functions.
-    \item Estimate absolute luminosities of Cepheids using band-wise extinction corrections and distances derived from the Infrared Surface Brightness (IRSB) method \cite{2011jesper} and Gaia parallaxes \cite{2023gaia}.
+    \item Estimate absolute luminosities of Cepheids using band-wise extinction corrections and distances derived from the Infrared Surface Brightness (IRSB) method \cite{2011storm} and Gaia parallaxes \cite{2023gaia}.
     \item Develop and adapt a mathematical framework for PL calibration based on \cite{2017madore} to improve error corrections.
     \item Quantify uncertainties in distances and interstellar reddenings for individual Cepheids following the refined methodology.
     \item Derive the calibrated Leavitt Law using distance- and reddening-corrected absolute magnitudes.
@@ -219,20 +201,23 @@ Systematic uncertainties in reddening and distances of Galactic Cepheids directl
     \item Apply the refined Leavitt Law to Cepheids in the Large and Small Magellanic Clouds to determine their distances.
 \end{itemize}
 
-This thesis is organized into three parts. The first part presents the physics of Cepheid pulsation. The second part develops the calibration methodology for addressing distance and reddening systematics. The final part presents the calibrated Leavitt Law, discusses its implications for the extragalactic distance scale through applications to the Magellanic Clouds, and concludes with prospects for future work.
+This work is organized into three parts. The first part presents the physics of Cepheid pulsation. The second part develops the calibration methodology for addressing distance and reddening systematics. The final part presents the calibrated Leavitt Law, discusses its implications for the extragalactic distance scale through applications to the Magellanic Clouds, and concludes with prospects for future work.
+
+This research utilizes Virtual Observatory (VO) services for data access, TOPCAT for catalogue analysis, and custom data-processing libraries developed in the Python programming language. The software developed as part of this work is publicly available through a GitHub repository at \url{https://github.com/mshubham00/Leavitt_Law_Calibration}.
+
 
 \subsection{Part I: Parameters of the Leavitt Law}
-The period--luminosity (PL) relation depends on two key parameters of Cepheid variables: (a) the pulsation period and (b) the intrinsic (absolute) luminosity. Figure~\ref{PLjesper} illustrates the Leavitt Law in the $K$ band, with distances measured via the Infrared Surface Brightness (IRSB) method \citep{2011storm} and interstellar extinction estimated using Fouqué's law \citep{2007fouque} combined with Fernie's reddening measurements \citep{1994fernie}.
+The period--luminosity (PL) relation depends on two key parameters of Cepheid variables: (a) the pulsation period and (b) the intrinsic (absolute) luminosity. Figure~\ref{PLjesper} illustrates the Leavitt Law in the $K$ band, with distances measured via the Infrared Surface Brightness (IRSB) method \citep{2011storm} and interstellar extinction estimated using Fouqué's Galactic extinction law \citep{2007fouque} combined with Sandage estimation of Galactic reddening ratio in visual band \citep{2004sandage} and scaled with Fernie's reddening measurements \citep{1994fernie}.
 
-Pulsation periods are derived from light curves spanning multiple cycles and are well-determined for all targets in this study. The focus of this thesis is on accurately estimating intrinsic luminosities, which requires correcting the observed apparent magnitudes for both distance and interstellar extinction.
+\input{chapters/content/0_1_plot_PLjesper.tex}
 
-Stellar light is attenuated by scattering and absorption in the interstellar medium, particularly by dust and gas along the line of sight. Inaccurate corrections can introduce significant deviations from the expected linear PL relation. Therefore, a central objective of this thesis is to quantify uncertainties in both distance and reddening for each Cepheid and assess their impact on the PL relation.
+Pulsation periods, derived from light curves spanning multiple cycles, are well-determined for all Galactic Cepheids in this study. Stellar light emitted by these stars attenuated by scattering and absorption primarily due to dust and gas along the line of sight. Inaccurate estimation for extinction and distance can introduce significant deviations from the expected linear period–luminosity (PL) relation. Therefore, a central objective of this work is to quantify uncertainties in both distance and reddening for each Cepheid and evaluate their impact on the PL relation. 
 
-This first part of the thesis is devoted to examining these parameters, their interdependencies, and the methodologies employed for their determination.
+This section of the thesis is devoted to examining these parameters, their interdependencies, and the methodologies employed for their determination.
 
 \subsection{Part II: Calibration Method and Dataset}
 
-This part of the thesis covers the Galactic Cepheid dataset, the calibration methodology, the underlying physics, and comparison analyses. The dataset includes multiband photometry in the BVIJHK bands. Color excesses compiled by Fernie \citep{1994fernie} are converted to band-specific extinction using the Cardelli et al. law \citep{1989cardelli} combined with the total-to-selective extinction ratio from Sandage \citep{2004sandage}. Leavitt Laws are then derived using both Gaia parallaxes and IRSB distances, corrected for extinction. Prior to calibration, deviations in the slope and intercept of the Leavitt Law for both distance estimates are examined.
+This part of the thesis describes the Galactic Cepheid dataset, the calibration methodology, discuss underlying physics, and make band-wise analyses of calibrated luminosities. The dataset includes multiband photometry in the BVIJHK bands. Color excesses compiled by Fernie \citep{1994fernie} are converted to band-specific extinction using the Cardelli et al. law \citep{1989cardelli} combined with the visual band total-to-selective extinction ratio from Sandage \citep{2004sandage}. Leavitt Laws are then derived using both Gaia parallaxes and IRSB distances. Prior to calibration, deviations in the slope and intercept of the Leavitt Law for both distance estimates are examined.
 
 The calibration follows Madore's approach \citep{2017madore}, which employs the reddening-free Wesenheit function \citep{1982madore} to decouple reddening and distance errors. Unlike Madore, who applied a single Wesenheit relation for all residual correlations, this thesis compares residuals from the BVIJHK period--luminosity relations with corresponding composite period--Wesenheit relations. While Madore used only the $V-I$ Wesenheit function, this study extends the method to all fifteen color indices derived from BVIJHK photometry to compute distance--reddening error pairs for each star. Further extending the method to composite Wesenheit functions reveals how period–Wesenheit residuals depend on reddening ratios and color indices.
 
