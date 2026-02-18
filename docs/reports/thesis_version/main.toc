@@ -1,43 +1,31 @@
 \babel@toc {USenglish}{}\relax 
-\contentsline {chapter}{List of Figures}{iii}{section*.1}%
-\contentsline {chapter}{List of Tables}{v}{section*.2}%
-\contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}%
-\contentsline {section}{\numberline {1.1}Perspective on the Subject}{1}{section.1.1}%
-\contentsline {subsection}{\numberline {1.1.1}Astrophysics, Astronomy, and Cosmology}{1}{subsection.1.1.1}%
-\contentsline {section}{\numberline {1.2}Spectrum of Spatial Scale}{3}{section.1.2}%
-\contentsline {subsection}{\numberline {1.2.1}Our Galaxy: Milky Way}{3}{subsection.1.2.1}%
-\contentsline {subsection}{\numberline {1.2.2}Galactic Halo and Surrounding Galaxies}{4}{subsection.1.2.2}%
-\contentsline {subsection}{\numberline {1.2.3}Galaxy Clusters and Superclusters}{5}{subsection.1.2.3}%
-\contentsline {subsection}{\numberline {1.2.4}Cosmic Web: Filaments, Walls, and Voids}{6}{subsection.1.2.4}%
-\contentsline {section}{\numberline {1.3}Historical Background and Development}{6}{section.1.3}%
-\contentsline {subsection}{\numberline {1.3.1}Distance Determination beyond the Galaxy: Early Twentieth Century}{7}{subsection.1.3.1}%
-\contentsline {subsection}{\numberline {1.3.2}Expansion of the Universe}{8}{subsection.1.3.2}%
-\contentsline {subsection}{\numberline {1.3.3}The Big Bang Model: 1930s}{9}{subsection.1.3.3}%
-\contentsline {subsection}{\numberline {1.3.4}Composition of Stars}{10}{subsection.1.3.4}%
-\contentsline {subsection}{\numberline {1.3.5}Age of the Universe: 1950s}{10}{subsection.1.3.5}%
-\contentsline {subsection}{\numberline {1.3.6}Technological Development: 1960s}{11}{subsection.1.3.6}%
-\contentsline {subsection}{\numberline {1.3.7}The Space Age: Gamma, X-Ray, UV, Infrared, Microwave, and Radio Astronomy}{12}{subsection.1.3.7}%
-\contentsline {subsection}{\numberline {1.3.8}The Golden Era of Astronomy: Hubble, Planck, Gaia, and JWST}{12}{subsection.1.3.8}%
-\contentsline {section}{\numberline {1.4}Scope of this Thesis}{14}{section.1.4}%
-\contentsline {subsection}{\numberline {1.4.1}Part I: Parameters of the Leavitt Law}{15}{subsection.1.4.1}%
-\contentsline {subsection}{\numberline {1.4.2}Part II: Calibration Method and Dataset}{15}{subsection.1.4.2}%
-\contentsline {subsection}{\numberline {1.4.3}Part III: Results and Prospects for Improvement}{16}{subsection.1.4.3}%
-\contentsline {part}{I\hspace {1em}Parameters of Leavitt Law}{18}{part.1}%
-\contentsline {chapter}{\numberline {2}Observables - Luminosity, Reddening and Distance}{19}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Why Does a Star Shine?}{19}{section.2.1}%
-\contentsline {section}{\numberline {2.2}Luminosity}{19}{section.2.2}%
-\contentsline {subsection}{\numberline {2.2.1}Magnitude Scale}{21}{subsection.2.2.1}%
-\contentsline {subsection}{\numberline {2.2.2}Color Index \textit {($m_1 - m_2$)}}{22}{subsection.2.2.2}%
-\contentsline {subsection}{\numberline {2.2.3}Absolute Magnitude (\textit {M})}{24}{subsection.2.2.3}%
-\contentsline {section}{\numberline {2.3}Interstellar Reddening}{24}{section.2.3}%
-\contentsline {subsection}{\numberline {2.3.1}Reddening Ratio}{25}{subsection.2.3.1}%
-\contentsline {subsection}{\numberline {2.3.2}Interstellar Extinction Law}{26}{subsection.2.3.2}%
-\contentsline {subsection}{\numberline {2.3.3}Wesenheit Function: Reddening-free Magnitude}{27}{subsection.2.3.3}%
-\contentsline {section}{\numberline {2.4}Distance}{29}{section.2.4}%
-\contentsline {subsection}{\numberline {2.4.1}Parallax Method}{30}{subsection.2.4.1}%
-\contentsline {subsection}{\numberline {2.4.2}Infrared Surface Brightness Method}{31}{subsection.2.4.2}%
-\contentsline {subsection}{\numberline {2.4.3}Cluster Membership Method}{34}{subsection.2.4.3}%
-\contentsline {section}{\numberline {2.5}Distance Modulus ($\mu $)}{36}{section.2.5}%
-\contentsline {part}{II\hspace {1em}Calibration Method and Dataset}{37}{part.2}%
-\contentsline {chapter}{Bibliography}{38}{section*.19}%
-\contentsline {chapter}{Bibliography}{38}{chapter*.20}%
+\contentsline {part}{I\hspace {1em}Parameters of Leavitt Law}{2}{part.1}%
+\contentsline {part}{II\hspace {1em}Galactic Cepheid Dataset and Calibration Method}{3}{part.2}%
+\contentsline {chapter}{\numberline {1}Galactic Cepheid Dataset}{4}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Dataset Cleaning}{5}{section.1.1}%
+\contentsline {subsection}{\numberline {1.1.1}Pulsating in Overtone}{5}{subsection.1.1.1}%
+\contentsline {subsection}{\numberline {1.1.2}Photometric error}{5}{subsection.1.1.2}%
+\contentsline {subsection}{\numberline {1.1.3}PL/PW Residuals}{7}{subsection.1.1.3}%
+\contentsline {section}{\numberline {1.2}Extinction Law Calibration}{7}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Cleaned Dataset}{9}{section.1.3}%
+\contentsline {section}{\numberline {1.4}Leavitt Law}{11}{section.1.4}%
+\contentsline {chapter}{\numberline {2}Calibration Method}{13}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Leavitt Law residuals and corresponding Wesenheits}{13}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Residual Analysis}{15}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Decoupling $\delta \mu - \delta E_{BV}$}{18}{section.2.3}%
+\contentsline {section}{\numberline {2.4}Calibrated Leavitt Law}{20}{section.2.4}%
+\contentsline {part}{III\hspace {1em}Result Implications}{23}{part.3}%
+\contentsline {chapter}{\numberline {3}Discussion}{24}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Validation of Result : Cluster Cepheid}{24}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Reddening Comparison}{24}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Distance Comparison}{25}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Luminosity Comparison}{25}{section.3.4}%
+\contentsline {chapter}{\numberline {4}Conclusion}{26}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Result}{26}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Application Of The Result}{26}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Understanding the Universe: 1990s}{26}{subsection.4.2.1}%
+\contentsline {subsubsection}{\numberline {4.2.1.1}$\Lambda $CDM Cosmological Model}{28}{subsubsection.4.2.1.1}%
+\contentsline {subsection}{\numberline {4.2.2}Cosmic Distance Ladder and the Hubble Constant: The Twenty-First Century}{29}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Instruments of furture}{29}{subsection.4.2.3}%
+\contentsline {chapter}{Bibliography}{30}{subsection.4.2.3}%
+\contentsline {chapter}{Bibliography}{31}{chapter*.29}%

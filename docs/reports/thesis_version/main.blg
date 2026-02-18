@@ -1,49 +1,48 @@
 This is BibTeX, Version 0.99d (TeX Live 2025)
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: main.aux
-The style file: apalike.bst
+The style file: amsalpha.bst
 Database file #1: references.bib
-Warning--I didn't find a database entry for "2023cruz"
-Warning--I didn't find a database entry for "cruz2023"
-You've used 58 entries,
-            1935 wiz_defined-function locations,
-            850 strings with 14026 characters,
-and the built_in function-call counts, 22218 in all, are:
-= -- 2147
-> -- 922
-< -- 45
-+ -- 340
-- -- 312
-* -- 1889
-:= -- 3986
-add.period$ -- 181
-call.type$ -- 58
-change.case$ -- 438
-chr.to.int$ -- 58
-cite$ -- 58
-duplicate$ -- 812
-empty$ -- 1528
-format.name$ -- 392
-if$ -- 4253
+Warning--I didn't find a database entry for "2009ApJ...696.1498M"
+You've used 11 entries,
+            2624 wiz_defined-function locations,
+            634 strings with 6812 characters,
+and the built_in function-call counts, 5058 in all, are:
+= -- 447
+> -- 339
+< -- 2
++ -- 128
+- -- 123
+* -- 496
+:= -- 872
+add.period$ -- 11
+call.type$ -- 11
+change.case$ -- 91
+chr.to.int$ -- 11
+cite$ -- 11
+duplicate$ -- 156
+empty$ -- 317
+format.name$ -- 133
+if$ -- 965
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 59
-newline$ -- 299
-num.names$ -- 175
-pop$ -- 301
+missing$ -- 22
+newline$ -- 44
+num.names$ -- 33
+pop$ -- 88
 preamble$ -- 1
-purify$ -- 442
+purify$ -- 102
 quote$ -- 0
-skip$ -- 635
+skip$ -- 107
 stack$ -- 0
-substring$ -- 1531
-swap$ -- 66
-text.length$ -- 1
-text.prefix$ -- 0
+substring$ -- 258
+swap$ -- 11
+text.length$ -- 2
+text.prefix$ -- 2
 top$ -- 0
-type$ -- 340
+type$ -- 88
 warning$ -- 0
-while$ -- 184
-width$ -- 0
-write$ -- 764
-(There were 2 warnings)
+while$ -- 47
+width$ -- 14
+write$ -- 125
+(There was 1 warning)

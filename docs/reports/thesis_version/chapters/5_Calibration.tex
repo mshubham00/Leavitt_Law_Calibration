@@ -1,66 +1,14 @@
 \chapter{Calibration Method}
 
 
-\section{Leavitt Law and their Wesenheits}
+\input{chapters/content/0_5_plot_model.tex}
+
+\section{Leavitt Law residuals and corresponding Wesenheits}
 
 
-%\input{chapters/content/0_4_table_madore_compare.tex}
+\input{chapters/content/0_5_plot_residue.tex}
 
 Observations in different bands of light provide information about the effect of interstellar reddening on light. For longer wavelengths, the impact of reddening decreases significantly, implying a reduced possibility of reddening errors and leading to a tighter Leavitt Law. In its most generic form, the linear fit to the dataset is expressed as follows:
-
-\begin{wraptable}{r}{0.40\textwidth} 
-  \vspace{-1cm}
-  \centering
- \caption{\tiny PL relations are shown in six bands, along with the corresponding PW relations in four colors. Notice the decreasing error in the slope and intercept with increasing wavelength.}\label{PLWtable}
-  {\tiny
-	\begin{tabular}{c c c}
-	\hline
-	Band & slope (error) & intercept (error) \\
-	$M_\lambda$ & $\alpha_\lambda$ & $\beta_\lambda$ \\
-	\hline        
-	B &  -1.855 ($\pm$ 0.110) & -3.221 ($\pm$ 0.033) \\
-	V &  -2.259 ($\pm$ 0.098) & -3.951 ($\pm$ 0.029) \\
-	I &  -2.563 ($\pm$ 0.093) & -4.735 ($\pm$ 0.028) \\
-	J &  -2.784 ($\pm$ 0.088) & -5.218 ($\pm$ 0.026) \\
-	H &  -2.917 ($\pm$ 0.084) & -5.598 ($\pm$ 0.025) \\
-	K &  -2.971 ($\pm$ 0.084) & -5.653 ($\pm$ 0.025) \\
-	\hline
-	Wesenheit & slope (error) & intercept (error) \\
-	$W_\lambda$ & $\alpha^{12}_\lambda$ & $\beta^{12}_\lambda$ \\
-	\hline        
-	B,BI &  -3.175 ($\pm$ 0.095) & -6.046 ($\pm$ 0.028) \\
-	V,BI &  -3.267 ($\pm$ 0.095) & -6.108 ($\pm$ 0.028) \\
-	I,BI &  -3.175 ($\pm$ 0.095) & -6.046 ($\pm$ 0.028) \\
-	J,BI &  -3.078 ($\pm$ 0.088) & -5.847 ($\pm$ 0.026) \\
-	H,BI &  -3.100 ($\pm$ 0.085) & -5.988 ($\pm$ 0.025) \\
-	K,BI &  -3.091 ($\pm$ 0.084) & -5.910 ($\pm$ 0.025) \\
-	\\
-	B,VI &  -2.869 ($\pm$ 0.101) & -5.838 ($\pm$ 0.030) \\
-	V,VI &  -3.033 ($\pm$ 0.096) & -5.949 ($\pm$ 0.029) \\
-	I,VI &  -3.033 ($\pm$ 0.096) & -5.949 ($\pm$ 0.029) \\
-	J,VI &  -3.010 ($\pm$ 0.088) & -5.801 ($\pm$ 0.026) \\
-	H,VI &  -3.058 ($\pm$ 0.085) & -5.960 ($\pm$ 0.025) \\
-	K,VI &  -3.063 ($\pm$ 0.084) & -5.891 ($\pm$ 0.025) \\
-	\\
-	B,IH &  -2.944 ($\pm$ 0.091) & -5.870 ($\pm$ 0.027) \\
-	V,IH &  -3.090 ($\pm$ 0.084) & -5.974 ($\pm$ 0.025) \\
-	I,IH &  -3.068 ($\pm$ 0.083) & -5.964 ($\pm$ 0.025) \\
-	J,IH &  -3.027 ($\pm$ 0.085) & -5.808 ($\pm$ 0.025) \\
-	H,IH &  -3.068 ($\pm$ 0.083) & -5.964 ($\pm$ 0.025) \\
-	K,IH &  -3.070 ($\pm$ 0.083) & -5.894 ($\pm$ 0.025) \\
-	\\
-	B,JK &  -3.269 ($\pm$ 0.089) & -6.517 ($\pm$ 0.027) \\
-	V,JK &  -3.338 ($\pm$ 0.082) & -6.468 ($\pm$ 0.024) \\
-	I,JK &  -3.219 ($\pm$ 0.081) & -6.265 ($\pm$ 0.024) \\
-	J,JK &  -3.099 ($\pm$ 0.082) & -5.952 ($\pm$ 0.024) \\
-	H,JK &  -3.113 ($\pm$ 0.081) & -6.054 ($\pm$ 0.024) \\
-	K,JK &  -3.099 ($\pm$ 0.082) & -5.952 ($\pm$ 0.024) \\
-	\hline
-	\hline
-	\end{tabular}
-	}
-
-\end{wraptable}
 
 
 \begin{align}\label{eq:plr}
@@ -71,33 +19,9 @@ Observations in different bands of light provide information about the effect of
 
 Since the periodic range of Cepheids lies between 0.49 and 1.8 on a logarithmic scale, 1 is chosen as the pivot point and subtracted from the period before calculating the regression coefficients, i.e., the slope and intercept. The Leavitt Law for each band is shown in Figure \ref{rawLL}, including four selected Wesenheit variants for VI, VK, IH, and JK.
 
-\begin{figure}[!ht]
-	\centering
-	\begin{subfigure}[b]{0.19\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{clean/abs.pdf}
-	\end{subfigure}
-	\hfill
-	\begin{subfigure}[b]{0.19\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{clean/wes_BK.pdf}
-	\end{subfigure}
-	\begin{subfigure}[b]{0.19\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{clean/wes_VI.pdf}
-	\end{subfigure}
-	\begin{subfigure}[b]{0.19\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{clean/wes_VK.pdf}
-	\end{subfigure}
-	\begin{subfigure}[b]{0.19\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{clean/wes_JK.pdf}
-	\end{subfigure}
-	\caption{BVIJHK PL and PW relations with their Pearson correlation coefficient (r-value).}
-	\label{rawLL}
-	\hfill
-\end{figure}
+\input{chapters/content/0_5_plot_wesVK.tex}
+
+
 
 The plots above provide a comparative overview of the Leavitt Laws across different bands. In the first column, notice the decreasing width of the PL relation from the B-band to the K-band. The increasing Pearson correlation coefficient indicates a reduction in residuals. Assuming Cepheids align perfectly with the PL relation suggests that the residuals must stem from errors in reddening or distance measurements. 
 
@@ -132,19 +56,10 @@ The residuals of PL and PW relations are calculated as follows:
 
 \vspace{-0.2cm}
 
-\begin{figure}[htbp]
-	\centering
-	\begin{subfigure}{\textwidth}
-		\includegraphics[width=\textwidth]{jesper/95_deldel_S0VI_g.pdf}
-		\caption{$\Delta W^{VI}_\lambda$ - $\Delta M_\lambda$ correlation}
-	\end{subfigure}		
-	\begin{subfigure}{\textwidth}
-		\includegraphics[width=\textwidth]{jesper/95_deldel_S0JK_g}
-		\caption{$\Delta W^{JK}_\lambda$ - $\Delta M_\lambda$ correlation}
-	\end{subfigure}			
-	\caption{$\Delta W$ - $\Delta M$ correlation plots shown for three versions of wesenheit - VI and JK. With increasing wavelength, slope is approaching to 1.}
-	\label{deldel_plots}
-	\end{figure}
+
+\input{chapters/content/0_5_plot_deldel.tex}
+
+
 
 Here, $\Delta M_\lambda$ represents the residuals of the PL relation, and $\Delta W_\lambda^{12}$ represents the residuals of the PW relation. Since distance modulus $\mu$ term is involved in both the parameters, $M_\lambda$ and $W_\lambda$, thereby $\delta \mu$, impacts both $\Delta W$ and $\Delta M$ equally. However, $\delta E_{BV}$ does not contribute to $\Delta W$, and only affects $\Delta M$ by an amount of $\delta E_{BV} / R_\lambda = \delta A_\lambda$. Since other possible factor like the effect of metallicity is not considered in this work, the equation for PL and PW residuals, equations \ref{mag_error} and \ref{wesen_error}, can be expressed as:
 
@@ -190,8 +105,9 @@ This method of decoupling errors, introduced by \cite{2017madore}, involves corr
 \label{rho}
 \end{table}
 
-
 \section{Decoupling $\delta \mu - \delta E_{BV}$}
+
+\input{chapters/content/0_5_plot_idea.tex}
 
 The core process of the calibration is encapsulated in this step. Up until this point, from the Galactic Cepheid dataset, I have derived multiband Leavitt laws and their corresponding Wesenheit Leavitt laws. The correlation of their residuals leads to the results summarized in Table \ref{rho}, which will be used for decoupling the errors $\delta E_{BV}$ and $\delta \mu$ for each star in the dataset. Given the high sensitivity of reddening at shorter wavelengths, to estimate a realistic correction for reddening error ($\delta E_{BV}$), averaging result from the first four bands — B, V, I, and J would be enough.
 
@@ -269,6 +185,9 @@ For  dataset, it  the variance across the bands being the minimum for the best s
 
 \section{Calibrated Leavitt Law}
 
+\input{chapters/content/0_5_plot_algorithm.tex}
+
+
 These corrections will be adjusted with the original data as follow. 
 
 \begin{align*}
@@ -302,32 +221,6 @@ These corrections will be adjusted with the original data as follow.
 	\label{rawLL}
 	\hfill
 \end{figure}
-
-\section{cluster Cepheid}
-
-In the dataset, 17 Cepheids are identified as members of clusters with statistical parallaxes measured by \textcite{cruz2023}. A comparison between the calibrated distances of these Cepheids shows a good agreement in reddening value with $\sigma = 0.049$. 
-
-For distance modulus, nine of 17 cluster Cepheid deviated by 0.1 mag only, but five Cepheids (EV Sct, QZ Nor, SV Vul, Y Sct and X Lac) have deviation larger than 0.4 mag.
-
-\begin{figure}[htp]
-    \centering
-    \begin{subfigure}[b]{0.49\textwidth}
-        \centering
-        \includegraphics[width=\linewidth]{./plots/9_compare/jesper_cruz_rd.pdf}
-        \caption{Reddening correction comparision}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.49\textwidth}
-        \centering
-        \includegraphics[width=\linewidth]{./plots/9_compare/jesper_cruz_mu.pdf}
-        \caption{Distance modulus comparision}
-    \end{subfigure}
-        \caption{\small Deviation of distance and reddening with 17 Cluster Cepheids (Cruz, 2023)}
-    \label{dis_correction}
-\end{figure}
-
-
-
 
 
 
