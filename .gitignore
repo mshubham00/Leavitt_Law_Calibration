@@ -13,7 +13,7 @@
 # Ignore a specific folder (e.g., 'folder_name')
 data/processed/
 docs/reports/plots/
-
+docs/reports/thesis_version/
 .ipynb_checkpoints/
 *.bbl
 *.blg

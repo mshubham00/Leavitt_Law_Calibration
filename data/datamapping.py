@@ -6,16 +6,17 @@ module = 'datamapping'
 #####################################################################
 k=1; 						# k selects dataset [0:Madore, 1:Jesper, 2:Cruz, 3:LMC, 4:SMC]
 skip=0;
-s=1; 						# saves the output
+s=0; 						# saves the output
 z=0; 						# z switches output to paging mode
 p=0;
 plots=0; 					# plots for genrating plots
 flags = ['S'] 				# Madore and Shubham
-mode = ['0']  			    # Absolute mag and True absolute mag for PL and PW
-rd_avg_drop = []# Not included in estimating reddening variance (f_star_wise)
+mode = ['','0']  			    # Absolute mag and True absolute mag for PL and PW
+rd_avg_drop = ['K']# Not included in estimating reddening variance (f_star_wise)
 del_mu = [round(i*0.01,3) for i in range(-100,100,2)]
 plot_every_n_star = 15
 ex_law = '_S'
+del_mask = (-0.3, 0.3)
 #####################################################################
 if ex_law == '_F':
     extinction_ratios = {'B': 1.31, 'V': 1.0, 'R': 0.845,'I': 0.608,'J': 0.292,'H': 0.181,'K': 0.119 }   	
@@ -51,16 +52,10 @@ def select_data_file(k):
         R, R_v, A = R_ratio(R_v = Rv, mag = mag, A = extinction_ratios)
         file_cols = ['name','logP','EBV'] + dis_list + [f'M_{m}' for m in mag] 
     elif k ==1:
-#        filename = '71_IRSB_plx'
-#        filename = '71_IRSB_plx'
-#        filename = '76_IRSB_IJ_HK'
-#        filename = '99_IRSB_plx'
         filename = '121_Cepheids'
-#        filename = '150_IRSB_plx'
-        dis_list = ['mMplx']; dis_flag = ['_g']
+#        dis_list = ['mMplx']; dis_flag = ['_g']
 #        dis_list = ['mM0']; dis_flag = ['_j']
-#        dis_list = ['mM0', 'mMplx']; dis_flag = ['_j', '_g']
-#        dis_list = ['HST']; dis_flag = ['_h']
+        dis_list = ['mMplx', 'mM0']; dis_flag = ['_g', '_i']
         mag = ['B','V','I', 'J', 'H','K'];#
         wes_show=colors(mag)#['VI', 'BJ', 'BH', 'BK', 'VJ', 'VH', 'VK', 'IH', 'IK']
         R, R_v, A = R_ratio(R_v = Rv, mag = mag, A = extinction_ratios)
@@ -115,9 +110,9 @@ def R_dic(mag=mag):
                 R_[m+c1+c2] = R123(m,c1,c2)
     return R_
 #####################################################################
-col_dot = ['b.', 'm*', 'y+', 'c*', 'g+', 'k.', 'c+', 'r+'] ;
-col_lin = ['b-', 'm-', 'y-', 'c-', 'g-', 'k-', 'c-', 'r-'] ;
-col_das = ['b--', 'm--', 'y--', 'c--', 'g--', 'k--', 'c--', 'r--']
-col_ = ['b', 'm', 'y', 'c', 'g', 'k', 'c', 'r'] ;
+col_dot = ['b.', 'g*', 'y+', 'c*', 'm+', 'k.', 'c+', 'r+'] ;
+col_lin = ['b-', 'g-', 'y-', 'c-', 'm-', 'k-', 'c-', 'r-'] ;
+col_das = ['b--', 'g--', 'y--', 'c--', 'm--', 'k--', 'c--', 'r--']
+col_ = ['b', 'g', 'y', 'c', 'm', 'k', 'c', 'r'] ;
 #####################################################################
 print(f'* * {module} module loaded!')

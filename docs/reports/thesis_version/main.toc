@@ -5,27 +5,27 @@
 \contentsline {section}{\numberline {1.1}Dataset Cleaning}{5}{section.1.1}%
 \contentsline {subsection}{\numberline {1.1.1}Pulsating in Overtone}{5}{subsection.1.1.1}%
 \contentsline {subsection}{\numberline {1.1.2}Photometric error}{5}{subsection.1.1.2}%
-\contentsline {subsection}{\numberline {1.1.3}PL/PW Residuals}{7}{subsection.1.1.3}%
-\contentsline {section}{\numberline {1.2}Extinction Law Calibration}{7}{section.1.2}%
-\contentsline {section}{\numberline {1.3}Cleaned Dataset}{9}{section.1.3}%
+\contentsline {subsection}{\numberline {1.1.3}PL/PW Residuals}{6}{subsection.1.1.3}%
+\contentsline {section}{\numberline {1.2}Extinction Law Calibration}{6}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Cleaned Dataset}{7}{section.1.3}%
 \contentsline {section}{\numberline {1.4}Leavitt Law}{11}{section.1.4}%
-\contentsline {chapter}{\numberline {2}Calibration Method}{13}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Leavitt Law residuals and corresponding Wesenheits}{13}{section.2.1}%
-\contentsline {section}{\numberline {2.2}Residual Analysis}{15}{section.2.2}%
-\contentsline {section}{\numberline {2.3}Decoupling $\delta \mu - \delta E_{BV}$}{18}{section.2.3}%
-\contentsline {section}{\numberline {2.4}Calibrated Leavitt Law}{20}{section.2.4}%
-\contentsline {part}{III\hspace {1em}Result Implications}{23}{part.3}%
-\contentsline {chapter}{\numberline {3}Discussion}{24}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Validation of Result : Cluster Cepheid}{24}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Reddening Comparison}{24}{section.3.2}%
-\contentsline {section}{\numberline {3.3}Distance Comparison}{25}{section.3.3}%
-\contentsline {section}{\numberline {3.4}Luminosity Comparison}{25}{section.3.4}%
-\contentsline {chapter}{\numberline {4}Conclusion}{26}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Result}{26}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Application Of The Result}{26}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Understanding the Universe: 1990s}{26}{subsection.4.2.1}%
-\contentsline {subsubsection}{\numberline {4.2.1.1}$\Lambda $CDM Cosmological Model}{28}{subsubsection.4.2.1.1}%
-\contentsline {subsection}{\numberline {4.2.2}Cosmic Distance Ladder and the Hubble Constant: The Twenty-First Century}{29}{subsection.4.2.2}%
-\contentsline {subsection}{\numberline {4.2.3}Instruments of furture}{29}{subsection.4.2.3}%
-\contentsline {chapter}{Bibliography}{30}{subsection.4.2.3}%
-\contentsline {chapter}{Bibliography}{31}{chapter*.29}%
+\contentsline {chapter}{\numberline {2}Calibration Method}{17}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Leavitt Law residuals and corresponding Wesenheits}{17}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Residual Analysis}{20}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Decoupling $\delta \mu - \delta E_{BV}$}{24}{section.2.3}%
+\contentsline {section}{\numberline {2.4}Calibrated Leavitt Law}{27}{section.2.4}%
+\contentsline {part}{III\hspace {1em}Result Implications}{30}{part.3}%
+\contentsline {chapter}{\numberline {3}Discussion}{31}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Validation of Result : Cluster Cepheid}{31}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Reddening Comparison}{31}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Distance Comparison}{32}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Luminosity Comparison}{32}{section.3.4}%
+\contentsline {chapter}{\numberline {4}Conclusion}{33}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Result}{33}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Application Of The Result}{33}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Understanding the Universe: 1990s}{33}{subsection.4.2.1}%
+\contentsline {subsubsection}{\numberline {4.2.1.1}$\Lambda $CDM Cosmological Model}{34}{subsubsection.4.2.1.1}%
+\contentsline {subsection}{\numberline {4.2.2}Cosmic Distance Ladder and the Hubble Constant: The Twenty-First Century}{35}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Instruments of furture}{36}{subsection.4.2.3}%
+\contentsline {chapter}{Bibliography}{37}{subsection.4.2.3}%
+\contentsline {chapter}{Bibliography}{38}{chapter*.29}%
