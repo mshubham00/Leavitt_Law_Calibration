@@ -3,7 +3,7 @@ module = 'h_loadoutput'
 import pandas as pd
 import os
 import subprocess
-from data.datamapping import *
+from lvtlaw.datamapping import *
 from lvtlaw.a_utils import load_data, imgsave
 from decimal import Decimal, getcontext
 getcontext().prec = 10

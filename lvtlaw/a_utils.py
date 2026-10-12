@@ -8,7 +8,7 @@ import os, subprocess, sys
 import matplotlib.pyplot as plt
 from scipy import stats
 import pandas as pd
-from data.datamapping import plots,s,file_name,data_dir,z, image_step, data_out, k, process_step, img_out_path, mag, dis_flag, dis_list, data_cols
+from lvtlaw.datamapping import plots,s,file_name,data_dir,z, image_step, data_out, k, process_step, img_out_path, mag, dis_flag, dis_list, data_cols
 
 #####################################################################
 def output_directories(parent_folder = data_out, s=1,subdirectories = process_step):
@@ -58,6 +58,14 @@ def open_output_dir(path):
     # Open the output folder after process completion
     subprocess.run(['xdg-open', path])
 #####################################################################
+def update_result(data, result, cols):
+    for col in cols:
+        data[dis_list[0]] = result[f'muS0{col}{dis_flag[0]}']
+        data['EBV'] = result[f'rdS0{col}{dis_flag[0]}']
+        data.to_csv(f'./data/input/{file_name}_{col}{dis_flag[0]}.csv')
+        print(f'./data/input/{file_name}_{col}{dis_flag[0]}.csv')
+#result.style#[[f'rdS0{col}_j' for col in ['VJ']]]#.style
+#####################################################################
 def colprint(merged_data):
     l = merged_data.columns
     for x in range(0, len(l),40):
@@ -77,13 +85,15 @@ def pr_value(x,y,s=0):
         print('P-value:', p)
     return p,r
 #####################################################################
-'''def RA_DEC_DIS_to_Galactocentric(ra, dec, dis):
+def RA_DEC_DIS_to_Galactocentric(ra, dec, dis):
+    import astropy.units as u
+    from astropy.coordinates import (SkyCoord, Galactocentric, Longitude, Latitude, Distance)
     ra = Longitude(ra, unit=u.degree)
     dec = Latitude(dec, unit = u.degree)                        #   1
     dis = 10**(1 + dis/5)/1000          # modulus to kpc
     dis = Distance(dis, unit = u.kpc)
     coordinate = SkyCoord(ra=ra, dec=dec, distance=dis, frame='icrs')
     coordinate = coordinate.transform_to(Galactocentric(galcen_distance=8.1*u.kpc))
-    return coordinate'''
+    return coordinate
 #####################################################################
 print(f'* * {module} module loaded!')

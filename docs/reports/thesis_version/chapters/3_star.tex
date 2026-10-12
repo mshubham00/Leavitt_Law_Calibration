@@ -1,221 +1,198 @@
-\chapter{Pulsating Star - Classical Cepheid}
+\chapter{Pulsating Star -- Classical Cepheid}
+\label{pulsating-star}
 
-\input{chapters/content/0_3_plot_crowd.tex}
+\input{chapters/content/0_3_plot.tex}
 
 
 \section{Are all stars the same?}
-Seeing the night sky, one can easily spot that stars come in different colors and luminosities, making it easy to infer that not all stars are the same. But what makes them appear different? With the advent of quantum mechanics and spectroscopic observation, this question was answered by explaining the physical processes occurring inside the star, along with changing chemical potential over the different evolutionary phases of the stars. It has been observed that some stars can be thousands of times larger than others—such as red giants and supergiants — while some undergo radial oscillations periodically, like RR Lyrae, Cepheids, and Mira variables. Some stars may form diffuse gaseous systems, such as protostars and planetary nebulae, while others could be the remnants of dead stars, like white dwarfs or neutron stars. These examples represent different phases in the life cycle of a star. This chapter delves into these evolutionary stages, examining how astronomers classify stars, discussing their underlying physics, while focusing particularly on Cepheid variables.
+Seeing the night sky, one can easily spot that stars come in different colors and luminosities, making it easy to infer that not all stars are the same. But what makes them appear different? With the advent of quantum mechanics and spectroscopic observation, this question was answered by explaining the physical processes occurring inside the star, along with changing energy transportation modes within the stars and varying chemical potential over the different evolutionary phases. It has been observed that some stars can be thousands of times larger than others—such as red giants and supergiants — while some undergo radial oscillations periodically, like RR Lyrae, Cepheids, and Mira variables. Some stars may form diffuse gaseous systems, such as protostars and planetary nebulae, while others could be the remnants of dead stars, like white dwarfs or neutron stars. These examples represent different phases in the life cycle of a star. This chapter delves into these evolutionary stages, examining how astronomers classify stars, discussing their underlying physics, while focusing particularly on Cepheid variables. \footnote{Classical Cepheid 'V1' in M31 using HST WFC3/UVIS. Source: NASA, ESA, Hubble Heritage Project (STScI, AURA) and R. Gendler }
 
 \subsection{Discovery of Variable stars}
-The year 1784 is significant in astronomy, as it was when John Goodricke observed the luminosity variation of a star in Cephus consellation - Delta Cephei - challenging the centuries-old belief that the sky is static i.e. all stars being fixed and unchanging \cite{1786john}. This finding initiated systematic searches for similar objects, leading to the identification of Cepheid variables as a distinct class.
+The year 1784 is significant in astronomy, as it was when John Goodricke observed the luminosity variation of a star in Cephus consellation - Delta Cephei - challenging the centuries-old Aristotelian belief that the sky is static i.e. all stars being fixed and unchanging \citep{1786john, 1785pigott}. This finding initiated systematic searches for similar objects, leading to the identification of Cepheid variables as a distinct class.
 
-Prior to the twentieth century, the physical origin of Cepheid variability remained uncertain. Proposed explanations included eclipsing binary systems \citep{1899pickering,1903myers,1914shapley}, magnetic activity cycles \citep{1908hale,1914russellvariables}, and tidal distortions of stellar envelopes \citep{jeans1917tidal}. However, spectroscopic observations and phase mismatches between light curves and rotation periods ruled out these hypotheses.
+Prior to the twentieth century, the physical origin of Cepheid variability remained uncertain. Proposed explanations included eclipsing binary systems \citep{1899pickering,1903myers,1914shapley}, magnetic activity cycles \citep{1908hale,1914russellvariables}, and tidal distortions of stellar envelopes \citep{jeans1917tidal}. However, spectroscopic observations and phase mismatches between light curves and rotation periods ruled out these hypotheses \citep{1928struve, 1930wilson}.
 
-A decisive breakthrough was achieved by Arthur Eddington, who formulated the theory of radial stellar pulsations. Drawing an analogy with a heat engine, he introduced the $\kappa$-mechanism, in which periodic modulation of radiative opacity drives self-sustained oscillations \citep{1917eddington}. The physical basis of this mechanism was later identified by Zhevakin, who demonstrated that partial ionization of helium in the stellar envelope produces opacity variations that regulate energy flow and drive pulsation \citep{1963zhevakin}.
+A decisive breakthrough was achieved by Arthur Eddington, who formulated the theory of radial stellar pulsations. Drawing an analogy with a heat engine, he introduced the $\kappa$-mechanism, in which periodic modulation of radiative opacity drives self-sustained oscillations \citep{1917eddington}. The physical basis of this mechanism was later identified by \cite{1963zhevakin}, who demonstrated that partial ionization of helium in the stellar envelope produces opacity variations that regulate energy flow and drive pulsation.
 
-This section summarizes the key physical processes during different stellar evolutionary phases. It sets the foundation for understanding the physics of Cepheid pulsations and the resulting variations in their fundamental parameters.
 
 \section{Genesis of Stars: Stellar Evolution}
 
-\subsection{Big Bang nucleosynthesis}
+This section provides a concise summary of the key physical processes occurring during different phases of stellar evolution. Understanding these processes is essential for interpreting the physics underlying Cepheid pulsations and the consequent variations in fundamental stellar parameters, including radius, luminosity, surface temperature, and radial velocity. The chapter concludes with a discussion of the pulsation mechanisms that give rise to the empirical Leavitt Law, highlighting the connection between stellar structure and the observed period-luminosity relationship.
 
-\input{chapters/content/0_3_plot_quark2blackhole.tex} 
+\subsection{Composition of Stars}
 
-According to the Big Bang model, during the first microseconds after the origin of the Universe, matter existed as a hot, dense quark--gluon plasma within a region of only a few kilometers in horizon scale. As the Universe expanded and cooled, quarks, carrying electric charge, became confined by the strong interaction, forming hadrons. Of the six quark flavors, the lightest—up and down quarks—dominated particle formation, yielding baryons in the form of protons ($uud$, spin $1/2$) and neutrons ($udd$, spin $1/2$). 
+Parallel advances in quantum physics during the early twentieth century profoundly improved the understanding of stellar structure and evolution. In 1920, Arthur Eddington famously hypothesized that stellar energy is generated through the fusion of hydrogen into helium \citep{1920eddington}, a concept that was revolutionary at the time.
 
-Down quarks are slightly heavier than up quarks and can undergo beta decay, producing an up quark, an electron, and an electron antineutrino. Consequently, free neutrons ($udd$) are slightly more massive than protons (uud) and unstable, with a mean lifetime of $\sim 880$~s, decaying via 
-\[
-n \rightarrow p + e^- + \bar{\nu}_e,
-\] 
-which rapidly reduces the neutron-to-proton ratio. 
 
-Within the first few minutes, at temperatures $T \sim 10^9$~K, Big Bang nucleosynthesis produced light nuclei like hygroden and deuterium. Once the temperature dropped below $\sim 0.1$~MeV, deuterium became stable, allowing rapid fusion into heavier nuclei. This process yielded a primordial composition of roughly $75\%$ hydrogen and $25\%$ helium by mass, with trace amounts of deuterium, ${}^3\mathrm{He}$, and ${}^7\mathrm{Li}$.
+\input{chapters/content/0_3_note_BBN.tex} 
+
+Further breakthroughs arose from the analysis of stellar spectra. In her 1925 doctoral dissertation, Cecilia Payne demonstrated that hydrogen and helium are by far the most abundant elements in stellar atmospheres, overturning the prevailing assumption that stellar compositions resembled that of the Earth \citep{1925payne}. Her work firmly established these elements as the dominant constituents of stars. A comprehensive theoretical description of nuclear energy generation in stars was later provided by \cite{1939bethe}, who identified the proton--proton chain and CNO cycle as the primary mechanisms of stellar nuclear fusion.
+
+These developments represented a major turning point in astrophysics, as they established the physical basis of stellar structure and evolution. Prior to this period, the internal mechanisms governing stars---including the origin of the cyclic pulsations observed in Cepheid variables---were largely unknown.
+
 
 \subsection{Formation of Star}
-Massive baryonic gas in dark matter potentials formed the first primordial structures. In molecular clouds, dense regions form globules composed primarily of \ce{H2} with trace heavy elements. Gravitational collapse raises core temperatures from 10–30~K, initially balanced by thermal motion and radiative cooling. As density increases, opacity traps radiation, gradually heating the core. When temperatures reach 60–100~K, thermal pressure temporarily halts the collapse, forming the first hydrostatic core. Continued mass accumulation raises the core temperature further.  
+Massive baryonic gas in dark matter potentials formed the first primordial structures \citep{Abel1997}. In molecular clouds, dense regions form globules composed primarily of \ce{H2} gas with trace heavy elements \citep{Krause2020}. Gravitational collapse raises core temperatures from 10--30~K, initially balanced by thermal motion and radiative cooling \citep{Masunaga1999}. As density increases, opacity traps radiation, gradually heating the core \citep{Bate2014}. When temperatures reach 60--100~K, thermal pressure temporarily halts the collapse, forming the first hydrostatic core \citep{Larson1969}. 
 
-At $\sim 2000$~K, molecular hydrogen dissociates, absorbing energy and accelerating collapse until the temperature reaches $\sim 10^4$–$2\times10^4$~K, fully ionizing hydrogen and establishing the second hydrostatic core. Rotational effects produce an accretion disk, and magnetic pressure along the poles drives supersonic bipolar jets, observed as Herbig–Haro objects.
+Continued mass accretion raises the core temperature. At $\sim \SI{2000}{\kelvin}$, molecular hydrogen (\ce{H2}) dissociates, absorbing energy and accelerating collapse until $\sim 10^{4}$~K, fully ionizing hydrogen and forming the second hydrostatic core \citep{Larson1969, Masunaga1999, Bate2014}. Rotation generates an accretion disk, while magnetic pressure along the poles drives supersonic bipolar jets, observed as Herbig--Haro objects \citep{Reipurth2001}.
 
-As the protostar continues to accrete mass, it contracts over the Kelvin--Helmholtz timescale, converting gravitational energy into heat. As the core temperature gradually rises to $\sim 10$~MK, two protons collide at velocities sufficient to overcome Coulomb repulsion and approach within the range of the strong nuclear force ($\sim 1$~fm). To stabilize the nucleus, one proton undergoes $\beta^+$ decay:
-\[
-p \rightarrow n + e^+ + \bar{\nu}_e ,
-\]
-corresponding at the quark level to an up quark converting into a down quark, resulting the formation of deuterium ($^2$H). This reaction initiates the proton--proton chain, releasing energy in the form of photons and neutrinos. 
+As the protostar continues to accrete mass, it contracts over the Kelvin--Helmholtz timescale ($\sim 10^7$ yrs), converting gravitational energy into heat \citep{Kippenhahn2012, Stahler2004}. As the core temperature gradually rises to $\sim \SI{10}{MK}$, two protons can collide with sufficient energy to quantum mechanically tunnel through the Coulomb barrier and approach within the range of the strong nuclear force ($\sim \SI{1}{fm}$). They can then form a bound state via the strong interaction. To achieve a stable configuration, one proton converts into a neutron via the weak interaction, corresponding to an up quark transforming into a down quark. This results in the formation of deuterium ($\ce{^2H}$), along with the emission of a positron and an electron neutrino. This reaction initiates the proton--proton chain, releasing energy in the form of photons and neutrinos \citep{Bahcall1989}.
 
+\input{chapters/content/0_3_plot_1939_bethe.tex} 
 
-Radiation pressure counter balances the continuous gravitation collapse of the matter, sustaining the spherical structure of the protostar for thousand to million years. The energy released from fusion reactions in stars calculated by Bethe and published under title - 'Energy production in stars'\citep{1939bethe}. At the heart of these calculation, Einstein's famous equality $E = \Delta m c^2$ underlies which transforms mass into energy. Here, c is the speed of light and $\Delta m$ is the difference between the mass of reactants and products of the fusion reactions. 
+Outward radiation pressure counter balances the continuous gravitation collapse of the matter, sustaining the spherical structure of the protostar for thousand to million years. The energy released from fusion reactions in stars calculated by \cite{1939bethe} and published under title - 'Energy production in stars'. At the heart of these calculation, Einstein's famous equality $E = \Delta m c^2$ underlies which transforms mass into energy. Here, c is the speed of light and $\Delta m$ is the difference between the mass of reactants and products of the fusion reactions. 
 
 
 \subsection{Main sequence star and Turn-off point}
 
 Stellar evolution is governed primarily by the initial stellar mass. Massive stars attain higher core temperatures and fusion rates, leading to rapid fuel consumption and short lifetimes, whereas low-mass stars burn hydrogen slowly and evolve over much longer timescales. A star’s color provides a direct proxy for its surface temperature and evolutionary state.
-\input{chapters/content/0_3_note_fusion.tex}
 
-\input{chapters/content/0_3_plot_1939_bethe.tex} 
+Newly formed main-sequence stars are hydrogen-rich and sustain stable core hydrogen fusion, resulting in high surface temperatures and blue colors. High-mass stars ($\sim 8$--$10\,M_\odot$) exhaust their nuclear fuel within $\sim 10$--$15$~Myr, whereas low-mass stars can remain on the main sequence for $\sim 15$--$20$~Gyr. Regardless of mass, stars spend the majority of their lifetimes in the main-sequence phase. 
 
-Newly formed main-sequence stars are hydrogen-rich and sustain stable core hydrogen fusion, resulting in high surface temperatures and blue colors. As hydrogen is progressively converted into helium, an inert helium core builds up and the central fusion rate gradually declines. To maintain hydrostatic equilibrium, the core contracts while the outer envelope expands, causing the stellar radius to increase and the surface temperature to decrease. The star therefore evolves toward cooler, redder colors. This structural reconfiguration drives the star off the main sequence, defining the turn-off point in the Hertzsprung--Russell diagram. During this expansion into the red giant phase, deepening convection mixes nuclear-processed material from the interior to the surface, marking the onset of the first dredge-up. High-mass stars ($\sim 8$--$10\,M_\odot$) exhaust their nuclear fuel within $\sim 10$--$15$~Myr, whereas low-mass stars can remain on the main sequence for $\sim 15$--$20$~Gyr. Regardless of mass, stars spend the majority of their lifetimes in the main-sequence phase.
+Stars with masses below $\sim 0.08\,M_\odot$ do not develop cores hot enough to sustain hydrogen fusion and therefore never reach the main sequence. Instead, they cool and fade over time, becoming progressively redder on timescales exceeding the age of the Universe. Such ultra-cool objects are known as brown dwarfs, with surface temperatures typically ranging from $\sim 300$ to $2500 $ K \citep{Kirkpatrick2005}.
 
 
-Stars with masses below $\sim 0.5\,M_\odot$ never develop sufficiently hot cores to leave the main sequence. Instead, they gradually cool and fade, evolving toward redder spectral types over timescales exceeding the age of the Universe. 
+\input{chapters/content/0_3_note_main.tex}
+
+As hydrogen is progressively converted into helium, an inert helium core builds up and the central fusion rate gradually declines. To maintain hydrostatic equilibrium, the core contracts while the outer envelope expands, causing the stellar radius to increase and the surface temperature to decrease. The star therefore evolves toward cooler, redder color and shines brighter. This structural reconfiguration drives the star off the main sequence, defining the turn-off point in the Hertzsprung--Russell diagram. 
+
+
+
+
+\input{chapters/content/0_3_note_massive.tex}
+
 
 \subsection{Red Giant Star and Helium Flash}
-Shell burning Hydrogen generates even more energy than core burning phases. Released energy pushes the envelope of matter outwards which expands the surface of the star enormously and it becomes a giant. With increased surface area and shell H-burning, luminosity of the star increases by the order 3 to 4, however, due to expansion, surface of the star cools down making it red in color. This physical characteristics gives it name - Red Giant. Further accumulation of Helium at the core due to H-shell burning continuous. Star having mass more than 3 solar mass, gradually starts helium burning at the core, however stars with mass between 0.3 to 3 solar mass attain Helium fusion spontaneously, called as Helium Flash. For the latter case, central region of the core becomes incompressible but the rest of core still collapses causing further rise in temperature at center, but not sufficiently enough that helium could fuse, so the central core takes the form of degenerate matter to balance the gravitation collapse. 
+
+
+Shell burning Hydrogen generates even more energy than core burning phases. Released energy pushes the envelope of matter outwards which expands the surface of the star enormously and it becomes a giant. During this expansion into the red giant phase, deepening convection mixes nuclear-processed material from the interior to the surface, marking the onset of the first dredge-up. This changes the surface chemical abundances. With increased surface area and shell H-burning, luminosity of the star increases by the order 3 to 4, however, due to expansion, surface of the star cools down making it red in color. This physical characteristics gives it name - Red Giant. 
 
 \input{chapters/content/0_3_plot_isochrone.tex}
 
-Around 300 million K, the degenerate matter spontaneously fuses into heavier elements, Carbon and Oxygen, by triple alpha process leaving behind a flash of high energy which rises the temperature exponentially high. Degenerate matter fuses rapidly rising the temperature even higher which accelerate the reaction rate. This thermal runaway reaction increases the energy production of the star to 100 billion times for a very short time, which is comparable to entire galaxy's energy output. Eventually thermal pressure becomes dominant and the core expands. This phase in HR diagram can be observed as the tip of the red gaint branch on the right-upper side for intermidiate mass (0.4 to 3 solar mass). Just after this state, star rearranges its structure rapidly and attain an equilibrium state with a lower luminosity but higher temperature than before. This spontaneous process shifts the star from red gaint branch to horizontal branch while leaving a discontnuity in between the two regions in HR diagram. \footnote{Kristen. B. W. McQuinn et al 2019 ApJ 880 63}    
+Further accumulation of Helium at the core due to H-shell burning continuous. Star having mass more than 2 solar mass, gradually starts helium burning at the core, however stars with mass between 0.8 to 2 solar mass attain helium fusion spontaneously, called as \textit{Helium Flash}. For the latter case, the central region of the core becomes effectively incompressible, while the rest of the core continues to collapse, causing a further rise in temperature at the center—but not enough for helium fusion to begin. As a result, the dense central core takes the form of degenerate matter to balance gravitational collapse. In such a degenerate core, electrons are confined to a very small volume, and due to the Pauli exclusion principle, they are forced to occupy higher-momentum quantum states, producing electron degeneracy pressure to counter the gravitational collapse. 
+
+
+\input{chapters/content/0_3_note_flash.tex}
+
+
+Around $\sim 3\times 10^8$~K, the degenerate helium core in low-mass stars ($\sim 0.8$--$2\,M_\odot$) ignites helium via the triple-$\alpha$ process \citep{1954hoyle}. The rapid fusion reactions increase the temperature even further, which accelerates the reaction rate, approximately following a power law of $T^{40}$. Because electron degeneracy pressure is independent of temperature, the core does not expand as the temperature rises. This triggers thermal runaway reaction increasing the energy production of the star to 100 billion times for a very short time  ( seconds to a few minutes) leading to a \textit{Helium Flash}, which is comparable to entire galaxy's energy output. Eventually thermal pressure becomes dominant and the core expands \citep{McQuinn2019}. This phase in HR diagram can be observed as the tip of the red giant branch (TRGB) on the right-upper side of the Figure \ref{isochrone}. 
+
+\input{chapters/content/0_3_note_TRGB.tex}
+
 
 \subsection{Horizontal Branch and Variable Stars}
 
-Stars on the horizontal branch burn helium in the core and hydrogen in a surrounding shell. As they evolve toward the blue edge of the instability strip in the Hertzsprung--Russell diagram, a dynamic equilibrium develops between gravitational contraction of the envelope and thermal expansion driven by internal energy generation. This equilibrium manifests as radial oscillations of the stellar surface, producing variable stars.
 
-The radial pulsations are primarily governed by the $\kappa$-mechanism, in which opacity variations in partially ionized layers (e.g., He\,{\sc ii}) trap and release energy, driving periodic expansion and contraction. Stars with masses roughly $0.8$--$8\,M_\odot$ can exhibit such pulsations, with periods ranging from hours to hundreds of days.
 
-Depending on mass, temperature, and evolutionary state, different classes of pulsating stars arise:
+After helium ignition, the core expands, and the star reaches a stable equilibrium with lower luminosity and higher surface temperature, moving from the red giant branch to the horizontal branch and creating a noticeable discontinuity in the HR diagram. On the horizontal branch, stars burn helium in the core and hydrogen in a surrounding shell. As some cross the instability strip, pulsations driven by the $\kappa$-mechanism in helium partial ionization zones cause radial oscillations of the envelope, producing variable stars \citep{CarrollOstlie2017}.
 
-\begin{itemize}
-    \item \textbf{Delta Scuti:} $1.5$--$2.5\,M_\odot$, short periods (0.02--0.3~days), radial and non-radial modes.
-    \item \textbf{RR Lyrae:} $0.6$--$0.8\,M_\odot$, periods 0.2--1~day, classic radial pulsations.
-    \item \textbf{Classical Cepheids:} $3$--$12\,M_\odot$, periods 1--100~days, driven by the helium $\kappa$-mechanism.
-    \item \textbf{W Virginis:} $0.5$--$0.6\,M_\odot$, periods 10--30~days, low-mass Population II pulsators.
-    \item \textbf{Mira Variables:} $0.8$--$8\,M_\odot$, long periods 100--1000~days, radial pulsations in the AGB phase.
-\end{itemize}
 
-These stars are particularly important in astronomy because their pulsation periods correlate tightly with intrinsic luminosity, making them reliable standard candles for distance measurements. Classical Cepheids are among the brightest, reaching absolute magnitudes of $M_V \sim -6$. The physical mechanism driving these pulsations will be discussed in the following section.
+
+\input{chapters/content/0_3_table_variable.tex}
+
+
+
+Low-mass stars ($\sim 0.8$--$2\,M_\odot$) evolving through the horizontal branch give rise to RR Lyrae variables (periods $\sim 0.2$--$1$~days) \citep{Smith1995}. More evolved low-mass stars can appear as Type II Cepheids, including BL Herculis stars (periods $\sim 1$--$4$~days) and W Virginis stars (periods $\sim 10$--$30$~days). In contrast, Classical Cepheids (periods $\sim 1$--$100$~days) are intermediate- to high-mass stars ($\sim 3$--$10\,M_\odot$) that cross the instability strip during post-main-sequence evolution, often multiple times during blue-loop phases  \citep{Wallerstein2002}.
+
+
+\input{chapters/content/0_3_note_pulsating.tex}
+After helium core exhaustion in intermediate-mass stars (\(4 - 8\,M_\odot\)), the C–O core contracts gravitationally, increasing the temperature and strengthening the hydrogen- and helium-shell burning. This leads to the expansion and cooling of the outer envelope, which becomes a convective zone driven by high \ce{H^-} opacity. Deep convection in the envelope mixes material from the interior layers up to the stellar surface. This phase marks the second dredge-up. Massive stars proceed to advanced burning stages such as carbon, neon, oxygen, and silicon burning, while core degeneracy in low-mass stars prevents the second dredge-up.
 
 \subsection{AGB Stars and Planetary Nebulae}
 
-Over timescales of $\sim 100$~Myr, stars evolve through the instability strip and move toward the red edge in the Hertzsprung–Russell diagram. At this stage, helium fusion continues in a shell around the carbon–oxygen core, increasing the star's luminosity and expanding it to sizes comparable to the Earth’s orbit. In HR diagram, it moves alongside the Red Giant branch which gives it name Asymptotic Giant Branch. After Helium shell runs out of fuel, outer layer of Hydrogen burning becomes the dominant source of energy and produces Helium. After 100 thousand years, Helium accumulates and ignites again spontaneously which expands the outer surface of the star even more. Expansion cools down the temperature which halts the Hydrogen shell burning. In the next hundreds of years, Helium burning stops and Hydrogen burning take place to produce more Helium. This cycle of energy production in shells along with Helium shell flash processes expel 50\% to 70\% of star's mass in the interstellar space, bringing AGB stars to its end as a planetary nebula. With Carbon and Oxygen rich core, radius of planetary nebula can reach upto 30 light years (nearest star to the Sun, Proxima Centauri is about 4.2 lightyears away). 
+Over timescales of $\sim 100$~Myr, stars evolve through the instability strip and move toward the red edge in the Hertzsprung–Russell diagram. At this stage, helium fusion continues in a shell around the carbon–oxygen core, increasing the star's luminosity and expanding it to sizes comparable to the Earth’s orbit. In HR diagram, it moves adjacent to the Red Giant branch which gives it name Asymptotic Giant Branch. After Helium shell runs out of fuel, outer layer of Hydrogen burning becomes the dominant source of energy and produces Helium. After 100 thousand years, Helium accumulates and ignites again spontaneously which expands the outer surface of the star even more. Expansion cools down the temperature which halts the Hydrogen shell burning. In the next hundreds of years, Helium burning stops and Hydrogen burning take place to produce more Helium. This cycle of energy production in shells along with Helium shell flash processes expel 50\% to 70\% of star's mass in the interstellar space, bringing AGB stars to its end as a planetary nebula. With Carbon and Oxygen rich core, radius of planetary nebula can reach upto 0.5 to 1 light years (nearest star to the Sun, Proxima Centauri is about 4.2 lightyears away).  \citep{CarrollOstlie2017}.  
 
-In massive stars ($>8~M_\odot$), core temperatures exceed $3\times 10^9$~K, enabling successive burning stages of carbon, neon, oxygen, and silicon, ultimately producing elements up to $^{56}$Fe, , the most tightly bound nucleus. First-generation (Population III) stars could synthesize only elements up to the third period of the periodic table, while elements heavier than iron form later through supernova nucleosynthesis or neutron-capture processes. 
+
+\input{chapters/content/0_3_note_AGB.tex}
+
+
+%\input{chapters/content/0_3_note_JAGB.tex}
+
+In massive stars ($>8~M_\odot$), core temperatures exceed $3\times 10^9$~K, enabling successive carbon, neon, oxygen, and silicon burning stages, producing elements up to $^{56}$Fe -- the most tightly bound nucleus. First-generation (Population III) stars synthesized only lighter elements, while heavier nuclei form later through supernova nucleosynthesis or rapid neutron-capture processes \citep{WoosleyWeaver1995}.
+
+%\input{chapters/content/0_3_note_evolved.tex}
+
+
+\subsection{Super Novae and Compact Objects}
+Depending on its initial mass, a star can end its life as a White Dwarf ($\sim 10^4~\mathrm{km}$ radius) from low ‑ to intermediate mass, more massive stars produce neutron stars ($\sim 10~\mathrm{km}$), and the most massive cores collapse into black holes (Schwarzschild radius $R_s \sim 3~\mathrm{km}$, \citep{ShapiroTeukolsky1983, LattimerPrakash2004, MisnerThorneWheeler1973}). Stars that pass through the AGB and planetary nebula phases leave behind a compact remnant supported against gravitational collapse by electron degeneracy pressure, known as a white dwarf. \cite{1931chandrasekhar} developed a theory for such compact objects and proposed that their mass cannot exceed $1.44~M_\odot$, a value now known as the Chandrasekhar limit. If the mass of a white dwarf exceeds the Chandrasekhar limit, gravitational forces overcome electron degeneracy pressure, triggering a thermonuclear runaway explosion: a Type Ia supernova. The core density approaches $\rho \sim (1-3) \times 10^9~\mathrm{g\,cm^{-3}}$, and the temperature rises to $T \sim (5-8) \times 10^8~\mathrm{K}$ \citep{woosley2002}, triggering carbon–carbon and oxygen–oxygen burning. These reactions release enormous energy, rapidly increasing the temperature further and driving nucleosynthesis toward nuclear statistical equilibrium (NSE), where iron-group elements, primarily $^{56}$Ni, are synthesized. This subsequently decays to $^{56}$Co and then to $^{56}$Fe, with half-lives of 6.1 and 77 days, respectively, releasing gamma rays that power the supernova light curve.
+
+\input{chapters/content/0_3_note_SNIa.tex}
+
+Heavier elements are synthesized during supernova explosions, where extreme temperatures and neutron fluxes enable nucleosynthesis beyond iron, producing isotopes via rapid neutron capture (r-process) such as nickel, cobalt, zinc, gold, silver, platinum, uranium, etc \citep{woosley2007}. These heavy elements are ejected into the interstellar medium, enriching subsequent generations of stars. Type Ia supernovae are major contributors of iron-group elements in galaxies. 
+
+\input{chapters/content/0_3_note_nova.tex}
 
 
 \input{chapters/content/0_3_plot_stellar_evolution.tex}
 
 
-\subsection{Super Novae and Compact Objects}
-As per the initial mass of the star, it could reach to three end points of its life - a) White dwarf, b) Neutron star or c) Black Hole.  By passing through AGB and then planetary nebula phase, the remnant of dead star counters the gravitational collapse by electron degneracy pressure as there is not active nuclear fusion going on. Such an object is called White Dwarf. S. Chandrasekhar, in 1930s, developed a theory about such compact object and purposed that such object can not exceed its mass more than 1.44 times of solar mass. This number is known as Chandrasekhar limit. Upon exceeding 1.44 solar mass, gravitational pull dominates the electron degeneracy pressure and spontaneous thermal runaway reaction initiates the fusion process of carbon to heavier elements like oxygen, neon, magnesium, silicon, phosphorous, argon, calcium, titanium, chromium, iron to nickel. This process emits an immense amount of energy and the event is called as Type Ia Super Nova, where Ia is the luminosity class. There are other types of super novae (or novae) also occur from different range of masses of stars, however, Type Ia SNe are set as standard candle with absolute luminosity of -19 mag approx. 
-
-The main nuclear reactions involve:
-
-\begin{align}
-^{12}\mathrm{C} + {}^{12}\mathrm{C} &\rightarrow {}^{20}\mathrm{Ne} + \alpha + 4.62~\mathrm{MeV}, \\
-^{12}\mathrm{C} + {}^{16}\mathrm{O} &\rightarrow {}^{24}\mathrm{Mg} + \alpha + 2.61~\mathrm{MeV}, \\
-\alpha\text{-capture reactions} &\rightarrow {}^{28}\mathrm{Si}, {}^{32}\mathrm{S}, {}^{36}\mathrm{Ar}, {}^{40}\mathrm{Ca}, \ldots
-\end{align}
-
-During the explosion, nucleosynthesis proceeds to nuclear statistical equilibrium (NSE), producing large amounts of iron-group elements (primarily $^{56}$Ni), which decays to $^{56}$Co and then to $^{56}$Fe, releasing gamma rays that power the light curve:
-
-\[
-^{56}\mathrm{Ni} \xrightarrow[6.1~\text{days}]{\beta^+} {}^{56}\mathrm{Co} \xrightarrow[77~\text{days}]{\beta^+} {}^{56}\mathrm{Fe}.
-\]
-
-Type Ia supernovae are major contributors of iron-group elements in galaxies and provide standardizable luminosity for cosmological distance measurements.
-
-
-Heavier elements are produced during supernova explosions, where extreme temperatures and neutron fluxes enable nucleosynthesis of elements beyond iron, such as nickel, cobalt, zinc, gold, silver, platinum, and uranium. Even-even nuclei generally have spin $0$, therefore form bottle neck due to its high stability. Nuclei with odd atomic numbers have half-integer spins, reaching $9/2$ for ground-state ${}^{87}$Sr. 
-
-Supernovae eject these heavy elements into the interstellar medium, enriching subsequent generations of stars. Stellar remnants depend on initial mass: low- to intermediate-mass stars form white dwarfs, supported by electron degeneracy pressure; more massive stars produce neutron stars, where neutrons provide degeneracy support and typical radii are $\sim 10$--$30$~km; the most massive cores collapse to form black holes, where spacetime curvature prevents information from escaping, creating an event horizon.
-
-
-
-
-\vspace{1cm}
-
-
-Over the course of their lifetimes, stars vary in size and luminosity depending on their evolutionary phase. Hertzsprung was the first to plot the brightness of a star cluster against its color \cite{1911hertzsprung}, revealing an underlying evolutionary trend. Soon after, Russell independently reached to the similar conclusions \cite{1914russell}. In their honor, this diagram is now called the Hertzsprung-Russell (HR) diagram. For a student of Astrophysics, understanding the color-magnitude is the first step as it play fundamental role in understanding the stellar evolution processes undergoing in different kind of stars.
-
-
-
-
 \section{Pulsation of Cepheid}
-In 1784, John Goodricke had discovered a variable star, $\delta$ Cephei, in Cepheus constellation and named the star as $\delta$ Cephei. After the discovery of a few more variable stars, the family of $\delta$ Cephei type stars called as Cepheid stars. 
-
-Initially, it was assumed that the periodic variation of luminosity arising because the star is a member of eclipsing binary system. In 1917, Arthur Eddington rejected the prior theory and gave a clever explanation behind the radial pulsation of star by purposing a valve mechanism. His purposed mechanism known as Kappa mechanism as kappa stand for coefficient of absorption of stellar material. After excessive burn of hydrogen, helium becomes the next abundant element on the surface. Due to high temperature at the compressed state of Cepheid star, Helium releases its both electrons and get ionized \ce{He^{2+}}. Opaque \ce{He^{2+}} blocks the outcoming radiation making the star appear dimmer. The radiant energy develops a pressure and expands the star's surface. The expansion increases the surface area illuminating the star. Expansion also cools down the surface so the ionized Helium captures the free electrons and back to its ground state \ce{He}. Neutral Helium is a transparent gas consequently, all the trapped radiation releases making the star even more luminous. As the radiation pressure decreases, the stellar surface begin to collapse again due to gravitational pull and shrinks down to original state. This brings the process to its initial state.   
-Modeling chemical composition and drawing inspiration from Eddington’s valve mechanism for stellar pulsations, Zhevakin, in 1953, proposed that the cyclical ionization of helium envelope drives the radial oscillations observed in Cepheid variables 
-Further developments by S. Chandrasekhar in the hydrodynamic and magnetohydrodynamic stability provided a foundational approach for modelling stellar interior for different masses in various phases \cite{1949chandrasekhar} \cite{1961chandrasekhar}. Utilizing hydrodynamic theory with thermal condition for the stability of Cepheid variable, Cox developed the equation of state of such radially oscillating system \cite{1959cox} . His contribution through non-adiabatic pulsation theory explained $\kappa$- mechanism in detail - how ionized Helium layers changing opacity leads to instability region in Hertzsprung-Russell diagram, also called as instability strip \cite{1968cox} \cite{1980cox}. 
 
 
+In 1917, Arthur Eddington provided a clever explanation for the radial pulsation of stars by proposing a valve mechanism \citep{1917eddington}. His proposed mechanism, known as the $\kappa$-mechanism, is based on the opacity (absorption coefficient) of stellar material. Building on models of chemical composition and inspired by Eddington’s valve mechanism, \cite{1953zhevakin} proposed that the cyclical ionization of the helium envelope drives the radial oscillations observed in Cepheid variables, with helium abundance is at least 15\% of the total stellar mass. 
 
-he abundance of helium is at least 15\% of the total stellar mass (Zhevakin, 1959c). \cite{1959zhevakin} models were able to reproduce the zero-point of the P-L relation
+\input{chapters/content/0_3_plot_delcep.tex}
+The models of \cite{1959zhevakin} were able to reproduce the zero-point of the period–luminosity (P--L) relation. Further developments by \cite{1949chandrasekhar} in the hydrodynamic and magnetohydrodynamic stability provided a foundational approach for modeling stellar interior for different masses in various phases \citep{1961chandrasekhar}. Utilizing hydrodynamic theory with thermal condition for the stability of Cepheid variable, Cox developed the equation of state of such radially oscillating system \citep{1959cox} . Developing upon theoretical model studied by \cite{1968christy}, \cite{1973cox} show that the Cepheids will not pulsate unless the helium content is at least Y=0.25. His contribution through non-adiabatic pulsation theory explained $\kappa$- mechanism in detail - how ionized Helium layers changing opacity leads to instability region in Hertzsprung-Russell diagram, also called as instability strip \citep{1968cox, 1980cox}. 
+
+\subsection{Instability Strip}
+In HR diagram, a Cepheid evolves through the instability strip region. Entering from the red edge, it moves toward the blue edge, and then turns back toward the red at higher luminosity during its second crossing. 
 
 
+The red edge is defined as a region of the HR Diagram where the pulsation is quenched by convection. In these cooler stars, convection becomes highly efficient in the outer layers, transporting energy in a way that suppresses the temperature and pressure variations required for pulsation. In contrast, the blue edge corresponds to the hot boundary of the instability strip, where pulsations are no longer driven because the partial ionization zones (especially helium) responsible for the $\kappa$-mechanism are too weak to sustain oscillations.
 
-The red edge is defined as a region of the HR Diagram where the
-pulsation is quenched by convection.
+\input{chapters/content/0_3_plot_stellar.tex}
 
-More classical studies done long ago by
-Cox, King, and Tabor (1973) show that the
-Cepheids will not pulsate unless the helium
-content is at least Y=0.25 \cite{1973cox}
 
-\input{chapters/content/0_3_plot_1926_eddington.tex}
-
-\input{chapters/content/0_3_plot_1926_binary.tex}
-
-\input{chapters/content/0_3_plot_1968_pulsation.tex}
-
-\textit{If the leakage of heat decreases during compression and increases during expansion, then driving of pulsation is possible.} \cite{1998noels}
-
-\subsection{Light Curve}
-In 1926, while analysing the light curve of Cepheid variable, Hertzsprung noticed a systematic trend in the shapes of light curve with respect to period which is called Hertzsprung progression.
-\cite{1981Simon} He noticed that the Cepheids with period less than 6 days has nearly sinusodial light curve and as the period increases to 10 days, a bump appears on the descending part of light curve which progesses towards maximum light and crosses the maximum light for Cepheid of period greater than 10 days.  
+More massive Cepheids, at a more advanced stage of evolution, undergo core helium burning and structural readjustments that drive them back toward higher effective temperatures. As a result, they return to the instability strip in a blueward direction, executing what is known as a blue loop in the Hertzsprung--Russell diagram. Figure \ref{stellar} compares evolution of massive stars calculated by different stellar evolutionary models \citep{2014anderson}. Note the evolutionary track of a 5~$M_\odot$ star, which clearly shows the blue loop feature and multiple crossings of the instability strip as a Cepheid. Lower-mass stars cross the instability strip only once.
 
 \subsection{Kappa Mechanism}
 
-The kappa mechanism is a key process that drives the pulsations in Cepheid stars. 
+\cite{1998noels} wrote, \textit{"If the leakage of heat decreases during compression and increases during expansion, then pulsation driving is possible."} This statement well summarizes the $\kappa$-mechanism, which operates in the outer layers of the star, specifically in the partially ionized regions where the opacity, $\kappa$, changes significantly with temperature, typically between 35,000 K and 55,000 K. The varying opacity of the helium layer influences the balance between gravity and radiation pressure, triggering cyclic radial expansion and contraction of the outer layers. As the star expands, the temperature in the outer layers decreases, causing some previously ionized atoms to recombine with electrons, resulting in partial ionization. This ionization state is crucial for the $\kappa$-mechanism to operate effectively.
 
-It operates within the outer layers of the star, specifically in the partially ionized regions where the opacity, represented by the Greek letter kappa ($\kappa$), changes significantly with temperature.
+Recombination decreases the opacity, releases the trapped radiation. This decrease allows gravity to regain dominance, causing the outer layers to contract and the temperature to rise again. This cycle repeats, producing the characteristic pulsations observed in Cepheid stars. 
 
-The pulsations in Cepheids are characterized by radial expansion and contraction of the outer layers, causing the star to periodically brighten and dim. 
-
-The kappa mechanism is responsible for triggering these pulsations by influencing the balance between gravity and radiation pressure in the star's interior.
-
-    Opacity and Temperature Sensitivity: Opacity refers to the ability of a medium to absorb and scatter radiation. In Cepheid stars, the opacity is affected by the degree of ionization within the outer layers. At certain temperatures, the opacity experiences a sharp increase, leading to a localized region called the opacity bump.
-
-Expansion and Contraction: During the pulsation cycle, the outer layers of the Cepheid star expand during maximum brightness and contract during minimum brightness. As the star expands, it cools down due to the decrease in temperature. Conversely, during contraction, the temperature increases.
-
-Partial Ionization: As the star expands, the temperature decreases in the outer layers, causing some previously ionized atoms to recombine with electrons, resulting in partial ionization. This ionization state is crucial for the kappa mechanism to operate effectively.
-
-Opacity Bump Effect: Within the partially ionized regions of the Cepheid star, the temperature reaches a point where the opacity is relatively high. This increased opacity affects the balance between gravity and radiation pressure. When the opacity is high, the radiation pressure becomes less effective at counteracting gravity, causing the outer layers to contract.
-
-Energy Transfer: The contraction of the outer layers increases the temperature, reducing the degree of ionization. As a result, the opacity decreases, allowing the radiation pressure to become more efficient. This increased radiation pressure then pushes against gravity, causing the outer layers to expand.
-
-Feedback Loop: The expansion of the outer layers leads to a decrease in temperature, triggering recombination and an increase in opacity. This increased opacity restricts radiation pressure, causing the outer layers to contract again. This cycle repeats, creating the pulsations observed in Cepheid stars.
-
-\section{Hydrogen Ionization Front:}
-At base of HIF, opacity increases sharply limiting the depth of Cepheids photosphere. Hydrogen ionizes at 6000K \cite{1995kanbur}
-
-Motion HIF over envolopes \cite{1971keller}
+\input{chapters/content/0_3_plot_cepheid.tex}
 
 
 \section{Leavitt Law}
 
-To obtain the total luminosity LL of a star (total power emitted across all wavelengths and directions), you integrate over the star's entire surface area and over all wavelengths:
+To obtain the total luminosity of a star (total power emitted across all wavelengths and directions), integrate over the star's entire surface area and over all wavelengths:
 
 
 \begin{align}
-	L= & \int_{0}^{\infty} (4 \pi R^2 F_\lambda(T)) d \lambda \\
-	 = & 4 \pi^2 R^2 \int_{0}^{\infty} B_\lambda(T) d \lambda \\
-	 = & 4 \pi R^2 \sigma T^4
+    L &= \int_{0}^{\infty} 4 \pi R^2 F_\lambda(T) \, d\lambda \\
+      &= 4 \pi R^2 \int_{0}^{\infty} B_\lambda(T) \, d\lambda \\
+      &= 4 \pi R^2 \sigma T^4 \\
+   L  & \propto R^2  T^4
 \end{align}
 
+where $L$ is the total luminosity of the star, $R$ is the stellar radius, $F_\lambda(T)$ is the flux per unit wavelength,  $B_\lambda(T)$ is the Planck function, $\sigma$ is the Stefan--Boltzmann constant, $T$ is the effective temperature of the star.
 
+Stellar pulsation period  $P$ is a direct consequence of star's total mass and found inversely propotional to square root of mean density, $\bar{\rho}$. This relation is known as period–mean density relation and can be written as:
 
-On plotting a scatter plot in between period and luminosity,a linear relation in between both the parameters  with a certain scatter 
+\begin{equation}
+    P \propto \frac{1}{\sqrt{\bar{\rho}}} \propto \sqrt{\frac{R^3}{M}},
+\end{equation}
 
+Assuming that the mass–luminosity relation holds approximately as $L \propto M^\alpha$, and combining it with the Stefan--Boltzmann law $L \propto R^2 T^4$, luminosity can be related with the pulsation period:
 
-The period-luminosity relation (also known as the Leavitt Law or the Cepheid period-luminosity relation) is an empirical relationship that exists between the pulsation period and the intrinsic luminosity of Cepheid variable stars. This relationship allows astronomers to determine the distance to Cepheids and calibrate the cosmic distance ladder.
+\begin{align}
+    L &\propto R^2 T^4 \\
+      &\propto \left(P^{2/3} M^{1/3}\right)^2 T^4 \\
+      &\propto P^{4/3} M^{2/3} T^4,
+\end{align}
 
-The period-luminosity relation was first discovered by American astronomer Henrietta Leavitt in the early 20th century while studying the brightness variations of Cepheid stars in the Small Magellanic Cloud. Leavitt found that there was a consistent relationship between the periods and the average luminosities of these stars.
+For classical Cepheids, the effective temperature $T$ varies only slightly across the instability strip, so $T^4$ can be approximated as roughly constant. Therefore, the luminosity scales with the pulsation period approximately as:
 
-The period-luminosity relation states that the longer the period of a Cepheid star's pulsation, the more luminous it is. In other words, there is a direct correlation between the pulsation period and the intrinsic brightness of the star. This relationship allows astronomers to use the observed period of a Cepheid star to determine its intrinsic luminosity.
+\begin{equation}
+    L \propto P^{4/3},
+\end{equation}
 
-Once the intrinsic luminosity is known, the apparent brightness (or magnitude) of the star can be measured. By comparing the intrinsic luminosity with the apparent brightness, astronomers can calculate the distance to the Cepheid star using the inverse square law of light.
+which is the basis of the Leavitt Law (Period–Luminosity relationship). 
 
-The period-luminosity relation is valuable because it provides a reliable and relatively straightforward method for determining distances to Cepheids and, subsequently, to other celestial objects. By measuring the period of a Cepheid star's pulsation, astronomers can estimate its intrinsic luminosity, and from that, they can determine its distance by comparing it to the observed brightness.
+The period--luminosity relation states that Cepheid variables with longer pulsation periods are intrinsically more luminous, establishing a direct correlation between period and absolute luminosity. This relation enables the determination of a Cepheid's intrinsic luminosity from its observed pulsation period.
 
-The period-luminosity relation has been refined over the years through extensive observations and analysis of Cepheid stars in various galaxies. It has become an essential tool for measuring cosmic distances and has played a vital role in our understanding of the scale of the universe, the expansion rate of the universe (Hubble's Law), and the calibration of other distance indicators, such as Type Ia supernovae.
+The Leavitt Law has been progressively refined through observational studies of Cepheids across different galaxies since its discovery. In this work, the Leavitt Law is derived for Cepheids in the Milky Way and the Magellanic Clouds using a dataset calibrated for distance and reddening. The next part of this thesis presents the calibration algorithm.
 
-
+%\input{chapters/content/0_3_note_LL.tex}
 

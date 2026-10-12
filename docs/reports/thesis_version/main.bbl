@@ -1,74 +1,983 @@
-\newcommand{\etalchar}[1]{$^{#1}$}
-\providecommand{\bysame}{\leavevmode\hbox to3em{\hrulefill}\thinspace}
-\providecommand{\MR}{\relax\ifhmode\unskip\space\fi MR }
-% \MRhref is called by the amsart/book/proc definition of \MR.
-\providecommand{\MRhref}[2]{%
-  \href{http://www.ams.org/mathscinet-getitem?mr=#1}{#2}
-}
-\providecommand{\href}[2]{#2}
-\begin{thebibliography}{RYM{\etalchar{+}}22}
+\begin{thebibliography}{}
 
-\bibitem[AAA20]{2018planck}
-Y.~Akrami, M.~Ashdown, and J.~Aumont, \emph{Planck2018 results: Vii. isotropy
-  and statistics of the cmb}, Astronomy \& Astrophysics \textbf{641} (2020),
-  A7.
+\bibitem[Abel et~al., 1997]{Abel1997}
+Abel, T., Anninos, P., Norman, M.~L., and Zhang, Y. (1997).
+\newblock First structure formation. i. primordial star forming regions in
+  hierarchical models.
+\newblock {\em Astrophysical Journal}.
 
-\bibitem[CA23]{2023cruz}
-Mauricio {Cruz Reyes} and Richard~I. {Anderson}, \emph{{A 0.9\% calibration of
-  the Galactic Cepheid luminosity scale based on Gaia DR3 data of open clusters
-  and Cepheids}}, \aap \textbf{672} (2023), A85.
+\bibitem[Abel et~al., 2002]{abel2002}
+Abel, T., Bryan, G.~L., and Norman, M.~L. (2002).
+\newblock The formation of the first star in the universe.
+\newblock {\em Science}, 295:93--98.
 
-\bibitem[CCM89]{1989cardelli}
-Jason~A Cardelli, Geoffrey~C Clayton, and John~S Mathis, \emph{The relationship
-  between infrared, optical, and ultraviolet extinction}, The Astrophysical
-  Journal \textbf{345} (1989), 245--256.
+\bibitem[Agency, 1997]{1997esa}
+Agency, E.~S., editor (1997).
+\newblock {\em The Hipparcos and Tycho Catalogues}.
+\newblock ESA Publications Division, Noordwijk, The Netherlands.
+\newblock Hipparcos Catalogue (ESA SP--1200).
 
-\bibitem[FAS{\etalchar{+}}07]{2007fouque}
-Pascal Fouqu{\'e}, P~Arriagada, J~Storm, TG~Barnes, N~Nardetto, A~M{\'e}rand,
-  P~Kervella, W~Gieren, D~Bersier, GF~Benedict, et~al., \emph{A new calibration
-  of galactic cepheid period-luminosity relations from b to k bands, and a
-  comparison to lmc relations}, Astronomy \& Astrophysics \textbf{476} (2007),
-  no.~1, 73--81.
+\bibitem[Akrami et~al., 2020]{2018planck}
+Akrami, Y., Ashdown, M., and Aumont, J. (2020).
+\newblock Planck2018 results: Vii. isotropy and statistics of the cmb.
+\newblock {\em Astronomy \& Astrophysics}, 641:A7.
 
-\bibitem[Fer94]{1994fernie}
-JD~Fernie, \emph{Color excesses for classical cepheids from bv photometry}, The
-  Astrophysical Journal, vol. 429, no. 2, pt. 1, p. 844-845 \textbf{429}
-  (1994), 844--845.
+\bibitem[{Anderson} et~al., 2014]{2014anderson}
+{Anderson}, R.~I., {Ekstr{\"o}m}, S., {Georgy}, C., {Meynet}, G., {Mowlavi},
+  N., and {Eyer}, L. (2014).
+\newblock {On the effect of rotation on populations of classical Cepheids. I.
+  Predictions at solar metallicity}.
+\newblock {\em \aap}, 564:A100.
 
-\bibitem[Mad82]{1982madore}
-BF~Madore, \emph{The period-luminosity relation. iv-intrinsic relations and
-  reddenings for the large magellanic cloud cepheids}, The astrophysical
-  journal \textbf{253} (1982), 575--579.
+\bibitem[Anglada-Escudé, 2017]{Anglada2017}
+Anglada-Escudé, G. e.~a. (2017).
+\newblock A terrestrial planet candidate in a temperate orbit around proxima
+  centauri.
+\newblock {\em Nature}, 536:437.
 
-\bibitem[MFM17]{2017madore}
-Barry~F Madore, Wendy~L Freedman, and Sandy Moak, \emph{A method for improving
-  galactic cepheid reddenings and distances}, The Astrophysical Journal
-  \textbf{842} (2017), no.~1, 42.
+\bibitem[{Baade}, 1926]{1926baade}
+{Baade}, W. (1926).
+\newblock {{\"U}ber eine M{\"o}glichkeit, die Pulsationstheorie der
+  {\ensuremath{\delta}} Cephei-Ver{\"a}nderlichen zu pr{\"u}fen}.
+\newblock {\em Astronomische Nachrichten}, 228(20):359.
 
-\bibitem[RF98]{1998riess}
-Adam~G. {Riess} and Alexei~V. {Filippenko}, \emph{{Observational Evidence from
-  Supernovae for an Accelerating Universe and a Cosmological Constant}},
-  Astrophysical journal \textbf{116} (1998), no.~3, 1009--1038.
+\bibitem[{Baade}, 1958]{1958baade}
+{Baade}, W. (1958).
+\newblock {Problems in the determination of the distance of galaxies.}
+\newblock {\em The Astronomical Journal}, 63:207--210.
 
-\bibitem[RYM{\etalchar{+}}22]{2022riess}
-Adam~G Riess, Wenlong Yuan, Lucas~M Macri, Dan Scolnic, Dillon Brout, Stefano
-  Casertano, David~O Jones, Yukei Murakami, Gagandeep~S Anand, Louise Breuval,
-  et~al., \emph{A comprehensive measurement of the local value of the hubble
-  constant with 1 km s- 1 mpc- 1 uncertainty from the hubble space telescope
-  and the sh0es team}, The Astrophysical Journal Letters \textbf{934} (2022),
-  no.~1, L7.
+\bibitem[Bahcall, 1989]{Bahcall1989}
+Bahcall, J.~N. (1989).
+\newblock {\em Neutrino Astrophysics}.
+\newblock Cambridge University Press.
+\newblock Details the proton--proton chain and neutrino emission in stars.
 
-\bibitem[SGF{\etalchar{+}}11]{2011storm}
-Jesper Storm, Wolfgang Gieren, Pascal Fouque, Thomas~G Barnes,
-  G~Pietrzy{\'n}ski, Nicolas Nardetto, M~Weber, T~Granzer, and KG~Strassmeier,
-  \emph{Calibrating the cepheid period-luminosity relation from the infrared
+\bibitem[Bailer-Jones et~al., 2021]{2021bailer}
+Bailer-Jones, C., Rybizki, J., Fouesneau, M., Demleitner, M., and Andrae, R.
+  (2021).
+\newblock Estimating distances from parallaxes. v. geometric and photogeometric
+  distances to 1.47 billion stars in gaia early data release 3.
+\newblock {\em The Astronomical Journal}, 161(3):147.
+
+\bibitem[Bailer-Jones, 2018]{Bailer-Jones2018}
+Bailer-Jones, C. A. L. e.~a. (2018).
+\newblock Estimating distances from parallaxes iv: Distances to 1.33 billion
+  stars in gaia dr2.
+\newblock {\em AJ}, 156:58.
+
+\bibitem[{Barnes} and {Evans}, 1976]{1976barnes}
+{Barnes}, T.~G. and {Evans}, D.~S. (1976).
+\newblock {Stellar angular diameters and visual surface brightness - I. Late
+  spectral types.}
+\newblock {\em \mnras}, 174:489--502.
+
+\bibitem[Bate et~al., 2014]{Bate2014}
+Bate, M.~R., Tricco, T.~S., and Price, D.~J. (2014).
+\newblock Collapse of a molecular cloud core to stellar densities: stellar-core
+  and outflow formation in radiation magnetohydrodynamic simulations.
+\newblock {\em Monthly Notices of the Royal Astronomical Society}, 437:77--95.
+
+\bibitem[{Beaulieu} et~al., 1995]{1995beaulieu}
+{Beaulieu}, J.~P., {Grison}, P., {Tobin}, W., {Pritchard}, J.~D., {Ferlet}, R.,
+  {Lepeintre}, F., {Vidal-Madjar}, A., {Maurice}, E., {Prevot}, L., {Gry}, C.,
+  {Guibert}, J., {Moreau}, O., {Tajhamady}, F., {Aubourg}, E., {Bareyre}, P.,
+  {Coutures}, C., {Gros}, M., {Laurent}, B., {Lachieze-Rey}, M., {Lesquoy}, E.,
+  {Magneville}, C., {Milsztajn}, A., {Moscoso}, L., {Queinnec}, F., {Renault},
+  C., {Rich}, J., {Spiro}, M., {Vigroux}, L., {Zylberajch}, S., {Ansari}, R.,
+  {Cavalier}, F., and {Moniez}, M. (1995).
+\newblock {EROS variable stars: fundamental-mode and first-overtone Cepheids in
+  the bar of the Large Magellanic Cloud.}
+\newblock {\em \aap}, 303:137.
+
+\bibitem[Becker, 1935]{1935becker}
+Becker, W. (1935).
+\newblock <insert exact article title here>.
+\newblock {\em Ver{\"o}ffentlichungen der Universit{\"a}tssternwarte zu
+  Berlin-Babelsberg}, 10(6).
+
+\bibitem[{Becker}, 1940]{1940Becker}
+{Becker}, W. (1940).
+\newblock {Spektralphotometrische Untersuchungen an {\ensuremath{\delta}}
+  Cephei-Sternen. X. Ein Beitrag zur Pr{\"u}fung der Pulsationstheorie der
+  {\ensuremath{\delta}} Cephei-Ver{\"a}nderlichen durch die Beobachtung und
+  eine unabh{\"a}ngige Ableitung der Perioden-Helligkeitsbeziehung.
+  (Mitteilungen des Astrophysikalischen Observatoriums Potsdam, Nr. 4. ) Mit 5
+  Abbildungen.}
+\newblock {\em \zap}, 19:289.
+
+\bibitem[Benjamin, 2005]{Benjamin2005}
+Benjamin, R. A. e.~a. (2005).
+\newblock First glimpse results on the stellar structure of the galaxy.
+\newblock {\em ApJ}, 630:L149.
+
+\bibitem[Bethe, 1939]{1939bethe}
+Bethe, H.~A. (1939).
+\newblock Energy production in stars.
+\newblock {\em Physical Review}, 55(5):434.
+
+\bibitem[Bland-Hawthorn and Gerhard, 2016a]{Bland-Hawthorn-2016}
+Bland-Hawthorn, J. and Gerhard, O. (2016a).
+\newblock The galaxy in context: Structural, kinematic, and integrated
+  properties.
+\newblock {\em ARA\&A}, 54:529.
+
+\bibitem[Bland-Hawthorn and Gerhard, 2016b]{Bland-Hawthorn2016}
+Bland-Hawthorn, J. and Gerhard, O. (2016b).
+\newblock The galaxy in context: Structural, kinematic, and integrated
+  properties.
+\newblock {\em ARA\&A}, 54:529.
+
+\bibitem[Bond et~al., 1996]{Bond1996}
+Bond, J.~R., Kofman, L., and Pogosyan, D. (1996).
+\newblock How filaments of galaxies are woven into the cosmic web.
+\newblock {\em Nature}, 380:603.
+
+\bibitem[Bonnarel and et~al., 2000]{Bonnarel2000}
+Bonnarel, F. and et~al. (2000).
+\newblock The aladin interactive sky atlas. a reference tool for identification
+  of astronomical sources.
+\newblock {\em Astronomy and Astrophysics Supplement Series}, 143(1):33--40.
+
+\bibitem[Bono et~al., 2000]{2000bono}
+Bono, G., Castellani, V., and Marconi, M. (2000).
+\newblock Pulsation models for classical cepheids. ii. the instability strip.
+\newblock {\em The Astrophysical Journal}, 529:293--317.
+
+\bibitem[Bromm and Larson, 2004]{bromm2004}
+Bromm, V. and Larson, R.~B. (2004).
+\newblock The first stars.
+\newblock {\em Annual Review of Astronomy and Astrophysics}, 42:79--118.
+
+\bibitem[Cardelli et~al., 1989]{1989cardelli}
+Cardelli, J.~A., Clayton, G.~C., and Mathis, J.~S. (1989).
+\newblock The relationship between infrared, optical, and ultraviolet
+  extinction.
+\newblock {\em The Astrophysical Journal}, 345:245--256.
+
+\bibitem[Carroll and Ostlie, 2017]{CarrollOstlie2017}
+Carroll, B.~W. and Ostlie, D.~A. (2017).
+\newblock {\em An Introduction to Modern Astrophysics}.
+\newblock Cambridge University Press, 2nd edition.
+
+\bibitem[Chandrasekhar, 1931]{1931chandrasekhar}
+Chandrasekhar, S. (1931).
+\newblock The maximum mass of ideal white dwarfs.
+\newblock {\em Astrophysical Journal}, 74:81--82.
+
+\bibitem[Chandrasekhar, 1949]{1949chandrasekhar}
+Chandrasekhar, S. (1949).
+\newblock The instability of a layer of fluid heated from below.
+\newblock {\em Proceedings of the Royal Society of London A}, 198:141--161.
+
+\bibitem[Chandrasekhar, 1961]{1961chandrasekhar}
+Chandrasekhar, S. (1961).
+\newblock {\em Hydrodynamic and Hydromagnetic Stability}.
+\newblock Oxford University Press, Oxford.
+
+\bibitem[Christian, 2011]{2011MapsOfTime}
+Christian, D. (2011).
+\newblock {\em Maps of Time: An Introduction to Big History}.
+\newblock University of California Press, Berkeley, 2 edition.
+\newblock pp.~17--18.
+
+\bibitem[Christy, 1968]{1968christy}
+Christy, R.~F. (1968).
+\newblock Theoretical models of cepheid variables.
+\newblock {\em Quarterly Journal of the Royal Astronomical Society}, 9:13--39.
+
+\bibitem[Clementini et~al., 2023]{2023gaia}
+Clementini, G., Ripepi, V., Garofalo, A., Molinaro, R., Muraveva, T., Leccia,
+  S., Rimoldini, L., Holl, B., de~Fombelle, G.~J., Sartoretti, P., et~al.
+  (2023).
+\newblock Gaia data release 3-specific processing and validation of all-sky rr
+  lyrae and cepheid stars: The rr lyrae sample.
+\newblock {\em Astronomy \& Astrophysics}, 674:A18.
+
+\bibitem[Collaboration et~al., 2020]{planck2018}
+Collaboration, P., Aghanim, N., Akrami, Y., Ashdown, M., et~al. (2020).
+\newblock Planck 2018 results. vi. cosmological parameters.
+\newblock {\em Astronomy \& Astrophysics}, 641:A6.
+
+\bibitem[Courtois, 2013]{Courtois2013}
+Courtois, H. M. e.~a. (2013).
+\newblock Cosmic flows and the structure of the local universe.
+\newblock {\em AJ}, 146:69.
+
+\bibitem[{Cox} et~al., 1973]{1973cox}
+{Cox}, A.~N., {King}, D.~S., and {Tabor}, J.~E. (1973).
+\newblock {Non pulsating Stars and the Populations i and II Instability
+  Strips}.
+\newblock {\em \apj}, 184:201--210.
+
+\bibitem[Cox, 1959]{1959cox}
+Cox, J.~P. (1959).
+\newblock Radial pulsations of stars.
+\newblock {\em Astrophysical Journal}, 130:748--763.
+
+\bibitem[Cox, 1980]{1980cox}
+Cox, J.~P. (1980).
+\newblock {\em Theory of Stellar Pulsation}.
+\newblock Princeton University Press, Princeton, NJ.
+
+\bibitem[Cox and Giuli, 1968]{1968cox}
+Cox, J.~P. and Giuli, R.~T. (1968).
+\newblock Opacity and the driving mechanism of stellar pulsations.
+\newblock {\em Astrophysical Journal}, 154:53--63.
+
+\bibitem[{Cruz Reyes} and {Anderson}, 2023]{2023cruz}
+{Cruz Reyes}, M. and {Anderson}, R.~I. (2023).
+\newblock {A 0.9\% calibration of the Galactic Cepheid luminosity scale based
+  on Gaia DR3 data of open clusters and Cepheids}.
+\newblock {\em \aap}, 672:A85.
+
+\bibitem[Curtis, 1921]{Curtis1921}
+Curtis, H.~D. (1921).
+\newblock The scale of the universe.
+\newblock {\em Bulletin of the National Research Council}, 2:173.
+
+\bibitem[Cyburt et~al., 2016]{cyburt2016}
+Cyburt, R.~H., Fields, B.~D., Olive, K.~A., and Yeh, T.-H. (2016).
+\newblock Big bang nucleosynthesis: 2015.
+\newblock {\em Reviews of Modern Physics}, 88:015004.
+
+\bibitem[{DARWIN Project}, 2026]{UZHcosmicRecipe}
+{DARWIN Project} (2026).
+\newblock The cosmic recipe: Darwin – dark matter wimp search with liquid
+  xenon.
+
+\bibitem[Dodelson, 2003]{dodelson2003modern}
+Dodelson, S. (2003).
+\newblock {\em Modern Cosmology}.
+\newblock Academic Press.
+
+\bibitem[Dressler, 1987]{Dressler1987}
+Dressler, A. e.~a. (1987).
+\newblock Spectroscopy and photometry of elliptical galaxies. i - a new
+  distance estimator.
+\newblock {\em ApJ}, 313:42.
+
+\bibitem[Eddington, 1920]{1920eddington}
+Eddington, A. (1920).
+\newblock The internal constitution of the stars.
+\newblock {\em The Scientific Monthly}, 11(4):297--303.
+
+\bibitem[{Eddington}, 1917]{1917eddington}
+{Eddington}, A.~S. (1917).
+\newblock {The pulsation theory of Cepheid variables}.
+\newblock {\em The Observatory}, 40:290--293.
+
+\bibitem[Einstein, 1917]{1917einstein}
+Einstein, A. (1917).
+\newblock Kosmologische betrachtungen zur allgemeinen relativit{\"a}tstheorie.
+\newblock {\em Sitzungsberichte der Koniglich Preussischen Akademie der
+  Wissenschaften}, pages 142--152.
+
+\bibitem[Feast and Catchpole, 1997]{1997feats}
+Feast, M.~W. and Catchpole, R.~M. (1997).
+\newblock The cepheid period–luminosity zero-point from {\it hipparcos}
+  trigonometrical parallaxes.
+\newblock {\em \emph{Monthly Notices of the Royal Astronomical Society}},
+  286:L1–L5.
+
+\bibitem[Fernie, 1994]{1994fernie}
+Fernie, J. (1994).
+\newblock Color excesses for classical cepheids from bv photometry.
+\newblock {\em The Astrophysical Journal, vol. 429, no. 2, pt. 1, p. 844-845},
+  429:844--845.
+
+\bibitem[Fouqu{\'e} et~al., 2007]{2007fouque}
+Fouqu{\'e}, P., Arriagada, P., Storm, J., Barnes, T., Nardetto, N., M{\'e}rand,
+  A., Kervella, P., Gieren, W., Bersier, D., Benedict, G., et~al. (2007).
+\newblock A new calibration of galactic cepheid period-luminosity relations
+  from b to k bands, and a comparison to lmc relations.
+\newblock {\em Astronomy \& Astrophysics}, 476(1):73--81.
+
+\bibitem[{Fouque} and {Gieren}, 1997]{1997Fouque}
+{Fouque}, P. and {Gieren}, W.~P. (1997).
+\newblock {An improved calibration of Cepheid visual and infrared surface
+  brightness relations from accurate angular diameter measurements of cool
+  giants and supergiants.}
+\newblock {\em \aap}, 320:799--810.
+
+\bibitem[Freedman and Kaufmann, 2018]{Freedman2020}
+Freedman, R.~A. and Kaufmann, W. J.~I. (2018).
+\newblock {\em Universe}.
+\newblock W. H. Freeman and Company, New York, NY, USA, 8th edition.
+
+\bibitem[Freedman and Madore, 2010a]{Freedman2010}
+Freedman, W.~L. and Madore, B.~F. (2010a).
+\newblock The hubble constant.
+\newblock {\em Annual Review of Astronomy and Astrophysics}, 48:673--710.
+
+\bibitem[Freedman and Madore, 2010b]{2010freedman}
+Freedman, W.~L. and Madore, B.~F. (2010b).
+\newblock The hubble constant.
+\newblock {\em arXiv preprint arXiv:1004.1856}.
+
+\bibitem[Freedman and Madore, 2023]{Freedman2023CepheidScale}
+Freedman, W.~L. and Madore, B.~F. (2023).
+\newblock The cepheid extragalactic distance scale: Past, present and future.
+\newblock {\em Proceedings of the International Astronomical Union}.
+\newblock Review of Cepheids and the cosmic distance ladder including JWST
+  implications.
+
+\bibitem[Freedman et~al., 2001]{2001freedman}
+Freedman, W.~L., Madore, B.~F., Gibson, B.~K., Ferrarese, L., Kelson, D.~D.,
+  Sakai, S., Mould, J.~R., Kennicutt~Jr, R.~C., Ford, H.~C., Graham, J.~A.,
+  et~al. (2001).
+\newblock Final results from the hubble space telescope key project to measure
+  the hubble constant.
+\newblock {\em The Astrophysical Journal}, 553(1):47.
+
+\bibitem[{Garc{\'\i}a-Varela} et~al., 2013]{2013garca}
+{Garc{\'\i}a-Varela}, A., {Sabogal}, B.~E., and {Ram{\'\i}rez-Tannus}, M.~C.
+  (2013).
+\newblock {A study on the universality and linearity of the Leavitt law in the
+  LMC and SMC galaxies}.
+\newblock {\em \mnras}, 431(3):2278--2284.
+
+\bibitem[Ghez, 2008]{Ghez2008}
+Ghez, A. M. e.~a. (2008).
+\newblock Measuring distance and properties of the milky way's central
+  supermassive black hole with stellar orbits.
+\newblock {\em ApJ}, 689:1044.
+
+\bibitem[Gillessen, 2009]{Gillessen2009}
+Gillessen, S. e.~a. (2009).
+\newblock Monitoring stellar orbits around the massive black hole in the
+  galactic center.
+\newblock {\em ApJ}, 692:1075.
+
+\bibitem[Goodricke, 1786]{1786john}
+Goodricke, J. (1786).
+\newblock A series of observations on, and a discovery of, the period of the
+  variation of the light of the star marked $\delta$ by bayer, near the head of
+  cepheus.
+\newblock {\em Philosophical Transactions of the Royal Society of London},
+  76:48--??
+\newblock Published January 1786; discovery made 1784.
+
+\bibitem[Hale, 1908]{1908hale}
+Hale, G.~E. (1908).
+\newblock On the probable existence of a magnetic field in sun-spots.
+\newblock {\em Astrophysical Journal}, 28:315--343.
+
+\bibitem[Harris and Zaritsky, 2006]{Harris2006}
+Harris, J. and Zaritsky, D. (2006).
+\newblock The star formation history of the small magellanic cloud.
+\newblock {\em AJ}, 131:2514.
+
+\bibitem[Haynes and Giovanelli, 1988]{Haynes1988}
+Haynes, M.~P. and Giovanelli, R. (1988).
+\newblock Large-scale structure in the local universe.
+\newblock {\em AJ}, 95:607.
+
+\bibitem[Helmi, 2020]{Helmi2020}
+Helmi, A. (2020).
+\newblock The stellar halo of the galaxy.
+\newblock {\em ARA\&A}, 58:205.
+
+\bibitem[Henry, 2018]{Henry2018}
+Henry, T. J. e.~a. (2018).
+\newblock The recons 10 parsec sample: Stars within 32.6 light-years.
+\newblock {\em AJ}, 155:265.
+
+\bibitem[Hertzsprung, 1913]{hertzsprung1913}
+Hertzsprung, E. (1913).
+\newblock Zur räumlichen verteilung der veränderlichen vom \(\delta\)
+  cephei-typus.
+\newblock {\em Astronomische Nachrichten}, 196:201--210.
+
+\bibitem[Hogg, 1999]{Hogg1999}
+Hogg, D.~W. (1999).
+\newblock Distance measures in cosmology.
+\newblock {\em arXiv:astro-ph/9905116}.
+
+\bibitem[Horv{\'a}th, 2014]{Horvath2014}
+Horv{\'a}th, I. e.~a. (2014).
+\newblock The hercules--corona borealis great wall.
+\newblock {\em A\&A}, 561:L12.
+
+\bibitem[Hoyle, 1954]{1954hoyle}
+Hoyle, F. (1954).
+\newblock On nuclear reactions occurring in very hot stars. i. the synthesis of
+  elements from carbon to nickel.
+\newblock {\em The Astrophysical Journal Supplement Series}, 1:121.
+
+\bibitem[Hubble, 1925]{hubble1925}
+Hubble, E. (1925).
+\newblock Cepheids in spiral nebulae.
+\newblock {\em Proceedings of the National Academy of Sciences}, 11:192--197.
+
+\bibitem[{Hubble}, 1925]{1925hubble}
+{Hubble}, E. (1925).
+\newblock {Cepheids in spiral nebulae}.
+\newblock {\em The Observatory}, 48:139--142.
+
+\bibitem[Hubble, 1929a]{1929hubble}
+Hubble, E. (1929a).
+\newblock A relation between distance and radial velocity among extra-galactic
+  nebulae.
+\newblock {\em Proceedings of the national academy of sciences},
+  15(3):168--173.
+
+\bibitem[Hubble, 1929b]{Hubble1929}
+Hubble, E. (1929b).
+\newblock A relation between distance and radial velocity among
+  extra‑galactic nebulae.
+\newblock {\em Proceedings of the National Academy of Sciences}, 15:168--173.
+
+\bibitem[{HyperPhysics}, 2026]{hyperphysics_parallax}
+{HyperPhysics} (2026).
+\newblock Stellar parallax.
+\newblock
+  \url{http://hyperphysics.phy-astr.gsu.edu/hbase/Astro/imgast/stelpar.gif}.
+
+\bibitem[Jeans, 1917]{jeans1917tidal}
+Jeans, J.~H. (1917).
+\newblock The theory of tidal evolution and variable stars.
+\newblock {\em Monthly Notices of the Royal Astronomical Society}, 77:70--84.
+
+\bibitem[Johnson and Morgan, 1953]{1953johnson}
+Johnson, H.~L. and Morgan, W.~W. (1953).
+\newblock Fundamental stellar photometry for standards of spectral type on the
+  revised system of the yerkes spectral atlas.
+\newblock {\em The Astrophysical Journal}, 117(3):313--352.
+
+\bibitem[Kallivayalil, 2013]{Kallivayalil2013}
+Kallivayalil, N. e.~a. (2013).
+\newblock Third-epoch magellanic cloud proper motions. ii. the large magellanic
+  cloud rotation field in three dimensions.
+\newblock {\em ApJ}, 764:161.
+
+\bibitem[{Kanbur} and {Ngeow}, 2005]{2005kanbur}
+{Kanbur}, S. and {Ngeow}, C. (2005).
+\newblock {The Physics Behind the Non-Linearity of the Cepheid
+  Period-Luminosity Relation}.
+\newblock In {Turon}, C., {O'Flaherty}, K.~S., and {Perryman}, M.~A.~C.,
+  editors, {\em The Three-Dimensional Universe with Gaia}, volume 576 of {\em
+  ESA Special Publication}, page 691.
+
+\bibitem[{Kanbur} and {Ngeow}, 2006]{2006kanbur}
+{Kanbur}, S.~M. and {Ngeow}, C.-C. (2006).
+\newblock {Period-colour and amplitude-colour relations in classical Cepheid
+  variables - III. The Large Magellanic Cloud Cepheid models}.
+\newblock {\em \mnras}, 369(2):705--722.
+
+\bibitem[Kaufmann-III, 1978]{kaufmann1978}
+Kaufmann-III, W.~J. (1978).
+\newblock {\em Stars and Nebulas}.
+\newblock W. H. Freeman \& Co.
+\newblock Introductory astronomy text covering stellar evolution, supernovae,
+  and compact remnants.
+
+\bibitem[Kippenhahn et~al., 2012]{Kippenhahn2012}
+Kippenhahn, R., Weigert, A., and Weiss, A. (2012).
+\newblock {\em Stellar Structure and Evolution}.
+\newblock Springer-Verlag Berlin Heidelberg, 2nd edition.
+\newblock Chapter on pre-main sequence evolution and Kelvin--Helmholtz
+  contraction.
+
+\bibitem[Kirkpatrick, 2005]{Kirkpatrick2005}
+Kirkpatrick, J.~D. (2005).
+\newblock New spectral types l and t.
+\newblock {\em Annual Review of Astronomy and Astrophysics}, 43:195--245.
+
+\bibitem[Kragh, 1996]{Kragh1996}
+Kragh, H. (1996).
+\newblock {\em Cosmology and Controversy: The Historical Development of Two
+  Theories of the Universe}.
+\newblock Princeton University Press.
+
+\bibitem[Krause, 2020]{Krause2020}
+Krause, M. e.~a. (2020).
+\newblock The molecular cloud lifecycle.
+\newblock {\em Space Science Reviews}.
+
+\bibitem[Krelowski and Papaj, 1993]{1993krelowski}
+Krelowski, J. and Papaj, J. (1993).
+\newblock The interstellar extinction curve.
+\newblock {\em Publications of the Astronomical Society of the Pacific},
+  105(693):1209.
+
+\bibitem[Larson, 1969]{Larson1969}
+Larson, R.~B. (1969).
+\newblock Numerical calculations of the dynamics of collapsing proto-stars.
+\newblock {\em Monthly Notices of the Royal Astronomical Society},
+  145:271--295.
+
+\bibitem[Lattimer and Prakash, 2004]{LattimerPrakash2004}
+Lattimer, J.~M. and Prakash, M. (2004).
+\newblock The physics of neutron stars.
+\newblock {\em Science}, 304:536--542.
+
+\bibitem[Leavitt, 1908]{1908leavitt}
+Leavitt, H.~S. (1908).
+\newblock 1777 variables in the magellanic clouds.
+\newblock {\em Annals of Harvard College Observatory}, 60(4):87--103.
+
+\bibitem[Leavitt and Pickering, 1912]{1912leavitt}
+Leavitt, H.~S. and Pickering, E.~C. (1912).
+\newblock Periods of 25 variable stars in the small magellanic cloud.
+\newblock {\em Harvard College Observatory Circular, vol. 173, pp. 1-3},
+  173:1--3.
+
+\bibitem[Lindegren, 2018]{2018Lindegren}
+Lindegren, L. e.~a. (2018).
+\newblock Gaia data release 2: The astrometric solution.
+\newblock {\em A\&A}, 616:A2.
+
+\bibitem[Lynden-Bell, 1988]{LyndenBell1988}
+Lynden-Bell, D. e.~a. (1988).
+\newblock Spectroscopy and photometry of elliptical galaxies. v - galaxy
+  streaming toward the new supergalactic center.
+\newblock {\em ApJ}, 326:19.
+
+\bibitem[Madore, 1982]{1982madore}
+Madore, B. (1982).
+\newblock The period-luminosity relation. iv-intrinsic relations and reddenings
+  for the large magellanic cloud cepheids.
+\newblock {\em The astrophysical journal}, 253:575--579.
+
+\bibitem[Madore and Freedman, 2026]{2026Madore}
+Madore, B.~F. and Freedman, W.~L. (2026).
+\newblock Revising the milky way cepheid calibration: Quantifying and
+  correcting for previously undetected distance modulus errors in the
+  gaia-based multi-wavelength period-luminosity relations.
+\newblock {\em The Astrophysical Journal}, 999:94.
+
+\bibitem[Madore et~al., 2017]{2017madore}
+Madore, B.~F., Freedman, W.~L., and Moak, S. (2017).
+\newblock A method for improving galactic cepheid reddenings and distances.
+\newblock {\em The Astrophysical Journal}, 842(1):42.
+
+\bibitem[Masunaga and Inutsuka, 1999]{Masunaga1999}
+Masunaga, H. and Inutsuka, S. (1999).
+\newblock Radiation hydrodynamic collapse of molecular cloud cores and the
+  first hydrostatic core.
+\newblock {\em Monthly Notices of the Royal Astronomical Society},
+  316:578--596.
+
+\bibitem[McConnachie, 2012]{McConnachie2012}
+McConnachie, A.~W. (2012).
+\newblock The observed properties of dwarf galaxies in and around the local
+  group.
+\newblock {\em AJ}, 144:4.
+
+\bibitem[McQuinn et~al., 2019]{McQuinn2019}
+McQuinn, K. B.~W., Boyer, M., Skillman, E.~D., and Dolphin, A.~E. (2019).
+\newblock Using the tip of the red giant branch as a distance indicator in the
+  near infrared.
+\newblock {\em Astrophysical Journal}, 880(1):63.
+
+\bibitem[Misner et~al., 1973]{MisnerThorneWheeler1973}
+Misner, C.~W., Thorne, K.~S., and Wheeler, J.~A. (1973).
+\newblock {\em Gravitation}.
+\newblock W. H. Freeman, San Francisco, USA.
+
+\bibitem[Myers, 1903]{1903myers}
+Myers, G.~W. (1903).
+\newblock On the possible binary nature of certain variable stars.
+\newblock {\em Astrophysical Journal}, 18:89--98.
+
+\bibitem[{Ngeow} and {Kanbur}, 2009]{2009kanbur}
+{Ngeow}, C. and {Kanbur}, S.~M. (2009).
+\newblock {Non-Linear Cepheid Period-Luminosity Relation and the Interaction of
+  Stellar Photosphere with Hydrogen Ionization Front}.
+\newblock In {Murphy}, S.~J. and {Bessell}, M.~S., editors, {\em The Eighth
+  Pacific Rim Conference on Stellar Astrophysics: A Tribute to Kam-Ching
+  Leung}, volume 404 of {\em Astronomical Society of the Pacific Conference
+  Series}, page 262.
+
+\bibitem[{Noels}, 1998]{1998noels}
+{Noels}, A. (1998).
+\newblock {Stability Problems and Linear Driving}.
+\newblock In {Bradley}, P.~A. and {Guzik}, J.~A., editors, {\em A Half Century
+  of Stellar Pulsation Interpretation}, volume 135 of {\em Astronomical Society
+  of the Pacific Conference Series}, page 400.
+
+\bibitem[{Payne-Gaposchkin}, 1925]{1925payne}
+{Payne-Gaposchkin}, C.~H. (1925).
+\newblock {\em {Stellar atmospheres: A contribution to the observational study
+  of high temperature in the reversing layers of stars}}.
+\newblock PhD thesis, Radcliffe College, United States.
+
+\bibitem[Perlmutter et~al., 1999]{Perlmutter1999}
+Perlmutter, S., Aldering, G., Goldhaber, G., Knop, R.~A., Nugent, P., Castro,
+  P.~G., et~al. (1999).
+\newblock Measurements of omega and lambda from 42 high‑redshift supernovae.
+\newblock {\em Astrophysical Journal}, 517:565--586.
+
+\bibitem[Phillips, 1993]{1993phillips}
+Phillips, M.~M. (1993).
+\newblock The absolute magnitudes of type ia supernovae.
+\newblock {\em \emph{The Astrophysical Journal}}, 413:L105--L108.
+
+\bibitem[Pickering, 1899]{1899pickering}
+Pickering, E.~C. (1899).
+\newblock Variable stars of short period.
+\newblock {\em Astrophysical Journal}, 9:54--68.
+
+\bibitem[Pietrzyński, 2013]{Pietrzynski2013}
+Pietrzyński, G. e.~a. (2013).
+\newblock An eclipsing-binary distance to the large magellanic cloud accurate
+  to two per cent.
+\newblock {\em Nature}, 495:76.
+
+\bibitem[{Pigott}, 1785]{1785pigott}
+{Pigott}, E. (1785).
+\newblock {Observations of a New Variable Star. In a Letter from Edward Pigott,
+  Esq. to Sir H. C. Englefield, Bart. F. R. S. and A. S.}
+\newblock {\em Philosophical Transactions of the Royal Society of London Series
+  I}, 75:127--136.
+
+\bibitem[Planck, 1900]{1900planck}
+Planck, M. (1900).
+\newblock On the theory of the energy distribution law of the normal spectrum.
+\newblock {\em Verh. Deut. Phys. Ges}, 2(237):237--245.
+
+\bibitem[{Planck Collaboration} et~al., 2020]{2018planckVI}
+{Planck Collaboration}, Aghanim, N., Akrami, Y., Ashdown, M., Arroja, F., and
+  ... (2020).
+\newblock Planck 2018 results. vi. cosmological parameters.
+\newblock {\em \emph{Astronomy \& Astrophysics}}, 641.
+
+\bibitem[Pogson, 1856]{1856pogson}
+Pogson, N.~R. (1856).
+\newblock Magnitudes of thirty-six of the minor planets for the first day of
+  each month of the year 1857.
+\newblock {\em Monthly Notices of the Royal Astronomical Society}, 17:12--15.
+
+\bibitem[Reid, 2014]{Reid2014}
+Reid, M. J. e.~a. (2014).
+\newblock Trigonometric parallaxes of high mass star forming regions: The
+  structure and kinematics of the milky way.
+\newblock {\em ApJ}, 783:130.
+
+\bibitem[Reid, 2019]{Reid2019}
+Reid, M. J. e.~a. (2019).
+\newblock Mapping the milky way with high-mass star-forming regions.
+\newblock {\em ApJ}, 885:131.
+
+\bibitem[Reipurth and Bally, 2001]{Reipurth2001}
+Reipurth, B. and Bally, J. (2001).
+\newblock Herbig–haro flows: Probes of early stellar evolution.
+\newblock {\em Annual Review of Astronomy and Astrophysics}, 39:403--455.
+
+\bibitem[Riess et~al., 2024]{Riess2024JWST}
+Riess, A.~G., Anand, G.~S., Yuan, W., et~al. (2024).
+\newblock Jwst observations reject unrecognized crowding of cepheid photometry
+  as an explanation for the hubble tension at 8$\sigma$ confidence.
+\newblock {\em The Astrophysical Journal Letters}.
+\newblock arXiv:2401.04773.
+
+\bibitem[Riess et~al., 2019]{Riess2018}
+Riess, A.~G., Casertano, S., Yuan, W., and Macri, L.~M. (2019).
+\newblock Large magellanic cloud cepheid standards provide a 1\% foundation for
+  the determination of the hubble constant and stronger evidence for physics
+  beyond Λcdm.
+\newblock {\em ApJ}, 876:85.
+
+\bibitem[{Riess} and {Filippenko}, 1998]{1998riess}
+{Riess}, A.~G. and {Filippenko}, A.~V. (1998).
+\newblock {Observational Evidence from Supernovae for an Accelerating Universe
+  and a Cosmological Constant}.
+\newblock {\em Astrophysical journal}, 116(3):1009--1038.
+
+\bibitem[Riess et~al., 1998]{Riess1998}
+Riess, A.~G., Filippenko, A.~V., Challis, P., Clocchiatti, A., Diercks, A.,
+  Garnavich, P.~M., et~al. (1998).
+\newblock Observational evidence from supernovae for an accelerating universe
+  and a cosmological constant.
+\newblock {\em Astronomical Journal}, 116:1009--1038.
+
+\bibitem[Riess et~al., 1996]{Riess1996}
+Riess, A.~G., Press, W.~H., and Kirshner, R.~P. (1996).
+\newblock Using light curve shape to calibrate absolute magnitudes of type ia
+  supernovae.
+\newblock {\em Astrophysical Journal}, 473:88--109.
+
+\bibitem[Riess et~al., 2022a]{2022riess_tension}
+Riess, A.~G., Yuan, W., Macri, L.~M., Scolnic, D., Brout, D., Casertano, S.,
+  Jones, D.~O., Murakami, Y., Anand, G.~S., Breuval, L., Brink, T.~G.,
+  Filippenko, A.~V., Jha, S.~C., Kenworthy, W.~D., Mackenty, J., Stahl, B.~E.,
+  and Zheng, W. (2022a).
+\newblock A comprehensive measurement of the local value of the hubble constant
+  with 1 km s$^{-1}$ mpc$^{-1}$ uncertainty from the hubble space telescope and
+  the sh0es team.
+\newblock {\em \emph{The Astrophysical Journal Letters}}, 934(1):L7.
+
+\bibitem[Riess et~al., 2022b]{2022riess}
+Riess, A.~G., Yuan, W., Macri, L.~M., Scolnic, D., Brout, D., Casertano, S.,
+  Jones, D.~O., Murakami, Y., Anand, G.~S., Breuval, L., et~al. (2022b).
+\newblock A comprehensive measurement of the local value of the hubble constant
+  with 1 km s- 1 mpc- 1 uncertainty from the hubble space telescope and the
+  sh0es team.
+\newblock {\em The Astrophysical Journal Letters}, 934(1):L7.
+
+\bibitem[Riess, 2012]{2012riess}
+Riess, A. G. e.~a. (2012).
+\newblock Cepheid calibration of the distance to m31.
+\newblock {\em ApJ}, 745:156.
+
+\bibitem[Rubin and Ford, 1980]{Rubin1980}
+Rubin, V.~C. and Ford, W.~K., J. (1980).
+\newblock Rotation of the andromeda nebula from a spectroscopic survey of
+  emission regions.
+\newblock {\em ApJ}, 238:471--487.
+
+\bibitem[Russell, 1913]{russell1913}
+Russell, H.~N. (1913).
+\newblock On calibrating the cepheid period–luminosity relation.
+\newblock {\em Annals of Harvard College Observatory}, 60:343--.
+
+\bibitem[Russell, 1914]{1914russellvariables}
+Russell, H.~N. (1914).
+\newblock On the causes of stellar variability.
+\newblock {\em Astrophysical Journal}, 39:1--24.
+
+\bibitem[Sandage, 1958]{1958sandage}
+Sandage, A. (1958).
+\newblock Current problems in the extragalactic distance scale.
+\newblock {\em The Astrophysical Journal}, 127:513.
+
+\bibitem[Sandage, 1981]{Sandage1981}
+Sandage, A. (1981).
+\newblock {\em The Universe at Large}.
+\newblock University of Chicago Press.
+
+\bibitem[Sandage et~al., 2004]{2004sandage}
+Sandage, A., Tammann, G., and Reindl, B. (2004).
+\newblock New period-luminosity and period-color relations of classical
+  cepheids-ii. cepheids in lmc.
+\newblock {\em Astronomy \& Astrophysics}, 424(1):43--71.
+
+\bibitem[Schmidt et~al., 1998]{Schmidt1998}
+Schmidt, B.~P., Suntzeff, N.~B., Phillips, M.~M., Schommer, R.~A., Clocchiatti,
+  A., Kirshner, R.~P., et~al. (1998).
+\newblock The high‑z supernova search: Measuring cosmic deceleration and
+  global curvature of the universe using type ia supernovae.
+\newblock {\em arXiv:astro‑ph/9805200}.
+
+\bibitem[{Schoolphysics}, nd]{schoolphysics_cepheid}
+{Schoolphysics} (n.d.).
+\newblock Cepheid variables.
+
+\bibitem[Schwarz, 2003]{quark_hadron_transition}
+Schwarz, D.~J. (2003).
+\newblock The first second of the universe.
+\newblock {\em CERN Yellow Report}.
+\newblock Quark–hadron transition and hadron formation in the early universe.
+
+\bibitem[Schwarzschild, 1900]{1900schwarzschild}
+Schwarzschild, K. (1900).
+\newblock {\"U}ber das gesetz der energieverteilung im spektrum der fixsterne.
+\newblock {\em Astronomische Nachrichten}, 152:1--10.
+\newblock English title: ``On the Law of Energy Distribution in the Spectra of
+  Fixed Stars''.
+
+\bibitem[Shapiro and Teukolsky, 1983]{ShapiroTeukolsky1983}
+Shapiro, S.~L. and Teukolsky, S.~A. (1983).
+\newblock {\em Black Holes, White Dwarfs, and Neutron Stars: The Physics of
+  Compact Objects}.
+\newblock Wiley, New York, USA.
+
+\bibitem[Shapley, 1914]{1914shapley}
+Shapley, H. (1914).
+\newblock On the nature of cepheid variables.
+\newblock {\em Astrophysical Journal}, 40:448--465.
+
+\bibitem[Shapley, 1918]{shapley1918}
+Shapley, H. (1918).
+\newblock Studies based on the colors and magnitudes in stellar clusters: The
+  luminosities and distances of 139 cepheid variables.
+\newblock {\em Astrophysical Journal}, 48:89--.
+
+\bibitem[Shapley, 1921]{Shapley1921}
+Shapley, H. (1921).
+\newblock The scale of the universe.
+\newblock {\em Bulletin of the National Research Council}, 2:171.
+
+\bibitem[Simon, 2019]{2019simon}
+Simon, J.~D. (2019).
+\newblock The faintest dwarf galaxies.
+\newblock {\em ARA\&A}, 57:375.
+
+\bibitem[Skrutskie and et~al., 2006]{Skrutskie2006}
+Skrutskie, M.~F. and et~al. (2006).
+\newblock The two micron all sky survey (2mass).
+\newblock {\em The Astronomical Journal}, 131(2):1163--1183.
+
+\bibitem[Smith, 1995]{Smith1995}
+Smith, H.~A. (1995).
+\newblock Rr lyrae stars.
+\newblock {\em Cambridge Astrophysics Series}, 27.
+
+\bibitem[Sofue, 2013]{Sofue2013}
+Sofue, Y. (2013).
+\newblock Rotation curve and mass distribution in the milky way and spiral
+  galaxies.
+\newblock {\em PASJ}, 65:118.
+
+\bibitem[Springel, 2006]{Springel2006}
+Springel, V. e.~a. (2006).
+\newblock Simulations of the formation, evolution and clustering of galaxies
+  and quasars.
+\newblock {\em Nature}, 440:1137.
+
+\bibitem[Stahler and Palla, 2004]{Stahler2004}
+Stahler, S.~W. and Palla, F. (2004).
+\newblock {\em The Formation of Stars}.
+\newblock Wiley-VCH, 1st edition.
+\newblock Comprehensive review of protostellar contraction and nuclear
+  ignition.
+
+\bibitem[{Storm} et~al., 2004]{2004storm}
+{Storm}, J., {Carney}, B.~W., {Gieren}, W.~P., {Fouqu{\'e}}, P., {Latham},
+  D.~W., and {Fry}, A.~M. (2004).
+\newblock {The effect of metallicity on the Cepheid Period-Luminosity relation
+  from a Baade-Wesselink analysis of Cepheids in the Galaxy and in the Small
+  Magellanic Cloud}.
+\newblock {\em \aap}, 415:531--547.
+
+\bibitem[Storm et~al., 2011]{2011storm}
+Storm, J., Gieren, W., Fouque, P., Barnes, T.~G., Pietrzy{\'n}ski, G.,
+  Nardetto, N., Weber, M., Granzer, T., and Strassmeier, K. (2011).
+\newblock Calibrating the cepheid period-luminosity relation from the infrared
   surface brightness technique-i. the p-factor, the milky way relations, and a
-  universal k-band relation}, Astronomy \& Astrophysics \textbf{534} (2011),
-  A94.
+  universal k-band relation.
+\newblock {\em Astronomy \& Astrophysics}, 534:A94.
 
-\bibitem[STR04]{2004sandage}
-A~Sandage, GA~Tammann, and Bernd Reindl, \emph{New period-luminosity and
-  period-color relations of classical cepheids-ii. cepheids in lmc}, Astronomy
-  \& Astrophysics \textbf{424} (2004), no.~1, 43--71.
+\bibitem[Struve, 1928]{1928struve}
+Struve, O. (1928).
+\newblock Observations of cepheid spectra.
+\newblock {\em Astrophysical Journal}, 67:xxx--xxx.
+
+\bibitem[{Svolopoulos}, 1960]{1960Svolopoulos}
+{Svolopoulos}, S.~N. (1960).
+\newblock {Six-color photometry of ten classical Cepheids.}
+\newblock {\em \aj}, 65:473--480.
+
+\bibitem[Tamm, 2012]{2012tamm}
+Tamm, A. e.~a. (2012).
+\newblock Stellar mass map and dark matter distribution in m31.
+\newblock {\em A\&A}, 546:A4.
+
+\bibitem[{Tammann} et~al., 2003]{2003tammann}
+{Tammann}, G.~A., {Sandage}, A., and {Reindl}, B. (2003).
+\newblock {New Period-Luminosity and Period-Color relations of classical
+  Cepheids: I. Cepheids in the Galaxy}.
+\newblock {\em \aap}, 404:423--448.
+
+\bibitem[Tempel, 2014]{Tempel2014}
+Tempel, E. e.~a. (2014).
+\newblock Detecting filamentary patterns in the cosmic web.
+\newblock {\em MNRAS}, 438:3465.
+
+\bibitem[Tully, 1982]{Tully1982}
+Tully, R.~B. (1982).
+\newblock The local supercluster.
+\newblock {\em ApJ}, 257:389.
+
+\bibitem[Tully, 1987]{Tully1987}
+Tully, R.~B. (1987).
+\newblock Nearby galaxy flows and the pisces--cetus supercluster.
+\newblock {\em ApJ}, 321:280.
+
+\bibitem[Tully, 2014]{Tully2014}
+Tully, R. B. e.~a. (2014).
+\newblock The laniakea supercluster of galaxies.
+\newblock {\em Nature}, 513:71.
+
+\bibitem[Vallée, 2017]{Vallée2017}
+Vallée, J.~P. (2017).
+\newblock Catalog of milky way spiral arms.
+\newblock {\em ApJS}, 228:2.
+
+\bibitem[van~der Marel, 2012]{2012vanDerMarel}
+van~der Marel, R. P. e.~a. (2012).
+\newblock The m31 velocity vector and future milky way merger.
+\newblock {\em ApJ}, 753:8.
+
+\bibitem[Wallerstein, 2002]{Wallerstein2002}
+Wallerstein, G. (2002).
+\newblock The cepheids of population ii and related stars.
+\newblock {\em Publications of the Astronomical Society of the Pacific},
+  114:689--699.
+
+\bibitem[Wegg and Gerhard, 2015]{Wegg2015}
+Wegg, C. and Gerhard, O. (2015).
+\newblock Mapping the three-dimensional density of the galactic bulge with vvv
+  red clump stars.
+\newblock {\em MNRAS}, 450:4050.
+
+\bibitem[{Welch}, 1994]{1994Welch}
+{Welch}, D.~L. (1994).
+\newblock {Near-Infrared Variants of the Barnes-Evans Method for Finding
+  Cepheid Distances Calibrated With High-Precision Angular Diameters}.
+\newblock {\em \aj}, 108:1421.
+
+\bibitem[{Wesselink}, 1946]{1946wesselink}
+{Wesselink}, A.~J. (1946).
+\newblock {The observations of brightness, colour and radial velocity of
+  {\ensuremath{\delta}} Cephei and the pulsation hypothesis (Errata: 10 258,
+  310)}.
+\newblock {\em \bain}, 10:91.
+
+\bibitem[{Wesselink}, 1969]{1969wesselink}
+{Wesselink}, A.~J. (1969).
+\newblock {Surface brightnesses in the U, B, V system with applications of
+  M\_{\ensuremath{\upsilon}} and dimensions of stars}.
+\newblock {\em \mnras}, 144:297.
+
+\bibitem[{Whiteoak}, 1966]{1966Whiteoak}
+{Whiteoak}, J.~B. (1966).
+\newblock {The Wavelength Dependence of Interstellar Extinction}.
+\newblock {\em The Astrophysical Journal}, 144:305.
+
+\bibitem[Wilson, 1930]{1930wilson}
+Wilson, O.~C. (1930).
+\newblock Phase relationships in cepheid variables.
+\newblock {\em Astrophysical Journal}, 72:xxx--xxx.
+
+\bibitem[Woosley and Heger, 2007]{woosley2007}
+Woosley, S.~E. and Heger, A. (2007).
+\newblock Nucleosynthesis and remnants in massive stars of solar metallicity.
+\newblock {\em arXiv e‑prints}.
+\newblock Detailed models of nucleosynthesis in supernovae and stellar
+  remnants.
+
+\bibitem[Woosley and Weaver, 1995]{WoosleyWeaver1995}
+Woosley, S.~E. and Weaver, T.~A. (1995).
+\newblock The evolution and explosion of massive stars. ii. explosive
+  hydrodynamics and nucleosynthesis.
+\newblock {\em The Astrophysical Journal Supplement Series}, 101(2):181--235.
+
+\bibitem[Woosley and Weaver, 2002]{woosley2002}
+Woosley, S.~E. and Weaver, T.~A. (2002).
+\newblock {\em The Physics of Type Ia Supernovae}, volume~40.
+\newblock Annual Review of Astronomy and Astrophysics.
+
+\bibitem[Zhevakin, 1963]{1963zhevakin}
+Zhevakin, S. (1963).
+\newblock Physical basis of the pulsation theory of variable stars.
+\newblock {\em Annual Review of Astronomy and Astrophysics, vol. 1, p. 367},
+  1:367.
+
+\bibitem[Zhevakin, 1953]{1953zhevakin}
+Zhevakin, S.~A. (1953).
+\newblock Physical basis of the pulsation theory of variable stars.
+\newblock {\em Soviet Astronomy}, 31:594--598.
+
+\bibitem[{Zhevakin}, 1959]{1959zhevakin}
+{Zhevakin}, S.~A. (1959).
+\newblock {On the Pulsational Theory of Stellar Variability. VI. (A Unified
+  Interpretation of Various Types of Variability).}
+\newblock {\em Soviet Astronomy}, 3:913.
+
+\bibitem[Z{\"o}llner, 1861]{1861zoellner}
+Z{\"o}llner, J. C.~F. (1861).
+\newblock {\em Photometrische Untersuchungen}.
+\newblock Wilhelm Engelmann, Leipzig.
 
 \end{thebibliography}

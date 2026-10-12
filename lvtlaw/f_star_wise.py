@@ -14,9 +14,10 @@ Function contained:
 '''
 module = 'f_star_wise'
 #####################################################################
-from data.datamapping import dis_flag, flags, wes_show, del_mu, s, plots, mag, data_out, process_step, col_lin, col_dot, col_das, rd_avg_drop, mode, plot_every_n_star, file_name
+from lvtlaw.datamapping import *
 from lvtlaw.a_utils import imgsave
 import pandas as pd
+import itertools
 import matplotlib.pyplot as plt
 #####################################################################
 def star_frame(data, dis_flag=dis_flag, flags=flags, wes_show=wes_show):
@@ -84,7 +85,8 @@ def get_error_pair(star_rd_mu, flags = flags, wes_show = wes_show, del_mu = del_
                     else:
                         solution_mu = float(min_var_indx[9:])
                     mu_rd_dict[f'mu{f}{ab}{col}{d}'] = solution_mu
-                    mu_rd_dict[f'vr{f}{ab}{col}{d}'] = min_var_indx
+                    mu_rd_dict[f'vr{f}{ab}{col}{d}'] = variance_over_mu[min_var_indx]
+
     return mu_rd_dict
 #####################################################################
 def correction_rd_mu(stars_rd_mu_list, raw, plots=plots, s=s ):
@@ -151,6 +153,43 @@ def plot_star_rd_mu(i, stars_rd_mu_list, correction, flag, ab, dis, wes_show = w
         imgsave(title,5,fil='pdf', p=1)
     plt.show()
 #####################################################################
+def plot_stars_rd_mu(starlist, stars_rd_mu_list, correction, flag, ab, dis, col, s=s):
+    stars = {}
+    for i in starlist:
+        stars[i] = stars_rd_mu_list[i]
+    fig, axs = plt.subplots(2, 2, figsize=(13, 5), sharey='row')
+    axs = axs.flatten()  # Flatten for easy indexing
+    for k, i in enumerate(starlist):
+        del_E = stars[i][[f'{flag}{ab}{col}{dis}rd_{mu}' for mu in del_mu]]
+        mu_c = correction[f'mu{flag}{ab}{col}{dis}'].iloc[i]
+        EBV_c = correction[f'rd{flag}{ab}{col}{dis}'].iloc[i]
+# === Plotting ===
+        ax = axs[k]
+        #ax.invert_yaxis()
+        for j in range(len(mag)):
+            ax.plot(del_mu, del_E.iloc[j].values, col_lin[j], label='%s'%(mag[j]+ab))
+        ax.plot(del_mu, del_E.iloc[-1].values, col_das[0], label=f'rms')
+        ax.plot(mu_c, EBV_c, 'ko') 
+        ax.axhline(y=EBV_c, color='gray', linestyle='--')
+        ax.axvline(x=mu_c, color='gray', linestyle='--')
+        ax.annotate(f'{mu_c:.2f}', xy=(mu_c, axs[1].get_ylim()[-1]), xytext=(0, 5), textcoords='offset points', va='top', ha='left', fontsize=10, color='black')
+        ax.annotate(f'{EBV_c:.2f}', xy=(del_mu[-1], EBV_c), xytext=(5, 0), textcoords='offset points', va='bottom', ha='right', fontsize=10, color='black')
+        ax.set_xlabel(f' i | {correction.name.iloc[i]} | $\Delta \mu  $  ({col}  :  {mu_c:.3f}) ')
+        ax.set_ylabel(f'$\Delta E  $  ({col}  :  {EBV_c:.3f})')
+#        ax.set_ylim(-1, 1)
+    for ax in axs:
+#        ax.legend()
+        for spine in ax.spines.values():
+            spine.set_visible(False)
+    axs[0].legend()
+    plt.tight_layout()
+    title = f'{file_name}_{starlist[0]}_{starlist[1]}_{starlist[2]}_{starlist[3]}_star_{flag}{col}{dis}'
+    plt.suptitle(f'Distance Reddening correction for stars {starlist} for {col} with ({flag}) method.')
+    print(title)
+    if s==1:
+        imgsave(title,5,fil='pdf', p=1)
+    plt.show()
+#####################################################################
 def plot_star_rd_muM(index, stars_rd_mu_list, correction, flag, ab, dis, col = 'VI', s=s):
     fig, axs = plt.subplots(2, 2, figsize=(13, 5), sharex='col')
     axs = axs.flatten()  # Flatten for easy indexing
@@ -170,8 +209,8 @@ def plot_star_rd_muM(index, stars_rd_mu_list, correction, flag, ab, dis, col = '
         ax.annotate(f'{EBV_c:.2f}', xy=(del_mu[-1], EBV_c), xytext=(5, 0), textcoords='offset points', va='bottom', ha='right', fontsize=10, color='black')
         ax.axvline(x=mu_c, color='gray', linestyle='--')
         ax.annotate(f'{mu_c:.2f}', xy=(mu_c, axs[1].get_ylim()[-1]), xytext=(0, 5), textcoords='offset points', va='top', ha='left', fontsize=10, color='black')
-        ax.set_xlabel(f'{correction.name.iloc[i]} $\Delta \mu ({col} : {mu_c:.2f}, {EBV_c:.2f})$')
-        ax.set_ylabel(r'$\Delta E_{BV}$')
+        ax.set_xlabel(f'$\Delta \mu ({col} : {mu_c:.2f}, {EBV_c:.2f})$')
+        ax.set_ylabel(f'{correction.name.iloc[i]} | $\Delta E_B_V$')
 #        ax.set_ylim(-1, 1)
     for ax in axs:
 #        ax.legend()
@@ -186,4 +225,44 @@ def plot_star_rd_muM(index, stars_rd_mu_list, correction, flag, ab, dis, col = '
         imgsave(title,5,fil='pdf', p=1)
     plt.show()
 #####################################################################
+def plot_stars_rd_muSM(i, stars_rd_mu_list, correction, data, ab, col, flags=flags, dis_flag= dis_flag, s=0):    
+    stars = stars_rd_mu_list[i]
+    fig, axs = plt.subplots(len(flags), 2, figsize=(8, 3*len(flags)))
+    axs = axs.flatten()
+    for idx, (flag, dis) in enumerate(itertools.product(flags, dis_flag)):
+        del_E = stars[[f'{flag}{ab}{col}{dis}rd_{mu}' for mu in del_mu]]
+        mu_c  = correction[f'mu{flag}{ab}{col}{dis}'].iloc[i]
+        EBV_c = correction[f'rd{flag}{ab}{col}{dis}'].iloc[i]
+        ax = axs[idx]
+        for j, m in enumerate(mag):
+            ax.plot(del_mu, del_E.iloc[j].values, col_lin[j],label=f'{m}{ab}')
+#        ax.plot(del_mu, del_E.iloc[-1].values, col_das[0], label='rms')
+        ax.plot(mu_c, EBV_c, 'ko')
+        ax.axhline(EBV_c, color='gray', ls='--')
+        ax.axvline(mu_c,  color='gray', ls='--')
+        ax.scatter(mu_c, EBV_c, color='blue', s=50, zorder=5)
+        ax.axhline(EBV_c, color='gray', ls='--', lw=1)
+        ax.axvline(mu_c,  color='gray', ls='--', lw=1)
+        ax.annotate(f'{mu_c:.2f}', xy=(mu_c, ax.get_ylim()[-1]),
+                    xytext=(0, 5), textcoords='offset points', va='top', ha='left')
+        ax.annotate(f'{EBV_c:.2f}', xy=(ax.get_xlim()[-1], EBV_c),
+                    xytext=(5, 0), textcoords='offset points', va='top', ha='right')
+        ax.set_title(f'{flag} | {dis_label[dis_flag.index(dis)]}: {data[dis_list[dis_flag.index(dis)]].iloc[i] : .3f}')
+        ax.set_xlabel(f'{correction.name.iloc[i]} | $\Delta\mu$ ({col}: {mu_c:.3f})')
+        ax.set_ylabel(f'$\Delta E$ ({col}: {EBV_c:.3f})'        )
+        # Remove box frame
+        for spine in ax.spines.values():
+            spine.set_visible(False)
+    axs[0].legend()
+    plt.tight_layout()
+#    plt.suptitle(f'{col}-based distance–reddening corrections for Cepheid: {correction.name.iloc[i]}', y=1.02)
+    if s == 1:
+        title = f'star_{i}_{col}_{ab}_mu_vs_EBV'
+        imgsave(title,5,fil='pdf', p=1)
+    plt.show()
+#####################################################################
+
+
+
+
 print(f'* * {module} module loaded!')

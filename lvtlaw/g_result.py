@@ -12,7 +12,7 @@ Function contained:
     plotresultPL6()
 '''
 module = 'g_result'
-from data.datamapping import *
+from lvtlaw.datamapping import *
 from lvtlaw.a_utils import regression, pr_value, imgsave, merge_12
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -27,7 +27,7 @@ def correction_apply(data, correction, wes_show=wes_show, flags=flags, dis_flag=
                     corrected['mu'+f+ab+col+d] = data[dis_list[dis_flag.index(d)]] - correction['mu'+f+ab+col+d]
                     for m in mag:
                         ex = - R[m]*correction['rd'+f+ab+col+d] 
-                        mu = correction['mu'+f+ab+col+d] #
+                        mu =  correction['mu'+f+ab+col+d] 
                         corr = ex + mu
                         corrected[m+f+ab+col+d]=data['M_'+m+ab+d] + corr
     if s==1:
@@ -59,11 +59,11 @@ def corrected_PL(data, corrected, dis_flag, flag, s=1):
         for ab in mode:
             for i in range(len(mag)):
                 print('\n\t Mag: ', mag[i] + ab, '\t Method: ', flag, '\t Dis:', dis)
-                a,b,c,d,e,f,g = regression(data['logP']-1, data['M_'+mag[i]+ab+dis], '(logP - 1)', 'M__'+mag[i]+ab, 1)
+                a,b,c,d,e,f,g = regression(data['logP']-pivot, data['M_'+mag[i]+ab+dis], f'(logP - {pivot})', 'M__'+mag[i]+ab, 1)
                 PLW_struct = append_PLW(PLW_struct, mag[i] + ab, a, b, c, d, e, f, dis, g)
             # calibrated data
                 for col in wes_show:
-                    a,b,c,d,e,f,g = regression(corrected['logP']-1,corrected[mag[i]+flag+ab+col+dis], '(logP - 1)', 'M%s%s'%(mag[i]+ab,col), p = 1)
+                    a,b,c,d,e,f,g = regression(corrected['logP']-pivot,corrected[mag[i]+flag+ab+col+dis], f'(logP - {pivot})', 'M%s%s'%(mag[i]+ab,col), p = 1)
                     PLW_struct = append_PLW(PLW_struct, mag[i]+ab+col+flag, a, b, c, d, e, f, dis, g)
         PLW['name'] = PLW_struct[0]
         PLW['m'+dis] = PLW_struct[1]
@@ -105,7 +105,8 @@ def corrected_reg(data, corrected, dis_flag, plots=plots, wes_show = wes_show, f
         for f in flags:
             for col in wes_show:
                 for ab in mode:
-                    plotresultPL6_(merged_data, reg, col, dis, f, ab)
+                    for dis in dis_flag:
+                        plotresultPL6_(merged_data, reg, col, dis, f, ab)
     return reg, res, pre, merged_data
 
 
@@ -127,7 +128,14 @@ def print_PL(r, file_name, wes_show):
     standard  = pd.DataFrame(stt)
 
     return slope, intercept, serr, ierr, standard
+###########################################################################
 
+def update_result(data, result, cols):
+    for col in cols:
+        data[dis_list[0]] = result[f'muS0{col}{dis_flag[0]}']
+        data['EBV'] = result[f'rdS0{col}{dis_flag[0]}']
+        data.to_csv(f'./data/input/{file_name}_{col}{dis_flag[0]}.csv')
+        print(f'./data/input/{file_name}_{col}{dis_flag[0]}.csv')
 
 ###########################################################################
 
@@ -154,10 +162,10 @@ def plt_dev(col, dis_list, dis_flag, file_name = file_name, Rv=R_v, s=0):
 
 
 def plotresultPL6_(merged_data, merged_reg, col, dis, f, ab, s=s):
-    fig, axs = plt.subplots(2, 3, figsize=(18, 8), sharex='col')
+    fig, axs = plt.subplots(2, int(len(mag)/2), figsize=(18, 8), sharex='col')
     axs = axs.flatten()  # Flatten for easy indexing
     x = merged_data['logP'] - 1
-    for i, m in enumerate(mag[:6]):
+    for i, m in enumerate(mag):
         y = merged_data['M_' + m + ab + dis]
         y_cor = merged_data[m + f + ab+col + dis]
         # Get regression coefficients
@@ -178,8 +186,8 @@ def plotresultPL6_(merged_data, merged_reg, col, dis, f, ab, s=s):
         r_std = round(rres.std(ddof=0), 3)
         d_std = round(resd.std(ddof=0), 3)
         ax = axs[i]
-        ax.plot(x, y, col_dot[i], label=f'{m+ab} Band | $\sigma$ = {d_std}')
-        ax.plot(x, y_cor, 'ro', label=f'{m+ab} Band ({f}, {col}) | $\sigma$ = {r_std}')
+        ax.plot(x, y, col_dot[i], label=f'{m+ab} Band | $\\sigma$ = {d_std}')
+        ax.plot(x, y_cor, 'ro', label=f'{m+ab} Band ({f}, {col}) | $\\sigma$ = {r_std}')
         ax.plot(x, rpre, 'r-', label=f'$M_{m}^{f}$ = {ralpha:.3f}(logP - 1) + {rgamma:.3f}')
         ax.plot(x, pred, col_das[i], label=f'$M_{m}$ = {alpha:.3f}(logP - 1) + {gamma:.3f}')
         # Residual lines
@@ -209,10 +217,10 @@ def plotresultPL6_(merged_data, merged_reg, col, dis, f, ab, s=s):
     plt.show()     
 
 def plotresultPL6_compare(compare, wes, raw_reg, merged_data, merged_reg, col, dis, f, ab, s=s):
-    fig, axs = plt.subplots(2, 3, figsize=(18, 8), sharex='col')
+    fig, axs = plt.subplots(2, int(len(mag)/2), figsize=(18, 8), sharex='col')
     axs = axs.flatten()  # Flatten for easy indexing
     x = merged_data['logP'] - 1
-    for i, m in enumerate(mag[:6]):
+    for i, m in enumerate(mag):
         com = compare['M_' + m + ab + dis]
         y = merged_data['M_' + m + ab + dis]
         y_cor = merged_data[m + f + ab+col + dis]
@@ -236,9 +244,9 @@ def plotresultPL6_compare(compare, wes, raw_reg, merged_data, merged_reg, col, d
         r_std = round(rres.std(ddof=0), 3)
         d_std = round(resd.std(ddof=0), 3)
         ax = axs[i]
-        ax.plot(x, com, 'k.', label=f'Uncorrected | $\sigma$ = {raw_std}')
-        ax.plot(x, y, col_dot[i], label=f'Ist order correction ({f}, {wes}) | $\sigma$ = {d_std}')
-        ax.plot(x, y_cor, 'ro', label=f'calibrated {m+ab} ({f}, {wes}+{col}) | $\sigma$ = {r_std}')
+        ax.plot(x, com, 'k.', label=f'Uncorrected | $\\sigma$ = {raw_std}')
+        ax.plot(x, y, col_dot[i], label=f'Ist order correction ({f}, {wes}) | $\\sigma$ = {d_std}')
+        ax.plot(x, y_cor, 'ro', label=f'calibrated {m+ab} ({f}, {wes}+{col}) | $\\sigma$ = {r_std}')
         ax.plot(x, rpre, 'r-', label=f'$M_{m}^{f}$ = {ralpha:.3f}(logP - 1) + {rgamma:.3f}')
         ax.plot(x, pred, col_das[i], label=f'$M_{m}$ = {alpha:.3f}(logP - 1) + {gamma:.3f}')
         # Residual lines
@@ -269,10 +277,10 @@ def plotresultPL6_compare(compare, wes, raw_reg, merged_data, merged_reg, col, d
 
 
 def plotresultcleanPL6(merged_data, merged_reg, col, dis, f, ab, s=s):
-    fig, axs = plt.subplots(2, 3, figsize=(18, 8), sharex='col')
+    fig, axs = plt.subplots(2, int(len(mag)/2), figsize=(18, 8), sharex='col')
     axs = axs.flatten()  # Flatten for easy indexing
     x = merged_data['logP'] - 1
-    for i, m in enumerate(mag[:6]):
+    for i, m in enumerate(mag):
         y = merged_data['M_' + m + ab + dis]
         y_cor = merged_data[m + f + ab+col + dis]
         # Get regression coefficients
@@ -287,7 +295,7 @@ def plotresultcleanPL6(merged_data, merged_reg, col, dis, f, ab, s=s):
         r_std = round(rres.std(ddof=0), 3)
         d_std = round(resd.std(ddof=0), 3)
         ax = axs[i]
-        ax.plot(x, y_cor, 'ro', label=f'{m+ab} Band ({f}, {col}) | $\sigma$ = {r_std}')
+        ax.plot(x, y_cor, 'ro', label=f'{m+ab} Band ({f}, {col}) | $\\sigma$ = {r_std}')
         ax.plot(x, rpre, 'r-', label=f'$M_{m}^{f}$ = {ralpha:.3f}(logP - 1) + {rgamma:.3f}')
         ax.plot(x, pred, col_das[i], label=f'$M_{m}$ = {alpha:.3f}(logP - 1) + {gamma:.3f}')
         # Residual lines

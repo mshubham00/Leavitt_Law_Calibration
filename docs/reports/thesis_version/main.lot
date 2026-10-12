@@ -1,5 +1,20 @@
 \babel@toc {USenglish}{}\relax 
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {2.1}{\ignorespaces Extinction Law and corresponsing reddening ratio adopted from Table 4 of \cite {2007fouque} }}{27}{table.caption.14}%
-\contentsline {table}{\numberline {2.2}{\ignorespaces Conversion of astronomical distance units}}{29}{table.caption.15}%
+\contentsline {table}{\numberline {2.1}{\ignorespaces Extinction Law and corresponsing reddening ratio $R_V = 3.23$ adopted from Table 4 of \cite {2007fouque} }}{30}{table.caption.22}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {3.1}{\ignorespaces Distinct types of pulsating stars.}}{48}{table.caption.30}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {4.1}{\ignorespaces List of 13 photometric outliers (out of 143 GCCs) with corresponding color index}}{61}{table.caption.36}%
+\contentsline {table}{\numberline {4.2}{\ignorespaces Comparison of extinction-law $\left (A_{\lambda }/A_V\right )$ between the values from \cite {2007fouque} with $R_V = 3.23$ and the updated ratios computed with $R_V = 3.19$ and wesenheit function.}}{64}{table.caption.38}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {5.1}{\ignorespaces Slope and Intercept of BVIJHK Leavitt Law and $(V-K)$ wesenheit variants derived using IRSB as well as Gaia based distances of 121 Galactic Cepheids. Smaller error in correlation coefficients suggest Gaia based PL relations are much tighter than IRSB one. }}{71}{table.caption.48}%
+\contentsline {table}{\numberline {5.2}{\ignorespaces Slopes of residual correlation for IRSB- and Gaia- based distances, for $V-I$ and $V-K$ based wesenheits. Note the systematic decline in errors as the slope $\rho $ approaching to 1 with increasing wavelength. Yellow highlighted: $\rho ^{VI}_{\lambda ,M}$ utilized by Madore, whereas I used $\rho ^{VK}_{\lambda ,S}$. }}{75}{table.caption.51}%
+\contentsline {table}{\numberline {5.3}{\ignorespaces Distance-Reddening calibrated 121 GCCs based Period--Luminosity and Wesenheit relations ($\log P - 1$) }}{81}{table.caption.59}%
+\contentsline {table}{\numberline {5.4}{\ignorespaces Galactic Cepheid Dataset}}{82}{table.5.4}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {7.1}{\ignorespaces Distances to the Magellanic Clouds derived using IRSB and Gaia calibrations}}{98}{table.caption.66}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {A.1}{\ignorespaces Input data file contains following information.}}{104}{table.caption.69}%
+\contentsline {table}{\numberline {A.2}{\ignorespaces Parameters in datamapping.py file }}{105}{table.caption.70}%

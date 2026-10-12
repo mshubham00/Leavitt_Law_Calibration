@@ -1,12 +1,12 @@
 
 \chapter{Observables - Luminosity, Reddening and Distance}
-\input{chapters/content/0_2_plot_nebula.tex}
+\input{chapters/content/0_2_plot.tex}
 
 \section{Why Does a Star Shine?}
 
-The luminosity of a star originates from nuclear fusion reactions occurring in its core. During star formation, gravitational collapse of interstellar gas leads to extremely high central pressures and densities, raising the core temperature to several million kelvin. Under these conditions, thermal energies become sufficient to overcome the Coulomb repulsion between protons, enabling nuclear fusion.
+The luminosity of a star originates from nuclear fusion reactions occurring in its core. During star formation, gravitational collapse of interstellar gas leads to extremely high central pressures and densities, raising the core temperature to several million Kelvin. Under these conditions, thermal energies become sufficient to overcome the Coulomb repulsion between protons, enabling nuclear fusion.
 
-In the Sun and other low-mass main-sequence stars, energy production is dominated by the proton--proton (pp) chain, in which hydrogen nuclei fuse to form helium through a sequence of reactions discussed in the following chapter. Approximately $7 \times 10^{8}$~metric tons of hydrogen are converted into helium each second, releasing energy according to mass--energy equivalence.
+In the Sun and other low-mass main-sequence stars, energy production is dominated by the proton--proton (pp) chain, in which hydrogen nuclei fuse to form helium through a sequence of reactions discussed in the following chapter \ref{pulsating-star}. Approximately $7 \times 10^{8}$~metric tons of hydrogen are converted into helium each second, releasing energy according to mass--energy equivalence.
 
 A fraction of this energy is carried away by neutrinos, which escape the stellar interior almost unimpeded, while the remainder is transported outward by radiation and convection and ultimately emitted from the stellar surface as electromagnetic radiation. This radiation spans a broad range of wavelengths, with the peak emission in the optical band for solar-type stars, and propagates through space as starlight.
 
@@ -57,8 +57,8 @@ s = \int_0^\infty f_\lambda E_\lambda \, \mathrm{d}\lambda .
 In observational astronomy, this integrated flux is recorded within discrete wavelength intervals,
 referred to as \textit{photometric bands}, and is commonly expressed in logarithmic units known as \textit{magnitudes}.
 
-\subsection{Magnitude Scale}
-The ancient Greek astronomer Hipparchus (c. 190 – c. 120 BCE) compiled a star catalogue and introduced a scale of stellar brightness in units of magnitude (mag), where 1~mag corresponds to the brightest stars visible to the unaided eye, and 6~mag corresponds to the dimmest. The magnitude scale was revisited by Pogson in the 1850s \cite{1856pogson} and later calibrated by Zöllner in 1861 using a visual photometer \cite{1861zoellner}. In their work, comparisons were made between artificial and real stars using two Nicol prisms to establish a more precise magnitude scale.  
+\subsection{Magnitude Scale ($m_\lambda$)}
+The ancient Greek astronomer Hipparchus (c. 190 – c. 120 BCE) compiled a star catalogue and introduced a scale of stellar brightness in units of magnitude (mag), where 1~mag corresponds to the brightest stars visible to the unaided eye, and 6~mag corresponds to the dimmest. The magnitude scale was revisited by \cite{1856pogson} and later calibrated by \cite{1861zoellner} using a visual photometer. In their work, comparisons were made between artificial and real stars using two Nicol prisms to establish a more precise magnitude scale.  
 
 According to Pogson's definition, the difference in apparent magnitudes between two stars is proportional to the logarithm of their radiation flux ratio ($s_1/s_2$), i.e.,
 
@@ -66,41 +66,41 @@ According to Pogson's definition, the difference in apparent magnitudes between 
 m_1 - m_2 = 2.5 \log\left(\frac{s_1}{s_2}\right).
 \end{equation}
 
-Thus, a difference of 5 magnitudes corresponds to a brightness ratio of 100. For example, $\alpha$~Lyr (Vega) has a visual magnitude of 0.14~mag, while $\alpha$~Cyg (Deneb) has 1.33~mag, making it fainter than Vega. The Sun, Moon, Venus, Mars, Jupiter, and three stars—Sirius, Canopus, and $\alpha$~Centauri—are the only celestial objects with negative apparent magnitudes, placing them among the brightest objects in the night sky.
+Thus, a difference of 5 magnitudes corresponds to a brightness ratio of 100. For example, $\alpha$~Lyr (Vega) has a visual magnitude of 0.14~mag, while $\alpha$~Cyg (Deneb) has 1.33~mag, making it fainter than Vega. The Sun, Moon, Venus, Mars, Jupiter, and three stars—Sirius, Canopus, and $\alpha$~Centauri—are the only celestial objects with negative apparent magnitudes, placing them among the brightest objects in the sky.
 
 
-\subsection{Color Index \textit{($m_1 - m_2$)}}
+\subsection{Color Index ($m_1 - m_2$)}
 
-The difference between stellar magnitudes measured in two distinct wavelength bands is termed the \emph{color index}. Because stellar flux varies with wavelength, the measured magnitude of a star depends on the observational filter employed, leading to observable color differences among stars.
+Stellar flux varies with wavelength. Consequently, the measured magnitude of a star depends on the observational filter employed, leading to relative differences between photometric bands. In astronomy, the difference between the observed stellar fluxes in two distinct wavelength bands is termed the \emph{color index}.
 
 As an illustration, Betelgeuse appears brighter than Sirius when observed through a red filter, despite Sirius being the brightest star in the visual band. This contrast reflects the differing spectral energy distributions of the two stars: Sirius emits most strongly at shorter wavelengths, whereas Betelgeuse radiates predominantly at longer wavelengths. Such variations arise from differences in their photospheric effective temperatures.
 
-The physical basis for interpreting stellar colors was established by Karl Schwarzschild, who demonstrated that the shape of a stellar spectral energy distribution is primarily governed by temperature. His analysis showed that color measurements provide a quantitative means of estimating stellar photospheric temperatures \citep{1900schwarzschild}.
+The physical basis for interpreting stellar colors was established by \cite{1900schwarzschild}, who demonstrated that the shape of a stellar spectral energy distribution is primarily governed by temperature. His analysis showed that color measurements provide a quantitative means of estimating stellar photospheric temperatures.
 
 Building upon this theoretical framework, W.~W.~Morgan and H.~L.~Johnson developed a standardized photometric system to measure stellar colors and magnitudes reliably. The Johnson--Morgan UBV system consists of three broadband filters with effective wavelengths in the ultraviolet ($\lambda_{\mathrm{eff}} = 365$~nm), blue ($\lambda_{\mathrm{eff}} = 440$~nm), and visual ($\lambda_{\mathrm{eff}} = 548$~nm) regions \citep{1953johnson}. This system was subsequently extended into the red and infrared through the addition of further passbands, commonly specified in micrometers ($\mu$m):
-
 \[
 \begin{array}{ccccccccccccc}
 \text{Band} & U & B & V & R & I & J & H & K & L & M & N & Q \\
-\lambda_{\mathrm{eff}}~(\mu\mathrm{m}) & 
-0.36 & 0.44 & 0.55 & 0.70 & 0.90 & 1.25 & 1.63 & 2.20 & 3.60 & 5.00 & 10.6 & 21
+\lambda_{\mathrm{eff}}~(\mu\mathrm{m}) &
+0.36 & 0.44 & 0.55 & 0.70 & 0.90 & 1.25 & 1.63 & 2.20 & 3.60 & 5.00 & 10.6 & 21 \\
+\Delta\lambda~(\mu\mathrm{m}) &
+0.07 & 0.09 & 0.09 & 0.22 & 0.24 & 0.30 & 0.30 & 0.40 & 0.75 & 1.0 & 5.0 & 8.0
 \end{array}
 \]
-
 By combining broadband photometry with spectral classification, Morgan further developed the MK system, which allows stars to be classified simultaneously by effective temperature (spectral type) and luminosity class. These advances established color indices as a fundamental observational tool in stellar astrophysics, providing a quantitative link between stellar color and physical properties.
 
 The stellar energy distribution can be approximated by Planck’s radiation law. Adopting Wien’s approximation \(\left( c_2/(\lambda T) \gg 1 \right)\), the monochromatic radiative flux is given by
 \begin{equation}
 F_\lambda \propto \exp\!\left(-\frac{c_2}{\lambda T_{\mathrm{eff}}}\right),
 \end{equation}
-where \(c_2 = hc/k_B \) is the second radiation constant equivalent to = 1.4388 cm K.
+where \(c_2 = hc/k_B \) is the second radiation constant equivalent to 1.4388 cm K.
 
 Corresponding magnitude would be,
 \begin{equation}
 m_\lambda = -2.5 \log F_\lambda + const.
 \end{equation}
 
-Assuming that the detector sensitivity peaks near the effective wavelengths of the photometric filters, the relation between the color index \(B-V\) ($m_B - m_V$) and the stellar effective temperature can be expressed as
+Assuming that the detector sensitivity peaks near the effective wavelengths of the photometric filters, the relation between the color index \(B-V\) and the stellar effective temperature can be expressed as
 \begin{equation}
 B - V = \frac{2.5\, c_2 \log e}{T_{\mathrm{eff}}}
 \left(\frac{1}{\lambda_B} - \frac{1}{\lambda_V} \right) + \mathrm{const.}
@@ -113,17 +113,15 @@ B - V \approx \frac{0.7 \times 10^{4}}{T_{\mathrm{eff}}} + \mathrm{const.}
 
 This expression clearly demonstrates that the color index \(B-V\) provides a direct estimate of a star's effective temperature, highlighting the utility of photometric measurements in stellar astrophysics.
 
-Adopting \(\alpha\)~Lyr (Vega; spectral type A0V) as the standard star, the photometric zero points in the \(U\), \(B\), and \(V\) bands are defined such that
+For \(\alpha\)~Lyr (Vega; spectral type A0V) - the standard star, the photometric zero points in the \(U\), \(B\), and \(V\) bands are defined such that
 \begin{equation}
 U - B = B - V = 0,
 \end{equation}
-implying \(C_{UB} = C_{BV} = 0\).
 
-For convenience, the color index \(U-B\) is denoted by \(C_{UB}\). Stars with $C_{BV} \lesssim 0.5$ are classified as blue, while those with $C_{BV} \gtrsim 1.5$ are considered red.
+Stars with $B-V \lesssim 0.5$ are classified as blue, while those with $B-V \gtrsim 1.5$ are considered red.
 
-\vspace{2cm}
 
-\subsection{Absolute Magnitude (\textit{M})}
+\subsection{Absolute Magnitude ($M_\lambda$)}
 When a luminous object is observed from different distances, it appears to have varying brightness because flux decreases with increasing distance. So, how can we compare the intrinsic brightness of two remote stars?  To enable standardized comparisons, astronomers adopt a reference distance of 10 parsecs (pc). The radiant flux of a star measured at this distance defines its \textit{absolute magnitude}, denoted as $M_\lambda$. The subscript $\lambda$ indicates the specific photometric band (filter) used in the observation, as brightness varies across different bands.
 
 Given this framework, if $m_\lambda$ represents the apparent magnitude of a star observed at a distance \textit{d} (in parsecs), and $M_\lambda$ is its absolute magnitude, the relationship between them is given by the following formula:
@@ -135,23 +133,18 @@ M_\lambda = m_\lambda - 5\log{d[pc]}  + 5
 
 The above is a simple relation which relates the observable luminosity with the distance of any stellar object. 
 
-\begin{notebox}[sharp corners, width=\textwidth]{True Absolute Magnitude}
-The above relation must be corrected for the effect of interstellar extinction, $A_\lambda$, to obtain the correct \textit{'photometric'} distance. 
-\begin{align}
-M_\lambda^0 = m_\lambda - A_\lambda - 5\log{d[pc]}  + 5 
-\end{align}
-\end{notebox}
+\input{chapters/content/0_2_note_trueabs.tex}
 
-\section{Interstellar Reddening}
 
-In photometric observations, the electromagnetic flux of starlight is quantified by counting the incoming photons within a specific wavelength range of the spectrum. Intervening gas in interstellar space absorbs most of the high-energy photons (X-rays and extreme ultraviolet) especially and scatters much of the light in the B and V bands. Radiation with wavelengths longer than the size of dust particles can pass through the interstellar medium largely unaffected, making the sky nearly transparent to infrared, microwave, and radio waves. The diminishing of short-wavelength luminosity makes the source appear redder than its intrinsic color, giving rise to the effect known as reddening.
+\section{Interstellar Reddening $E(B-V)$}
+
+In photometric observations, the electromagnetic flux of starlight is quantified by counting the incoming photons within a specific wavelength range of the spectrum. Intervening gas in interstellar space absorbs most of the high-energy photons (X-rays and extreme ultraviolet) especially and scatters much of the light in the U and B bands. Radiation with wavelengths longer than the size of dust particles can pass through the interstellar medium largely unaffected, making the sky nearly transparent to infrared, microwave, and radio waves. The diminishing of short-wavelength luminosity makes the source appear redder than its intrinsic color, giving rise to the visual effect known as reddening.
 
 
 \input{chapters/content/0_2_plot_extinction.tex}
 
 
-This phenomenon can be illustrated by comparing the observed SED of stellar light to the theoretical SED predicted by Planck's Law, as shown in Figure \ref{extinction}. \\
-Let B and V be the apparent luminosities of a star as received by the observer, while $B_0$ and $V_0$ represent the unextincted luminosities. Then, the effect of extinction can be formulated as follows:
+This phenomenon can be illustrated by comparing the observed SED of stellar light to the theoretical SED predicted by Planck's Law, as shown in Figure \ref{extinction}. Let B and V be the apparent luminosities of a star as received by the observer, while $B_0$ and $V_0$ represent the unextincted luminosities. Then, the effect of extinction can be formulated as follows:
 \begin{align}
 A_B = B - B_0 \\
 A_V = V - V_0 
@@ -162,9 +155,9 @@ From the plot, it can be noticed that B band experienced higher extinction than 
 E(B-V) = A_B - A_V = (B - V) - (B - V)_0 
 \end{align} 
 
-Color excess is more widely used than extinction to describe the effect of the ISM on starlight, as it can be measured photometrically and do not depend on the measurement of distance to the target. 
+Color excess is more widely used than extinction to describe the effect of the inter stellar medium (ISM) on starlight, as it can be measured photometrically and do not depend on the measurement of distance to the target. 
 
-\subsection{Reddening Ratio}
+\subsection{Reddening Ratio ($R_{\lambda}$)}
 The ratio of total-to-selective absorption, $R_\lambda$, summarizes the effect of extinction and reddening on the intensity of light along the line-of-sight. It is formulated as:
 
 \begin{align}\label{eq:reddening_ratio}
@@ -182,9 +175,7 @@ The above equation is used for transforming measured color excess into extinctio
 	\frac{A_B}{A_V} = & 1 + \frac{1}{R_V}
 \end{align}
 
-\cite{1989cardelli} generalized the extinction law in this form for all the bands with V-band as reference as discussed in the following section. 
-
-An another important aspect of the reddening ratio is to convert color excess from one color basis, say $E_{BV}$ to another, $E_{1 2}$. It can be done as follows:
+\cite{1989cardelli} generalized the extinction law in this form for all the bands with V-band as reference as discussed in the following section. Yet, an another important aspect of the reddening ratio is to convert color excess from one color basis, say $E_{BV}$ to another, $E_{1 2}$. It can be done as follows:
 
 \begin{align*}
 E_{12} = (R_{1}^{BV} - R_{2}^{BV}) E_{BV} 
@@ -199,7 +190,7 @@ This leads the transformation law for reddening ratio $R_\lambda$:
 
 The values of $R_\lambda^{BV}$ are calculated by \cite{2007fouque} and given in Table \ref{fouque}.
 
-\subsection{Interstellar Extinction Law}
+\subsection{Interstellar Extinction Law ($A_{\lambda}$)}
 
 \input{chapters/content/0_2_plot_extinctionlaw.tex}
 
@@ -215,9 +206,9 @@ Here $a(\lambda^{-1})$ and $b(\lambda^{-1})$ are determined empirically for diff
 \input{chapters/content/0_2_table_fouque.tex}
 
 
-\subsection{Wesenheit Function: Reddening-free Magnitude}
+\subsection{Wesenheit Function: Reddening-free Magnitude ($W_{\lambda}^{12}$)}
 
-To mitigate the effects of interstellar extinction, \citet{1982madore} introduced a multiband pseudo-magnitude based on the reddening ratio, termed as the \emph{Wesenheit magnitude}. By construction, this quantity is insensitive to interstellar reddening, provided that the reddening law is known accurately. Its formulation proceeds as follows.
+To mitigate the effects of interstellar extinction, \citet{1982madore} introduced a multiband pseudo-magnitude based on the reddening ratio, termed as the \emph{Wesenheit magnitude}. By construction, this quantity is insensitive to interstellar reddening, provided that the reddening law is accurately known. Its formulation proceeds as follows.
 
 The reddening ratio is defined as
 
@@ -234,7 +225,7 @@ m_\lambda - R_\lambda^{12}(m_1 - m_2)
 \end{align}
 All terms on the left-hand side, except for $R_\lambda^{12}$, are observable quantities. The equality demonstrates that this linear combination of apparent magnitudes is equivalent to the corresponding intrinsic quantity, implying that it is unaffected by reddening. Consequently, if the reddening law is known with sufficient precision, the Wesenheit magnitude attains identical values for reddened and unreddened sources, thereby constituting a reddening-free observable.
 
-\input{chapters/content/0_2_note_wesenheit.tex}
+%\input{chapters/content/0_2_note_wesenheit.tex}
 
 A comparison between the definitions of the intrinsic absolute magnitude and the Wesenheit magnitude clarifies their respective dependencies:
 \begin{align}\label{mag_eq}
@@ -247,7 +238,7 @@ where $\mu$ denotes the distance modulus.
 
 The absolute magnitude depends on four independent quantities: apparent magnitude, reddening ratio, color excess, and distance modulus. In contrast, the Wesenheit magnitude depends only on the apparent magnitude, reddening ratio, and distance modulus, and is independent of the color excess. Although defined for a specific color index, the Wesenheit formalism naturally forms a family of reddening-free magnitudes. For example, BVIJHK photometry allows fifteen independent color combinations, yielding fifteen Wesenheit families per band and a total of ninety reddening-free magnitudes derived from six apparent magnitudes.
 
-For a given photometric band, consistency among the values obtained from different Wesenheit families is expected if the adopted extinction law is correct. This property provides a means to test and calibrate the reddening law using multi-band photometry, an approach that is applied to the present dataset and discussed further in Chapter~4.
+For a given photometric band, consistency among the values obtained from different Wesenheit families is expected if the adopted extinction law is correct. This property provides a means to test and calibrate the reddening law using multi-band photometry, an approach that is applied to the present dataset and discussed further in Chapter \ref{datachap}.
 
 Finally, the propagation of measurement uncertainties in absolute and Wesenheit magnitudes is considered. With multi-epoch photometry, the apparent magnitudes can be determined with negligible uncertainty ($\delta m_\lambda = 0$), and assuming an accurate reddening law ($\delta R_\lambda = 0$), the dominant sources of error are the distance modulus ($\delta \mu$) and the color excess ($\delta E(B-V)$). From Eqs.~\eqref{mag_eq} and~\eqref{wes_eq}, one obtains
 \begin{align}\label{mag_error}
@@ -257,48 +248,20 @@ Finally, the propagation of measurement uncertainties in absolute and Wesenheit 
 \delta W_\lambda^{BV} &= -\delta \mu.
 \end{align}
 
-Both absolute and Wesenheit magnitudes are equally sensitive to uncertainties in the distance modulus. However, the Wesenheit magnitude is immune to errors in the color excess, a property that is central to this work as it enables a clean separation between distance- and reddening-related uncertainties for individual Cepheids.
-
-
-$\bar{W}^{12}_\lambda = \alpha^{12}_\lambda (\log P - 1) + \beta^{12}_\lambda$
-
-$\bar{M}_\lambda = \alpha_\lambda (\log P - 1) + \beta_\lambda$
-
-$\Delta W_\lambda^{12} = W_\lambda^{12} - \bar{W}^{12}_\lambda$
-
-$\Delta M_\lambda = M_\lambda^{0} - \bar{M}_\lambda$
-
-The application of these relations to the calibration of the Leavitt Law is presented in \textit{Part~II} of this thesis.
+Both absolute and Wesenheit magnitudes are equally sensitive to uncertainties in the distance modulus. However, the Wesenheit magnitude is immune to errors in the color excess, a property that is central to this work as it enables a clean separation between distance- and reddening-related uncertainties for individual Cepheids. The application of these relations to the calibration of the Leavitt Law is presented in \textit{Part~II} of this thesis.
 
 \section{Distance}
 
-The vast scale of the Universe necessitates the use of specialized distance measures. Astronomical units are used within the Solar System, light-years or parsecs on stellar and Galactic scales, and parsec multiples for extragalactic distances, with redshift serving as a cosmological distance indicator in an expanding Universe. The relationships among these commonly used units are summarized in Table~\ref{table:distance}.
+Accurate distance measurements are essential in astronomy, as derived physical properties and our understanding of Galactic and cosmic structure depend critically on them. Because no single method is valid across all distance scales, different techniques are employed depending on the target and spatial regime. This section describes three geometrical distance determination methods—trigonometric parallax, the Infrared Surface Brightness (IRSB) technique, and the cluster membership method—used to infer distances to Galactic Cepheid variable stars. 
 
-\begin{table}[h!]
-	\centering
-	\caption{Conversion of astronomical distance units}
-	\begin{tabular}{c | c c c c} 
-		 & Kilometer & Astronomical Unit & Light Year & Parsec \\  
-		\hline
-		Kilometer & 1 &  &  & \\ 
-		Astronomical Unit & $1.49\times10^{8}$ & 1 &  & \\
-		Light Year & $9.46\times10^{12}$ & $6.32\times10^{4}$ & 1 & \\
-		Parsec & $3.08\times10^{13}$ & $2.06\times10^{5}$ & 3.26 & 1 \\
-	\end{tabular}
-	\label{table:distance}
-\end{table}
-
-Accurate distance measurements are essential in astronomy, as derived physical properties and our understanding of Galactic and cosmic structure depend critically on them. Because no single method is valid across all distance scales, different techniques are employed depending on the target and spatial regime. This section describes two geometrical distance determination methods—trigonometric parallax, the Infrared Surface Brightness (IRSB) technique and cluster membership method — used to infer distances to Galactic Cepheid variable stars. 
-
-\subsection{Parallax Method}
-
-Trigonometric parallax is one of the most fundamental techniques for astronomical distance determination. In a right-angled triangle, knowledge of one side and a non-right angle uniquely determines the remaining sides through trigonometric relations. Since these relations depend only on angular measurements and not on the absolute scale of the triangle, they are particularly well suited to astronomical applications where direct distance measurements are infeasible.
+\subsection{Parallax Method ($\pi$)}
 
 \input{chapters/content/0_2_plot_parallax.tex}
+Trigonometric parallax is one of the most fundamental geometric techniques for astronomical distance determination. In a right-angled triangle, knowledge of one side and a non-right angle uniquely determines the remaining sides through trigonometric relations. Since these relations depend only on angular measurements and not on the absolute scale of the triangle, they are particularly well suited to astronomical applications where direct distance measurements are infeasible.
 
 In stellar parallax, a conceptual triangle is defined by the Earth, the Sun, and a nearby star. The baseline of this triangle is the Earth--Sun separation, equal to 1 astronomical unit (AU). As the Earth moves along its orbit, observations taken six months apart reveal an apparent shift in the position of the star relative to distant background sources. This angular displacement, known as the parallax angle, is extremely small and is therefore measured in milliarcseconds (mas).
 
-The distance to a star can then be determined from the measured parallax angle using the tangent trigonometric relation:
+The distance to a star can then be determined from the measured parallax angle using the trigonometric relation:
 
 \begin{equation}
 \tan p = \frac{1 AU}{d}
@@ -312,73 +275,58 @@ d = \lim_{p \to 0} \frac{1 AU}{\tan p} = \frac{1 AU}{p}
 
 To standardize distance measurements, astronomers use the parsec as a unit of length.
 
-\vspace{0.3cm}
-\begin{center}
-\textit{1 parsec (pc) is defined as the distance at which 1 AU subtends an angle of 1 arcsecond (1/3600 of a degree).}
-\end{center}
-\vspace{0.3cm}
 
-In this thesis, parallax-based distances from \textit{Gaia} are adopted; hence, it is important to consider systematic uncertainties. Being bright yellow giants, Cepheid variables saturate CCD pixels, leading to uncertain parallax measurements \cite{2018Lindegren}. The marginal impact of these parallax uncertainties on the resulting Leavitt Law is discussed in a later chapter.
+\begin{notebox}[sharp corners, width=\textwidth]{Parallax of one arcsecond: Parsec}
+\textit{1 parsec (pc) is defined as the distance at which 1 astronomical unit subtends an angle of 1 arcsecond (1/3600 of a degree).}
+\end{notebox}
 
-\subsection{Infrared Surface Brightness Method}
 
-The Infrared Surface Brightness (IRSB) method is a geometrical technique belonging to the broader class of \emph{parallax of pulsation} methods. Its fundamental principle is to determine the distance to a Cepheid by comparing its \emph{linear radius variation}, inferred from radial velocity measurements, with its \emph{angular diameter variation}, derived from photometry.
+In this thesis, parallax-based distances from \textit{Gaia} are adopted; hence, it is important to consider systematic uncertainties. Being bright yellow giants, Cepheid variables saturate CCD pixels, leading to uncertain parallax measurements \citep{2018Lindegren}. The marginal impact of these parallax uncertainties on the resulting Leavitt Law is discussed in a later chapter.
 
-For a spherical star at distance $d$, the basic relation is
+
+
+\subsection{Infrared Surface Brightness Method ($d$)}
+
+This geometrical technique to determine distance belonging to the broader class of \emph{parallax of pulsation} methods. In principle, it determines the distance to a Cepheid by comparing its \emph{linear radius variation}, inferred from radial velocity measurements of Cepheid's photosphere, with its \emph{angular diameter variation}, estimated from surface brightness derived from photometry. For a star at distance $d$, the relation with its linear radius $R$ and angular diameter $\theta$ would be
 \begin{equation}
-d = \frac{\text{linear diameter}}{\text{angular diameter}} .
+d = \frac{2R}{\theta}.
 \end{equation}
-
-
-The IRSB method has its roots in the classical Baade--Becker--Wesselink (BBW) technique \cite{1926baade,1940Becker,1946wesselink}, which exploits the existence of a linear relation between surface brightness and stellar color. \cite{1976barnes} were the first to apply this method to Cepheids using optical photometry (V and $V\!-\!R$) for determining their distances. 
 
 \input{chapters/content/0_2_plot_brightness_color.tex}
 
+The InfraRed Surface Brightness (IRSB) method has its roots in the classical Baade--Becker--Wesselink (BBW) technique \citep{1926baade,1940Becker,1946wesselink}, which determines the distances and radii of pulsating stars by combining photometric and spectroscopic observations. The technique was based on Becker's hypothesis, which is cited by \citet{1946wesselink} as follows:
 
-In the Barnes--Evans formulation, the visual surface brightness parameter $F_V$ is defined such that
+\begin{quote}
+``\textit{Wilhelm Becker \citep{1935becker}, who replaced the assumption of blackbody radiation by the hypothesis that among Cepheids, and throughout their variation, there exists a single-valued relation between colour and surface brightness.}''
+\end{quote}
 \begin{equation}
-V_0 = F_V - 5 \log R + C ,
+F_V = a\,(m_1 - m_2)_0 + b.
 \end{equation}
-where $V_0$ is the dereddened apparent magnitude, $R$ is the stellar radius (in solar units), and $C$ is a constant that depends on the choice of units.
+where $F_V$ is the surface brightness, and $m_1 - m_2$ is the color. \cite{1969wesselink} used $B-V$ color for the calibration of this relation. 
 
-The surface brightness parameter is empirically found to depend linearly on colour,
+The surface brightness can also be determined from the effective temperature $T_e$ and the bolometric correction $C$, or from the apparent visual magnitude $V_0$ and the angular diameter $\theta$.
 \begin{equation}
-F_V = a\,(V-R)_0 + b ,
+F_V = -10 \log T_e +  C  = V_0 + 5 \log \theta
 \end{equation}
-where $(V-R)_0$ is the dereddened colour index.
-
-Let the stellar radius vary with pulsation phase $\phi$ as
+\cite{1976barnes} were the first to apply these relations to Cepheids, using optical photometry ($V$ and $V\!-\!R$) to determine their distances. Calibrated with the Sun, they defined the visual surface brightness parameter $F_V$ as:
 \begin{equation}
-R(\phi) = R_0 + \Delta R(\phi),
+F_V = 4.2207 - 0.1V_0 - 0.5 \log \theta
 \end{equation}
-where $R_0$ is the mean radius. At two pulsation phases $\phi_1$ and $\phi_2$ with identical color $(V-K)_0$, the surface brightness parameter $F_V$ is the same. Therefore,
-\begin{align}
-V_1 &= F_V - 5 \log (R_0 + \Delta R_1) + C , \\
-V_2 &= F_V - 5 \log (R_0 + \Delta R_2) + C ,
-\end{align}
-\input{chapters/content/0_2_plot_color_D.tex}
-
-Subtracting the two equations gives
+which can be rearranged to get angular diameter of Cepheid over different phase.:
 \begin{equation}
-V_2 - V_1 = 5 \log \left( \frac{R_0 + \Delta R_1}{R_0 + \Delta R_2} \right).
+\theta(\phi) = 10^{\,4.2207 - 0.1\,V_0(\phi) - F_V(\phi)}
 \end{equation}
+Thus, the color $(V - R)_0$ determines the surface brightness $F_V(\phi)$, which in turn yields the angular diameter $\theta(\phi)$. 
 
-Defining $H = 10^{0.2\,(V_2 - V_1)}$, the mean radius can be written as
-\begin{equation}
-R_0 = \frac{H\,\Delta R_2 - \Delta R_1}{1 - H}.
-\end{equation}
-
-The linear radius variation $\Delta R(\phi)$ is obtained independently from spectroscopic radial velocity measurements. The observed radial velocity $v_r(t)$ is converted into the pulsational velocity of the photosphere $v_p(t)$ using the projection factor $p$,
+\input{chapters/content/0_2_plot_color.tex}
+For a Cepheid, the distance remains fixed; however, $R$ and $\theta$ vary with phase $\phi$ over the pulsation cycle. The linear radius variation $\Delta R(\phi)$ is obtained independently from spectroscopic radial velocity measurements. The observed radial velocity $v_r(t)$ is converted into the pulsational velocity of the photosphere $v_p(t)$ using the projection factor $p$,
 \begin{equation}
 v_p(t) = p \,[v_r(t) - v_\gamma],
 \end{equation}
-where $v_\gamma$ is the systemic velocity. The projection factor accounts for geometric projection effects, limb darkening, atmospheric velocity gradients, and phase-dependent photospheric motion.
-
-The radial displacement is obtained by integrating the pulsation velocity,
+where $v_\gamma$ is the systemic velocity. The projection factor accounts for geometric projection effects, limb darkening, atmospheric velocity gradients, and phase-dependent photospheric motion. The radial displacement is then obtained by integrating the pulsation velocity,
 \begin{equation}
 \Delta R = \int_{t_0}^{t} v_p(t')\,\mathrm{d}t' .
 \end{equation}
-
 Since Cepheid pulsation is periodic with period $P$, it is convenient to express the integration in terms of pulsation phase,
 \begin{equation}
 \phi = \frac{t - t_0}{P}, \qquad \mathrm{d}t = P\,\mathrm{d}\phi ,
@@ -387,29 +335,15 @@ leading to
 \begin{equation}
 \Delta R(\phi) = p P \int_{0}^{\phi} [v_r(\phi') - v_\gamma]\,\mathrm{d}\phi' .
 \end{equation}
-
-The angular diameter can also be written geometrically as
-
+By combining the linear radius variation $\Delta R(\phi)$ from spectroscopy with the angular diameter variation $\theta(\phi)$ from photometry, one can solve for both the distance $d$ and the mean radius $R$ through
 \begin{equation}
-\theta  = \frac{2(R_0 +  \Delta R(\phi))}{d} 
+\theta(\phi) = \frac{2\,[R_0 + \Delta R(\phi)]}{d}.
 \end{equation}
-
-\[
-\theta(\phi) = 10^{\,4.2207 - 0.1\,V_0(\phi) - F_V(\phi)}
-\]
-
-
-\begin{equation}
-\theta(\phi)  = \frac{2 R_0}{d} +  \frac{2 \Delta R(\phi)}{d} 
-\end{equation}
-
 \begin{equation}
 \theta(\phi) = \frac{2 R_0}{d} + \frac{2 p P}{d}
 \int_{0}^{\phi} [v_r(\phi') - v_\gamma]\,\mathrm{d}\phi' .
 \end{equation}
-where $\theta$ is expressed in milliarcseconds.
-
-This expression is linear and may be written as
+where $\theta$ is expressed in milliarcseconds. This expression is linear and may be written as
 \begin{equation}
 \theta(\phi) = A + B\,X(\phi),
 \end{equation}
@@ -417,68 +351,22 @@ where both $\theta(\phi)$ and $X(\phi)$ are directly derived from observations. 
 \begin{equation}
 d = \frac{2 p P}{B}.
 \end{equation}
-
-
-Subsequent improvements were achieved by adopting the $(V-K)$ colour \cite{1994Welch}, which provides a larger temperature leverage: the V band lies near the Wien regime of Cepheid spectral energy distributions, while the K band lies on the Rayleigh--Jeans tail, making the color primarily sensitive to effective temperature. In addition, extinction effects are significantly reduced in the K band.
+Subsequent improvements were achieved by adopting the $(V-K)$ color \citep{1994Welch}, which provides a larger temperature leverage: the $V$ band lies near the Wien regime of Cepheid spectral energy distributions, while the $K$ band lies on the Rayleigh--Jeans tail, making the color primarily sensitive to the effective temperature. In addition, extinction effects are significantly reduced in the $K$ band.
 
 A tight empirical calibration between $(V-K)$ and the surface brightness parameter $F_V$, based on interferometric angular diameter measurements, was established by \cite{1997Fouque}. This calibration forms the basis of the modern Infrared Surface Brightness (IRSB) method, which was further refined and applied to Cepheids by \cite{2011storm}.
 
+\subsection{Cluster Membership Method ($\bar{\pi}$)}
 
-\subsection{Cluster Membership Method}
+This method yields high-precision distance determinations for Cepheids belonging to star clusters. In this statistical approach, the weighted mean cluster parallax $\pi_{\mathrm{cl}}$ is evaluated by applying maximum likelihood estimation under the assumption of Gaussian errors. This distance is then assigned to the Cepheid with minimal uncertainty. This approach is particularly useful for Cepheids, as their \textit{Gaia} parallaxes often have higher uncertainties compared to dimmer stars due to their high brightness, which can saturate CCD pixels and make the parallax measurements unreliable. In this section, the mathematical framework for the cluster membership method is derived to yield the distance formula with uncertainity.
 
-Consider an open star cluster containing a Classical Cepheid variable.
-All bona fide cluster members share a common true parallax
-$\pi_{\mathrm{cl}}$.
-Let $N$ cluster stars have measured parallaxes $\{\pi_i\}_{i=1}^N$.
+Consider an open star cluster containing a Classical Cepheid variable. All bona fide cluster members share a common true parallax $\pi_{\mathrm{cl}}$ with minimal deviations $\epsilon_i$. Assuming a Gaussian distribution, the expected value is $\mathbb{E}[\epsilon_i] = 0$ and the variance is $\mathrm{Var}(\epsilon_i) = \sigma_i^2$. The joint likelihood of the observed parallaxes $\{\pi_i\}$ given $\pi_{\mathrm{cl}}$ is
 
-Each parallax measurement is modeled as
 \begin{equation}
-\pi_i = \pi_{\mathrm{cl}} + \epsilon_i,
-\end{equation}
-where the errors $\epsilon_i$ satisfy
-\begin{equation}
-\mathbb{E}[\epsilon_i] = 0,
-\qquad
-\mathrm{Var}(\epsilon_i) = \sigma_i^2,
-\end{equation}
-and are assumed to be statistically independent and Gaussian.
-
-The goal is to estimate $\pi_{\mathrm{cl}}$ with minimum uncertainty and
-assign this distance to the Cepheid.
-
-Likelihood Function
-
-The joint likelihood of observing the parallaxes $\{\pi_i\}$ given
-$\pi_{\mathrm{cl}}$ is
-\begin{equation}
-\mathcal{L}(\pi_{\mathrm{cl}})
-=
-\prod_{i=1}^N
-\frac{1}{\sqrt{2\pi\sigma_i^2}}
-\exp\!\left[
--\frac{(\pi_i - \pi_{\mathrm{cl}})^2}{2\sigma_i^2}
-\right].
+\mathcal{L}(\pi_{\mathrm{cl}}) = \prod_{i=1}^N \frac{1}{\sqrt{2\pi\sigma_i^2}} \exp\!\left[ -\frac{(\pi_i - \pi_{\mathrm{cl}})^2}{2\sigma_i^2} \right]
 \end{equation}
 
-Taking the logarithm,
-\begin{equation}
-\ln \mathcal{L}
-=
--\frac{1}{2}
-\sum_{i=1}^N
-\left[
-\frac{(\pi_i - \pi_{\mathrm{cl}})^2}{\sigma_i^2}
-+ \ln(2\pi\sigma_i^2)
-\right].
-\end{equation}
-
-The logarithmic normalization term does not depend on
-$\pi_{\mathrm{cl}}$ and may be ignored for maximization.
-
-Maximum Likelihood Estimator
-
-Differentiating the log-likelihood with respect to $\pi_{\mathrm{cl}}$
-and setting the derivative to zero yields
+\input{chapters/content/0_2_plot_cluster.tex}
+To find the maximum likelihood estimator of the parallax, we take the logarithm of the likelihood, differentiate with respect to $\pi_{\mathrm{cl}}$, and set the derivative equal to zero. This leads to
 \begin{equation}
 \frac{\partial \ln \mathcal{L}}{\partial \pi_{\mathrm{cl}}}
 =
@@ -486,27 +374,25 @@ and setting the derivative to zero yields
 \frac{\pi_i - \pi_{\mathrm{cl}}}{\sigma_i^2}
 = 0.
 \end{equation}
-
 Rearranging terms,
 \begin{equation}
-\sum_{i=1}^N \frac{\pi_i}{\sigma_i^2}
-=
-\pi_{\mathrm{cl}}
-\sum_{i=1}^N \frac{1}{\sigma_i^2}.
+\sum_{i=1}^N \frac{\pi_i}{\sigma_i^2} = \pi_{\mathrm{cl}} \sum_{i=1}^N \frac{1}{\sigma_i^2}.
 \end{equation}
 
 Solving for $\pi_{\mathrm{cl}}$, the maximum-likelihood estimator is
 \begin{equation}
-\boxed{
 \hat{\pi}_{\mathrm{cl}}
 =
 \frac{\displaystyle \sum_{i=1}^N \pi_i / \sigma_i^2}
 {\displaystyle \sum_{i=1}^N 1 / \sigma_i^2}
-}
 \end{equation}
 which is the weighted mean parallax.
 
-
+Define weights $w_i = 1/\sigma_i^2$.
+The estimator can be written as
+\begin{equation}
+\hat{\pi}_{\mathrm{cl}} = \frac{\sum_i w_i \pi_i}{\sum_i w_i}.
+\end{equation}
 
 The expectation value of the estimator is
 \begin{align}
@@ -523,25 +409,18 @@ The expectation value of the estimator is
 
 Thus, the estimator is unbiased.
 
-Variance of the Estimator
 
-Define weights $w_i = 1/\sigma_i^2$.
-The estimator can be written as
-\begin{equation}
-\hat{\pi}_{\mathrm{cl}} = \frac{\sum_i w_i \pi_i}{\sum_i w_i}.
-\end{equation}
-
-The variance is
+The variance of estimator is
 \begin{align}
 \mathrm{Var}(\hat{\pi}_{\mathrm{cl}})
 &=
-\frac{\sum_i w_i^2 \sigma_i^2}{(\sum_i w_i)^2} \\
+\frac{\sum_i w_i^2 \sigma_i^2}{\left(\sum_i w_i\right)^2} \\
 &=
-\frac{\sum_i (1/\sigma_i^2)}{(\sum_i 1/\sigma_i^2)^2} \\
+\frac{\sum_i \left(\frac{1}{\sigma_i^2}\right)^2 \sigma_i^2}{\left(\sum_i \frac{1}{\sigma_i^2}\right)^2} \\
 &=
-\boxed{
-\left( \sum_{i=1}^N \frac{1}{\sigma_i^2} \right)^{-1}
-}.
+\frac{\sum_i \frac{1}{\sigma_i^2}}{\left(\sum_i \frac{1}{\sigma_i^2}\right)^2} \\
+&=
+\left( \sum_{i=1}^N \frac{1}{\sigma_i^2} \right)^{-1}.
 \end{align}
 
 Hence, the standard deviation is
@@ -551,16 +430,20 @@ Hence, the standard deviation is
 \end{equation}
 
 
+\begin{notebox}[sharp corners, width=\textwidth]{Gauss--Markov theorem.}
+For observations with $\mathrm{Var}(y_i)=\sigma_i^2$, the estimator
+\[
+\hat{\pi}_{\mathrm{cl}} = \frac{\sum_i \sigma_i^{-2} y_i}{\sum_i \sigma_i^{-2}}
+\]
+is \emph{best linear unbiased estimator} (BLUE), i.e.,
+\[
+\mathrm{Var}(\tilde{\pi}) - \mathrm{Var}(\hat{\pi}_{\mathrm{cl}}) \ge 0
+\quad \text{for all linear unbiased } \tilde{\pi}.
+\]
+\end{notebox}
 
-By the Gauss--Markov theorem, among all linear unbiased estimators of
-$\pi_{\mathrm{cl}}$, the weighted mean with weights
-$w_i = 1/\sigma_i^2$ has the minimum variance.
+By the Gauss--Markov theorem, among all linear unbiased estimators of $\pi_{\mathrm{cl}}$, the weighted mean with weights $w_i = 1/\sigma_i^2$ has the minimum variance. Therefore, $\hat{\pi}_{\mathrm{cl}}$ is the optimal estimator of the parallax. The distance can then be obtained from the parallaxes of the cluster members as
 
-Therefore, $\hat{\pi}_{\mathrm{cl}}$ is the optimal estimator.
-
-
-
-The cluster distance is obtained from the parallax as
 \begin{equation}
 d = \frac{1}{\hat{\pi}_{\mathrm{cl}}},
 \end{equation}
@@ -571,21 +454,16 @@ with fractional uncertainty
 \frac{\sigma_{\hat{\pi}}}{\hat{\pi}_{\mathrm{cl}}}.
 \end{equation}
 
-Since the Cepheid is a cluster member, this distance applies directly to
-the Cepheid and can be used to calibrate the period--luminosity relation.
-
-The cluster Cepheid parallax method follows rigorously from maximum
-likelihood estimation under Gaussian errors.
-The weighted mean parallax is unbiased, minimum-variance, and provides a
-high-precision geometric distance to Cepheid variables.
-
+Further constrained by similar positions in the sky (RA, Dec), as well as measurements of proper motions and radial velocities, \cite{2023cruz} prepared a gold sample of 34 cluster Cepheids and determined their precise parallaxes. Seventeen Cepheids from this sample are in common with my dataset of 121 GCCS. Given the higher reliability of cluster membership–derived distances, these Cepheids will be used for verifying the calibrated distances obtained in this research.
 
 \section{Distance Modulus ($\mu$)}
 
-For the ease of calculation, a dimensionless measure of distance is used in astronomy called as the distance modulus, $\mu$, which provides a logarithmic transformation of the distance to an object, by setting 10 parsecs as the reference distance. It can also be expressed as the difference between the apparent magnitude and the absolute magnitude of an object as the absolute magnitude is the measure of luminosity at the 10 pc distance from the source. Mathematically, distance modulus can be formulated as:
+\input{chapters/content/0_2_plot_modulus.tex}
+
+
+For ease of calculation, a dimensionless measure of distance is used in astronomy called the distance modulus, $\mu$, which provides a logarithmic transformation of an object's distance by taking 10 parsecs as the reference distance. It can also be expressed as the difference between an object's apparent magnitude and its absolute magnitude, where the absolute magnitude is defined as the luminosity of the object measured at a distance of 10 pc. Mathematically, the distance modulus can be written as:
 
 $$\mu = m - M = 5 log_{10}\left[\frac{d}{10 pc}\right] $$ 
  
-
 
 

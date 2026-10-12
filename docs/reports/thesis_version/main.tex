@@ -1,56 +1,58 @@
-\documentclass[a4paper, twoside, 11pt]{report}
+\documentclass[a4paper, twoside, 12pt]{report}
 \input{usepackages.tex}
-%\addbibresource{bibliography.bib}
 \newtcolorbox[auto counter, number within=section]{notebox}[2][]{colframe=cyan!60!black, colback=cyan!10, coltitle=black, title=Note~\thetcbcounter: #2, width=\textwidth, #1}
+
 \begin{document}
 
 \pagestyle{empty} %No headings for the first pages.
 
 \graphicspath{ {../plots/} }
-%\input{titlepage}
+\input{intro/titlepage}
   
-\clearpage
+\input{intro/declaration}
+
 
 \pagenumbering{gobble}
 \pagenumbering{roman}
 
-%\input{acknowledgements.tex}
-%\addcontentsline{toc}{chapter}{Acknowledgements}
+\input{intro/acknowledgements.tex}
+\addcontentsline{toc}{chapter}{Acknowledgements}
 
-\clearpage
-%\input{abstract.tex}
-%\addcontentsline{toc}{chapter}{Abstract}
+%\clearpage
+\input{intro/abstract.tex}
+\addcontentsline{toc}{chapter}{Abstract}
 
 \clearpage
 \tableofcontents
-%\cleardoublepage %The first chapter should start on an odd page.
-%\pagestyle{plain} %Now display headings: headings / fancy / ...
+\cleardoublepage %The first chapter should start on an odd page.
+\pagestyle{plain} %Now display headings: headings / fancy / ...
 
-%\newpage
-%\listoffigures
+\newpage
+\listoffigures
 %\addcontentsline{toc}{chapter}{List of figures}
-%\newpage
-%\listoftables
+\newpage
+\listoftables
 %\addcontentsline{toc}{chapter}{List of tables}
 \textcolor{white}{.}
 \thispagestyle{empty}
-%\newpage
-%\clearpage
+\newpage
+\clearpage
 \pagenumbering{arabic}
-%\input{chapters/1_intro.tex}
+\input{chapters/1_intro.tex}
 \part{Parameters of Leavitt Law}
-%\input{chapters/2_observables.tex}
-%\input{chapters/3_star.tex}
+\input{chapters/2_observables.tex}
+\input{chapters/3_star.tex}
 \part{Galactic Cepheid Dataset and Calibration Method}
 \input{chapters/4_Dataset.tex}
 \input{chapters/5_Calibration.tex}
 \part{Result Implications}
-\input{chapters/6_discussion.tex}
-\input{chapters/7_conclusion.tex}
-%\part*{Appendix}
-%\input{appendix.tex}
+\input{chapters/7_discussion.tex}
+\input{chapters/8_conclusion.tex}
+\part*{Appendix}
+\appendix
+\input{chapters/6_Code.tex}
 %line{toc}{chapter}{Appendix}
-\bibliographystyle{amsalpha}
+\bibliographystyle{apalike}
 \addcontentsline{toc}{chapter}{Bibliography}
 \bibliography{references}
 \end{document}

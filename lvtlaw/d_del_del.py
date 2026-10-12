@@ -12,7 +12,7 @@ Function contained:
 '''
 module = 'd_del_del'
 from lvtlaw.a_utils import regression, merge_12, imgsave
-from data.datamapping import file_name, data_cols, dis_list, dis_flag, col_dot, col_lin, mag, flags, data_out, wes_show, process_step,z, s, plots, mode
+from lvtlaw.datamapping import *
 import pandas as pd
 import numpy as np
 from functools import reduce
@@ -20,8 +20,34 @@ import matplotlib.pyplot as plt
 from warnings import simplefilter
 simplefilter(action="ignore", category=pd.errors.PerformanceWarning)
 out_dir = data_out
+
 #####################################################################
-def residue_correlation(residue, col, flag, dis_flag = dis_flag): 
+def masked_mc(residue, x_key, y_key, del_mask):
+    m1, m2 = del_mask           # mask range
+    mask = residue[x_key].between(m1, m2)           # select residues within masked range
+    x = residue.loc[mask, x_key]
+    y = residue.loc[mask, y_key]
+    slope, intercept, _, _, slope_err, intercept_err, stdd = regression(x, y, x_key[2:-2], y_key[2:], 1)
+    return slope, intercept, slope_err, intercept_err, stdd
+#####################################################################
+def masked_residual(residue, x_key, y_key, m,c):
+    # this function finds masked delta-delta slope
+    x = residue[x_key]
+    y = residue[y_key]
+    prediction = m * x + c; 
+    residual = y - prediction
+    return prediction, residual 
+#####################################################################
+def show_masked(PLWresidue, x_key, y_key, del_mask):
+    m1, m2 = del_mask
+    mask = PLWresidue[x_key].between(m1, m2)
+    x = PLWresidue.loc[mask, x_key]
+    y = PLWresidue.loc[mask, y_key]
+    plt.plot(PLWresidue[x_key], PLWresidue[y_key], '.')
+    plt.plot(x, y, '.')
+    plt.show()
+#####################################################################
+def residue_correlation(residue, col, flag, dis_flag = dis_flag, del_mask = del_mask, del_fit=del_fit): 
     # this function correlates the PL and PW residuals
     del_mc = pd.DataFrame()         # Stores del-del regression slope and intercept
     del_predictions = pd.DataFrame({'name': residue['name'],'logP': residue['logP'],'EBV': residue['EBV'] })  # Star-by-star predictions
@@ -38,8 +64,12 @@ def residue_correlation(residue, col, flag, dis_flag = dis_flag):
                 y_key = 'r_' + band + ab + diss
                 x_key = 'r_' + wesenheit + diss
             # Perform regression
-                slope, intercept, predicted, residual, slope_err, intercept_err, stdd = regression(
-                    residue[x_key], residue[y_key], wesenheit, band + ab + diss, 1)
+                if del_fit == 1:
+                    rho = del_del()
+                    slope, intercept, slope_err, intercept_err, stdd = rho[band], 0, 0, 0, 0
+                else:
+                    slope, intercept, slope_err, intercept_err, stdd = masked_mc(residue, x_key, y_key, del_mask)
+                predicted, residual = masked_residual(residue, x_key, y_key, slope,intercept) 
                 regression_names.append(regression_name)
                 d_std.append(stdd)
                 slopes.append(slope)
@@ -58,13 +88,13 @@ def residue_correlation(residue, col, flag, dis_flag = dis_flag):
     return del_residuals, del_predictions, del_mc
 #####################################################################
 def residue_analysis(residue, plots=plots,s=s, dis_flag = dis_flag, cols = wes_show, flags = flags):
-    # This function calls residue_correlation() for different different wesenheits
+    # This function calls residue_correlation() for different wesenheits color
     dmc = []
     dres = pd.DataFrame({'name': residue['name'], 'logP': residue['logP'], 'EBV': residue['EBV']})
     dpre = dres.copy()
-    for flg in flags:
+    for flag in flags: # Shubham 0r Madore
         for col in cols:
-            res, pre, mc = residue_correlation(residue, col, flg)
+            res, pre, mc = residue_correlation(residue, col, flag)
             dres = pd.merge(dres, res[[cl for cl in res.columns if cl not in dres.columns or cl == 'name']], on='name')
             dpre = pd.merge(dpre, pre[[cl for cl in pre.columns if cl not in dpre.columns or cl == 'name']], on='name')
             dmc.append(mc) 
@@ -171,5 +201,55 @@ def plotdeldelres(data, dmc, col, dis, flag, ab, s):
     if s == 1:
         imgsave(title + "_residuals", 2, fil='png', p=1)
     plt.show()
+#####################################################################
+def plotmaskdel6(data, dmc, del_mask, col, dis, flag, ab, s):
+# 1. Extracting x-y axis
+    print(col)
+    m1, m2 = del_mask
+    # Boolean mask
+    fig, axs = plt.subplots(2, 3, figsize=(18, 8), sharex='col')
+    axs = axs.flatten()  # Flatten for easy indexing
+    for i, m in enumerate(mag[0:6]):
+        wes_str = f"{m}{col}" if flag == "S" else f"{col[0]}{col}"
+        x_key = 'r_' + wes_str + dis
+        y_key = 'r_' + m + ab + dis
+        all_x = data[x_key]
+        all_y = data[y_key]
+        mask_pred = data['p_' + m + ab+ wes_str + dis]
+        mask_residuals =  data['d_' + m + ab+ wes_str + dis]
+        all_alpha, all_gamma, all_pred, all_residue, _, _, all_stdd = regression(all_x, all_y, x_key[2:-2], y_key[2:], 0)
+        if dis == '_i':
+            mask_alpha = dmc[m+ab+wes_str].iloc[4]
+            mask_gamma = dmc[m+ab+wes_str].iloc[5]
+        else:
+            mask_alpha = dmc[:4][m+ab+wes_str].iloc[0]
+            mask_gamma = dmc[:4][m+ab+wes_str].iloc[1]
+#        corr_coef, _ = pr_value(x, y)
+        ax = axs[i]
+        mask = data[x_key].between(m1, m2)
+        mask_x = data.loc[mask, x_key]
+        mask_y = data.loc[mask, y_key]
+        ax.plot(all_x, all_y, col_dot[i], label=f'{m+ab}{wes_str}')
+        ax.plot(mask_x, mask_y, 'r.', label=f'Mask {del_mask}')
+#       plot regression line
+        ax.plot(all_x, all_pred, col_lin[i], label=f'All | m: {all_alpha:.3f}, c: {all_gamma:.3f}')
+        ax.plot(all_x, mask_pred, 'r-', label=f'Masked | m: {mask_alpha:.3f} c: {mask_gamma:.3f}')
+        # Residual lines
+#        for j in range(len(data)):
+#            label = r"$\delta E_{{BV}} = \Delta M_{%s} / R_{%s}$"%(m,m) if j == 0 else None
+#            ax.plot([all_x[j], all_x[j]], [all_y[j], mask_pred[j]], color='red', linestyle='--', alpha=0.5, label=label)
+        ax.set_ylabel(f'PL Residue: $\\Delta M_{m+ab}$')
+        ax.set_xlabel(f'PW Residue: $\\Delta$ {wes_str}')
+        ax.tick_params(direction='in', top=True, right=True)
+        ax.legend()   
+        for spine in ax.spines.values():
+            spine.set_visible(False)
+    title = f"{file_name}_masked_deldel_{flag}_{ab}{col}{dis}"
+    plt.suptitle(f'Masked PL-PW Residuals Correlation {col}')
+    plt.tight_layout()
+    if s == 1:
+        imgsave(title, 2, fil='pdf', p=1)
+    plt.show()
+    #plotdeldelres(data, dmc, col, dis, flag, ab, s)
 #####################################################################
 print(f'* * {module} module loaded!')

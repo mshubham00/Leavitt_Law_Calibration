@@ -1,48 +1,73 @@
 This is BibTeX, Version 0.99d (TeX Live 2025)
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: main.aux
-The style file: amsalpha.bst
+The style file: apalike.bst
 Database file #1: references.bib
-Warning--I didn't find a database entry for "2009ApJ...696.1498M"
-You've used 11 entries,
-            2624 wiz_defined-function locations,
-            634 strings with 6812 characters,
-and the built_in function-call counts, 5058 in all, are:
-= -- 447
-> -- 339
-< -- 2
-+ -- 128
-- -- 123
-* -- 496
-:= -- 872
-add.period$ -- 11
-call.type$ -- 11
-change.case$ -- 91
-chr.to.int$ -- 11
-cite$ -- 11
-duplicate$ -- 156
-empty$ -- 317
-format.name$ -- 133
-if$ -- 965
-int.to.chr$ -- 1
+Repeated entry---line 1777 of file references.bib
+ : @article{Tully2014
+ :                   ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1786 of file references.bib
+ : @article{Courtois2013
+ :                      ,
+I'm skipping whatever remains of this entry
+Warning--entry type for "UZHcosmicRecipe" isn't style-file defined
+--line 2197 of file references.bib
+Warning--entry type for "hyperphysics_parallax" isn't style-file defined
+--line 2213 of file references.bib
+Repeated entry---line 2337 of file references.bib
+ : @book{Kippenhahn2012
+ :                     ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 2346 of file references.bib
+ : @book{Stahler2004
+ :                  ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 2364 of file references.bib
+ : @book{Bahcall1989
+ :                  ,
+I'm skipping whatever remains of this entry
+Warning--entry type for "schoolphysics_cepheid" isn't style-file defined
+--line 2600 of file references.bib
+You've used 167 entries,
+            1935 wiz_defined-function locations,
+            1463 strings with 29005 characters,
+and the built_in function-call counts, 61117 in all, are:
+= -- 5909
+> -- 2336
+< -- 141
++ -- 873
+- -- 769
+* -- 5019
+:= -- 10975
+add.period$ -- 511
+call.type$ -- 167
+change.case$ -- 1194
+chr.to.int$ -- 163
+cite$ -- 167
+duplicate$ -- 2359
+empty$ -- 4328
+format.name$ -- 1006
+if$ -- 11747
+int.to.chr$ -- 5
 int.to.str$ -- 0
-missing$ -- 22
-newline$ -- 44
-num.names$ -- 33
-pop$ -- 88
+missing$ -- 179
+newline$ -- 848
+num.names$ -- 508
+pop$ -- 840
 preamble$ -- 1
-purify$ -- 102
+purify$ -- 1207
 quote$ -- 0
-skip$ -- 107
+skip$ -- 1824
 stack$ -- 0
-substring$ -- 258
-swap$ -- 11
-text.length$ -- 2
-text.prefix$ -- 2
+substring$ -- 4163
+swap$ -- 201
+text.length$ -- 8
+text.prefix$ -- 0
 top$ -- 0
-type$ -- 88
+type$ -- 968
 warning$ -- 0
-while$ -- 47
-width$ -- 14
-write$ -- 125
-(There was 1 warning)
+while$ -- 520
+width$ -- 0
+write$ -- 2181
+(There were 5 error messages)

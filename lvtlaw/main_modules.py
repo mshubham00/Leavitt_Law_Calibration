@@ -2,7 +2,7 @@
 module = 'main_modules'
 ####################################################################
 import pandas as pd
-from data.datamapping import plots,s,file_name,mag,z, wes_show, data_out, k, del_mu, flags, dis_flag, R_v, R,A,dis_list
+from lvtlaw.datamapping import *
 from lvtlaw.a_utils import output_directories, image_directories, load_data 
 from lvtlaw.b_data_transform import transformation, plot_corr
 from lvtlaw.c_pl_pw import pl_reg, plotPL6, plotPW6     
@@ -17,7 +17,7 @@ def intro(data_out=data_out, k=k, s=s, z=z):
     bar = '_'
     star = '* '
     Rv = R_v
-    print(f"{star*20}\n{star*20}\n\n\nMaster Thesis Project: \tGalactic BVIJHK Leavitt Law Calibration using {file_name} for R_v = {Rv} {dis_list[0]}\n\n  \t\t\tTo Refine systematic errors in luminosity, distance and reddening of individual Cepheid. \n\t\t\t{bar*54}\n\n     \t\t\tAuthor: Shubham Mamgain (mshubham00@gmail.com) \n     \t\t\tSupervisor I: Dr. Jesper Storm (AIP Potsdam)\n     \t\t\tSupervisor II: Prof. Dr. Maria Rosa Cioni")    
+    print(f"{star*20}\n{star*20}\n\n\nMaster Thesis Project: \tGalactic BVIJHK Leavitt Law Calibration using {file_name} for R_v = {Rv} {dis_label}\n\n  \t\t\tTo refine systematic errors in luminosity, distance and reddening of individual Cepheid. \n\t\t\t{bar*54}\n\n     \t\t\tAuthor: Shubham Mamgain (mshubham00@gmail.com) \n     \t\t\tSupervisor I: Dr. Jesper Storm (AIP Potsdam)\n     \t\t\tSupervisor II: Prof. Dr. Maria Rosa Cioni")    
     print('\n\n\n\n\t\t\tTo begin the calibration process, store cleaned data at ./data/input/<file_name>.csv \n\n\t\t\tFor datafile selection (k) and columns mapping, edit ./data/datamapping.py file.')
     print(f'\n\t\t\tAutosave (s = {s}) | Paging (z = {z}) | Generate Plots (plots = {plots})\n\n\t\t\tk : {k}\n\t\t\tdata : {file_name}\n\t\t\tR_v : {Rv}\n\n\t\t\tProcessed data will be saved in {data_out} directory. \n\n'+'###'*30)
     if z==1:
@@ -25,7 +25,6 @@ def intro(data_out=data_out, k=k, s=s, z=z):
 
 # Load data and select relevant coloumns
 input_data, raw, mag, dis = load_data(file_name) # a_utils
-
 #####################################################################################################
 # b_data_transform -> [0] output folder
 def mag_transformation(cleaned_data = raw, A = A, R = R, plots=plots,s=s,file_name=file_name):

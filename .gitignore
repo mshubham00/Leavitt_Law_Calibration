@@ -10,7 +10,8 @@
 *.swp
 *.save
 # Ignore a specific folder (e.g., 'folder_name')
-data/processed/
-docs/reports/plots/
+data/
+docs/
+.lvtlaw/
 
 .ipynb_checkpoints/

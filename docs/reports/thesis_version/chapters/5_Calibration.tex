@@ -1,134 +1,96 @@
 \chapter{Calibration Method}
+\label{methodchap}
+\input{chapters/content/0_5_plot.tex}
 
+
+% Apply a background image to the epigraph region
+
+
+\section{Physical Senario}
+
+A remote star emits light with absolute magnitude $M^0$, which get reddened by $E(B-V)$ while passing through the interstellar medium and is observed in multiple bands by an observer at distance $\mu$. Observations in different bands provide information about the effects of interstellar reddening on the light. At longer wavelengths, the impact of reddening decreases significantly, leading to a tighter Leavitt Law. The band-dependent extinction of light is used as a key property for determining small errors in reddening and distance estimates when constrained by the period. \footnote{Background Image: Bok globule Barnard 68. Interstellar extinction in K, H and J band. Credit: ESO. Source: \url{https://www.eso.org/public/images/eso9934b/}}
+\begin{align}
+    \label{modeleq}
+    m_\lambda & = \mu +  R_\lambda^{BV} E(B-V) + M^0_\lambda 
+\end{align}
 
 \input{chapters/content/0_5_plot_model.tex}
 
-\section{Leavitt Law residuals and corresponding Wesenheits}
+In this chapter, I will briefly discuss the calibration method devised by \cite{2017madore} and develop a mathematical framework that facilitates understanding of the systematics in the current method. In the subsequent analysis, I have examined the underlying physics, refined the method, and derived the distance-reddening corrections for 121 GCCs. 
 
-
-\input{chapters/content/0_5_plot_residue.tex}
-
-Observations in different bands of light provide information about the effect of interstellar reddening on light. For longer wavelengths, the impact of reddening decreases significantly, implying a reduced possibility of reddening errors and leading to a tighter Leavitt Law. In its most generic form, the linear fit to the dataset is expressed as follows:
-
-
-\begin{align}\label{eq:plr}
-	M_\lambda & = \alpha_\lambda (\log P -1) + \beta_\lambda \\
-	W_\lambda^{12} &  = \alpha_\lambda^{12} (\log P -1) + \beta_\lambda^{12}
-\end{align}
-
-
-Since the periodic range of Cepheids lies between 0.49 and 1.8 on a logarithmic scale, 1 is chosen as the pivot point and subtracted from the period before calculating the regression coefficients, i.e., the slope and intercept. The Leavitt Law for each band is shown in Figure \ref{rawLL}, including four selected Wesenheit variants for VI, VK, IH, and JK.
-
-\input{chapters/content/0_5_plot_wesVK.tex}
-
-
-
-The plots above provide a comparative overview of the Leavitt Laws across different bands. In the first column, notice the decreasing width of the PL relation from the B-band to the K-band. The increasing Pearson correlation coefficient indicates a reduction in residuals. Assuming Cepheids align perfectly with the PL relation suggests that the residuals must stem from errors in reddening or distance measurements. 
-
-
-\begin{wrapfigure}{r}{0.4\textwidth}
-	\centering
-	\includegraphics[trim = 0 5mm 0 1cm, clip, width = \linewidth]{clean/PLW_mc.pdf}\label{PLW_mc}
-	\caption{\tiny Slope and Intercept of BVIJHK PL and PW relations. Interestingly, PW seems constant for all the bands, which is not the case for PL relations.}
-	\label{PLW_mc}
-	\vspace{-5mm}
-\end{wrapfigure}
-
-The contribution of residuals due to extinction errors varies with the band, while errors from the distance modulus remain constant. Therefore, the decrease in the width of the PL relation is strongly related to incorrect reddening measurements.
-
-
-The four variants of the PW relation have relatively higher r-values (approaching -1) than their corresponding PL relations, as Wesenheits are independent of extinction-based errors. Being reddening-free, the scatter in the Wesenheit-based Leavitt Law primarily arises from errors in distance and the reddening ratio. In this research, the reddening ratio is assumed to be correctly known ($R_V=3.23$, \cite{2004sandage}), making distance the only source of the scatter. 
-
-
-The slope and intercept of each PL and PW relations are summarized in Table \ref{PLWtable} and Figure \ref{PLW_mc}. The Table \ref{PLWtable} also list the uncertainity in slope and intercept of PL and PW relation, arising due to a larger scatter. After the calibration, these uncertainity will be deminished significantly. 
-
-On the other hand, note the convergence of slope and intercept of PW relations at K band for VI, VK and IH in the adjecent figure. JK based PW relation showing a fine deviation from the rest. These subtle variation in PW slope and intercept suggests a fine-tuning of reddening law for longer wavelength, though such exercise is out of the scope of this thesis. In the next section, procedure for analysing these residual of PL and PW relations is briefly discussed.
-
-\section{Residual Analysis}
-
-The residuals of PL and PW relations are calculated as follows:
-\vspace{-0.3cm}
+Prior to the calibration, slope and intercept of Leavitt Law and their wesenheit variants using 121 GCCs are summarized below:
+\input{chapters/content/0_5_table_plw.tex} 
+\section{Residual Correlation}
+Each PL and PW relations exhibits intrinsic scatter due to deviations of individual Cepheids from the regression line. Individual residual of Cepheids are attributed to external effects, namely distance and reddening errors. The residuals of the PL and PW relations are calculated as follows:
 \begin{align}
-	\label{eq:del_del}
-	\Delta M_\lambda = & M_\lambda - (\alpha_\lambda \log P + \beta_\lambda) \\
-	\Delta W_\lambda^{12} = & W_\lambda^{12} - (\alpha^{12}_\lambda \log P + \beta^{12}_\lambda) 
+	\label{del_M}
+	\Delta M_\lambda = & M^0_\lambda - (\alpha_\lambda (\log P - 1) + \beta_\lambda)\\
+	\Delta W_\lambda^{12} = & W_\lambda^{12} - (\alpha^{12}_\lambda (\log P - 1) + \beta^{12}_\lambda) 
 \end{align}
-
 \vspace{-0.2cm}
 
+Here, $\Delta M_\lambda$ represents the residuals of the PL relation, and $\Delta W_\lambda^{12}$ represents the residuals of the PW relation for $m_1 - m_2$ color index. Since the distance modulus, $\mu$, is involved in both parameters, $M^0_\lambda$ and $W_\lambda$, the uncertainty in distance, $\delta \mu$, affects both $\Delta W_\lambda^{12}$ and $\Delta M_\lambda$ equally. However, because the Wesenheit magnitude is reddening-free, the uncertainty in reddening, $\delta E_{BV}$, does not contribute to $\Delta W_\lambda^{12}$. It therefore affects only $\Delta M_\lambda$ by an amount $ R_\lambda \times \delta E_{BV}   = \delta A_\lambda$. 
+
+Since other possible factors, such as the effect of metallicity, are not considered in this work, the equations for the PL and PW residuals (Eqs.~\ref{del_M}) can be expressed as:
+\begin{align}
+    \label{error}
+    \Delta M_\lambda & = - ( R_\lambda^{BV}* \delta E(B-V) + \delta \mu)\\
+    \Delta W_\lambda^{BV} & = - \delta \mu
+\end{align}
 
 \input{chapters/content/0_5_plot_deldel.tex}
 
+Graphically, these equations suggest that $\delta E_{BV}$ (scaled by $R_\lambda$) shifts a star along the y-axis (vertically), while $\delta \mu$ affects both the x- and y-axes equally, moving the star along a line with slope 1. For the complete ensemble of stars, a deviation of regression slope from unity indicates a significant contribution from reddening errors, as clearly observed for the B and V bands in Figure~\ref{deldel_plots}. 
 
+\input{chapters/content/0_5_plot_madore.tex}
+At longer wavelengths---J, H, and K---the contribution from reddening errors is minimized, and distance-related uncertainties become dominant, causing the slope $\rho$ to approach unity.
 
-Here, $\Delta M_\lambda$ represents the residuals of the PL relation, and $\Delta W_\lambda^{12}$ represents the residuals of the PW relation. Since distance modulus $\mu$ term is involved in both the parameters, $M_\lambda$ and $W_\lambda$, thereby $\delta \mu$, impacts both $\Delta W$ and $\Delta M$ equally. However, $\delta E_{BV}$ does not contribute to $\Delta W$, and only affects $\Delta M$ by an amount of $\delta E_{BV} / R_\lambda = \delta A_\lambda$. Since other possible factor like the effect of metallicity is not considered in this work, the equation for PL and PW residuals, equations \ref{mag_error} and \ref{wesen_error}, can be expressed as:
+Figure~\ref{madore} illustrates the approach suggested by \cite{2017madore} to decouple the $\delta \mu$--$\delta E_{BV}$ errors using the residual correlation of the PL and PW relations. The location of an individual Cepheid in the $\Delta W_\lambda^{12}$--$\Delta M_\lambda$ correlation plots provides valuable insight into the extinction error associated with each band. By converting the vertical deviation into a reddening error for each band and averaging these values, an estimate of the reddening correction for that specific star can be obtained. 
 
-  
-\begin{align*}
-    \Delta M_\lambda & = - ( R_\lambda^{BV}* \delta E(B-V) + \delta \mu)\\
-    \Delta W_\lambda^{BV} & = - \delta \mu
-\end{align*}
+However, at this stage, the correction to the distance modulus is not yet determined. To estimate the modulus error, a series of trials for the distance error $\delta \mu$ is performed, which shifts the star along a line with slope 1, as shown for stars B and C. The solid black diagonal line represents the regression line with slope, $\rho_{B}$, of the $\Delta W$--$\Delta M$ plot. The vertical deviation from this regression line, for each trial, reflects the amount of reddening correction required for the Cepheid to ideally follow the Leavitt Law. Several trial positions for star B are labeled as `B0' and `B1', while `C2', `C3', and `C4' correspond to the trials made for star C.
 
-Geometrically, these equations suggest that $\delta E_{BV}$ (scaled by $R_\lambda^{-1}$) shifts a star along the y-axis (vertically), while $\delta \mu$ affects both the x and y axes equally, moving the star along a line with slope 1. For the complete ensemble of stars, the slope of the residual correlation, $\rho$, when deviating from 1, suggests a significant contribution from reddening errors, as clearly observed for the case of the B and V bands in Figure \ref{deldel_plots}. For the longer wavelengths---J, H, and K---the contribution from reddening errors is minimized, and distance-based errors become dominant, causing the slope $\rho$ to approach 1.
+These examples illustrate multiple possible error pairs for the B band. Similar correlation plots are constructed for the VIJHK bands. Each plot provides corresponding reddening errors for the respective $\delta \mu$ trials; \textbf{i.e., every $\delta \mu$ trial corresponds to six $\delta E_{BV}$ estimates.} The $\delta \mu$ trial that minimizes the variance of $\delta E_{BV}$ across the bands identifies the correct distance-modulus correction. This ultimately decouples the error budget between $\delta \mu$ and $\delta E_{BV}$ for each star.
 
-\begin{wrapfigure}{r}{0.4\textwidth}
-    \vspace{-0.4cm}
-	\centering
-	\includegraphics[width = 0.4\textwidth]{2017_madore}
-	\caption{\small{For each star, multiple trials are conducted to estimate the reddening-distance error pair in the B band. This process is then repeated for the remaining bands to constrain the correct $\delta \mu - \delta E_{BV}$ error pair. \cite{2017madore}}}\label{2017_madore}
-\vspace{-0.6cm}
-\end{wrapfigure}
+\section{Method: Madore vs. Shubham}
 
-Tracing an individual Cepheid in every $\Delta W_\lambda^{12}$ - $\Delta M_\lambda$ correlation plots provides valuable insight into the extinction error associated with each band. By converting the extinction error into reddening error for each band and averaging these values, an estimate of the reddening correction for that specific star is obtained. However, at this stage, the correction for the modulus is not yet determined. To estimate the modulus error, a series of trials for $\delta \mu$ are conducted, which shifts the star along the line of slope 1, as shown in Figure~\ref{2017_madore} for stars B and C. The solid black diagonal line represents the regression line derived from one of the $\Delta W - \Delta M$ plots. The vertical deviation from this regression line, for each trial, reflects the amount of reddening correction needed. Several trial combinations for star B are labeled as 'B0' and 'B1', while 'C2', 'C3', and 'C4' correspond to the trial positions for star C. 
+The method of error decoupling introduced by \cite{2017madore} involves correlating $\Delta W_V$ with $\Delta M_\lambda$ ($\Delta - \Delta$). In contrast, I use the composite Wesenheit function, $\Delta W_\lambda$, for each correlation instance. The key motivation behind this choice lies in the definition of the Wesenheit function, which provides a reddening-free magnitude for the 'corresponding band'. For instance, the reddening-free magnitude for the J band with respect to $V-I$ should be $W_J^{VI}$, not $W_V^{VI}$. Consequently, $\Delta M_J$ must be correlated with its reddening-free counterpart, $\Delta W_J^{VI}$, rather than $\Delta W_V^{VI}$ as \cite{2017madore} exercised. The deviation between extinction error yield by Shubham's $\Delta_S$ and Madore's approach $\Delta_M$ would be 
+\begin{align}
+    \label{MS}
+    \Delta_M - \Delta_S =   \rho^{12}_{\lambda \lambda} \Delta W^{12}_\lambda -  \rho^{12}_{\lambda \kappa} \Delta W^{12}_\kappa
+\end{align}
 
-These examples illustrate multiple possible error pairs for the B-band. Similar correlation plots are also constructed for the VIJHK bands. Each residual correlation plot provides the corresponding reddening errors for the respective $\delta \mu$ trials, i.e. every $\delta \mu$ trail corresponds to six $\delta E_{BV}$. The $\delta \mu$ trial that minimizes the variance of $\delta E_{BV}$ across the bands identifies the correct distance correction trial. This ultimately decouples the error budget between $\delta \mu$ and $\delta E_{BV}$ for each star.
+where color index $m_1 - m_2$ used in the Wesenheit formulation, $\kappa$ represents a fixed Wesenheit band, as in Madore's approach (e.g., $W^{V\!I}_V$) and $\lambda$ represents photometric bands. The corresponding band-wise slope for the $\Delta M_\lambda$--$\Delta W^{12}_\kappa$ correlation is denoted by $\rho^{12}_{\lambda \kappa}$, the slope in Madore's approach. Whereas, for Shubham's case, Wesenheit function varies with the respective band therefore, slope represented as $\rho^{12}_{\lambda \lambda}$.
 
-This method of decoupling errors, introduced by \cite{2017madore}, involves correlating $\Delta W^{VI}_V$ with $\Delta M_\lambda$. In contrast, I have used the composite Wesenheit function, $\Delta W^{VI}_\lambda$, for each correlation instance. The key motivation behind this choice is the definition of the Wesenheit function, which provides a reddening-free magnitude for the respective band. Specifically, for the VI color, the reddening-free magnitude for the J band should be $W_J^{VI}$, not $W_V^{VI}$. This implies that $\Delta M_J$ must be correlated with $\Delta W_J^{VI}$. The slopes of the regression lines for the four families of Wesenheit functions—based on BI, VI, IH, and JK—are summarized in Table \ref{rho}.
+From the reddening law analysis, $V\!-\!K$ appears to be a more suitable choice than $V\!-\!I$ due to its larger wavelength baseline and its consistency with IRSB-based distances, as distance measurements also rely on $V\!-\!K$ surface brightness calibrations \citep{2011storm}. As the choice of color has a significant effect on the estimated errors, here I clarify how these errors vary. 
+\input{chapters/content/0_5_table_rho.tex}
 
+The slopes of the regression lines obtained from the correlation of the PL–PW relation residuals constitute the key parameter of calibration process - the slope $\rho$, as the intercept for every case would be zero. Two independent distance estimates, Gaia and IRSB, lead to two versions of these slopes. Two different methods—Madore and Shubham—produce additional versions. Furthermore, the dependence of the Wesenheit magnitude on color, either $V-I$ or $V-K$, introduces two more variations. Consequently, eight versions of the band-wise slopes, along with their respective errors, are summarized in Table~\ref{rho}. For all fifteen combinations, there will be 90 versions of distance-reddening error pair for each Cepheid. 
 
-\begin{table}[ht]
-	\centering
-	\vspace*{3mm}
-	\begin{tabular}{c c c c c}
-	\hline \\
-	Band & $\rho^{BI}_\lambda$ (error) &  $\rho^{VI}_\lambda$ (error) & $\rho^{IH}_\lambda$ (error) & $\rho^{JK}_\lambda$ (error) \\
-\\
-\hline 
-	B &  0.797 ($\pm$  0.088) &  0.819 ($\pm$  0.075) &  0.791 ($\pm$  0.094) &  0.619 ($\pm$  0.111) \\
-	V &  0.818 ($\pm$  0.066) &  0.847 ($\pm$  0.060) &  0.882 ($\pm$  0.079) &  0.778 ($\pm$  0.095) \\
-	I &  0.906 ($\pm$  0.041) &  0.907 ($\pm$  0.036) &  1.022 ($\pm$  0.049) &  0.993 ($\pm$  0.060) \\
-	J &  0.979 ($\pm$  0.022) &  0.976 ($\pm$  0.019) &  1.013 ($\pm$  0.023) &  1.037 ($\pm$  0.028) \\
-	H &  0.986 ($\pm$  0.014) &  0.984 ($\pm$  0.013) &  1.007 ($\pm$  0.015) &  1.023 ($\pm$  0.018) \\
-	K &  0.994 ($\pm$  0.009) &  0.992 ($\pm$  0.008) &  1.007 ($\pm$  0.010) &  1.015 ($\pm$  0.012) \\	\hline		 
-\end{tabular}
-\caption{Slopes of residual correlation  $\Delta W_\lambda^{12} - \Delta M_\lambda$ for BI, VI, IH and JK. Note the systematic decrease in errors as the slope $\rho$ approaching to 1 with increasing wavelength.}
-\label{rho}
-\end{table}
+Larger errors in the slope are a direct consequence of higher scatter of $\Delta-\Delta$ correlation. For $V-I$, compare the slope-error for Madore's and Shubham's approach. A systematic decline of error in later approach is due to deviation in PW residue, Equation \ref{MS}. In the case of $V\!-\!I$ within Madore's approach, a systematic pattern in slope is not prominently visible, since each band correlated with same wesenheit. Due to this, NIR bands suggest a higher contribution from reddening errors than physically expected, which ultimately increases the mean reddening estimate. As distance corrections are highly sensitive to reddening estimates; consequently, even small deviations in reddening can lead to misleading results. In contrast, Shubham's approach reveals a trend in bandwise slope, as well as suppresses the reddening error in the $K$ band as expected in NIR band. Consequently, Shubham's method shifts the uncertainty weight into the distance domain. This behavior is evident for both color combinations. 
 
-\section{Decoupling $\delta \mu - \delta E_{BV}$}
+A band-wise comparison of the estimated reddening for V0916~Aql ($E_{B-V} = 1.089$), one of the most highly reddened stars in the dataset, is shown in Figure~\ref{rdVI}. Shubham's approach yields a more stable reddening correction across different bands compared to Madore's approach. This suggests that Shubham's approach provides more precise results with smaller uncertainties.
 
-\input{chapters/content/0_5_plot_idea.tex}
+However, these estimates of reddening error do not account for uncertainties in distance. The next step is to decouple the distance error from these apparent reddening correction for individual stars. The following section presents the mathematical framework for this calibration procedure.
 
-The core process of the calibration is encapsulated in this step. Up until this point, from the Galactic Cepheid dataset, I have derived multiband Leavitt laws and their corresponding Wesenheit Leavitt laws. The correlation of their residuals leads to the results summarized in Table \ref{rho}, which will be used for decoupling the errors $\delta E_{BV}$ and $\delta \mu$ for each star in the dataset. Given the high sensitivity of reddening at shorter wavelengths, to estimate a realistic correction for reddening error ($\delta E_{BV}$), averaging result from the first four bands — B, V, I, and J would be enough.
+\input{chapters/content/0_5_plot_rdVI.tex}
 
-Since the vertical deviation from the regression line in $\Delta W_\lambda^{12} - \Delta M_\lambda$ suggested the extinction error, mathematically, it can be formulated as:
+\section{$\delta \mu - \delta E_{BV}$ Decoupling Equation }
 
+The slopes from residual correlation, listed in Table~\ref{rho}, will be used for decoupling the errors $\delta E_{BV}$ and $\delta \mu$ for each star in the dataset. Since the vertical deviation from the regression line in the $\Delta W_\lambda^{12}$--$\Delta M_\lambda$ correlation plot represents the extinction error, $\delta A^0_\lambda$,  it can be mathematically expressed as:
 \begin{align}
 	\label{eq:extictionerror}
 	\delta A^0_\lambda = \Delta M_\lambda - \rho_\lambda^{12} \Delta W_\lambda^{12}  - \sigma_\lambda^{12}
 \end{align}
 
-The superscript '0' on A indicates that the distance error trial is not considered yet. $\rho_\lambda^{12}$ represents the slope of the $\Delta W_\lambda^{12}$ vs. $\Delta M_\lambda$ plot. Since residuals are dispersed around the origin, intercept of the regression lines $\sigma_\lambda$ approach to zero and can be neglected. 
+Since the residuals are dispersed around the origin, the intercept of the regression line, $\sigma_\lambda$, approaches zero and can therefore be neglected.
 
-To convert the extinction error into reddening error, dividing by $R^{BV}_\lambda$
-
+To convert the extinction error into the corresponding reddening error, the quantity is divided by $R^{BV}_\lambda$.
 \begin{align}
 	\label{eq:reddeningerror}
 	\delta E^0(B-V)_{\lambda} = \frac{\delta A^0_\lambda}{R_\lambda^{BV}} 
 \end{align}
 
-By making trials for the error in the modulus, $\delta \mu^i$, the corresponding reddening error, $\delta A^i_\lambda$, is calculated as follows:
-
+For each trial of the modulus error, $\delta \mu^i$, the corresponding reddening error, $\delta A_\lambda^i$, is calculated as follows:
 \begin{align*}
     \delta A_\lambda (\delta \mu^i) 
         &= (\Delta M_\lambda + \delta \mu^i)
@@ -137,125 +99,60 @@ By making trials for the error in the modulus, $\delta \mu^i$, the corresponding
         + \delta \mu^i - \rho_\lambda^{12} \delta \mu^i \\
         &= \delta A^0_\lambda + \delta \mu^i - \rho_\lambda^{12} \delta \mu^i 
 \end{align*}
-Therefore, for given modulus correction trail, extinction in any band will be calculated as follow:
 
+Therefore, for a given trial of the modulus correction, band-wise reddening estimate would be:
 \begin{align}
 	\label{rderror}
-	\delta A^i_\lambda 	& = \delta A^0_\lambda + \delta \mu^i(1  - \rho_\lambda^{12}) \\ 
-	\delta E^i_\lambda(B-V) 	& = \frac{\delta A^i_\lambda}{R_\lambda^{BV}} \\
+\delta E_\lambda^i(B-V) = \frac{\delta A_\lambda^0 + \delta \mu^i (1 - \rho_\lambda^{12})}{R_\lambda^{BV}}.
 \end{align}
 
-Considering ideal case where extinction law $\frac{A_\lambda}{A_V}$ and reddening ratio $R_\lambda$ are precisely known for the line-of-sight of each Cepheid of the dataset. Let i number of trails made for modulus correction $\delta \mu$ which correspond to six variants of reddening corrections (BVIJHK) for each wesenheit-color (BI, VI, IH and JK). Each Cepheid yields an error matrix of 100 rows ($\delta \mu^i$) and 6 x 4 columns for expected $\delta E^i_\lambda(B-V)$. 
+Equation~\ref{rderror} equation plays a central role in separating the contributions of distance and reddening uncertainties, and is therefore referred to as the \textbf{Decoupling Equation}. Physically, this relation arises from the wavelength dependence of interstellar extinction: at longer wavelengths, the correlation coefficient $\rho_\lambda^{12}$ approaches unity, making $(1 - \rho_\lambda^{12})$ small and reducing the sensitivity of distance errors. Conversely, at shorter wavelengths, the impact of distance errors on reddening determinations becomes more significant. Therefore, Equation~\ref{rderror} provides a quantitative framework to account for both distance and reddening uncertainties as a function of wavelength, which is crucial for precise photometric calibrations and distance scale studies.
 
-Let, $k^{th}$ trail be the correct one, i.e. reddening corrections $\delta E_\lambda$ suggested by each band must be agreeing with remaining ones., $\delta \mu^k$ must yield the same reddening correction $\delta E^k$ for all the bands, impling their variance is zero. 
+\section{Correction Estimation}
 
+Assume that $i$ trials are performed for the modulus correction $\delta\mu$, corresponding to six reddening-correction variants ($\lambda = B, V, I, J, H, K$). For an individual Cepheid, this procedure produces an error matrix with multiple rows corresponds to $\delta\mu^i$ and six columns representing the expected reddening corrections $\delta E_\lambda^i(B-V)$ derived with $m_1 - m_2$ based wesenheit, here taken as $V-K$ color.
+
+\input{chapters/content/0_5_plot_idea.tex}
+
+Let the $k^{\mathrm{th}}$ trial be the correct one, $\delta \mu^k$. In this case, the reddening corrections $\delta E_\lambda$ suggested by each band must agree with one another. That is, $\delta\mu^k$ should yield the same reddening correction $\delta E^k$ for all bands, implying that their variance would be zero or minimum.
+
+Mathematicaly, for the correct error pair, $k^{\mathrm{th}}$ trial, it can be said that:
 \begin{align}
 	\delta E_{BV}(\delta \mu^k) = \delta E^k_B = \delta E^k_V = \delta E^k_I = \delta E^k_J = \delta E^k_H = \delta E^k_K = <\delta E^k_\lambda>_\lambda
 \end{align}
 
-
-
-For  dataset, it  the variance across the bands being the minimum for the best solution, when . 
-
+Numerically, the optimal combination of distance and reddening uncertainties is determined through the minimization of the variance in reddening estimates across multiple photometric bands. The variance is computed for a range of trial distance errors, and the trial corresponding to the minimum variance is adopted as the preferred solution.
 \begin{align}
 	k & = min(var(\delta E^i_\lambda(B-V))_\lambda)_i  
 \end{align}
 
+In practice, Figure~\ref{redmu} illustrates the mechanism for constraining the error by locating the convergence point of seven independent linear functions of distance--reddening error pairs, determined by minimizing the variation along the y-axis relative to the x-axis. Two independent distance measurements would naturally require different corrections; however, agreement in reddening for both cases highlights the robustness of the algorithm in accurately decoupling the systematic error.
 
-\begin{figure}[!ht]
-	\centering
-	\begin{subfigure}[b]{\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{9_plots/6_rms/95_0_star_SBI_g.pdf}
-	\end{subfigure}
-	\hfill
-	\begin{subfigure}[b]{\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{9_plots/6_rms/95_1_star_SBI_g.pdf}
-	\end{subfigure}
-	\begin{subfigure}[b]{\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{9_plots/6_rms/95_2_star_SBI_g.pdf}
-	\end{subfigure}
-	\caption{Determination of reddening error with least variance over modulus error for four family of wesenheit function. Dashed blue line dipects the variance.}
-	\label{rawLL}
-	\hfill
-\end{figure}
+\input{chapters/content/0_5_plot_redmu.tex}
 
+After error estimation, the corrected reddening and distance are given by:
+
+$$\mathrm{\textbf{Corrected Distance:  }}  \mu^{*} = \mu + \delta \mu^k $$
+$$\mathrm{\textbf{Corrected Reddening:  }}  E_{BV}^* = E_{BV} + \delta E_{BV}^k$$
+
+These correction must be implemented to true absolute magnitude of individual Cepheids to derived the calibrated Leavitt Law as shown in next section.
 
 \section{Calibrated Leavitt Law}
 
-\input{chapters/content/0_5_plot_algorithm.tex}
-
-
-These corrections will be adjusted with the original data as follow. 
-
+This section concludes the chapter by presenting the distance- and reddening-calibrated BVIJHK Galactic Leavitt Law and respective $V-K$ wesenheit relations. The corrections are applied to the original data as follows.
 \begin{align*}
     M_\lambda^* = M_\lambda^0 + \delta A_\lambda^* + \delta \mu^*
 \end{align*}
 
-\begin{figure}[!ht]
-	\centering
-	\begin{subfigure}[b]{0.19\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{clean/abs.pdf}
-	\end{subfigure}
-	\hfill
-	\begin{subfigure}[b]{0.19\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{clean/95PLBV.pdf}
-	\end{subfigure}
-	\begin{subfigure}[b]{0.19\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{clean/95PLVI.pdf}
-	\end{subfigure}
-	\begin{subfigure}[b]{0.19\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{clean/95PLVK.pdf}
-	\end{subfigure}
-	\begin{subfigure}[b]{0.19\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{clean/95PLJK.pdf}
-	\end{subfigure}
-	\caption{BVIJHK PL and PW relations with their Pearson correlation coefficient (r-value).}
-	\label{rawLL}
-	\hfill
-\end{figure}
+\input{chapters/content/0_5_plot_LL.tex}
 
+After implementing distance--reddening error corrections in the absolute magnitude, a marginal reduction in the scatter of the Leavitt Law is observed, ultimately leading to a more tightly constrained zero-point. The Figure \ref{PL_g} depicts the distance-reddening calibrated Leavitt Laws based on the corrected true absolute magnitude, along with their respective Wesenheit variants. 
 
+The set of Leavitt Laws and Wesenheit variants derived from distance-reddening calibrated data of 121 Galactic Classical Cepheids are summarized in the Table \ref{plpw}.
 
-\begin{figure}[!ht]
-	\centering
-	\begin{subfigure}[b]{0.19\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{clean/18_abs.pdf}
-	\end{subfigure}
-	\hfill
-	\begin{subfigure}[b]{0.19\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{clean/18PL_BV.pdf}
-	\end{subfigure}
-	\begin{subfigure}[b]{0.19\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{clean/18PL_VI.pdf}
-	\end{subfigure}
-	\begin{subfigure}[b]{0.19\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{clean/18PL_VK.pdf}
-	\end{subfigure}
-	\begin{subfigure}[b]{0.19\textwidth}
-		\centering
-		\includegraphics[width=\textwidth]{clean/18PL_JK.pdf}
-	\end{subfigure}
-	\caption{BVIJHK PL and PW relations with their Pearson correlation coefficient (r-value).}
-	\label{rawLL}
-	\hfill
-\end{figure}
+\input{chapters/content/0_5_table_plpw.tex}
 
+Following Table \ref{data} contains data of 121 GCCs along with calibrated distance and reddening highlighted with colors - Red for Gaia and Yellow for IRSB. For calibration, $V-K$ based wesenheit magnitude is used. 
 
-Gaia parallax based distances are independent of reddening error as the method is fundamentally geometrical in nature. Although, Cepheid being one of the brightest target in the sky, leading to saturation of photons on the CCD causing a strong bais for longer period Cepheids. This makes parallax of Cepheid slightly uncertain as compare to dimmer stars. I have implimented the calibration algorithm on the same set of stars and determine calibrated distance for individual Cepheid. If the algorithm works perfectly, calibrated distance must agree with IRSB based calibrated distance.  
-
-
-
-
-
+\input{chapters/content/0_5_table_data.tex}
+The second part of this thesis concludes here. The final part validates the results, investigates anomalous cases of negative reddening, discusses additional systematics not yet addressed in Shubham's method, and finally demonstrates  astronomical applications of the algorithm developed in this work, including distance determination to the Magellanic Clouds and probing the three-dimensional geometry of the SMC.

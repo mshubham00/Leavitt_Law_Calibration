@@ -1,15 +1,13 @@
 \begin{figure}[!ht]
-	\centering
-	\vspace{-0.2cm}
-	\includegraphics[width = \textwidth]{../plots/2_PLPW/121_Cepheids_0BVIJHK_g.pdf}
-	\caption{Leavitt Law based on 121 Galactic Cepheids with Gaia distance prior to calibration}\label{pl_gaia}
-\end{figure}
-
-
-
-\begin{figure}[!ht]
-	\centering
-	\vspace{-1cm}
-	\includegraphics[width = \textwidth]{../plots/2_PLPW/121_Cepheids_0BVIJHK_j.pdf}
-	\caption{Leavitt Law with IRSB distance prior to calibration}\label{pl_irsb}
+\centering
+\begin{subfigure}{\textwidth}
+    \centering
+	\includegraphics[width = \textwidth]{../plots/1_datacleaning/121_absj.pdf}
+\end{subfigure}
+\hfill
+\begin{subfigure}{\textwidth}
+    \centering
+	\includegraphics[width = \textwidth]{../plots/1_datacleaning/121_absg.pdf}
+\end{subfigure}
+\caption{ \textbf{First Panel:} Leavitt Law prior to calibration (121 GCCs, IRSB distance). \textbf{Second Panel:} Gaia distance based Leavitt Law}\label{pl}
 \end{figure}

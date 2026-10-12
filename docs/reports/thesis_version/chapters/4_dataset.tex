@@ -1,29 +1,32 @@
 \chapter{Galactic Cepheid Dataset}
+\label{datachap}
+\input{chapters/content/0_4_plot.tex}
 
 \vspace{-0.2cm}
+
 \input{chapters/content/0_4_plot_dataset.tex} 
 
-A multi-band photometric dataset of 150 Galactic Classical Cepheids (GCCs) is provided by Dr.~Jesper Storm to me for the calibration of distance and reddening estimates. The dataset includes apparent magnitudes in the $B$, $V$, $R$, $I$, $J$, $H$, and $K$ bands, obtained using different instruments at multiple observing sites \cite{2011storm}. For each Cepheid, color excess $E(B-V)$ is estimated following the method of \cite{1994fernie}. Distance moduli are derived using three independent techniques: the infrared surface brightness (IRSB) method \cite{2011storm}, Gaia parallaxes for the full sample, and cluster membership distances for 17 Cepheids associated with stellar clusters \cite{2023cruz}. The pulsation period is measured in days and transformed in logarithmic scale (not shown in the plot.). 
+
+A \footnote{Background Image: Milky Way Central Bulge, taken from Aladin (2MASS) \citep{Bonnarel2000, Skrutskie2006}} multi-band photometric dataset of 150 Galactic Classical Cepheids (GCCs) is provided by Dr.~Jesper Storm to me for the calibration of distance and reddening estimates of individual Cepheids. The dataset includes apparent magnitudes in the $B$, $V$, $I$, $J$, $H$, and $K$ bands, obtained using different instruments at multiple observing sites \citep{2011storm}. For each Cepheid, color excess $E(B-V)$ is estimated following the method of \citep{1994fernie}. Distance moduli are derived using three independent techniques: the infrared surface brightness (IRSB) method \citep{2011storm}, Gaia parallaxes for the full sample, and cluster membership distances for 17 Cepheids associated with stellar clusters \citep{2023cruz}. The pulsation period is measured in days and transformed in logarithmic scale (not shown in the plot). 
+
 
 \section{Dataset Cleaning}
 
-The prepared dataset is collected from different sources, therefore some Cepheids could be inconsistent in certain ways - pulsation mode, photometric error, etc., for data calibration. Such stars considered as outliers and must be filtered out is the first step. 
+The prepared dataset was collected from different sources; therefore, some Cepheids may be inconsistent in certain aspects—such as pulsation mode or photometric errors—which can affect data calibration. Identifying and filtering out such outliers is the first step.
 
-\subsection{Pulsating in Overtone}
-In the given dataset, seven Cepheid found to be overtone, and have excluded from the dataset. Those are namely: \textbf{SU Cas, V0465 Mon, QZ Nor, DT Cyg, EV Sct, FF Aql and SZ Tau}.  The dataset of 143 Galactic Classical Cepheids, pulsating in fundamental mode, is given in Appendix A of this thesis.  
+\subsection{Overtone Pulsation mode}
+In the given dataset, seven Cepheids were identified as overtone pulsators and were therefore excluded from the sample. These are \textbf{SU Cas, V0465 Mon, QZ Nor, DT Cyg, EV Sct, FF Aql, and SZ Tau}. The final dataset, consisting of 143 Galactic Classical Cepheids pulsating in the fundamental mode, is presented in Appendix A of this thesis.
 
 \subsection{Photometric error}
-Cepheids with inconsistent photometric measurements must be removed from the dataset. To identify the outliers, the period-color relation is employed. This approach is effective because both the intrinsic color and the period of a Cepheid are independent of distance. Since  Cepheid's period strongly correlates with its luminosity, plotting the period against color mimics the features of the color-magnitude diagram — particularly representing the region known as the instability strip in color magnitude diagram.
+Cepheids with inconsistent photometric measurements must be removed from the dataset. To identify such outliers, the period–color relation is employed. This approach is effective because both the intrinsic color and the period of a Cepheid are independent of distance. Since a Cepheid’s period is strongly correlated with its luminosity, plotting period against color reproduces key features of the color–magnitude diagram, particularly the region known as the instability strip.
 
-Within the instability strip, short-period Cepheids appear lower, while long-period (and thus brighter Cepheids) appear higher. Cepheids that significantly deviate from the linear trend of the instability strip are likely affected by incorrect photometry in specific bands and are therefore considered as outliers. In general, the intrinsic color index for any pair of photometric bands can be calculated as shown in equation \ref{color}.
-
+Within the instability strip, short-period Cepheids occupy the lower region, while long-period (and thus intrinsically brighter) Cepheids lie toward the upper region. Cepheids that significantly deviate from the linear trend defined by the instability strip are likely affected by inaccurate photometry in specific bands and are therefore considered outliers. In general, the intrinsic color index for any pair of photometric bands can be calculated as shown in Equation~\ref{color}.
 \begin{align}
 	(m_1-m_2)_0 = (m_1-m_2) - (R_1^{BV} - R_2^{BV}) E_{BV}
 	\label{color}
 \end{align}
 
-From BVIJHK photometry fifteen color combinations are made. Tracing the anomalous movement of individual GCCs in each color-period plot suggests inconsistency in photometric measurement in particular bands. Cepheids with such anomalous behavior are listed in the Table \ref{outliers}
-
+From the BVIJHK photometry, fifteen color combinations were constructed. Tracing the anomalous behavior of individual GCCs in each color–period diagram helps identify inconsistencies in specific photometric bands. Cepheids exhibiting such anomalous behavior are listed in Table~\ref{outliers}.
 
 \input{chapters/content/0_4_table_outlier.tex} 
 
@@ -31,65 +34,95 @@ From BVIJHK photometry fifteen color combinations are made. Tracing the anomalou
 
 \input{chapters/content/0_4_plot_outlier.tex} 
 
-Upon removing photometric outliers from the dataset of 143 Cepheids, 130 Cepheids remain available for further analysis.
+Following the removal of photometric outliers from the initial sample of 143 Cepheids, a total of 130 Cepheids remain for subsequent analysis.
 
 \subsection{PL/PW Residuals}
-Another set of outliers selected from calibration process. To calibrate individual GCC for distance and reddening error, respective residuals from PL and PW relations are correlated. The slope of the regression line of such correlation plays a central role in the calibration process. In this process, nine Cepheids (\textbf{CY Aur, RX Cam, V1344 Aql, RW Cam, SV Per, MW Cyg, RZ Gem, V0495 Cyg and VX Per}), found be of large residue, which significantly affecting the slope of regression line as compare to remaining dataset, therefore rejected from the analysis. Ultimately leaving 121 Cepheids in the cleaned dataset. 
+An additional set of outliers was identified during the calibration process. To calibrate individual GCCs for distance and reddening errors, the residuals from the Period–Luminosity (PL) and Period–Wesenheit (PW) relations were correlated. The slope of the resulting regression line plays a central role in the calibration procedure.
 
+In this process, nine Cepheids (\textbf{CY Aur, RX Cam, V1344 Aql, RW Cam, SV Per, MW Cyg, RZ Gem, V0495 Cyg, and VX Per}) were found to have large residuals that significantly affected the slope of the regression line compared to the rest of the sample. These objects were therefore excluded from the analysis, ultimately leaving 121 Cepheids in the cleaned dataset.
 
 \section{Extinction Law Calibration}
 
-To calibrate the reddening-distance error, pulsation period of Cepheid plays the key role which is a well observed parameter for individual star. For GCCs, period indicates the true absolute magnitude over the spectral range, which aids to decouple distance-extinction from apparent magnitude. Unlike distance, extinction cannot be directly observed however deviation of extinction across bands can be measured as color excess. For my dataset, color excess is measured between B band and V band, i.e. $E(B-V) = A_B - A_V $.  By scaling with reddening ratio, color excess can be converted into extinction i.e. for visual band $ R_V \times E(B-V) = A_V$. Here reddening ratio is related with interstellar grain size increases with particle size, for Milky Way it is expected to be $R_V = 3.23$ \cite{2004sandage}. For other bands, composite reddening ratio can be derived using an extinction law, $R_V \times \frac{A_\lambda}{A_V} = R_\lambda$ \cite{1989cardelli}. In his calibration method, Madore \cite{2017madore} adopted the extinction law given in table 4 of \cite{2007fouque} to derive (V-I) based wesenheit magnitude of 59 GCCs. 
+To calibrate the reddening–distance error, the pulsation period of a Cepheid plays a key role, as it is a well-observed and highly precise parameter for each star. For Galactic Classical Cepheids (GCCs), the period determines the true absolute magnitude across the spectral range through the Period–Luminosity relation, thereby enabling the decoupling of distance and extinction effects from the observed apparent magnitude.
 
-Wesenheit function, $W= m - R(m_1 - m_2)$, is sensitive to composite reddening ratio, implies error in adopted extinction law as well as visual reddening ratio would contribute to residue of period-wesenheit relation. Therefore, it is crucial to minimize such systematics prior to distance-reddening calibration of given GCCs dataset. 
+Unlike distance, extinction cannot be measured directly. However, its wavelength-dependent variation can be quantified through the color excess. For the dataset, color excess is measured between the B and V bands, defined as $E(B-V) = A_B - A_V $. By scaling with the total-to-selective extinction ratio, the color excess can be converted into absolute extinction, for the V band, $R_V \times E(B-V) = A_V$. The reddening ratio is related to the properties of interstellar dust grains and increases with particle size. For the Milky Way, a typical value is $R_V = 3.23$  \cite{2004sandage}. For other photometric bands, the corresponding total-to-selective extinction ratios can be derived using an extinction law, $R_V \times \frac{A_\lambda}{A_V} = R_\lambda$ \cite{1989cardelli}. 
 
-Since wesenheit magnitude do not require measurement of color excess and yields the same result as of unreddened magnitude, $W = W_0$, leveraging over available color excess measurements, deviation between $W$ and $W_0$ can be plotted for the given dataset.  
+In his calibration method, Madore \cite{2017madore} adopted the extinction law presented in Table \ref{fouque} \citep{2007fouque} to derive the $(V - I)$-based Wesenheit magnitudes for 59 GCCs. The Wesenheit function, $W= m - R(m_1 - m_2)$, is sensitive to the adopted composite reddening ratio, which implies that errors in the extinction law or in the visual reddening ratio contribute directly to the residuals of the Period–Wesenheit relation. Therefore, it is crucial to minimize such systematic uncertainties prior to performing the distance–reddening calibration for the GCC dataset.
 
-Noticing the non-zero deviation, it can be said that the deviation, $\delta W$, can be due to following equation:
+Since the Wesenheit magnitude does not require an independent measurement of color excess and is equivalent to the unreddened magnitude, $W = W_0$, the available color excess measurements can be leveraged to compute deviations between \(W\) and \(W_0\). These deviations can then be plotted for the dataset to assess residual reddening effects. Noticing the non-zero deviation, it can be said that the deviation, $\delta W$, can be due to following equation:
 
-$$\delta W = \delta A_\lambda - \delta R \times E(B-V) $$
+$$\delta W = \delta A_\lambda - \delta R \times E(m_1-m_2) $$
 
-\input{chapters/content/0_4_plot_wesF.tex} 
-\input{chapters/content/0_4_plot_wesS.tex} 
+For the given dataset, I adjusted the reddening and extinction ratios to different values (see Table \ref{exlaw}), for which the deviation between $W$ and $W_0$ is minimized.
 
-For given dataset, I adjusted the reddening ratio and extinction ratio to different values, see Table \ref{exlaw}, for which the deviation between $W$ and $W_0$ approaches to the least. 
+Such fine adjustments to the reddening ratio and extinction law for the considered dataset yield a smaller deviation between $W$ and $W_0$, thereby minimizing the systematic error in the residuals of the period–Wesenheit magnitude.
 
 \input{chapters/content/0_4_table_exlaw.tex} 
 
+\input{chapters/content/0_4_plot_wesF.tex} 
 
-Such fine adjustment in reddening ratio and extinction law for considered dataset yields smaller deviation between $W$ and $W_0$, therefore minimizing the systematic in residue of period-wesenheit magnitude. 
+\input{chapters/content/0_4_plot_wesS.tex} 
 
-\section{Cleaned Dataset}
-After cleaning the outliers, the dataset can be used for the calibration of Leavitt Law. Following step would transform observed apparent magnitude into true apparent magnitude using distance modulus and color excess measurements. This is shown in the adjacent plot - red region transforming into blue region. In the plot, period (x-axis) plotted against luminosity (y-axis). The apparent magnitude, B and K magnitude depicted with red dashed line. Remaining bands - V, I, J and H lie in between the two edges of colored area. After band wise extinction correction, true apparent magnitude results as depicted by blue region. Note that the shift in B band is much larger than K band, as light of short wavelength is much more sensitive to extinction compare to longer ones. After extinction correction, resulting magnitude becomes brighter and the area of red region squeezed to blue region. At this point, no clear correlation between the period and luminosity is evident. 
 
+\section{Data Transformation}
+
+After cleaning the outliers, the dataset can be used to calibrate the Leavitt Law. The next step is to transform the observed apparent magnitudes into true apparent magnitudes using the distance modulus and color-excess measurements.
+
+This transformation is illustrated in the adjacent plot, Figure \ref{magcom}. In the plot, the period (x-axis) is plotted against luminosity (y-axis). The apparent magnitudes in the B and K bands are shown with red dashed lines, while the remaining bands—V, I, J, and H—lie between the two edges of the colored region. After band-wise extinction correction, the resulting true apparent magnitudes are represented by the magenta region.
 \begin{align}
-	m_0 = m_\lambda - R_\lambda * E_{BV}
+	m_\lambda^0 = m_\lambda - R_\lambda \times E_{BV}
 	\label{true_apparent}
 \end{align}
 
-Following step adjusts the distance for each Cepheid, transforming true apparent magnitudes into true absolute magnitudes, as depicted by the yellow region. At this point, a linear trend begins to emerge between the period and intrinsic luminosity of the Cepheids which known as the Leavitt Law.
+\input{chapters/content/0_4_plot_magcom.tex} 
 
+Between red and magenta region, the shift in the B band is much larger than in the K band, as light at shorter wavelengths is much more sensitive to extinction compared to longer wavelengths. After extinction correction, the resulting magnitudes become brighter, and the red region is compressed into the brighter and narrower magenta region. At this stage, no clear correlation between period and luminosity is evident.
+
+The next step adjusts the distance for each Cepheid, transforming the true apparent magnitudes into true absolute magnitudes, as represented by the yellow region (Gaia based distance used in the Figure \ref{magcom}).
 \begin{align}
-	M_0 = m_\lambda - R_\lambda * E_{BV} - \mu
+	M_\lambda = m_\lambda^0 - \mu
 	\label{true_absolute}
 \end{align}
 
+At this stage, a linear trend emerges between the period and intrinsic luminosity of the Cepheids, known as the Leavitt Law.
 
-%\input{chapters/content/0_4_plot_wesen.tex} 
-
-Another version of extinction free luminosity (true absolute magnitude) is reddening free magnitude which derived through Wesenhiet function \cite{1982madore}. An important aspect of the Wesenheit magnitude is that does not require the measurement of color excess, rather depends on color index. For multiband photometry (BVIJHK), I considered all the fifteen permulations of color indices to understand the key differences between them. It is crucial because wesenheit magitude for respective band $m_\lambda$ is derived from reddening ratio $R{12}_\lambda$. 
-
-For residual correlation of period-luminosity relation and period-wesenheit relation Composite Leavitt Law (CLL) them for the Leavitt Law calibration. The cyan and green regions in the plot represent two versions of the Wesenheit magnitudes—HK and JH, respectively. The lower and upper edges of these regions correspond to the B and K bands, while the shaded region encompasses the remaining four bands used in the Wesenheit magnitude. All other versions of the Wesenheit magnitude lie between the HK and JH regions, as explicitly shown in Figure \ref{wesen_compare}.
-
-\input{chapters/content/0_4_plot_cleaned.tex} 
+Another version of the extinction-corrected luminosity (true absolute magnitude) is the reddening-free magnitude, derived through the Wesenheit function \citep{1982madore}. An important feature of the Wesenheit magnitude is that it does not require a direct measurement of the color excess; instead, it depends on the color index and reddening ratio. For multiband photometry (BVIJHK), I considered all fifteen combination of color indices to investigate the key differences among them. In Figure \ref{magcom}, the cyan and green regions represent two families of Wesenheit magnitudes—HK and JH, respectively. The lower and upper edges of these regions correspond to the B and K bands, while the shaded region encompasses the remaining four bands used in the Wesenheit magnitude. The other thirteen families of Wesenheit magnitudes lie between the HK and JH regions and are explicitly shown in Figure \ref{magwes}.
+\input{chapters/content/0_4_plot_wescom.tex} 
 
 
+\input{chapters/content/0_4_plot_redd_com.tex} 
 
-%\input{chapters/content/0_4_plot_wesen_compare.tex} 
+The four subplots in Figure \ref{magwes} compare all fifteen versions of the Wesenheit magnitudes. Each plot includes the $H-K$ and $J-H$ Wesenheit magnitudes in the background as a reference for ease of comparison. It is evident that not all color bases for the Wesenheit magnitude yield the same result, indicating that Wesenheit magnitudes are highly sensitive to the choice of color index. For example, the area covered by the B-to-K for HK and JH Wesenheits is much larger than that of the BV-based or other Wesenheit magnitudes. It is due to scaling of color with composite reddening ratio $R^{12}_\lambda$, where reddening ratios $R^{JH}_\lambda$ and $R^{HK}_\lambda$ are significantly larger than the rest, see Figure \ref{redd_com}
 
 
-The four subplots of Figure \ref{wesen_compare} compare all fifteen versions of the Wesenheit magnitudes. Each plot includes the HK and JH Wesenheit magnitudes in the background as a reference for ease of comparison. It is clear that not all color bases for the Wesenheit lead to the same magnitude. For example, the area covered by the B-to-K Wesenheit of HK is much larger than that of the BV-based or other Wesenheit magnitudes. Lesser difference between the two edges of a given Wesenheit makes it a better choice for the calibration process, as all Wesenheit magnitudes of that color suggest the same reddening-free magnitude and only contain errors due to the distance modulus. Based on this observation, the VI, VK, IH, and JK-based Wesenheit magnitudes are selected for the analysis.
+A smaller difference between the two edges makes it a better choice for calibration, as all Wesenheit bands converge to a reddening-free magnitude. Based on the observation, V–K-based Wesenheit magnitudes exhibit smaller variation across the bands while covering a larger observational wavelength range. Therefore, I adopted the V–K color index for distance–reddening calibration, instead of the V–I color as used by \cite{2017madore},. 
 
-\section{Leavitt Law}
+In the following section, the BVIJHK Leavitt relations are derived from the Galactic Cepheid dataset prior to the application of calibration.
+
+\section{Galactic Leavitt Law}
+The periodic range of 121 Cepheids lies between 0.43 and 1.8 on a logarithmic scale, near to their mean, 1 is chosen as the pivot point and subtracted from the period, $\log P $,  before calculating the regression coefficients, $\alpha_\lambda$ and $\beta_\lambda$. The 'true' absolute magnitude is calculated using Equation \ref{true_absolute}. In its most generic form, the linear fit between period-luminosity relation is expressed as follows:
+\begin{align}\label{eq:plr}
+	M_\lambda & = \alpha_\lambda (\log P -1) + \beta_\lambda 
+\end{align}
+
+The Figure \ref{pl} provides a comparative overview of the Leavitt Laws across different bands. Note the decreasing width of the period–luminosity (PL) relation from the B band to the K band. As the distance remains fixed for individual Galactic Cepheids across the bands, the variation among the bands arises primarily from extinction correction and, to a lesser extent, from the metallicity of the stars. The increasing Pearson correlation coefficient indicates a declining effect of extinction at longer wavelengths. Assuming that Cepheids strictly follow the PL relation, the residuals in each PL relation therefore contain information about the uncertainties in reddening or distance measurements.
 
 \input{chapters/content/0_4_plot_pl.tex} 
+
+
+\section{Wesenheit variants}
+
+The period–Wesenheit (PW) relations exhibit relatively higher correlation coefficients than their corresponding period–luminosity (PL) relations, as Wesenheit magnitudes are independent of extinction-related errors. Being reddening-free, the scatter in the Wesenheit-based Leavitt Law arises primarily from uncertainties in distance and in the adopted reddening ratio, plausible effect of metallicity is ignored in this work. In his method of decoupling reddening and distance errors \citep{2017madore}, Madore utilized a V–I-based Wesenheit magnitude, adopting a reddening ratio of $R_V = 3.23$ \citep{2004sandage}, shown in the first panel of Figure \ref{irsbpwvk}. Following panels depict $V-K$ based period-wesenheit relations for Gaia and IRSB distance respectively. 
+\begin{align}\label{eq:plw}
+	W_\lambda^{12} &  = \alpha_\lambda^{12} (\log P -1) + \beta_\lambda^{12}
+\end{align}
+
+\input{chapters/content/0_4_plot_irsbpwvk.tex}
+
+\input{chapters/content/0_4_plot_PLW_mc.tex}
+
+Figure~ \ref{PLW_mc} and Table \ref{plw} summarizes the slopes and intercepts of the period--luminosity (PL) and period--Wesenheit (PW) relations for Gaia- and IRSB-based distances, respectively. Interestingly, the PW relation, for $V-K$, appears nearly constant across all bands, unlike the PL relations. This reflects its effectiveness in normalizing luminosity differences across different bands, primarily accounting for interstellar reddening.
+
+Table \ref{plw} also list the uncertainity in slope and intercept of PL and PW relation, arising due to a larger scatter. After the calibration, these uncertainity will be deminished significantly. In the next section, procedure for analysing these residual of PL and PW relations is briefly discussed.
+
+
